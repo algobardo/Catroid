@@ -46,6 +46,7 @@ import org.catrobat.catroid.legonxt.LegoNXTBtCommunicator;
 import org.catrobat.catroid.legonxt.LegoNXTCommunicator;
 import org.catrobat.catroid.stage.StageActivity;
 import org.catrobat.catroid.ui.MainMenuActivity;
+import org.catrobat.catroid.ui.MyProjectsActivity;
 import org.catrobat.catroid.ui.ProgramMenuActivity;
 import org.catrobat.catroid.ui.ProjectActivity;
 import org.catrobat.catroid.ui.ScriptActivity;
@@ -232,6 +233,9 @@ public class LegoNXTTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		autoConnectIDs.add(PAIRED_UNAVAILABLE_DEVICE_MAC);
 		Reflection.setPrivateField(deviceListActivity, "autoConnectIDs", autoConnectIDs);
 
+		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
+		solo.goBack();
+		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
 		solo.clickOnText(solo.getString(R.string.main_menu_continue));
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);

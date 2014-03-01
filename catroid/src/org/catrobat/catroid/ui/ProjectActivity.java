@@ -196,4 +196,11 @@ public class ProjectActivity extends BaseActivity {
 
 		item.setTitle(showDetails ? R.string.hide_details : R.string.show_details);
 	}
+
+	@Override
+	public void onBackPressed() {
+		Intent intent = new Intent(ProjectActivity.this, MyProjectsActivity.class);
+		startActivity(intent);
+		finish();
+	}
 }

@@ -120,11 +120,11 @@
             android:name=".ui.ProjectActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
-        	android:parentActivityName=".ui.MyProjectsActivity" >
-        	<!-- The meta-data element is needed for versions lower than 4.1 -->
-        	<meta-data
-           	 	android:name=".ui.MyProjectsActivity"
-          	  	android:value="com.example.myfirstapp.MainActivity" />
+			android:parentActivityName=".ui.MyProjectsActivity" >
+			<!-- The meta-data element is needed for versions lower than 4.1 -->
+			<meta-data
+				android:name=".ui.MyProjectsActivity"
+				android:value="com.example.myfirstapp.MainActivity" />
         </activity>
         <activity
             android:name=".ui.ProgramMenuActivity"

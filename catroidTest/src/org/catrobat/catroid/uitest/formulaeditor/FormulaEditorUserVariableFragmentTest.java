@@ -372,6 +372,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 		solo.goBack();
 		solo.goBack();
 		solo.goBack();
+		solo.goBack();
 
 		UiTestUtils.getIntoScriptActivityFromMainMenu(solo, 2);
 

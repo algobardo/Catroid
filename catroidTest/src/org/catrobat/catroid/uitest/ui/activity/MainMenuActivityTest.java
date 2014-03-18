@@ -129,8 +129,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.enterText(0, testProject);
 		solo.clickOnButton(getActivity().getString(R.string.ok));
 		assertTrue("No error message was displayed upon creating a project with the same name twice.",
-				solo.searchText(solo
-						.getString(R.string.error_project_exists)));
+				solo.searchText(solo.getString(R.string.error_project_exists)));
 		solo.clickOnButton(0);
 
 		directory = new File(Utils.buildProjectPath("te?st"));
@@ -141,8 +140,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.enterText(0, name);
 		solo.clickOnButton(getActivity().getString(R.string.ok));
 		assertTrue("No error message was displayed upon creating a project with the same name twice.",
-				solo.searchText(solo
-						.getString(R.string.error_project_exists)));
+				solo.searchText(solo.getString(R.string.error_project_exists)));
 		solo.clickOnButton(solo.getString(R.string.close));
 
 		UtilFile.deleteDirectory(directory);
@@ -243,6 +241,8 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.clickOnText(testProject3);
 		assertTrue("ProjectActivity not shown", solo.waitForActivity(ProjectActivity.class.getSimpleName()));
 		solo.sleep(200);
+		solo.goBack();
+		assertTrue("MyProjectsActivity not shown", solo.waitForActivity(MyProjectsActivity.class.getSimpleName()));
 		solo.goBack();
 		assertTrue("MainMenuActivity not shown", solo.waitForActivity(MainMenuActivity.class.getSimpleName()));
 		solo.clickOnText(solo.getString(R.string.main_menu_continue));
@@ -389,6 +389,8 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.waitForFragmentById(R.id.fragment_sprites_list);
 
 		solo.goBack();
+		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
+		solo.goBack();
 		assertTrue("The name of the current project is not displayed on the continue button", solo.getButton(0)
 				.getText().toString().endsWith(testProject));
 
@@ -397,6 +399,8 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.clickOnText(testProject2);
 		solo.waitForFragmentById(R.id.fragment_sprites_list);
 
+		solo.goBack();
+		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.goBack();
 		assertTrue("The name of the current project is not displayed on the continue button", solo.getButton(0)
 				.getText().toString().endsWith(testProject2));

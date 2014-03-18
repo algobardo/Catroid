@@ -144,6 +144,7 @@ public class NewProjectDialogTest extends BaseActivityInstrumentationTestCase<Ma
 				preferences.getBoolean(NewProjectDialog.SHARED_PREFERENCES_EMPTY_PROJECT, false));
 
 		solo.goBack();
+		solo.goBack();
 		solo.clickOnButton(solo.getString(R.string.main_menu_new));
 		UiTestUtils.waitForText(solo, solo.getString(R.string.new_project_dialog_title));
 

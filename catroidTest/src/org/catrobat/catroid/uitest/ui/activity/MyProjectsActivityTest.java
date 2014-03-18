@@ -295,9 +295,11 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		assertTrue("Program does not open within 5 secs!", solo.waitForText(backgroundName));
 		UiTestUtils.addNewSprite(solo, "testSprite", lookFile);
 		solo.goBack();
+		//solo.goBack();
 
 		corruptProjectXML(UiTestUtils.DEFAULT_TEST_PROJECT_NAME);
 		solo.sleep(200);
+		solo.goBack();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName(), 1000);
 		solo.clickOnButton(myProjectsText);
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
@@ -307,6 +309,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		assertTrue("No error message was shown", solo.searchText(solo.getString(R.string.error_load_project)));
 
 		solo.clickOnButton(0);
+		solo.goBack();
 		solo.clickOnText(solo.getString(R.string.main_menu_continue));
 		List<Sprite> spriteList = ProjectManager.getInstance().getCurrentProject().getSpriteList();
 		assertTrue("Default Project should not be overwritten", spriteList.size() == 6);
@@ -338,6 +341,8 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.goBack();
 
 		solo.sleep(200);
+		solo.waitForActivity(MyProjectsActivity.class.getSimpleName(), 1000);
+		solo.goBack();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName(), 1000);
 		solo.clickOnButton(myProjectsText);
 
@@ -1187,8 +1192,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clickOnText(solo.getString(R.string.ok));
 		solo.waitForDialogToClose(500);
 		String errorMessageProjectExists = solo.getString(R.string.error_project_exists);
-		assertTrue("No or wrong error message shown",
-				solo.searchText((errorMessageProjectExists)));
+		assertTrue("No or wrong error message shown", solo.searchText((errorMessageProjectExists)));
 		solo.clickOnButton(solo.getString(R.string.close));
 	}
 
@@ -1208,8 +1212,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.sendKey(Solo.ENTER);
 		solo.waitForDialogToClose(500);
 		String errorMessageProjectExists = solo.getString(R.string.error_project_exists);
-		assertTrue("No or wrong error message shown",
-				solo.searchText((errorMessageProjectExists)));
+		assertTrue("No or wrong error message shown", solo.searchText((errorMessageProjectExists)));
 		solo.goBack();
 	}
 
@@ -1329,8 +1332,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clickOnButton(buttonOkText);
 
 		String errorMessageProjectExists = solo.getString(R.string.error_project_exists);
-		assertTrue("No or wrong error message shown",
-				solo.searchText(errorMessageProjectExists));
+		assertTrue("No or wrong error message shown", solo.searchText(errorMessageProjectExists));
 		solo.clickOnButton(buttonCloseText);
 
 		solo.clearEditText(0);
@@ -1342,9 +1344,9 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 				.getCurrentProject().getName());
 		UiTestUtils.waitForText(solo, UiTestUtils.PROJECTNAME2);
 		solo.goBack();
-		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.assertCurrentActivity("not in MainMenuActivity after goBack from ProjectActivity", MainMenuActivity.class);
-		solo.clickOnButton(buttonMyProjectsText);
+		//solo.waitForActivity(MainMenuActivity.class.getSimpleName());
+		//solo.assertCurrentActivity("not in MainMenuActivity after goBack from ProjectActivity", MainMenuActivity.class);
+		//solo.clickOnButton(buttonMyProjectsText);
 		assertTrue("project " + UiTestUtils.PROJECTNAME2 + " was not added",
 				solo.searchText(UiTestUtils.PROJECTNAME2, 1, true));
 	}
@@ -1446,8 +1448,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clickOnText(actionSetDescriptionText);
 
 		assertTrue("dialog not loaded in 5 seconds", solo.waitForText(actionSetDescriptionText, 0, 5000));
-		assertTrue("description is not shown in edittext",
-				solo.searchText((lorem)));
+		assertTrue("description is not shown in edittext", solo.searchText((lorem)));
 
 		ProjectManager.getInstance().loadProject(UiTestUtils.PROJECTNAME1, getActivity(), true);
 
@@ -1472,8 +1473,8 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		UiTestUtils.addNewSprite(solo, "testSprite", lookFile);
 
 		solo.goBack();
-		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
+		//solo.waitForActivity(MainMenuActivity.class.getSimpleName());
+		//solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
 		solo.sleep(300);
@@ -1579,8 +1580,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.sendKey(Solo.ENTER);
 		solo.sleep(200);
 		String errorMessageProjectExists = solo.getString(R.string.error_project_exists);
-		assertTrue("No or wrong error message shown",
-				solo.searchText((errorMessageProjectExists)));
+		assertTrue("No or wrong error message shown", solo.searchText((errorMessageProjectExists)));
 		solo.clickOnButton(solo.getString(R.string.close));
 	}
 
@@ -1621,8 +1621,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clickOnText(solo.getString(R.string.ok));
 		solo.sleep(200);
 		String errorMessageProjectExists = solo.getString(R.string.error_project_exists);
-		assertTrue("No or wrong error message shown",
-				solo.searchText((errorMessageProjectExists)));
+		assertTrue("No or wrong error message shown", solo.searchText((errorMessageProjectExists)));
 		solo.clickOnButton(solo.getString(R.string.close));
 	}
 
@@ -1659,8 +1658,6 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.waitForText(solo.getString(R.string.sprites));
 		solo.goBack();
 
-		solo.waitForText(solo.getString(R.string.main_menu_programs));
-		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 
 		assertTrue("Projectnames not cropped", solo.searchText(".+\\W+", true));

@@ -236,12 +236,12 @@ public final class LookController {
 			return;
 		}
 
-		File oldFile = new File(originalImagePath);
-
 		try {
-			if (originalImagePath.equals("")) {
+			if (originalImagePath == null || originalImagePath.equals("")) {
 				throw new IOException();
 			}
+
+			File oldFile = new File(originalImagePath);
 
 			String projectName = ProjectManager.getInstance().getCurrentProject().getName();
 			File imageFile = StorageHandler.getInstance().copyImage(projectName, originalImagePath, null);

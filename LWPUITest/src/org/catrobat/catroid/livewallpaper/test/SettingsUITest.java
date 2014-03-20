@@ -69,7 +69,6 @@ SingleLaunchActivityTestCase<SelectProgramActivity> {
 		TestUtils.restartActivity(getActivity());
 		testProject = TestUtils.createEmptyProjectWithoutSettingIt(getActivity().getApplicationContext(), TEST_PROJECT_NAME);
 		LiveWallpaper lwp = new LiveWallpaper();
-		lwp.TEST = true; 
 		lwp.onCreate();
 		
 		

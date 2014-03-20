@@ -168,10 +168,15 @@ public class SelectProgramFragment extends SherlockListFragment implements OnPro
 			LiveWallpaper.getInstance().changeWallpaperProgram();
 			//			getFragmentManager().beginTransaction().remove(selectProgramFragment).commit();
 			//			getFragmentManager().popBackStack();
-
 			if (progress.isShowing()) {
 				progress.dismiss();
 			}
+
+			//			Intent intent = new Intent(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
+			//			intent.putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT, new ComponentName(LiveWallpaper
+			//					.getInstance().getLWPContext(), LiveWallpaper.class));
+			//			startActivity(intent);
+
 			super.onPostExecute(result);
 		}
 	}
@@ -232,7 +237,6 @@ public class SelectProgramFragment extends SherlockListFragment implements OnPro
 			public void onClick(DialogInterface dialog, int which) {
 				LoadProject Loader = new LoadProject();
 				Loader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				//getActivity().finish();
 			}
 		});
 		AlertDialog alertDialog = builder.create();

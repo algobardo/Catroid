@@ -37,6 +37,8 @@ import org.catrobat.catroid.R;
 import org.catrobat.catroid.content.Script;
 import org.catrobat.catroid.content.Sprite;
 import org.catrobat.catroid.formulaeditor.Formula;
+import org.catrobat.catroid.formulaeditor.FormulaElement;
+import org.catrobat.catroid.formulaeditor.FormulaElement.ElementType;
 import org.catrobat.catroid.ui.fragment.FormulaEditorFragment;
 
 import java.util.List;
@@ -50,6 +52,7 @@ public class NoteBrick extends BrickBaseType implements OnClickListener, Formula
 
 	public NoteBrick(Sprite sprite) {
 		this.sprite = sprite;
+		this.note = new Formula(new FormulaElement(ElementType.STRING, "", null));
 	}
 
 	public NoteBrick() {

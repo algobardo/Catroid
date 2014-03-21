@@ -706,7 +706,8 @@ public class FormulaEditorEditTextTest extends BaseActivityInstrumentationTestCa
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_compute));
 		solo.waitForView(solo.getView(R.id.formula_editor_compute_dialog_textview));
 		computeTextView = (TextView) solo.getView(R.id.formula_editor_compute_dialog_textview);
-		assertEquals("computeTextView did not contain the correct value", "-8.11", computeTextView.getText().toString());
+		assertEquals("computeTextView did not contain the correct value", -8.11,
+				Double.valueOf(computeTextView.getText().toString()), 0.01d);
 
 		solo.goBack();
 

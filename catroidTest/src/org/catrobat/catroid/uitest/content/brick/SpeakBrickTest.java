@@ -23,7 +23,6 @@
 package org.catrobat.catroid.uitest.content.brick;
 
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -33,6 +32,7 @@ import org.catrobat.catroid.content.Sprite;
 import org.catrobat.catroid.content.StartScript;
 import org.catrobat.catroid.content.bricks.Brick;
 import org.catrobat.catroid.content.bricks.SpeakBrick;
+import org.catrobat.catroid.formulaeditor.Formula;
 import org.catrobat.catroid.ui.ScriptActivity;
 import org.catrobat.catroid.ui.adapter.BrickAdapter;
 import org.catrobat.catroid.uitest.util.BaseActivityInstrumentationTestCase;
@@ -45,14 +45,9 @@ public class SpeakBrickTest extends BaseActivityInstrumentationTestCase<ScriptAc
 
 	private Project project;
 	private SpeakBrick speakBrick;
+	private Sprite sprite;
 
 	private String testString = "test";
-
-	private String leading = "leading";
-	private String testLeadingWhitespaces = " \t\n " + leading;
-
-	private String trailing = "trailing";
-	private String testTrailingWhitespaces = trailing + " \t\n";
 
 	public SpeakBrickTest() {
 		super(ScriptActivity.class);
@@ -83,40 +78,18 @@ public class SpeakBrickTest extends BaseActivityInstrumentationTestCase<ScriptAc
 		assertEquals("Wrong Brick instance.", projectBrickList.get(0), adapter.getChild(groupCount - 1, 0));
 		assertNotNull("TextView does not exist.", solo.getText(solo.getString(R.string.brick_speak)));
 
-		solo.clickOnView(solo.getView(R.id.brick_speak_edit_text));
-		solo.clearEditText(0);
-		solo.enterText(0, testString);
-		solo.clickOnButton(solo.getString(R.string.ok));
-
-		String brickText = (String) Reflection.getPrivateField(speakBrick, "text");
+		UiTestUtils.testBrickWithFormulaEditor(solo, R.id.brick_speak_edit_text, testString, "text", speakBrick);
+		String brickText = ((Formula) Reflection.getPrivateField(speakBrick, "text")).interpretString(sprite);
 		assertEquals("Wrong text in field.", testString, brickText);
-		assertEquals("Value in Brick is not updated.", testString,
-				((TextView) solo.getView(R.id.brick_speak_edit_text)).getText().toString());
 
-		solo.clickOnView(solo.getView(R.id.brick_speak_edit_text));
-		solo.clearEditText(0);
-		solo.enterText(0, testLeadingWhitespaces);
-		solo.clickOnButton(solo.getString(R.string.ok));
-
-		brickText = (String) Reflection.getPrivateField(speakBrick, "text");
-		assertEquals("Wrong text in field.", leading, brickText);
-		assertEquals("Value in Brick is not updated.", leading, ((TextView) solo.getView(R.id.brick_speak_edit_text))
-				.getText().toString());
-
-		solo.clickOnView(solo.getView(R.id.brick_speak_edit_text));
-		solo.clearEditText(0);
-		solo.enterText(0, testTrailingWhitespaces);
-		solo.clickOnButton(solo.getString(R.string.ok));
-
-		brickText = (String) Reflection.getPrivateField(speakBrick, "text");
-		assertEquals("Wrong text in field.", trailing, brickText);
-		assertEquals("Value in Brick is not updated.", trailing, ((TextView) solo.getView(R.id.brick_speak_edit_text))
-				.getText().toString());
+		UiTestUtils.testBrickWithFormulaEditor(solo, R.id.brick_speak_edit_text, "", "text", speakBrick);
+		brickText = ((Formula) Reflection.getPrivateField(speakBrick, "text")).interpretString(sprite);
+		assertEquals("Wrong text in field.", "", brickText);
 	}
 
 	private void createProject() {
 		project = new Project(null, UiTestUtils.DEFAULT_TEST_PROJECT_NAME);
-		Sprite sprite = new Sprite("cat");
+		sprite = new Sprite("cat");
 		Script script = new StartScript(sprite);
 		speakBrick = new SpeakBrick(sprite, "");
 		script.addBrick(speakBrick);

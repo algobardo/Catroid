@@ -22,6 +22,8 @@
  */
 package org.catrobat.catroid.formulaeditor;
 
+import android.util.Log;
+
 import org.catrobat.catroid.formulaeditor.FormulaElement.ElementType;
 
 public enum Functions {
@@ -39,19 +41,20 @@ public enum Functions {
 		returnType = type;
 	}
 
+	private static final String TAG = Functions.class.getSimpleName();
+
 	public static boolean isFunction(String value) {
 		if (getFunctionByValue(value) == null) {
 			return false;
 		}
 		return true;
-
 	}
 
 	public static Functions getFunctionByValue(String value) {
 		try {
 			return valueOf(value);
-		} catch (IllegalArgumentException exception) {
-
+		} catch (IllegalArgumentException illegalArgumentException) {
+			Log.e(TAG, Log.getStackTraceString(illegalArgumentException));
 		}
 		return null;
 	}

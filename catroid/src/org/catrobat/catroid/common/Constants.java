@@ -28,7 +28,7 @@ public final class Constants {
 
 	// Reflection in testcases needed
 	// http://stackoverflow.com/questions/1615163/modifying-final-fields-in-java?answertab=votes#tab-top
-	public static final float CURRENT_CATROBAT_LANGUAGE_VERSION = Float.valueOf(0.91f);
+	public static final float CURRENT_CATROBAT_LANGUAGE_VERSION = Float.valueOf(0.92f);
 
 	public static final String PLATFORM_NAME = "Android";
 	public static final int APPLICATION_BUILD_NUMBER = 0; // updated from jenkins nightly/release build
@@ -61,10 +61,10 @@ public final class Constants {
 	public static final String BASE_URL_HTTPS = "https://www.pocketcode.org/";
 	public static final String CATROBAT_TERMS_OF_USE_URL = BASE_URL_HTTPS + "termsOfUse";
 
-	public static final String CATROBAT_ABOUT_URL = "http://developer.catrobat.org/";
-	public static final String ABOUT_POCKETCODE_LICENSE_URL = CATROBAT_ABOUT_URL + "licenses";
+	public static final String CATROBAT_ABOUT_URL = "http://www.catrobat.org/";
+	public static final String ABOUT_POCKETCODE_LICENSE_URL = "http://developer.catrobat.org/licenses";
 
-	public static final String CATROBAT_HELP_URL = "http://www.pocketcode.org/tutorial";
+	public static final String CATROBAT_HELP_URL = "https://www.pocketcode.org/tutorial";
 
 	public static final String TOKEN = "token";
 	public static final String NO_TOKEN = "no_token";

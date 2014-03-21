@@ -2,21 +2,21 @@
  *  Catroid: An on-device visual programming system for Android devices
  *  Copyright (C) 2010-2013 The Catrobat Team
  *  (<http://developer.catrobat.org/credits>)
- *  
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as
  *  published by the Free Software Foundation, either version 3 of the
  *  License, or (at your option) any later version.
- *  
+ *
  *  An additional term exception under section 7 of the GNU Affero
  *  General Public License, version 3, is available at
  *  http://developer.catrobat.org/license_additional_term
- *  
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  *  GNU Affero General Public License for more details.
- *  
+ *
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -160,6 +160,26 @@ public final class StorageHandler {
 		createCatroidRoot();
 	}
 
+	public static StorageHandler getInstance() {
+		return INSTANCE;
+	}
+
+	public static void saveBitmapToImageFile(File outputFile, Bitmap bitmap) throws FileNotFoundException {
+		FileOutputStream outputStream = new FileOutputStream(outputFile);
+		try {
+			if (outputFile.getName().toLowerCase(Locale.US).endsWith(".jpg")
+					|| outputFile.getName().toLowerCase(Locale.US).endsWith(".jpeg")) {
+				bitmap.compress(CompressFormat.JPEG, JPG_COMPRESSION_SETTING, outputStream);
+			} else {
+				bitmap.compress(CompressFormat.PNG, 0, outputStream);
+			}
+			outputStream.flush();
+			outputStream.close();
+		} catch (IOException ioException) {
+			Log.e(TAG, Log.getStackTraceString(ioException));
+		}
+	}
+
 	private void setXstreamAliases() {
 		xstream.alias("look", LookData.class);
 		xstream.alias("sound", SoundInfo.class);
@@ -233,10 +253,6 @@ public final class StorageHandler {
 		}
 	}
 
-	public static StorageHandler getInstance() {
-		return INSTANCE;
-	}
-
 	public File getBackPackSoundDirectory() {
 		return backPackSoundDirectory;
 	}
@@ -262,9 +278,8 @@ public final class StorageHandler {
 		}
 	}
 
-	public boolean cancelLoadProject()
-	{
-		if (fileInputStream !=null){
+	public boolean cancelLoadProject() {
+		if (fileInputStream != null) {
 			try {
 				fileInputStream.close();
 				return true;
@@ -438,8 +453,12 @@ public final class StorageHandler {
 		}
 
 		Project project = ProjectManager.getInstance().getCurrentProject();
-		if ((imageDimensions[0] <= project.getXmlHeader().virtualScreenWidth)
-				&& (imageDimensions[1] <= project.getXmlHeader().virtualScreenHeight)) {
+
+		if ((imageDimensions[0] > project.getXmlHeader().virtualScreenWidth)
+				&& (imageDimensions[1] > project.getXmlHeader().virtualScreenHeight)) {
+			File outputFile = new File(buildPath(imageDirectory.getAbsolutePath(), inputFile.getName()));
+			return copyAndResizeImage(outputFile, inputFile, imageDirectory);
+		} else {
 			String checksumSource = Utils.md5Checksum(inputFile);
 
 			if (newName != null) {
@@ -454,9 +473,6 @@ public final class StorageHandler {
 
 			File outputFile = new File(newFilePath);
 			return copyFileAddCheckSum(outputFile, inputFile, imageDirectory);
-		} else {
-			File outputFile = new File(buildPath(imageDirectory.getAbsolutePath(), inputFile.getName()));
-			return copyAndResizeImage(outputFile, inputFile, imageDirectory);
 		}
 	}
 
@@ -502,7 +518,9 @@ public final class StorageHandler {
 				checksumCompressedFile + "_" + inputFile.getName());
 
 		if (!fileChecksumContainer.addChecksum(checksumCompressedFile, newFilePath)) {
-			outputFile.delete();
+			if (!outputFile.getAbsolutePath().equalsIgnoreCase(inputFile.getAbsolutePath())) {
+				outputFile.delete();
+			}
 			return new File(fileChecksumContainer.getPath(checksumCompressedFile));
 		}
 
@@ -512,22 +530,6 @@ public final class StorageHandler {
 		return compressedFile;
 	}
 
-	public static void saveBitmapToImageFile(File outputFile, Bitmap bitmap) throws FileNotFoundException {
-		FileOutputStream outputStream = new FileOutputStream(outputFile);
-		try {
-			if (outputFile.getName().toLowerCase(Locale.US).endsWith(".jpg")
-					|| outputFile.getName().toLowerCase(Locale.US).endsWith(".jpeg")) {
-				bitmap.compress(CompressFormat.JPEG, JPG_COMPRESSION_SETTING, outputStream);
-			} else {
-				bitmap.compress(CompressFormat.PNG, 0, outputStream);
-			}
-			outputStream.flush();
-			outputStream.close();
-		} catch (IOException e) {
-
-		}
-	}
-
 	public void deleteFile(String filepath) {
 		FileChecksumContainer container = ProjectManager.getInstance().getFileChecksumContainer();
 		try {
@@ -535,8 +537,8 @@ public final class StorageHandler {
 				File toDelete = new File(filepath);
 				toDelete.delete();
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		} catch (FileNotFoundException fileNotFoundException) {
+			Log.e(TAG, Log.getStackTraceString(fileNotFoundException));
 			//deleteFile(filepath);
 		}
 	}

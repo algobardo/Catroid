@@ -27,6 +27,7 @@ import android.media.MediaPlayer;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
+import org.catrobat.catroid.common.ScreenModes;
 import org.catrobat.catroid.common.ScreenValues;
 import org.catrobat.catroid.common.SoundInfo;
 import org.catrobat.catroid.content.Project;
@@ -302,8 +303,8 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		UiTestUtils.compareByteArrays(redPixel, stagePixel);
 		stagePixel = StageActivity.stageListener.getPixels(0, ScreenValues.SCREEN_HEIGHT / 2, 1, 1);
 		UiTestUtils.compareByteArrays(redPixel, stagePixel);
-		stagePixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH / 2, ScreenValues.SCREEN_HEIGHT,
-				1, 1);
+		stagePixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH / 2,
+				ScreenValues.SCREEN_HEIGHT - 1, 1, 1);
 		UiTestUtils.compareByteArrays(redPixel, stagePixel);
 		solo.goBack();
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_axes_off));
@@ -320,8 +321,8 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		UiTestUtils.compareByteArrays(whitePixel, stagePixel);
 		stagePixel = StageActivity.stageListener.getPixels(0, ScreenValues.SCREEN_HEIGHT / 2, 1, 1);
 		UiTestUtils.compareByteArrays(whitePixel, stagePixel);
-		stagePixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH / 2, ScreenValues.SCREEN_HEIGHT,
-				1, 1);
+		stagePixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH / 2,
+				ScreenValues.SCREEN_HEIGHT - 1, 1, 1);
 		UiTestUtils.compareByteArrays(whitePixel, stagePixel);
 	}
 
@@ -366,8 +367,8 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		screenPixel = StageActivity.stageListener.getPixels(0, ScreenValues.SCREEN_HEIGHT - 1, 1, 1);
 		UiTestUtils.compareByteArrays(blackPixel, screenPixel);
 
-		screenPixel = StageActivity.stageListener
-				.getPixels(ScreenValues.SCREEN_WIDTH, ScreenValues.SCREEN_HEIGHT, 1, 1);
+		screenPixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH / 2,
+				ScreenValues.SCREEN_HEIGHT / 2, 1, 1);
 		UiTestUtils.compareByteArrays(whitePixel, screenPixel);
 
 		solo.goBack();
@@ -383,6 +384,70 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		UiTestUtils.compareByteArrays(whitePixel, screenPixel);
 		screenPixel = StageActivity.stageListener.getPixels(0, ScreenValues.SCREEN_HEIGHT - 1, 1, 1);
 		UiTestUtils.compareByteArrays(whitePixel, screenPixel);
+
+		solo.goBack();
+		solo.clickOnView(solo.getView(R.id.stage_dialog_button_maximize));
+		solo.goBack();
+
+		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
+		solo.waitForActivity(StageActivity.class.getSimpleName());
+		assertTrue("Stage not resizeable.", ((StageActivity) solo.getCurrentActivity()).getResizePossible());
+
+		screenPixel = StageActivity.stageListener.getPixels(0, 0, 1, 1);
+		UiTestUtils.compareByteArrays(blackPixel, screenPixel);
+		screenPixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH - 1,
+				ScreenValues.SCREEN_HEIGHT - 1, 1, 1);
+		UiTestUtils.compareByteArrays(blackPixel, screenPixel);
+		screenPixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH - 1, 0, 1, 1);
+		UiTestUtils.compareByteArrays(blackPixel, screenPixel);
+		screenPixel = StageActivity.stageListener.getPixels(0, ScreenValues.SCREEN_HEIGHT - 1, 1, 1);
+		UiTestUtils.compareByteArrays(blackPixel, screenPixel);
+
+		screenPixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH / 2,
+				ScreenValues.SCREEN_HEIGHT / 2, 1, 1);
+		UiTestUtils.compareByteArrays(whitePixel, screenPixel);
+	}
+
+	public void testMaximizeStretchRememeberSetting() {
+		Project project = createTestProject(testProject);
+		project.getXmlHeader().virtualScreenWidth = 480;
+		project.getXmlHeader().virtualScreenHeight = 700;
+		project.setDeviceData(getActivity());
+		StorageHandler.getInstance().saveProject(project);
+		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
+		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
+		solo.waitForFragmentById(R.id.fragment_projects_list);
+		assertTrue("Cannot click project.", UiTestUtils.clickOnTextInList(solo, testProject));
+		solo.waitForActivity(ProjectActivity.class.getSimpleName());
+
+		Utils.updateScreenWidthAndHeight(getActivity());
+		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
+		solo.waitForActivity(StageActivity.class.getSimpleName());
+		assertTrue("Stage not resizeable.", ((StageActivity) solo.getCurrentActivity()).getResizePossible());
+
+		solo.sleep(200);
+		solo.goBack();
+		solo.clickOnView(solo.getView(R.id.stage_dialog_button_continue));
+		solo.sleep(200);
+		solo.goBack();
+		solo.goBack();
+		StorageHandler.getInstance().saveProject(project);
+		solo.sleep(200);
+
+		assertTrue("Wrong screenMode in xml-file.",
+				ProjectManager.getInstance().getCurrentProject().getScreenMode() == ScreenModes.STRETCH);
+		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
+		solo.waitForActivity(StageActivity.class.getSimpleName());
+		solo.sleep(200);
+		solo.goBack();
+		solo.clickOnView(solo.getView(R.id.stage_dialog_button_maximize));
+		solo.clickOnView(solo.getView(R.id.stage_dialog_button_continue));
+		solo.sleep(200);
+		solo.goBack();
+		solo.goBack();
+
+		assertTrue("Wrong screenMode in xml-file.",
+				ProjectManager.getInstance().getCurrentProject().getScreenMode() == ScreenModes.MAXIMIZE);
 	}
 
 	private Project createTestProject(String projectName) {

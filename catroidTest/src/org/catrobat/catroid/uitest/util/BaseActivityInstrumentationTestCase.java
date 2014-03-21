@@ -23,11 +23,14 @@
 package org.catrobat.catroid.uitest.util;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
 import com.jayway.android.robotium.solo.Solo;
 
+import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.stage.StageListener;
 
 public abstract class BaseActivityInstrumentationTestCase<T extends Activity> extends
@@ -46,6 +49,7 @@ public abstract class BaseActivityInstrumentationTestCase<T extends Activity> ex
 		Log.v(TAG, "setUp");
 		super.setUp();
 		UiTestUtils.clearAllUtilTestProjects();
+		UiTestUtils.createEmptyProject();
 		solo = new Solo(getInstrumentation(), getActivity());
 		Reflection.setPrivateField(StageListener.class, "checkIfAutomaticScreenshotShouldBeTaken", false);
 	}
@@ -53,6 +57,12 @@ public abstract class BaseActivityInstrumentationTestCase<T extends Activity> ex
 	@Override
 	protected void tearDown() throws Exception {
 		Log.v(TAG, "tearDown");
+		Log.v(TAG, "remove Projectname from SharedPreferences");
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		SharedPreferences.Editor edit = preferences.edit();
+		edit.remove(Constants.PREF_PROJECTNAME_KEY);
+		edit.commit();
+
 		solo.finishOpenedActivities();
 		UiTestUtils.clearAllUtilTestProjects();
 		super.tearDown();

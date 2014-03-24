@@ -63,17 +63,14 @@ public class GlideToAction extends TemporalAction {
 			}
 		} catch (Exception exception) {
 			endXInterpretation = 0f;
-			;
 		}
 		try {
 			endYInterpretation = endY == null ? 0f : endY.interpretFloat(sprite);
 			if (endYInterpretation.isNaN()) {
 				endYInterpretation = 0f;
-				;
 			}
 		} catch (Exception exception) {
 			endYInterpretation = 0f;
-			;
 		}
 
 		if (!restart) {

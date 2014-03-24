@@ -381,13 +381,13 @@ public class FormulaElement implements Serializable {
 			try {
 				leftObject = leftChild.interpretRecursive(sprite);
 			} catch (NumberFormatException numberFormatException) {
-				leftObject = new Double(Double.NaN);
+				leftObject = Double.valueOf(Double.NaN);
 			}
 
 			try {
 				rightObject = rightChild.interpretRecursive(sprite);
 			} catch (NumberFormatException numberFormatException) {
-				rightObject = new Double(Double.NaN);
+				rightObject = Double.valueOf(Double.NaN);
 			}
 
 			Double left;

@@ -163,6 +163,8 @@ public class NoteBrick extends BrickBaseType implements OnClickListener, Formula
 			case R.id.brick_note_edit_text:
 				FormulaEditorFragment.showFragment(view, this, note);
 				break;
+			default:
+				break;
 		}
 	}
 }

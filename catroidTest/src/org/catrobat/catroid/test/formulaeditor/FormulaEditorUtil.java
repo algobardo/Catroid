@@ -23,6 +23,7 @@
 package org.catrobat.catroid.test.formulaeditor;
 
 import android.test.InstrumentationTestCase;
+import android.util.Log;
 
 import org.catrobat.catroid.content.Sprite;
 import org.catrobat.catroid.formulaeditor.FormulaElement;
@@ -35,7 +36,13 @@ import org.catrobat.catroid.formulaeditor.Operators;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FormulaEditorUtil {
+public final class FormulaEditorUtil {
+
+	private static final String TAG = FormulaEditorUtil.class.getSimpleName();
+
+	private FormulaEditorUtil() {
+		throw new AssertionError();
+	}
 
 	public static List<InternToken> buildSingleParameterFunction(Functions function, List<InternToken> internTokenList) {
 		List<InternToken> tokenList = new LinkedList<InternToken>();
@@ -68,7 +75,8 @@ public class FormulaEditorUtil {
 				tokenList.add(new InternToken(InternTokenType.OPERATOR, Operators.MINUS.name()));
 				parameterNumberValue = String.valueOf(Math.abs(Double.valueOf(parameterNumberValue)));
 			}
-		} catch (NumberFormatException numberFormatException) { // Do nothing, everything is fine :D!
+		} catch (NumberFormatException numberFormatException) {
+			Log.e(TAG, Log.getStackTraceString(numberFormatException));
 		}
 		tokenList.add(new InternToken(firstParameter, parameterNumberValue));
 		tokenList.add(new InternToken(InternTokenType.FUNCTION_PARAMETERS_BRACKET_CLOSE));
@@ -111,7 +119,8 @@ public class FormulaEditorUtil {
 				tokenList.add(new InternToken(InternTokenType.OPERATOR, Operators.MINUS.name()));
 				firstParameterNumberValue = String.valueOf(Math.abs(Double.valueOf(firstParameterNumberValue)));
 			}
-		} catch (NumberFormatException numberFormatException) { // Do nothing, everything is fine :D!
+		} catch (NumberFormatException numberFormatException) {
+			Log.e(TAG, Log.getStackTraceString(numberFormatException));
 		}
 		tokenList.add(new InternToken(firstParameter, firstParameterNumberValue));
 		tokenList.add(new InternToken(InternTokenType.FUNCTION_PARAMETER_DELIMITER));
@@ -120,7 +129,8 @@ public class FormulaEditorUtil {
 				tokenList.add(new InternToken(InternTokenType.OPERATOR, Operators.MINUS.name()));
 				secondParameterNumberValue = String.valueOf(Math.abs(Double.valueOf(secondParameterNumberValue)));
 			}
-		} catch (NumberFormatException numberFormatException) {// Do nothing, everything is fine :D!
+		} catch (NumberFormatException numberFormatException) {
+			Log.e(TAG, Log.getStackTraceString(numberFormatException));
 		}
 		tokenList.add(new InternToken(secondParameter, secondParameterNumberValue));
 		tokenList.add(new InternToken(InternTokenType.FUNCTION_PARAMETERS_BRACKET_CLOSE));

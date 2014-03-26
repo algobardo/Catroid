@@ -41,6 +41,7 @@ public class ChangeVariableActionTest extends AndroidTestCase {
 	private Sprite testSprite;
 	private StartScript testScript;
 	private Project project;
+	private UserVariable userVariable;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -53,13 +54,11 @@ public class ChangeVariableActionTest extends AndroidTestCase {
 		ProjectManager.getInstance().setCurrentScript(testScript);
 		ProjectManager.getInstance().getCurrentProject().getUserVariables().deleteUserVariableByName(TEST_USERVARIABLE);
 		ProjectManager.getInstance().getCurrentProject().getUserVariables().addProjectUserVariable(TEST_USERVARIABLE);
+		userVariable = ProjectManager.getInstance().getCurrentProject().getUserVariables()
+				.getUserVariable(TEST_USERVARIABLE, null);
 	}
 
 	public void testChangeUserVariableWithNumericalFormula() {
-
-		UserVariable userVariable = ProjectManager.getInstance().getCurrentProject().getUserVariables()
-				.getUserVariable(TEST_USERVARIABLE, null);
-
 		ChangeVariableBrick changeBrick = new ChangeVariableBrick(testSprite, new Formula(CHANGE_VARIABLE_VALUE),
 				userVariable);
 		testScript.addBrick(changeBrick);
@@ -74,7 +73,6 @@ public class ChangeVariableActionTest extends AndroidTestCase {
 	}
 
 	public void testChangeUserVariableInvalidUserVariable() {
-
 		ChangeVariableBrick changeBrick = new ChangeVariableBrick(testSprite, CHANGE_VARIABLE_VALUE);
 		testScript.addBrick(changeBrick);
 		testSprite.addScript(testScript);
@@ -82,16 +80,12 @@ public class ChangeVariableActionTest extends AndroidTestCase {
 		testSprite.createStartScriptActionSequence();
 		testSprite.look.act(1f);
 
-		UserVariable userVariable = ProjectManager.getInstance().getCurrentProject().getUserVariables()
+		userVariable = ProjectManager.getInstance().getCurrentProject().getUserVariables()
 				.getUserVariable(TEST_USERVARIABLE, null);
 		assertEquals("UserVariable changed, but should not!", INITIALIZED_VALUE, userVariable.getValue());
 	}
 
 	public void testChangeUserVariableWithNumericalStringFormula() {
-
-		UserVariable userVariable = ProjectManager.getInstance().getCurrentProject().getUserVariables()
-				.getUserVariable(TEST_USERVARIABLE, null);
-
 		Formula changeFormula = new Formula(String.valueOf(CHANGE_VARIABLE_VALUE));
 		ChangeVariableBrick changeVariableBrick = new ChangeVariableBrick(testSprite, changeFormula, userVariable);
 		testScript.addBrick(changeVariableBrick);
@@ -106,10 +100,6 @@ public class ChangeVariableActionTest extends AndroidTestCase {
 	}
 
 	public void testChangeUserVariableWithStringFormula() {
-
-		UserVariable userVariable = ProjectManager.getInstance().getCurrentProject().getUserVariables()
-				.getUserVariable(TEST_USERVARIABLE, null);
-
 		Formula validFormula = new Formula(NOT_NUMERICAL_STRING);
 		ChangeVariableBrick changeVariableBrick = new ChangeVariableBrick(testSprite, validFormula, userVariable);
 		testScript.addBrick(changeVariableBrick);
@@ -124,9 +114,6 @@ public class ChangeVariableActionTest extends AndroidTestCase {
 	}
 
 	public void testNullFormula() {
-		UserVariable userVariable = ProjectManager.getInstance().getCurrentProject().getUserVariables()
-				.getUserVariable(TEST_USERVARIABLE, null);
-
 		ChangeVariableBrick changeVariableBrick = new ChangeVariableBrick(testSprite, null, userVariable);
 		testScript.addBrick(changeVariableBrick);
 		testSprite.addScript(testScript);
@@ -140,9 +127,6 @@ public class ChangeVariableActionTest extends AndroidTestCase {
 	}
 
 	public void testNotANumberFormula() {
-		UserVariable userVariable = ProjectManager.getInstance().getCurrentProject().getUserVariables()
-				.getUserVariable(TEST_USERVARIABLE, null);
-
 		ChangeVariableBrick changeVariableBrick = new ChangeVariableBrick(testSprite, new Formula(Double.NaN),
 				userVariable);
 		testScript.addBrick(changeVariableBrick);

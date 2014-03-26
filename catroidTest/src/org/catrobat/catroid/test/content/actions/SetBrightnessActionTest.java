@@ -51,7 +51,7 @@ public class SetBrightnessActionTest extends InstrumentationTestCase {
 			action.act(1.0f);
 			fail("Execution of SetBrightnessBrick with null Sprite did not cause a NullPointerException to be thrown");
 		} catch (NullPointerException expected) {
-			// expected behavior
+			return;
 		}
 	}
 

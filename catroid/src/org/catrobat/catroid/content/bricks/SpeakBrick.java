@@ -161,6 +161,8 @@ public class SpeakBrick extends BrickBaseType implements OnClickListener, Formul
 			case R.id.brick_speak_edit_text:
 				FormulaEditorFragment.showFragment(view, this, text);
 				break;
+			default:
+				break;
 		}
 	}
 }

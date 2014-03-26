@@ -40,6 +40,7 @@ public class SetVariableActionTest extends AndroidTestCase {
 	private Sprite testSprite;
 	private StartScript testScript;
 	private Project project;
+	private UserVariable userVariable;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -52,13 +53,11 @@ public class SetVariableActionTest extends AndroidTestCase {
 		ProjectManager.getInstance().setCurrentScript(testScript);
 		ProjectManager.getInstance().getCurrentProject().getUserVariables().deleteUserVariableByName(TEST_USERVARIABLE);
 		ProjectManager.getInstance().getCurrentProject().getUserVariables().addProjectUserVariable(TEST_USERVARIABLE);
+		userVariable = ProjectManager.getInstance().getCurrentProject().getUserVariables()
+				.getUserVariable(TEST_USERVARIABLE, null);
 	}
 
 	public void testSetVariableWithNumericalFormula() {
-
-		UserVariable userVariable = ProjectManager.getInstance().getCurrentProject().getUserVariables()
-				.getUserVariable(TEST_USERVARIABLE, null);
-
 		SetVariableBrick setBrick = new SetVariableBrick(testSprite, new Formula(SET_VARIABLE_VALUE), userVariable);
 		testScript.addBrick(setBrick);
 		testSprite.addScript(testScript);
@@ -87,9 +86,6 @@ public class SetVariableActionTest extends AndroidTestCase {
 	}
 
 	public void testSetVariableWithNumericalStringFormula() {
-		UserVariable userVariable = ProjectManager.getInstance().getCurrentProject().getUserVariables()
-				.getUserVariable(TEST_USERVARIABLE, null);
-
 		String myString = "155";
 		SetVariableBrick setVariableBrick = new SetVariableBrick(testSprite, new Formula(myString), userVariable);
 		testScript.addBrick(setVariableBrick);
@@ -104,9 +100,6 @@ public class SetVariableActionTest extends AndroidTestCase {
 	}
 
 	public void testSetVariableWithStringFormula() {
-		UserVariable userVariable = ProjectManager.getInstance().getCurrentProject().getUserVariables()
-				.getUserVariable(TEST_USERVARIABLE, null);
-
 		String myString = "myString";
 		Formula validFormula = new Formula(myString);
 		SetVariableBrick setVariableBrick = new SetVariableBrick(testSprite, validFormula, userVariable);
@@ -122,9 +115,6 @@ public class SetVariableActionTest extends AndroidTestCase {
 	}
 
 	public void testNullFormula() {
-		UserVariable userVariable = ProjectManager.getInstance().getCurrentProject().getUserVariables()
-				.getUserVariable(TEST_USERVARIABLE, null);
-
 		SetVariableBrick setVariableBrick = new SetVariableBrick(testSprite, null, userVariable);
 		testScript.addBrick(setVariableBrick);
 		testSprite.addScript(testScript);
@@ -138,9 +128,6 @@ public class SetVariableActionTest extends AndroidTestCase {
 	}
 
 	public void testNotANumberFormula() {
-		UserVariable userVariable = ProjectManager.getInstance().getCurrentProject().getUserVariables()
-				.getUserVariable(TEST_USERVARIABLE, null);
-
 		SetVariableBrick setVariableBrick = new SetVariableBrick(testSprite, new Formula(Double.NaN), userVariable);
 		testScript.addBrick(setVariableBrick);
 		testSprite.addScript(testScript);

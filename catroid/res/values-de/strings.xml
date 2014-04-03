@@ -543,7 +543,7 @@
     <string name="formula_editor_function_false">FALSCH</string>
     <string name="formula_editor_function_length">länge</string>
     <string name="formula_editor_function_letter">buchstabe</string>
-    <string name="formula_editor_function_join">join</string>
+    <string name="formula_editor_function_join">verbinde</string>
     <string name="formula_editor_function_sin_parameter">(0)</string>
     <string name="formula_editor_function_cos_parameter">(0)</string>
     <string name="formula_editor_function_tan_parameter">(0)</string>
@@ -580,11 +580,10 @@
     <string name="formula_editor_object_layer">Ebene</string>
     <string name="formula_editor_compute">Berechnen</string>
     <string name="formula_editor_object">Objekt</string>
-    <string name="formula_editor_math">Funktionen</string>
+    <string name="formula_editor_function">Funktionen</string>
     <string name="formula_editor_logic">Logik</string>
     <string name="formula_editor_sensors">Sensoren</string>
     <string name="formula_editor_variables">Variablen</string>
-    <string name="formula_editor_random">Zufall</string>
     <string name="formula_editor_string">Zeichenkette</string>
     <string name="formula_editor_logic_notequal">&#x2260;</string>
     <string name="formula_editor_logic_lesserthan">&lt;</string>

@@ -580,11 +580,10 @@
     <string name="formula_editor_object_layer">layer</string>
     <string name="formula_editor_compute">Compute</string>
     <string name="formula_editor_object">Object</string>
-    <string name="formula_editor_math">Math</string>
+    <string name="formula_editor_function">Functions</string>
     <string name="formula_editor_logic">Logic</string>
     <string name="formula_editor_sensors">Sensors</string>
     <string name="formula_editor_variables">Variables</string>
-    <string name="formula_editor_random">Random</string>
     <string name="formula_editor_string">String</string>
     <string name="formula_editor_logic_notequal">&#x2260;</string>
     <string name="formula_editor_logic_lesserthan">&lt;</string>

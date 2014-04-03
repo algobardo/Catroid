@@ -46,14 +46,14 @@ import org.catrobat.catroid.R;
 public class FormulaEditorListFragment extends SherlockListFragment implements Dialog.OnKeyListener {
 
 	public static final String OBJECT_TAG = "objectFragment";
-	public static final String MATH_TAG = "mathFragment";
+	public static final String FUNCTION_TAG = "functionFragment";
 	public static final String LOGIC_TAG = "logicFragment";
 	public static final String SENSOR_TAG = "sensorFragment";
 
 	public static final String ACTION_BAR_TITLE_BUNDLE_ARGUMENT = "actionBarTitle";
 	public static final String FRAGMENT_TAG_BUNDLE_ARGUMENT = "fragmentTag";
 
-	public static final String[] TAGS = { OBJECT_TAG, MATH_TAG, LOGIC_TAG, SENSOR_TAG };
+	public static final String[] TAGS = { OBJECT_TAG, FUNCTION_TAG, LOGIC_TAG, SENSOR_TAG };
 
 	private static final int[] OBJECT_ITEMS = { R.string.formula_editor_object_x, R.string.formula_editor_object_y,
 			R.string.formula_editor_object_ghosteffect, R.string.formula_editor_object_brightness,
@@ -67,7 +67,7 @@ public class FormulaEditorListFragment extends SherlockListFragment implements D
 			R.string.formula_editor_logic_or, R.string.formula_editor_logic_not, R.string.formula_editor_function_true,
 			R.string.formula_editor_function_false };
 
-	private static final int[] MATH_ITEMS = { R.string.formula_editor_function_sin,
+	private static final int[] FUNCTIONS_ITEMS = { R.string.formula_editor_function_sin,
 			R.string.formula_editor_function_cos, R.string.formula_editor_function_tan,
 			R.string.formula_editor_function_ln, R.string.formula_editor_function_log,
 			R.string.formula_editor_function_pi, R.string.formula_editor_function_sqrt,
@@ -79,7 +79,7 @@ public class FormulaEditorListFragment extends SherlockListFragment implements D
 			R.string.formula_editor_function_length, R.string.formula_editor_function_letter,
 			R.string.formula_editor_function_join };
 
-	private static final int[] MATH_PARAMETERS = { R.string.formula_editor_function_sin_parameter,
+	private static final int[] FUNCTIONS_PARAMETERS = { R.string.formula_editor_function_sin_parameter,
 			R.string.formula_editor_function_cos_parameter, R.string.formula_editor_function_tan_parameter,
 			R.string.formula_editor_function_ln_parameter, R.string.formula_editor_function_log_parameter,
 			R.string.formula_editor_function_pi_parameter, R.string.formula_editor_function_sqrt_parameter,
@@ -128,8 +128,8 @@ public class FormulaEditorListFragment extends SherlockListFragment implements D
 
 		if (tag == OBJECT_TAG) {
 			itemsIds = OBJECT_ITEMS;
-		} else if (tag == MATH_TAG) {
-			itemsIds = MATH_ITEMS;
+		} else if (tag == FUNCTION_TAG) {
+			itemsIds = FUNCTIONS_ITEMS;
 		} else if (tag == LOGIC_TAG) {
 			itemsIds = LOGIC_ITEMS;
 		} else if (tag == SENSOR_TAG) {
@@ -139,7 +139,7 @@ public class FormulaEditorListFragment extends SherlockListFragment implements D
 		items = new String[itemsIds.length];
 
 		for (int index = 0; index < items.length; index++) {
-			items[index] = tag == MATH_TAG ? getString(itemsIds[index]) + getString(MATH_PARAMETERS[index])
+			items[index] = tag == FUNCTION_TAG ? getString(itemsIds[index]) + getString(FUNCTIONS_PARAMETERS[index])
 					: getString(itemsIds[index]);
 		}
 

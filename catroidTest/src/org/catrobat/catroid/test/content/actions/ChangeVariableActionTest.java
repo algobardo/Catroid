@@ -39,8 +39,8 @@ public class ChangeVariableActionTest extends AndroidTestCase {
 	private static final double CHANGE_VARIABLE_VALUE = 11;
 	private static final double INITIALIZED_VALUE = 0.0;
 	private Sprite testSprite;
-	private StartScript testScript;
 	private Project project;
+	private StartScript testScript;
 	private UserVariable userVariable;
 
 	@Override

@@ -39,3 +39,7 @@ Thumbs.db
 # Gradle
 .gradle/
 build/
+
+#Crowdin
+crowdin.yaml
+crowdin-cli.jar

@@ -43,10 +43,12 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
+import org.catrobat.catroid.BuildConfig;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.content.Project;
+import org.catrobat.catroid.drone.DroneUtils;
 import org.catrobat.catroid.io.LoadProjectTask;
 import org.catrobat.catroid.io.LoadProjectTask.OnLoadProjectCompleteListener;
 import org.catrobat.catroid.stage.PreStageActivity;
@@ -99,10 +101,29 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 			BackPackListManager.getInstance().setSoundInfoArrayListEmpty();
 		}
 
-		//TODO Drone dont create project for now
-		//if (BuildConfig.DEBUG && DroneUtils.isDroneSharedPreferenceEnabled(getApplication(), false)) {
-		//	UtilFile.createStandardDroneProject(this);
-		//}
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder.setTitle(R.string.warning_drone_mainmenuactivity_title);
+		alertDialogBuilder.setCancelable(false);
+		alertDialogBuilder.setMessage(R.string.warning_drone_mainmenuactivity);
+		alertDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+				handleContinueButton();
+			}
+		});
+
+		alertDialogBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int id) {
+				closeApp();
+			}
+		});
+		alertDialogBuilder.show();
+	}
+
+	private void closeApp() {
+		finish();
 	}
 
 	@Override
@@ -116,6 +137,10 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 		findViewById(R.id.progress_circle).setVisibility(View.GONE);
 
 		UtilFile.createStandardProjectIfRootDirectoryIsEmpty(this);
+
+		if (BuildConfig.DEBUG && DroneUtils.isDroneSharedPreferenceEnabled(getApplication(), false)) {
+			UtilFile.createStandardDroneProject(this);
+		}
 
 		PreStageActivity.shutdownPersistentResources();
 		setMainMenuButtonContinueText();

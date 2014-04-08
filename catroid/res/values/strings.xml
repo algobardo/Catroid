@@ -24,7 +24,7 @@
 <resources>
 
     <!-- General terms -->
-    <string name="app_name">Pocket Code</string>
+    <string name="app_name">Pocket Drone</string>
     <string name="cancel_button">Cancel</string>
     <string name="rename">Rename</string>
     <string name="delete">Delete</string>
@@ -501,6 +501,8 @@
     <string name="error_drone_wrong_platform">We can not run a ARDrone project on your device.</string>
     <string name="error_drone_not_available_in_release_build_title">ARDrone projects not supported</string>
     <string name="error_drone_not_available_in_release_build">Unfortunately we can\'t run projects with ARDrone bricks for now.</string>
+    <string name="warning_drone_mainmenuactivity_title">Attention</string>
+    <string name="warning_drone_mainmenuactivity">This version is experimental and should only be used with extreme caution.\n\nFirst read the ARDrone 2.0 Manual before operating the Drone!\n\nWhen you are unsure please click \"No\" and contact the Pocket Code Team.\n\nDo you want to proceede?</string>      
     <!--  -->
     
 

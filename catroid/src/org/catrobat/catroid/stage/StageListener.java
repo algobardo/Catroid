@@ -81,7 +81,7 @@ public class StageListener implements ApplicationListener {
 	public static final String SCREENSHOT_MANUAL_FILE_NAME = "manual_screenshot" + Constants.IMAGE_STANDARD_EXTENTION;
 	private FPSLogger fpsLogger;
 
-	private Stage stage;
+	private VirtualGamepadStage stage;
 	private boolean paused = false;
 	private boolean finished = false;
 	private boolean firstStart = true;
@@ -155,8 +155,8 @@ public class StageListener implements ApplicationListener {
 		virtualWidthHalf = virtualWidth / 2;
 		virtualHeightHalf = virtualHeight / 2;
 
-<<<<<<< HEAD
-		screenMode = ScreenModes.STRETCH;
+//<<<<<<< HEAD
+		//screenMode = ScreenModes.STRETCH;
 
 		sprites = project.getSpriteList();
 
@@ -176,21 +176,21 @@ public class StageListener implements ApplicationListener {
 		if (virtualGamepadSelected) {
 			stage = new VirtualGamepadStage(virtualWidth, virtualHeight, true);
 		} else {
-			stage = new Stage(virtualWidth, virtualHeight, true);
+			stage = new VirtualGamepadStage(virtualWidth, virtualHeight, true);
 		}
 
-=======
-		stage = new Stage(virtualWidth, virtualHeight, true);
->>>>>>> master
+//=======
+		stage = new VirtualGamepadStage(virtualWidth, virtualHeight, true);
+//>>>>>>> master
 		batch = stage.getSpriteBatch();
 
 		Gdx.gl.glViewport(0, 0, ScreenValues.SCREEN_WIDTH, ScreenValues.SCREEN_HEIGHT);
 		initScreenMode();
 
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 		sprites = project.getSpriteList();
->>>>>>> master
+//>>>>>>> master
 		for (Sprite sprite : sprites) {
 			sprite.resetSprite();
 			sprite.look.createBrightnessContrastShader();
@@ -577,7 +577,7 @@ public class StageListener implements ApplicationListener {
 			}
 		}
 	}
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
 	private void prepareAutomaticScreenshotAndNoMeadiaFile() {
 		File noMediaFile = new File(pathForScreenshot + Constants.NO_MEDIA_FILE);
@@ -691,6 +691,6 @@ public class StageListener implements ApplicationListener {
 		}
 	}
 
-=======
->>>>>>> master
+//=======
+//>>>>>>> master
 }

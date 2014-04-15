@@ -22,13 +22,17 @@
  */
 package org.catrobat.catroid.stage;
 
+import android.graphics.Point;
 import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.common.LookData;
+import org.catrobat.catroid.common.ScreenValues;
 import org.catrobat.catroid.content.Look;
 import org.catrobat.catroid.content.Sprite;
 import org.catrobat.catroid.content.WhenVirtualButtonScript;
@@ -75,7 +79,6 @@ public class VirtualGamepadStage extends Stage {
 
 	public VirtualGamepadStage(float width, float height, boolean keepAspectRatio) {
 		super(width, height, keepAspectRatio);
-
 		this.width = width;
 		this.height = height;
 

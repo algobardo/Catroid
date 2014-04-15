@@ -50,7 +50,8 @@ def getVersionName = { ->
 }
 
 def gitDescribe() {
-    return 'git describe --tags'.execute().text.trim()
+ //   return 'git describe --tags'.execute().text.trim()
+    return "scheiss git und scheiss android studio";
 }
 
 

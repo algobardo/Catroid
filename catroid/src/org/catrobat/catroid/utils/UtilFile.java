@@ -98,27 +98,21 @@ public final class UtilFile {
 		return String.format(Locale.getDefault(), "%.1f %sB", bytes / Math.pow(unit, exponent), prefix);
 	}
 
-	public static boolean clearDirectory(File path) {
-		if (path.exists()) {
-			File[] filesInDirectory = path.listFiles();
-			if (filesInDirectory == null) {
-				return false;
-			}
-			for (File file : filesInDirectory) {
-				if (file.isDirectory()) {
-					deleteDirectory(file);
-				} else {
-					file.delete();
-				}
-			}
-		}
-		return true;
-	}
+	public static boolean deleteDirectory(File fileOrDirectory) {
+        if (fileOrDirectory == null) {
+            return false;
+        }
+        boolean success = true;
+        if (fileOrDirectory.isDirectory())
+            for (File child : fileOrDirectory.listFiles()) {
+                success = deleteDirectory(child);
+                if(!success) {
+                    return false;
+                }
+            }
 
-	public static boolean deleteDirectory(File path) {
-		clearDirectory(path);
-		return (path.delete());
-	}
+        return fileOrDirectory.delete();
+    }
 
 	public static File saveFileToProject(String project, String name, int fileID, Context context, FileType type) {
 

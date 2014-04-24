@@ -22,17 +22,6 @@
  */
 package org.catrobat.catroid.io;
 
-import static org.catrobat.catroid.common.Constants.BACKPACK_DIRECTORY;
-import static org.catrobat.catroid.common.Constants.BACKPACK_IMAGE_DIRECTORY;
-import static org.catrobat.catroid.common.Constants.BACKPACK_SOUND_DIRECTORY;
-import static org.catrobat.catroid.common.Constants.DEFAULT_ROOT;
-import static org.catrobat.catroid.common.Constants.IMAGE_DIRECTORY;
-import static org.catrobat.catroid.common.Constants.NO_MEDIA_FILE;
-import static org.catrobat.catroid.common.Constants.PROJECTCODE_NAME;
-import static org.catrobat.catroid.common.Constants.SOUND_DIRECTORY;
-import static org.catrobat.catroid.utils.Utils.buildPath;
-import static org.catrobat.catroid.utils.Utils.buildProjectPath;
-
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.util.Log;
@@ -45,7 +34,6 @@ import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.common.FileChecksumContainer;
 import org.catrobat.catroid.common.LookData;
-import org.catrobat.catroid.common.ProjectData;
 import org.catrobat.catroid.common.SoundInfo;
 import org.catrobat.catroid.content.BroadcastScript;
 import org.catrobat.catroid.content.Project;
@@ -123,6 +111,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import static org.catrobat.catroid.common.Constants.BACKPACK_DIRECTORY;
+import static org.catrobat.catroid.common.Constants.BACKPACK_IMAGE_DIRECTORY;
+import static org.catrobat.catroid.common.Constants.BACKPACK_SOUND_DIRECTORY;
+import static org.catrobat.catroid.common.Constants.DEFAULT_ROOT;
+import static org.catrobat.catroid.common.Constants.IMAGE_DIRECTORY;
+import static org.catrobat.catroid.common.Constants.NO_MEDIA_FILE;
+import static org.catrobat.catroid.common.Constants.PROJECTCODE_NAME;
+import static org.catrobat.catroid.common.Constants.SOUND_DIRECTORY;
+import static org.catrobat.catroid.utils.Utils.buildPath;
+import static org.catrobat.catroid.utils.Utils.buildProjectPath;
 
 public final class StorageHandler {
 	private static final StorageHandler INSTANCE;
@@ -369,19 +368,16 @@ public final class StorageHandler {
 		}
 	}
 
-	public boolean deleteProject(Project project) {
-		if (project != null) {
-			return UtilFile.deleteDirectory(new File(buildProjectPath(project.getName())));
-		}
-		return false;
-	}
-
-	public boolean deleteProject(ProjectData projectData) {
-		if (projectData != null) {
-			return UtilFile.deleteDirectory(new File(buildProjectPath(projectData.projectName)));
-		}
-		return false;
-	}
+    public void deleteProject(String projectName) throws IllegalArgumentException, IOException {
+        boolean success = true;
+        if (projectName == null || !projectExists(projectName)) {
+            throw new IllegalArgumentException("Project with name " + projectName + " does not exist");
+        }
+        success = UtilFile.deleteDirectory(new File(buildProjectPath(projectName)));
+        if (!success) {
+            throw new IOException("Error at deleting project " + projectName);
+        }
+    }
 
 	public boolean projectExists(String projectName) {
 		List<String> projectNameList = UtilFile.getProjectNames(new File(DEFAULT_ROOT));
@@ -496,7 +492,7 @@ public final class StorageHandler {
 		return copiedFile;
 	}
 
-	public void deletTempImageCopy() {
+	public void deleteTempImageCopy() {
 		File temporaryPictureFileInPocketPaint = new File(Constants.TMP_IMAGE_PATH);
 		if (temporaryPictureFileInPocketPaint.exists()) {
 			temporaryPictureFileInPocketPaint.delete();

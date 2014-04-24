@@ -232,10 +232,17 @@ public final class ProjectManager implements OnLoadProjectCompleteListener, OnCh
 		this.project = project;
 	}
 
-	public void deleteCurrentProject() {
-		StorageHandler.getInstance().deleteProject(project);
-		project = null;
-	}
+    @Deprecated
+    public void deleteCurrentProject() throws IOException {
+        deleteProject(project.getName());
+    }
+
+    public void deleteProject(String projectName) throws IllegalArgumentException, IOException {
+        StorageHandler.getInstance().deleteProject(projectName);
+        if (project != null && project.getName() == projectName) {
+            project = null;
+        }
+    }
 
 	public boolean renameProject(String newProjectName, Context context) {
 		if (StorageHandler.getInstance().projectExists(newProjectName)) {

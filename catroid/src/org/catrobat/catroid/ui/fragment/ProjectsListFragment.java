@@ -34,6 +34,7 @@ import android.preference.PreferenceManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -43,6 +44,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.ActionMode;
@@ -53,7 +55,6 @@ import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.common.ProjectData;
 import org.catrobat.catroid.content.Project;
-import org.catrobat.catroid.io.StorageHandler;
 import org.catrobat.catroid.ui.BottomBar;
 import org.catrobat.catroid.ui.MyProjectsActivity;
 import org.catrobat.catroid.ui.ProjectActivity;
@@ -70,6 +71,7 @@ import org.catrobat.catroid.utils.UtilFile;
 import org.catrobat.catroid.utils.Utils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -82,8 +84,9 @@ public class ProjectsListFragment extends SherlockListFragment implements OnProj
 
 	private static final String BUNDLE_ARGUMENTS_PROJECT_DATA = "project_data";
 	private static final String SHARED_PREFERENCE_NAME = "showDetailsMyProjects";
+    private static final String TAG = ProjectsListFragment.class.getSimpleName();
 
-	private static String deleteActionModeTitle;
+    private static String deleteActionModeTitle;
 	private static String singleItemAppendixDeleteActionMode;
 	private static String multipleItemAppendixDeleteActionMode;
 
@@ -391,23 +394,25 @@ public class ProjectsListFragment extends SherlockListFragment implements OnProj
 		alertDialog.show();
 	}
 
-	private void deleteProject() {
+	private void deleteProject(ProjectData project) {
 		ProjectManager projectManager = ProjectManager.getInstance();
-		Project currentProject = projectManager.getCurrentProject();
-
-		if (currentProject != null && currentProject.getName().equalsIgnoreCase(projectToEdit.projectName)) {
-			projectManager.deleteCurrentProject();
-		} else {
-			StorageHandler.getInstance().deleteProject(projectToEdit);
-		}
-		projectList.remove(projectToEdit);
+        try {
+            projectManager.deleteProject(project.projectName);
+            projectList.remove(project);
+        } catch (IOException exception) {
+            Log.e(TAG, "Project could not be deleted", exception);
+            Toast.makeText(getActivity(), R.string.error_delete_project, Toast.LENGTH_SHORT);
+        } catch (IllegalArgumentException exception) {
+            Log.e(TAG, "Project does not exist!", exception);
+            Toast.makeText(getActivity(), R.string.error_unknown_project, Toast.LENGTH_SHORT);
+        }
 	}
 
 	private void deleteCheckedProjects() {
 		int numDeleted = 0;
 		for (int position : adapter.getCheckedProjects()) {
 			projectToEdit = (ProjectData) getListView().getItemAtPosition(position - numDeleted);
-			deleteProject();
+			deleteProject(projectToEdit);
 			numDeleted++;
 		}
 

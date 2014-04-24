@@ -215,6 +215,9 @@ public class StageListener implements ApplicationListener {
 				loadVirtualButtonImagesLookData();
 				((VirtualGamepadStage) stage).setVgpPadSprite(vgpPadSprite);
 				((VirtualGamepadStage) stage).setVgpButtonSprite(vgpButtonSprite);
+                stage.createVirtualDPad();
+                stage.createVirtualButton();
+                //stage.touchDown(0,0,0,0);
 				Gdx.input.setInputProcessor(stage);
 			} else {
 				Gdx.input.setInputProcessor(stage);

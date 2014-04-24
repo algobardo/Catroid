@@ -22,17 +22,13 @@
  */
 package org.catrobat.catroid.stage;
 
-import android.graphics.Point;
 import android.util.Log;
-import android.view.Display;
-import android.view.WindowManager;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.common.LookData;
-import org.catrobat.catroid.common.ScreenValues;
 import org.catrobat.catroid.content.Look;
 import org.catrobat.catroid.content.Sprite;
 import org.catrobat.catroid.content.WhenVirtualButtonScript;
@@ -49,8 +45,14 @@ public class VirtualGamepadStage extends Stage {
 
 	private static int dPadInitValue = -99999;
 
-	private static double DPAD_MIN_MOTION = 20.0;
-	private static double DPAD_MAX_MOTION = 90.0;
+    private  double DPAD_MIN_MOTION = 20.0;
+
+    public void set_DPAD_Motion(double DPAD_MAX_MOTION) {
+        this.DPAD_MAX_MOTION = DPAD_MAX_MOTION;
+    }
+
+    private  double DPAD_MAX_MOTION = 90.0;
+
 	private static double BUTTON_MOTION = 20.0;
 
 	private static int DPAD_ITERATE_TIME = 15;
@@ -81,13 +83,44 @@ public class VirtualGamepadStage extends Stage {
 		super(width, height, keepAspectRatio);
 		this.width = width;
 		this.height = height;
-
+        // setting the range for accepting touches for the dPad to half our screen height
+        set_DPAD_Motion(getHeight() / 2.0);
 		dPadStartX = dPadInitValue;
 		dPadStartY = dPadInitValue;
 		buttonStartX = dPadInitValue;
 		buttonStartY = dPadInitValue;
+
+
 	}
 
+   public boolean createVirtualDPad()
+   {
+       try{
+           vgpPadSprite.look.setXInUserInterfaceDimensionUnit((-1.0f) * 325);
+           vgpPadSprite.look.setYInUserInterfaceDimensionUnit((-1.0f) * 750);
+
+           vgpPadSprite.look.setVisible(true);
+
+           return true;
+       } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+   }
+
+   public boolean createVirtualButton()
+   {
+       try{
+           vgpButtonSprite.look.setXInUserInterfaceDimensionUnit(325);
+           vgpButtonSprite.look.setYInUserInterfaceDimensionUnit((-1.0f) * 750);
+           vgpButtonSprite.look.setVisible(true);
+
+           return true;
+       } catch (Exception e) {
+           e.printStackTrace();
+           return false;
+       }
+   }
 	private void setDPadDirection(boolean dPadUp, boolean dPadDown, boolean dPadLeft, boolean dPadRight) {
 		this.dPadUp = dPadUp;
 		this.dPadDown = dPadDown;
@@ -104,8 +137,11 @@ public class VirtualGamepadStage extends Stage {
 				dPadThread = new DPadThread();
 				dPadThread.start();
 
-				vgpPadSprite.look.setXInUserInterfaceDimensionUnit(screenX - width / 2.0f);
-				vgpPadSprite.look.setYInUserInterfaceDimensionUnit(height / 2.0f - screenY);
+                Log.d("DPAD","DPad Position x: " + (screenX - width / 2.0f) + " y: " + (height / 2.0f - screenY));
+             //   vgpPadSprite.look.setXInUserInterfaceDimensionUnit(screenX - width / 2.0f);
+             //   vgpPadSprite.look.setYInUserInterfaceDimensionUnit(height / 2.0f - screenY);
+                vgpPadSprite.look.setXInUserInterfaceDimensionUnit((-1.0f) * 325);
+                vgpPadSprite.look.setYInUserInterfaceDimensionUnit((-1.0f) * 750);
 
 				vgpPadSprite.look.setVisible(true);
 
@@ -114,8 +150,11 @@ public class VirtualGamepadStage extends Stage {
 				buttonStartX = screenX;
 				buttonStartY = screenY;
 
-				vgpButtonSprite.look.setXInUserInterfaceDimensionUnit(buttonStartX - width / 2.0f);
-				vgpButtonSprite.look.setYInUserInterfaceDimensionUnit(height / 2.0f - buttonStartY);
+                Log.d("DPAD", "DPad Position x: " + (buttonStartX - width / 2.0f) + " y: " + (height / 2.0f - buttonStartY));
+             //   vgpButtonSprite.look.setXInUserInterfaceDimensionUnit(buttonStartX - width / 2.0f);
+             //   vgpButtonSprite.look.setYInUserInterfaceDimensionUnit(height / 2.0f - buttonStartY);
+                vgpButtonSprite.look.setXInUserInterfaceDimensionUnit(325);
+                vgpButtonSprite.look.setYInUserInterfaceDimensionUnit((-1.0f) * 750);
 
 				buttonHoldThread = new ButtonHoldThread();
 				buttonHoldThread.start();
@@ -184,7 +223,13 @@ public class VirtualGamepadStage extends Stage {
 
 				dPadThread.stopThread();
 
-				vgpPadSprite.look.setVisible(false);
+                for (LookData lookData : vgpPadSprite.getLookDataList()) {
+                    if (lookData.getLookName().equals(Constants.VGP_IMAGE_PAD_CENTER)) {
+                        vgpPadSprite.look.setLookData(lookData);
+                        break;
+                    }
+                }
+				// vgpPadSprite.look.setVisible(false);
 			} else if (pointer == 1) {
 
 				if (buttonHoldThread != null) {
@@ -205,6 +250,7 @@ public class VirtualGamepadStage extends Stage {
 		} catch (Exception e) {
 			return false;
 		}
+
 	}
 
 	private void handleDPadAction(Sprite sprite) throws Exception {
@@ -313,7 +359,7 @@ public class VirtualGamepadStage extends Stage {
 			}
 		}
 	}
-
+    //============================================= Button ========================================
 	private void handleButtonAction(int screenX, int screenY) throws Exception {
 		Sprite sprite = ProjectManager.getInstance().getCurrentSprite();
 		if (sprite == null) {

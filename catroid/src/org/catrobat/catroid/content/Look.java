@@ -22,6 +22,8 @@
  */
 package org.catrobat.catroid.content;
 
+import android.os.Debug;
+
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -157,6 +159,7 @@ public class Look extends Image {
 
 	@Override
 	public void act(float delta) {
+        //Debug.startMethodTracing("broadcastPerfAnalysiss");
 		Array<Action> actions = getActions();
 		allActionAreFinished = false;
 		int finishedCount = 0;
@@ -176,6 +179,7 @@ public class Look extends Image {
 		if (finishedCount == actions.size) {
 			allActionAreFinished = true;
 		}
+        //Debug.stopMethodTracing();
 	}
 
 	@Override

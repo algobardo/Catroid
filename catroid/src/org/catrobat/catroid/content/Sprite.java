@@ -105,15 +105,14 @@ public class Sprite implements Serializable, Cloneable {
 	}
 
 	public void createStartScriptActionSequence() {
-		for (Script s : scriptList) {
-			if (s instanceof StartScript) {
-				look.addAction(createActionSequence(s));
+		for (Script currentScript : scriptList) {
+			if (currentScript instanceof StartScript) {
+				look.addAction(createActionSequence(currentScript));
 			}
-			if (s instanceof BroadcastScript) {
-				BroadcastScript script = (BroadcastScript) s;
+			else if (currentScript instanceof BroadcastScript) {
+				BroadcastScript script = (BroadcastScript) currentScript;
 				SequenceAction action = createBroadcastScriptActionSequence(script);
 				putBroadcastSequenceAction(script.getBroadcastMessage(), action);
-
 			}
 		}
 	}
@@ -179,9 +178,9 @@ public class Sprite implements Serializable, Cloneable {
 
 	public void createWhenScriptActionSequence(String action) {
 		ParallelAction whenParallelAction = ExtendedActions.parallel();
-		for (Script s : scriptList) {
-			if (s instanceof WhenScript && (((WhenScript) s).getAction().equalsIgnoreCase(action))) {
-				SequenceAction sequence = createActionSequence(s);
+		for (Script script : scriptList) {
+			if (script instanceof WhenScript && (((WhenScript) script).getAction().equalsIgnoreCase(action))) {
+				SequenceAction sequence = createActionSequence(script);
 				whenParallelAction.addAction(sequence);
 
 			}
@@ -194,28 +193,22 @@ public class Sprite implements Serializable, Cloneable {
 		return createActionSequence(script);
 	}
 
-	private SequenceAction createActionSequence(Script s) {
+	private SequenceAction createActionSequence(Script script) {
 		SequenceAction sequence = ExtendedActions.sequence();
-		s.run(sequence);
+		script.run(sequence);
 		return sequence;
 	}
 
-	public void startScriptBroadcast(Script s, boolean overload) {
-		SequenceAction sequence = ExtendedActions.sequence();
-		s.run(sequence);
-		look.addAction(sequence);
-	}
-
 	public void pause() {
-		for (Script s : scriptList) {
-			s.setPaused(true);
+		for (Script script : scriptList) {
+			script.setPaused(true);
 		}
 		this.isPaused = true;
 	}
 
 	public void resume() {
-		for (Script s : scriptList) {
-			s.setPaused(false);
+		for (Script script : scriptList) {
+			script.setPaused(false);
 		}
 		this.isPaused = false;
 	}

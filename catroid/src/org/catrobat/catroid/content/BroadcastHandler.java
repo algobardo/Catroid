@@ -34,144 +34,152 @@ import org.catrobat.catroid.content.actions.ExtendedActions;
 import java.util.ArrayList;
 
 public final class BroadcastHandler {
-	private BroadcastHandler() {
-		throw new AssertionError();
-	}
+    private BroadcastHandler() {
+        throw new AssertionError();
+    }
 
-	public static void doHandleBroadcastEvent(Look look, String broadcastMessage) {
-		if (!BroadcastSequenceMap.containsKey(broadcastMessage)) {
-			return;
-		}
+    public static void doHandleBroadcastEvent(Look look, String broadcastMessage) {
+        if (!BroadcastSequenceMap.containsKey(broadcastMessage)) {
+            return;
+        }
 
-		for (SequenceAction action : BroadcastSequenceMap.get(broadcastMessage)) {
-			if (!handleAction(action)) {
-				addOrRestartAction(look, action);
-			}
-		}
+        for (SequenceAction action : BroadcastSequenceMap.get(broadcastMessage)) {
+            if (!handleAction(action)) {
+                addOrRestartAction(look, action);
+            }
+        }
 
-		if (BroadcastWaitSequenceMap.containsKey(broadcastMessage)) {
-			for (SequenceAction action : BroadcastWaitSequenceMap.get(broadcastMessage)) {
-				addOrRestartAction(look, action);
-			}
-			BroadcastWaitSequenceMap.getCurrentBroadcastEvent().resetEventAndResumeScript();
-		}
-	}
+        if (BroadcastWaitSequenceMap.containsKey(broadcastMessage)) {
+            for (SequenceAction action : BroadcastWaitSequenceMap.get(broadcastMessage)) {
+                addOrRestartAction(look, action);
+            }
+            BroadcastWaitSequenceMap.getCurrentBroadcastEvent().resetEventAndResumeScript();
+        }
+    }
 
-	public static void doHandleBroadcastFromWaiterEvent(Look look, BroadcastEvent event, String broadcastMessage) {
-		if (!BroadcastSequenceMap.containsKey(broadcastMessage)) {
-			return;
-		}
+    public static void doHandleBroadcastFromWaiterEvent(Look look, BroadcastEvent event, String broadcastMessage) {
+        if (!BroadcastSequenceMap.containsKey(broadcastMessage)) {
+            return;
+        }
 
-		if (!BroadcastWaitSequenceMap.containsKey(broadcastMessage)) {
-			addBroadcastMessageToBroadcastWaitSequenceMap(look, event, broadcastMessage);
-		} else {
-			if (BroadcastWaitSequenceMap.getCurrentBroadcastEvent() == event
-					&& BroadcastWaitSequenceMap.getCurrentBroadcastEvent() != null) {
-				for (SequenceAction action : BroadcastWaitSequenceMap.get(broadcastMessage)) {
-					BroadcastWaitSequenceMap.getCurrentBroadcastEvent().resetNumberOfFinishedReceivers();
-					addOrRestartAction(look, action);
-				}
-			} else {
-				if (BroadcastWaitSequenceMap.getCurrentBroadcastEvent() != null) {
-					BroadcastWaitSequenceMap.getCurrentBroadcastEvent().resetEventAndResumeScript();
-				}
-				addBroadcastMessageToBroadcastWaitSequenceMap(look, event, broadcastMessage);
-			}
-		}
-	}
+        if (!BroadcastWaitSequenceMap.containsKey(broadcastMessage)) {
+            addBroadcastMessageToBroadcastWaitSequenceMap(look, event, broadcastMessage);
+        } else {
+            if (BroadcastWaitSequenceMap.getCurrentBroadcastEvent().equals(event)
+                    && BroadcastWaitSequenceMap.getCurrentBroadcastEvent() != null) {
+                for (SequenceAction action : BroadcastWaitSequenceMap.get(broadcastMessage)) {
+                    BroadcastWaitSequenceMap.getCurrentBroadcastEvent().resetNumberOfFinishedReceivers();
+                    addOrRestartAction(look, action);
+                }
+            } else {
+                if (BroadcastWaitSequenceMap.getCurrentBroadcastEvent() != null) {
+                    BroadcastWaitSequenceMap.getCurrentBroadcastEvent().resetEventAndResumeScript();
+                }
+                addBroadcastMessageToBroadcastWaitSequenceMap(look, event, broadcastMessage);
+            }
+        }
+    }
 
-	private static void addOrRestartAction(Look look, Action action) {
-		if (action.getActor() == null) {
-			if (!look.getActions().contains(action, false)) {
-				look.addAction(action);
-			}
-		} else {
-			if (!Look.actionsToRestartContains(action)) {
-				Look.actionsToRestartAdd(action);
-			}
-		}
-	}
+    private static void addOrRestartAction(Look look, Action action) {
+        if (action.getActor() == null) {
+            if (!look.getActions().contains(action, false)) {
+                look.addAction(action);
+            }
+        } else {
+            if (!Look.actionsToRestartContains(action)) {
+                Look.actionsToRestartAdd(action);
+            }
+        }
+    }
 
-	private static void addBroadcastMessageToBroadcastWaitSequenceMap(Look look, BroadcastEvent event,
-			String broadcastMessage) {
-		ArrayList<SequenceAction> actionList = new ArrayList<SequenceAction>();
-		BroadcastWaitSequenceMap.setCurrentBroadcastEvent(event);
-		for (SequenceAction action : BroadcastSequenceMap.get(broadcastMessage)) {
-			SequenceAction broadcastWaitAction = ExtendedActions.sequence(action,
-					ExtendedActions.broadcastNotify(event));
-			if (!handleActionFromBroadcastWait(look, broadcastWaitAction)) {
-				event.raiseNumberOfReceivers();
-				actionList.add(broadcastWaitAction);
-				addOrRestartAction(look, broadcastWaitAction);
-			}
-		}
-		if (actionList.size() > 0) {
-			BroadcastWaitSequenceMap.put(broadcastMessage, actionList);
-		}
-	}
+    private static void addBroadcastMessageToBroadcastWaitSequenceMap(Look look, BroadcastEvent event,
+                                                                      String broadcastMessage) {
+        ArrayList<SequenceAction> actionList = new ArrayList<SequenceAction>();
+        BroadcastWaitSequenceMap.setCurrentBroadcastEvent(event);
+        for (SequenceAction action : BroadcastSequenceMap.get(broadcastMessage)) {
+            SequenceAction broadcastWaitAction = ExtendedActions.sequence(action,
+                    ExtendedActions.broadcastNotify(event));
+            if (!handleActionFromBroadcastWait(look, broadcastWaitAction)) {
+                event.raiseNumberOfReceivers();
+                actionList.add(broadcastWaitAction);
+                addOrRestartAction(look, broadcastWaitAction);
+            }
+        }
+        if (actionList.size() > 0) {
+            BroadcastWaitSequenceMap.put(broadcastMessage, actionList);
+        }
+    }
 
-	private static boolean handleAction(Action action) {
-		for (Sprite sprites : ProjectManager.getInstance().getCurrentProject().getSpriteList()) {
-			for (Action actionOfLook : sprites.look.getActions()) {
-				if (actionOfLook instanceof SequenceAction && ((SequenceAction) actionOfLook).getActions().size > 0
-						&& ((SequenceAction) actionOfLook).getActions().get(0) == action) {
-					Look.actionsToRestartAdd(actionOfLook);
-					return true;
-				} else {
-					if (action instanceof SequenceAction && ((SequenceAction) action).getActions().size > 0
-							&& ((SequenceAction) action).getActions().get(0) == actionOfLook) {
-						Look.actionsToRestartAdd(action);
-						return true;
-					} else {
-						if (action == actionOfLook) {
-							Look.actionsToRestartAdd(actionOfLook);
-							return true;
-						} else {
-							if (actionOfLook instanceof SequenceAction
-									&& ((SequenceAction) actionOfLook).getActions().size > 0
-									&& action instanceof SequenceAction
-									&& ((SequenceAction) action).getActions().size > 0
-									&& ((SequenceAction) actionOfLook).getActions().get(0) == ((SequenceAction) action)
-											.getActions().get(0)) {
-								Look.actionsToRestartAdd(action);
-								return true;
-							}
-						}
-					}
-				}
-			}
-		}
-		return false;
-	}
+    private static boolean handleAction(Action action) {
+        //for (Sprite sprites : ProjectManager.getInstance().getCurrentProject().getSpriteList()) {
+        Sprite sprites = ProjectManager.getInstance().getCurrentSprite();
+        ArrayList<Sprite> list = new ArrayList<Sprite>();
+        if (sprites != null) {
+            list.add(sprites);
+            for (Sprite sprite : ProjectManager.getInstance().getCurrentProject().getSpriteList()) {
+                if (!sprite.equals(sprites)) {
+                    list.add(sprite);
+                }
+            }
+        }
+        if (!list.isEmpty())
+            for (int i = 0; i < list.size(); i++) {
+                sprites = list.get(i);
 
-	private static boolean handleActionFromBroadcastWait(Look look,
-			SequenceAction sequenceActionWithBroadcastNotifyAction) {
-		Action actualAction = sequenceActionWithBroadcastNotifyAction.getActions().get(0);
+                for (Action actionOfLook : sprites.look.getActions()) {
+                    if (actionOfLook instanceof SequenceAction
+                            && ((SequenceAction) actionOfLook).getActions().size > 0
+                            && action instanceof SequenceAction
+                            && ((SequenceAction) action).getActions().size > 0
+                            && ((SequenceAction) actionOfLook).getActions().get(0).equals(((SequenceAction) action)
+                            .getActions().get(0))) {
+                        Look.actionsToRestartAdd(action);
+                        return true;
+                    } else if (action instanceof SequenceAction && ((SequenceAction) action).getActions().size > 0
+                            && ((SequenceAction) action).getActions().get(0).equals(actionOfLook)) {
+                        Look.actionsToRestartAdd(action);
+                        return true;
+                    } else if (action.equals(actionOfLook)) {
+                        Look.actionsToRestartAdd(actionOfLook);
+                        return true;
+                    } else if (actionOfLook instanceof SequenceAction && ((SequenceAction) actionOfLook).getActions().size > 0
+                            && ((SequenceAction) actionOfLook).getActions().get(0).equals(action)) {
+                        Look.actionsToRestartAdd(actionOfLook);
+                        return true;
+                    }
+                }
+            }
+        return false;
+    }
 
-		for (Sprite sprites : ProjectManager.getInstance().getCurrentProject().getSpriteList()) {
-			for (Action actionOfLook : sprites.look.getActions()) {
-				Action actualActionOfLook = null;
-				if (actionOfLook instanceof SequenceAction && ((SequenceAction) actionOfLook).getActions().size > 0) {
-					actualActionOfLook = ((SequenceAction) actionOfLook).getActions().get(0);
-				}
-				if (sequenceActionWithBroadcastNotifyAction == actionOfLook) {
-					((BroadcastNotifyAction) ((SequenceAction) actionOfLook).getActions().get(1)).getEvent()
-							.resetNumberOfFinishedReceivers();
-					Look.actionsToRestartAdd(actionOfLook);
-					return true;
-				} else {
-					if (actualActionOfLook != null && actualActionOfLook == actualAction) {
-						((BroadcastNotifyAction) ((SequenceAction) actionOfLook).getActions().get(1)).getEvent()
-								.resetEventAndResumeScript();
-						Look.actionsToRestartAdd(actionOfLook);
-						return false;
-					} else {
-						addOrRestartAction(look, sequenceActionWithBroadcastNotifyAction);
-						return false;
-					}
-				}
-			}
-		}
-		return false;
-	}
+    private static boolean handleActionFromBroadcastWait(Look look,
+                                                         SequenceAction sequenceActionWithBroadcastNotifyAction) {
+        Action actualAction = sequenceActionWithBroadcastNotifyAction.getActions().get(0);
+
+        for (Sprite sprites : ProjectManager.getInstance().getCurrentProject().getSpriteList()) {
+            for (Action actionOfLook : sprites.look.getActions()) {
+                Action actualActionOfLook = null;
+                if (actionOfLook instanceof SequenceAction && ((SequenceAction) actionOfLook).getActions().size > 0) {
+                    actualActionOfLook = ((SequenceAction) actionOfLook).getActions().get(0);
+                }
+                if (sequenceActionWithBroadcastNotifyAction.equals(actionOfLook)) {
+                    ((BroadcastNotifyAction) ((SequenceAction) actionOfLook).getActions().get(1)).getEvent()
+                            .resetNumberOfFinishedReceivers();
+                    Look.actionsToRestartAdd(actionOfLook);
+                    return true;
+                } else {
+                    if (actualActionOfLook != null && actualActionOfLook.equals(actualAction)) {
+                        ((BroadcastNotifyAction) ((SequenceAction) actionOfLook).getActions().get(1)).getEvent()
+                                .resetEventAndResumeScript();
+                        Look.actionsToRestartAdd(actionOfLook);
+                        return false;
+                    } else {
+                        addOrRestartAction(look, sequenceActionWithBroadcastNotifyAction);
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

@@ -24,6 +24,7 @@ package org.catrobat.catroid.stage;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Log;
 import android.view.WindowManager;
 
@@ -50,7 +51,7 @@ public class StageActivity extends AndroidApplication {
 		stageDialog = new StageDialog(this, stageListener, R.style.stage_dialog);
 		calculateScreenSizes();
 		initialize(stageListener, true);
-	}
+    }
 
 	@Override
 	public void onBackPressed() {

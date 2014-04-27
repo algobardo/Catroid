@@ -249,10 +249,8 @@ public class PreStageActivity extends Activity implements DroneReadyReceiverDele
 
 	@Override
 	protected void onDestroy() {
-		if (BuildConfig.DEBUG) {
-			if (droneControlService != null) {
-				unbindService(this.droneServiceConnection);
-			}
+		if (BuildConfig.DEBUG && droneControlService != null) {
+			unbindService(this.droneServiceConnection);
 		}
 		super.onDestroy();
 	}

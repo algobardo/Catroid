@@ -25,7 +25,7 @@ package org.catrobat.catroid.common;
 import android.content.Context;
 import android.widget.ArrayAdapter;
 
-import org.catrobat.catroid.R;
+import org.catrobat.catroid.dronetest.R;
 import org.catrobat.catroid.content.BroadcastScript;
 
 import java.util.ArrayList;

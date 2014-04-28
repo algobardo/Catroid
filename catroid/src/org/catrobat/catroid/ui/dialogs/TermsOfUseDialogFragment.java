@@ -33,7 +33,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import org.catrobat.catroid.R;
+import org.catrobat.catroid.dronetest.R;
 import org.catrobat.catroid.common.Constants;
 
 public class TermsOfUseDialogFragment extends DialogFragment {

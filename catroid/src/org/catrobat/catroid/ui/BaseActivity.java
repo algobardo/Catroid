@@ -30,7 +30,7 @@ import android.widget.AdapterView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 
-import org.catrobat.catroid.R;
+import org.catrobat.catroid.dronetest.R;
 import org.catrobat.catroid.ui.controller.BackPackListManager;
 
 public class BaseActivity extends SherlockFragmentActivity {

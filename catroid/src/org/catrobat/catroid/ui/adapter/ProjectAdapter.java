@@ -40,7 +40,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.catrobat.catroid.R;
+import org.catrobat.catroid.dronetest.R;
 import org.catrobat.catroid.common.ProjectData;
 import org.catrobat.catroid.io.ProjectScreenshotLoader;
 import org.catrobat.catroid.utils.UtilFile;

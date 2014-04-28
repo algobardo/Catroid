@@ -32,7 +32,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import org.catrobat.catroid.ProjectManager;
-import org.catrobat.catroid.R;
+import org.catrobat.catroid.dronetest.R;
 import org.catrobat.catroid.content.Project;
 import org.catrobat.catroid.ui.dialogs.CustomAlertDialogBuilder;
 

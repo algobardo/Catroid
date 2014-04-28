@@ -31,7 +31,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import org.catrobat.catroid.R;
+import org.catrobat.catroid.dronetest.R;
 import org.catrobat.catroid.formulaeditor.UserVariable;
 
 public class UserVariableAdapterWrapper extends BaseAdapter {

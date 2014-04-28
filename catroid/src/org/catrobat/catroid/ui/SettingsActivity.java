@@ -29,8 +29,8 @@ import android.preference.PreferenceScreen;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 
-import org.catrobat.catroid.BuildConfig;
-import org.catrobat.catroid.R;
+import org.catrobat.catroid.dronetest.BuildConfig;
+import org.catrobat.catroid.dronetest.R;
 
 public class SettingsActivity extends SherlockPreferenceActivity {
 

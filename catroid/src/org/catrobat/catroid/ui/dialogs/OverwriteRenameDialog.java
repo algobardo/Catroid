@@ -42,7 +42,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.catrobat.catroid.ProjectManager;
-import org.catrobat.catroid.R;
+import org.catrobat.catroid.dronetest.R;
 import org.catrobat.catroid.utils.DownloadUtil;
 import org.catrobat.catroid.utils.Utils;
 

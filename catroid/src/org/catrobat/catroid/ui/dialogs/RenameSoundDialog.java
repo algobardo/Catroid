@@ -29,7 +29,7 @@ import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.Toast;
 
-import org.catrobat.catroid.R;
+import org.catrobat.catroid.dronetest.R;
 import org.catrobat.catroid.ui.ScriptActivity;
 import org.catrobat.catroid.utils.Utils;
 

@@ -32,7 +32,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import org.catrobat.catroid.ProjectManager;
-import org.catrobat.catroid.R;
+import org.catrobat.catroid.dronetest.R;
 import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.io.StorageHandler;
 import org.catrobat.catroid.utils.UtilDeviceInfo;

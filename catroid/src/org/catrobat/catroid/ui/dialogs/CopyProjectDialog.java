@@ -25,7 +25,7 @@ package org.catrobat.catroid.ui.dialogs;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
-import org.catrobat.catroid.R;
+import org.catrobat.catroid.dronetest.R;
 import org.catrobat.catroid.ui.fragment.ProjectsListFragment;
 import org.catrobat.catroid.utils.CopyProjectTask;
 import org.catrobat.catroid.utils.Utils;

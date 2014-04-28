@@ -26,6 +26,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.parrot.freeflight.settings.ApplicationSettings;
+import org.catrobat.catroid.dronetest.BuildConfig;
 
 public class CatroidApplication extends Application {
 

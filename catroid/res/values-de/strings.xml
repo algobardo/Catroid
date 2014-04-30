@@ -419,8 +419,8 @@
     <string name="brick_note_default_value">"Anmerkung hier hinzufügen…" </string>
     <string name="brick_broadcast_default_value">"Nachricht 1"</string>
     
-    <string name="brick_when_virtual_pad_pressed">Wenn virtuelles Steuerkreuz gedrückt</string>
-    <string name="brick_when_virtual_button_pressed">Wenn virtuelle Taste gedrückt</string>
+    <string name="brick_when_virtual_pad_pressed">Wenn Steuerkreuz gedrückt</string>
+    <string name="brick_when_virtual_button_pressed">Wenn Taste gedrückt</string>
     <!--  -->
 
 

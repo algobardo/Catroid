@@ -370,7 +370,7 @@ public class VirtualGamepadStage extends Stage {
 		} else if (sprite.isPaused) {
 			throw new Exception("VirtualGamepadStage<handleButtonAction> sprite is paused");
 		}
-
+    /*
 		//handle button coordinates
 		double distance = Math.sqrt(Math.pow(buttonStartX - screenX, 2) + Math.pow(buttonStartY - screenY, 2));
 		if (distance <= BUTTON_MOTION) {
@@ -431,7 +431,7 @@ public class VirtualGamepadStage extends Stage {
 
 			sprite.createWhenVirtualButtonScriptActionSequence(wipeId);
 		}
-
+*/
 	}
 
 	private void handleButtonHoldAction(Sprite sprite) throws Exception {

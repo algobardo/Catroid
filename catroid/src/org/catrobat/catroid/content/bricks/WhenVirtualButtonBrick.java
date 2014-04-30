@@ -46,7 +46,8 @@ public class WhenVirtualButtonBrick extends ScriptBrick {
 	private static final long serialVersionUID = 1L;
 
 	public static enum Action {
-		TOUCH(0), HOLD(1), WIPE_UP(2), WIPE_DOWN(3), WIPE_LEFT(4), WIPE_RIGHT(5);
+		TOUCH(0), HOLD(1), WIPE_UP(2), WIPE_DOWN(3), WIPE_LEFT(4), WIPE_RIGHT(5), TOUCH_RIGHT(11),TOUCH_LEFT(12),TOUCH_TOP(13),TOUCH_BOTTOM(14);
+        // NEW
 
 		private int id;
 

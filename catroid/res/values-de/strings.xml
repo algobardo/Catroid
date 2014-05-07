@@ -24,6 +24,7 @@
 <resources>
 
     <!-- General terms -->
+    <string name="app_name">Pocket Code</string>
     <string name="cancel_button">Abbrechen</string>
     <string name="rename">Umbenennen</string>
     <string name="delete">Löschen</string>
@@ -74,10 +75,9 @@
 
 
     <!-- New Object Dialog -->
-    <string name="dialog_new_object_look_header">mit Aussehen von…</string>
-    <string name="dialog_new_object_pocketpaint">Pocket Paint</string>
-    <string name="dialog_new_object_gallery">Galerie</string>
-    <string name="dialog_new_object_camera">Kamera</string>
+    <string name="dialog_new_object_pocketpaint">Bild zeichnen</string>
+    <string name="dialog_new_object_gallery">Bild auswählen</string>
+    <string name="dialog_new_object_camera">Bild aufnehmen</string>
     <string name="dialog_new_object_look_preview">Vorschau Aussehen</string>
     <string name="dialog_new_object_name">Objekt Name</string>
     <string name="dialog_new_object_switch_title">Neues Objekt erstellt</string>
@@ -488,7 +488,7 @@
     <string name="select_device">Wähle dein Lego Mindstorms NXT</string>
     <string name="scanning">Suche</string>
     <string name="connecting_please_wait">Verbinde zum Lego NXT.\nBitte warten…</string>
-    <string name="pairing_message">Verbinde nach dem Pairing.</string>
+    <!-- <string name="pairing_message">Verbinde nach dem Pairing.</string> -->
     <string name="problem_at_closing">Problem beim Schließen der Verbindung!</string>
     <string name="bt_connection_failed">Verbindung zum Gerät fehlgeschlagen!</string>
     <string name="no_paired_nxt">Kein verbundenes NXT gefunden</string>

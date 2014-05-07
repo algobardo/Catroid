@@ -231,8 +231,12 @@ public final class ProjectManager implements LoadProjectTask.OnLoadProjectComple
 		}
 	}
 
+<<<<<<< HEAD
 	public void initializeNewProject(String projectName, Context context,
 			boolean empty) throws IOException {
+=======
+	public void initializeNewProject(String projectName, Context context, boolean empty) throws IllegalArgumentException, IOException {
+>>>>>>> master
 		fileChecksumContainer = new FileChecksumContainer();
 
 		if (empty) {

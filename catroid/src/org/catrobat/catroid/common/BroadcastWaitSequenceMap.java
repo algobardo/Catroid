@@ -31,29 +31,41 @@ import java.util.HashMap;
 
 public final class BroadcastWaitSequenceMap {
 	private static HashMap<String, ArrayList<SequenceAction>> broadcastWaitSequenceMap = new HashMap<String, ArrayList<SequenceAction>>();
-	public static BroadcastEvent currentBroadcastEvent = null;
+	private static BroadcastEvent currentBroadcastEvent = null;
 
 	private BroadcastWaitSequenceMap() {
 		throw new AssertionError();
 	}
 
 	public static boolean containsKey(String key) {
-		return broadcastWaitSequenceMap.containsKey(key);
+		return BroadcastWaitSequenceMap.broadcastWaitSequenceMap.containsKey(key);
 	}
 
 	public static ArrayList<SequenceAction> get(String key) {
-		return broadcastWaitSequenceMap.get(key);
+		return BroadcastWaitSequenceMap.broadcastWaitSequenceMap.get(key);
 	}
 
 	public static ArrayList<SequenceAction> put(String key, ArrayList<SequenceAction> value) {
-		return broadcastWaitSequenceMap.put(key, value);
+		return BroadcastWaitSequenceMap.broadcastWaitSequenceMap.put(key, value);
 	}
 
 	public static ArrayList<SequenceAction> remove(String key) {
-		return broadcastWaitSequenceMap.remove(key);
+		return BroadcastWaitSequenceMap.broadcastWaitSequenceMap.remove(key);
 	}
 
 	public static void clear() {
-		broadcastWaitSequenceMap.clear();
+		BroadcastWaitSequenceMap.broadcastWaitSequenceMap.clear();
+	}
+
+	public static BroadcastEvent getCurrentBroadcastEvent() {
+		return BroadcastWaitSequenceMap.currentBroadcastEvent;
+	}
+
+	public static void setCurrentBroadcastEvent(BroadcastEvent broadcastEvent) {
+		BroadcastWaitSequenceMap.currentBroadcastEvent = broadcastEvent;
+	}
+
+	public static void clearCurrentBroadcastEvent() {
+		BroadcastWaitSequenceMap.currentBroadcastEvent = null;
 	}
 }

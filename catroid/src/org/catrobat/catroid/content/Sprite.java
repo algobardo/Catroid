@@ -184,6 +184,7 @@ public class Sprite implements Serializable, Cloneable {
 				SequenceAction sequence = createActionSequence(s);
 				whenParallelAction.addAction(sequence);
 
+<<<<<<< HEAD
 			}
 		}
 		look.setWhenParallelAction(whenParallelAction);
@@ -212,6 +213,8 @@ public class Sprite implements Serializable, Cloneable {
 					SequenceAction sequence = createActionSequence(s);
 					whenParallelAction.addAction(sequence);
 				}
+=======
+>>>>>>> master
 			}
 		}
 		look.setWhenParallelAction(whenParallelAction);

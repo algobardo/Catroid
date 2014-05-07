@@ -230,6 +230,7 @@ public final class StandardProjectHandler {
 
 			LoopEndlessBrick loopEndlessBrick = new LoopEndlessBrick(mole1Sprite, foreverBrick);
 			mole1StartScript.addBrick(loopEndlessBrick);
+<<<<<<< HEAD
 
 			// when script
 			PlaySoundBrick playSoundBrick = new PlaySoundBrick(mole1Sprite);
@@ -293,6 +294,71 @@ public final class StandardProjectHandler {
 			placeAtBrick.setXPosition(new Formula(calculateValueRelativeToScaledBackground(160)));
 			placeAtBrick.setYPosition(new Formula(calculateValueRelativeToScaledBackground(-290)));
 
+=======
+
+			// when script
+			PlaySoundBrick playSoundBrick = new PlaySoundBrick(mole1Sprite);
+			playSoundBrick.setSoundInfo(soundInfo);
+			mole1WhenScript.addBrick(playSoundBrick);
+
+			setLookBrick = new SetLookBrick(mole1Sprite);
+			setLookBrick.setLook(whackedMoleLookData);
+			mole1WhenScript.addBrick(setLookBrick);
+
+			waitBrick = new WaitBrick(mole1Sprite, 1500);
+			mole1WhenScript.addBrick(waitBrick);
+
+			hideBrick = new HideBrick(mole1Sprite);
+			mole1WhenScript.addBrick(hideBrick);
+
+			mole1Sprite.addScript(mole1StartScript);
+			mole1Sprite.addScript(mole1WhenScript);
+			defaultProject.addSprite(mole1Sprite);
+
+			StorageHandler.getInstance().fillChecksumContainer();
+
+			// Mole 2 sprite
+			Sprite mole2Sprite = mole1Sprite.clone();
+			mole2Sprite.getSoundList().get(0).setSoundFileName(soundFile2.getName());
+			mole2Sprite.setName(mole2Name);
+			defaultProject.addSprite(mole2Sprite);
+
+			Script tempScript = mole2Sprite.getScript(0);
+			placeAtBrick = (PlaceAtBrick) tempScript.getBrick(2);
+			placeAtBrick.setXPosition(new Formula(calculateValueRelativeToScaledBackground(160)));
+			placeAtBrick.setYPosition(new Formula(calculateValueRelativeToScaledBackground(-110)));
+
+			glideToBrick = (GlideToBrick) tempScript.getBrick(6);
+			glideToBrick.setXDestination(new Formula(calculateValueRelativeToScaledBackground(160)));
+			glideToBrick.setYDestination(new Formula(calculateValueRelativeToScaledBackground(-95)));
+
+			// Mole 3 sprite
+			Sprite mole3Sprite = mole1Sprite.clone();
+			mole3Sprite.getSoundList().get(0).setSoundFileName(soundFile3.getName());
+			mole3Sprite.setName(mole3Name);
+			defaultProject.addSprite(mole3Sprite);
+
+			tempScript = mole3Sprite.getScript(0);
+			placeAtBrick = (PlaceAtBrick) tempScript.getBrick(2);
+			placeAtBrick.setXPosition(new Formula(calculateValueRelativeToScaledBackground(-160)));
+			placeAtBrick.setYPosition(new Formula(calculateValueRelativeToScaledBackground(-290)));
+
+			glideToBrick = (GlideToBrick) tempScript.getBrick(6);
+			glideToBrick.setXDestination(new Formula(calculateValueRelativeToScaledBackground(-160)));
+			glideToBrick.setYDestination(new Formula(calculateValueRelativeToScaledBackground(-275)));
+
+			// Mole 4 sprite
+			Sprite mole4Sprite = mole1Sprite.clone();
+			mole4Sprite.getSoundList().get(0).setSoundFileName(soundFile4.getName());
+			mole4Sprite.setName(mole4Name);
+			defaultProject.addSprite(mole4Sprite);
+
+			tempScript = mole4Sprite.getScript(0);
+			placeAtBrick = (PlaceAtBrick) tempScript.getBrick(2);
+			placeAtBrick.setXPosition(new Formula(calculateValueRelativeToScaledBackground(160)));
+			placeAtBrick.setYPosition(new Formula(calculateValueRelativeToScaledBackground(-290)));
+
+>>>>>>> master
 			glideToBrick = (GlideToBrick) tempScript.getBrick(6);
 			glideToBrick.setXDestination(new Formula(calculateValueRelativeToScaledBackground(160)));
 			glideToBrick.setYDestination(new Formula(calculateValueRelativeToScaledBackground(-275)));

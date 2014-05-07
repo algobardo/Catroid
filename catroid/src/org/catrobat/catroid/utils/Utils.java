@@ -148,7 +148,7 @@ public final class Utils {
 		StringBuilder result = new StringBuilder("/");
 
 		for (String pathElement : pathElements) {
-			result.append(pathElement).append("/");
+			result.append(pathElement).append('/');
 		}
 
 		String returnValue = result.toString().replaceAll("/+", "/");
@@ -161,7 +161,7 @@ public final class Utils {
 	}
 
 	public static String buildProjectPath(String projectName) {
-		return buildPath(Constants.DEFAULT_ROOT, deleteSpecialCharactersInString(projectName));
+		return buildPath(Constants.DEFAULT_ROOT, UtilFile.encodeSpecialCharsForFileSystem(projectName));
 	}
 
 	public static void showErrorDialog(Context context, int errorMessageId) {
@@ -231,14 +231,15 @@ public final class Utils {
 	}
 
 	private static String toHex(byte[] messageDigest) {
-		StringBuilder md5StringBuilder = new StringBuilder(2 * messageDigest.length);
+		final char[] hexChars = "0123456789ABCDEF".toCharArray();
 
-		for (byte b : messageDigest) {
-			md5StringBuilder.append("0123456789ABCDEF".charAt((b & 0xF0) >> 4));
-			md5StringBuilder.append("0123456789ABCDEF".charAt((b & 0x0F)));
+		char[] hexBuffer = new char[messageDigest.length * 2];
+		for (int i = 0, j = 0; i < messageDigest.length; i++) {
+			hexBuffer[j++] = hexChars[(messageDigest[i] & 0xF0) >> 4];
+			hexBuffer[j++] = hexChars[messageDigest[i] & 0x0F];
 		}
 
-		return md5StringBuilder.toString();
+		return String.valueOf(hexBuffer);
 	}
 
 	private static MessageDigest getMD5MessageDigest() {
@@ -297,11 +298,11 @@ public final class Utils {
 
 			if (projectName != null) {
 				ProjectManager.getInstance().loadProject(projectName, context, false);
-			} else if (ProjectManager.getInstance().loadProject(context.getString(R.string.default_project_name),
+			} else if (!ProjectManager.getInstance().loadProject(context.getString(R.string.default_project_name),
 					context, false)) {
-			} else {
 				ProjectManager.getInstance().initializeDefaultProject(context);
 			}
+
 		}
 	}
 
@@ -427,9 +428,9 @@ public final class Utils {
 	}
 
 	public static String getUniqueProjectName() {
-		String projectName = "project_" + String.valueOf(System.currentTimeMillis());
+		String projectName = "project_" + System.currentTimeMillis();
 		while (StorageHandler.getInstance().projectExists(projectName)) {
-			projectName = "project_" + String.valueOf(System.currentTimeMillis());
+			projectName = "project_" + System.currentTimeMillis();
 		}
 		return projectName;
 	}

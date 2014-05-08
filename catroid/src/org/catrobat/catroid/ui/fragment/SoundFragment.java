@@ -122,23 +122,10 @@ public class SoundFragment extends ScriptActivityFragment implements SoundBaseAd
 
 	private OnSoundInfoListChangedAfterNewListener soundInfoListChangedAfterNewListener;
 
-	private ImageButton addButton;
-
 	public void setOnSoundInfoListChangedAfterNewListener(OnSoundInfoListChangedAfterNewListener listener) {
 		soundInfoListChangedAfterNewListener = listener;
 	}
 
-	private void setHandleAddbutton() {
-		addButton = (ImageButton) getSherlockActivity().findViewById(R.id.button_add);
-		addButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View view) {
-				handleAddButton();
-			}
-		});
-
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -174,7 +161,6 @@ public class SoundFragment extends ScriptActivityFragment implements SoundBaseAd
 		((SoundAdapter) adapter).setSoundFragment(this);
 
 		Utils.loadProjectIfNeeded(getActivity());
-		setHandleAddbutton();
 
 		// set adapter and soundInfoList for ev. unpacking
 		BackPackListManager.getInstance().setCurrentSoundInfoList(soundInfoList);
@@ -220,8 +206,6 @@ public class SoundFragment extends ScriptActivityFragment implements SoundBaseAd
 	@Override
 	public void onResume() {
 		super.onResume();
-
-		setHandleAddbutton();
 
 		if (!Utils.checkForExternalStorageAvailableAndDisplayErrorIfNot(getActivity())) {
 			return;
@@ -376,11 +360,6 @@ public class SoundFragment extends ScriptActivityFragment implements SoundBaseAd
 			} else {
 				getLoaderManager().restartLoader(SoundController.ID_LOADER_MEDIA_IMAGE, arguments, this);
 			}
-		}
-		if (requestCode == SoundController.REQUEST_SELECT_MUSIC) {
-			Log.d("SoundFragment", "onActivityResult RequestMusic");
-			setHandleAddbutton();
-
 		}
 
 	}

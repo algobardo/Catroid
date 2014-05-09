@@ -49,7 +49,7 @@ public class GlideToAction extends TemporalAction {
 		Float endYInterpretation;
 
 		try {
-			durationInterpretation = duration == null ? 0f : duration.interpretFloat(sprite);
+			durationInterpretation = duration == null ? Float.valueOf(0f) : duration.interpretFloat(sprite);
 			if (durationInterpretation.isNaN()) {
 				durationInterpretation = 0f;
 			}

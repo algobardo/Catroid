@@ -44,6 +44,8 @@ public class XmlHeader implements Serializable {
 
 	private float catrobatLanguageVersion;
 
+	private boolean programExecutedAtLeastOnce= false;
+
 	// fields only used on the catrobat.org website so far
 	private String applicationBuildName = "";
 	private int applicationBuildNumber = 0;
@@ -69,6 +71,10 @@ public class XmlHeader implements Serializable {
 
 	public XmlHeader() {
 	}
+
+	boolean isProgramExecutedAtLeastOnce(){ return programExecutedAtLeastOnce; }
+
+	void setProgramExecutedAtLeastOnce(boolean programExecutedAtLeastOnce){ this.programExecutedAtLeastOnce = programExecutedAtLeastOnce; }
 
 	String getProgramName() {
 		return programName;

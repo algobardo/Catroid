@@ -6,11 +6,16 @@
 *.metadata
 
 #IntelliJ IDEA
-.idea
-*.iml
 *.ipr
 *.iws
 out
+workspace.xml
+tasks.xml
+datasources.xml
+dataSources.ids
+.idea/libraries
+.idea/dictionaries
+!.idea/dictionaries/catrobat.xml
 
 # files for the dex VM
 *.dex

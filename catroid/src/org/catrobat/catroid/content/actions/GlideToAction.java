@@ -22,6 +22,8 @@
  */
 package org.catrobat.catroid.content.actions;
 
+import android.util.Log;
+
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 
 import org.catrobat.catroid.content.Sprite;
@@ -45,33 +47,45 @@ public class GlideToAction extends TemporalAction {
 	@Override
 	protected void begin() {
 		Float durationInterpretation;
-		Float endXInterpretation;
-		Float endYInterpretation;
+		Float endXInterpretation = 0f;
+		Float endYInterpretation = 0f;
 
 		try {
 			durationInterpretation = duration == null ? Float.valueOf(0f) : duration.interpretFloat(sprite);
 			if (durationInterpretation.isNaN()) {
 				durationInterpretation = 0f;
 			}
-		} catch (Exception exception) {
-			durationInterpretation = 0f;
-		}
+        } catch (NumberFormatException numberFormatException) {
+            durationInterpretation = 0f;
+            Log.e(getClass().getSimpleName(), "Formula interpretation for this specific Brick failed.", numberFormatException);
+        } catch (ClassCastException classCasteException) {
+            durationInterpretation = 0f;
+            Log.e(getClass().getSimpleName(),"Formula interpretation for this specific Brick failed." , classCasteException);
+        }
 		try {
 			endXInterpretation = endX == null ? 0f : endX.interpretFloat(sprite);
 			if (endXInterpretation.isNaN()) {
 				endXInterpretation = 0f;
 			}
-		} catch (Exception exception) {
-			endXInterpretation = 0f;
-		}
+        } catch (NumberFormatException numberFormatException) {
+            durationInterpretation = 0f;
+            Log.e(getClass().getSimpleName(), "Formula interpretation for this specific Brick failed.", numberFormatException);
+        } catch (ClassCastException classCasteException) {
+            durationInterpretation = 0f;
+            Log.e(getClass().getSimpleName(),"Formula interpretation for this specific Brick failed." , classCasteException);
+        }
 		try {
 			endYInterpretation = endY == null ? 0f : endY.interpretFloat(sprite);
 			if (endYInterpretation.isNaN()) {
 				endYInterpretation = 0f;
 			}
-		} catch (Exception exception) {
-			endYInterpretation = 0f;
-		}
+        } catch (NumberFormatException numberFormatException) {
+            durationInterpretation = 0f;
+            Log.e(getClass().getSimpleName(), "Formula interpretation for this specific Brick failed.", numberFormatException);
+        } catch (ClassCastException classCastException) {
+            durationInterpretation = 0f;
+            Log.e(getClass().getSimpleName(),"Formula interpretation for this specific Brick failed." , classCastException);
+        }
 
 		if (!restart) {
 			if (duration != null) {

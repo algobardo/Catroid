@@ -22,6 +22,8 @@
  */
 package org.catrobat.catroid.content.actions;
 
+import android.util.Log;
+
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 
 import org.catrobat.catroid.content.Sprite;
@@ -43,9 +45,13 @@ public class LegoNxtMotorActionAction extends TemporalAction {
 		int speedValue;
 		try {
 			speedValue = speed.interpretInteger(sprite);
-		} catch (Exception exception) {
-			speedValue = 0;
-		}
+        } catch (NumberFormatException numberFormatException) {
+            speedValue = 0;
+            Log.e(getClass().getSimpleName(), "Formula interpretation for this specific Brick failed.", numberFormatException);
+        } catch (ClassCastException classCastException) {
+            speedValue = 0;
+            Log.e(getClass().getSimpleName(),"Formula interpretation for this specific Brick failed." , classCastException);
+        }
 
 		if (speedValue < MIN_SPEED) {
 			speedValue = MIN_SPEED;

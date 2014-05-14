@@ -22,6 +22,8 @@
  */
 package org.catrobat.catroid.content.actions;
 
+import android.util.Log;
+
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 
 import org.catrobat.catroid.content.Sprite;
@@ -40,9 +42,13 @@ public class GoNStepsBackAction extends TemporalAction {
 			if (stepsValue.isNaN()) {
 				return;
 			}
-		} catch (Exception exception) {
-			return;
-		}
+        } catch (NumberFormatException numberFormatException) {
+            Log.e(getClass().getSimpleName(), "Formula interpretation for this specific Brick failed.", numberFormatException);
+            return;
+        } catch (ClassCastException classCastException) {
+            Log.e(getClass().getSimpleName(),"Formula interpretation for this specific Brick failed." , classCastException);
+            return;
+        }
 
 		int zPosition = sprite.look.getZIndex();
 		if (stepsValue.intValue() > 0 && (zPosition - stepsValue.intValue()) < 1) {

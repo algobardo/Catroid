@@ -22,6 +22,8 @@
  */
 package org.catrobat.catroid.content.actions;
 
+import android.util.Log;
+
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 
 import org.catrobat.catroid.content.Sprite;
@@ -40,9 +42,13 @@ public class TurnLeftAction extends TemporalAction {
 			if (newDegrees.isNaN()) {
 				return;
 			}
-		} catch (Exception exception) {
-			return;
-		}
+        } catch (NumberFormatException numberFormatException) {
+            Log.e(getClass().getSimpleName(), "Formula interpretation for this specific Brick failed.", numberFormatException);
+            return;
+        } catch (ClassCastException classCastException) {
+            Log.e(getClass().getSimpleName(),"Formula interpretation for this specific Brick failed." , classCastException);
+            return;
+        }
 		sprite.look.changeDirectionInUserInterfaceDimensionUnit(newDegrees);
 	}
 

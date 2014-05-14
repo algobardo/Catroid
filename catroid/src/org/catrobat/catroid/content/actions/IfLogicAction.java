@@ -22,6 +22,8 @@
  */
 package org.catrobat.catroid.content.actions;
 
+import android.util.Log;
+
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
@@ -51,10 +53,13 @@ public class IfLogicAction extends Action {
 			}
 			ifConditionValue = interpretation.intValue() != 0 ? true : false;
 			isInterpretedCorrectly = true;
-		} catch (Exception exception) {
-			isInterpretedCorrectly = false;
-		}
-
+        } catch (NumberFormatException numberFormatException) {
+            isInterpretedCorrectly = false;
+            Log.e(getClass().getSimpleName(), "Formula interpretation for this specific Brick failed.", numberFormatException);
+        } catch (ClassCastException classCastException) {
+            isInterpretedCorrectly = false;
+            Log.e(getClass().getSimpleName(),"Formula interpretation for this specific Brick failed." , classCastException);
+        }
 	}
 
 	@Override
@@ -65,7 +70,7 @@ public class IfLogicAction extends Action {
 		}
 
 		if (!isInterpretedCorrectly) {
-			return false;
+			return true;
 		}
 
 		if (ifConditionValue) {

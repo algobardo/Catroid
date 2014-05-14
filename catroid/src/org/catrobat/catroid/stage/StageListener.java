@@ -140,6 +140,12 @@ public class StageListener implements ApplicationListener {
 		font.setScale(1.2f);
 
 		project = ProjectManager.getInstance().getCurrentProject();
+
+		if(!project.isProgramExecutedAtLeastOnce())
+		{
+			project.setProgramExecutedAtLeastOnce(true);
+		}
+
 		pathForScreenshot = Utils.buildProjectPath(project.getName()) + "/";
 
 		virtualWidth = project.getXmlHeader().virtualScreenWidth;

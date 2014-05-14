@@ -112,6 +112,10 @@ public class Project implements Serializable {
 		return xmlHeader.getProgramName();
 	}
 
+	public void setProgramExecutedAtLeastOnce(boolean programExecutedAtLeastOnce) { xmlHeader.setProgramExecutedAtLeastOnce(programExecutedAtLeastOnce); }
+
+	public boolean isProgramExecutedAtLeastOnce() { return xmlHeader.isProgramExecutedAtLeastOnce(); }
+
 	public void setDescription(String description) {
 		xmlHeader.setDescription(description);
 	}

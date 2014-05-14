@@ -48,6 +48,7 @@ import org.catrobat.catroid.io.LoadProjectTask.OnLoadProjectCompleteListener;
 import org.catrobat.catroid.io.StorageHandler;
 import org.catrobat.catroid.transfers.CheckTokenTask;
 import org.catrobat.catroid.transfers.CheckTokenTask.OnCheckTokenCompleteListener;
+import org.catrobat.catroid.ui.dialogs.ExecuteOnceDialog;
 import org.catrobat.catroid.ui.dialogs.LoginRegisterDialog;
 import org.catrobat.catroid.ui.dialogs.UploadProjectDialog;
 import org.catrobat.catroid.utils.Utils;
@@ -65,6 +66,7 @@ public final class ProjectManager implements OnLoadProjectCompleteListener, OnCh
 	private Script currentScript;
 	private Sprite currentSprite;
 	private boolean asynchronTask = true;
+	private FragmentActivity fragmentActivity = null;
 
 	private FileChecksumContainer fileChecksumContainer = new FileChecksumContainer();
 
@@ -76,11 +78,31 @@ public final class ProjectManager implements OnLoadProjectCompleteListener, OnCh
 	}
 
 	public void uploadProject(String projectName, FragmentActivity fragmentActivity) {
+
+		this.fragmentActivity = fragmentActivity;
+		boolean isProgramExecutedAtLeastOnce = false;
+		if(getCurrentProject() != null) {
+			isProgramExecutedAtLeastOnce = getCurrentProject().isProgramExecutedAtLeastOnce();
+			if (isProgramExecutedAtLeastOnce == false) {
+				showExecuteOnceDialog(fragmentActivity);
+			}
+		}
+
 		if (getCurrentProject() == null || !getCurrentProject().getName().equals(projectName)) {
 			LoadProjectTask loadProjectTask = new LoadProjectTask(fragmentActivity, projectName, false, false);
 			loadProjectTask.setOnLoadProjectCompleteListener(this);
 			loadProjectTask.execute();
 		}
+		if(isProgramExecutedAtLeastOnce == true)
+		{
+			startUploadProjectProccess();
+		}
+
+
+	}
+
+	private void startUploadProjectProccess()
+	{
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(fragmentActivity);
 		String token = preferences.getString(Constants.TOKEN, Constants.NO_TOKEN);
 		String username = preferences.getString(Constants.USERNAME, Constants.NO_USERNAME);
@@ -93,6 +115,14 @@ public final class ProjectManager implements OnLoadProjectCompleteListener, OnCh
 			checkTokenTask.setOnCheckTokenCompleteListener(this);
 			checkTokenTask.execute();
 		}
+
+	}
+
+	private void showExecuteOnceDialog(FragmentActivity fragmentActivity) {
+
+		ExecuteOnceDialog executeOnceDialog = new ExecuteOnceDialog(fragmentActivity);
+		executeOnceDialog.show(fragmentActivity.getSupportFragmentManager(),ExecuteOnceDialog.DIALOG_FRAGMENT_TAG);
+
 	}
 
 	public boolean loadProject(String projectName, Context context, boolean errorMessage) {
@@ -370,6 +400,15 @@ public final class ProjectManager implements OnLoadProjectCompleteListener, OnCh
 
 	@Override
 	public void onLoadProjectSuccess(boolean startProjectActivity) {
+
+		if(getCurrentProject().isProgramExecutedAtLeastOnce() == false)
+		{
+			showExecuteOnceDialog(fragmentActivity);
+		}
+		else
+		{
+			startUploadProjectProccess();
+		}
 
 	}
 

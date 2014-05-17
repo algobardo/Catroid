@@ -36,7 +36,7 @@ class Sleeper {
 	 */
 
 	public void sleep(int time) {
-		time = (int)(time*0.7);
+		//time = (int)(time*0.7);
 
 		if(startTime == -1){
 			startTime = System.currentTimeMillis();

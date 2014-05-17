@@ -30,10 +30,13 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.TextAppearanceSpan;
+import android.util.Log;
+import android.util.LogPrinter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -74,6 +77,9 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+        Looper.getMainLooper().setMessageLogging(new LogPrinter(Log.VERBOSE,"LooperLog"));
+
 		if (!Utils.checkForExternalStorageAvailableAndDisplayErrorIfNot(this)) {
 			return;
 		}

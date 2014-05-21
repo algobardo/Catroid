@@ -42,3 +42,6 @@ build/
 
 #Ipython
 .ipynb_checkpoints/*
+
+#Spoon tests output 
+spoon-output/*

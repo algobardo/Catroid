@@ -77,6 +77,8 @@ public class GlideToBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 		TextView textViewX = ((TextView) solo.getView(R.id.brick_glide_to_edit_text_x));
 		TextView textViewY = ((TextView) solo.getView(R.id.brick_glide_to_edit_text_y));
 
+        //System.out.println("Refss " + textViewDuration + textViewX + textViewY);
+
 		assertEquals("Text not updated within FormulaEditor", duration,
 				Double.parseDouble(textViewDuration.getText().toString().replace(',', '.')));
 		assertEquals("Text not updated within FormulaEditor", xPosition,

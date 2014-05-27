@@ -32,6 +32,10 @@ dependencies {
     compile fileTree(dir: 'catroid/libs-natives', include: '*.jar')
 
     androidTestCompile fileTree(dir: 'catroidTest/libs', include: '*.jar')
+    androidTestCompile('com.jakewharton.espresso:espresso:1.1-r3'){
+        exclude group: 'org.hamcrest'
+    }
+    
     compile fileTree(dir: 'robotium/robotium-solo/target', include: '*.jar')
 
 }
@@ -59,6 +63,8 @@ android {
     compileSdkVersion 19
     buildToolsVersion "19"
 
+    // Robotium tests
+    /*
     defaultConfig {
         minSdkVersion 10
         targetSdkVersion 19
@@ -69,6 +75,22 @@ android {
         versionName getVersionName()
         buildConfigField "String", "GIT_DESCRIBE", "\"${gitDescribe()}\""
     }
+    */
+    defaultConfig {
+        minSdkVersion 10
+        targetSdkVersion 19
+        packageName "org.catrobat.catroid"
+        testPackageName "org.catrobat.catroid.test"
+        testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
+        versionCode getVersionCode()
+        versionName getVersionName()
+        buildConfigField "String", "GIT_DESCRIBE", "\"${gitDescribe()}\""
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+    }
+
 
     sourceSets {
         main {

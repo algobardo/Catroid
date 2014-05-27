@@ -78,43 +78,6 @@ public class Solo {
     }
 
     /**
-     * Constructor that takes the Instrumentation and Config objects.
-     *
-     * @param instrumentation the {@link Instrumentation} instance
-     * @param config the {@link Config} instance
-     */
-
-    public Solo(Instrumentation instrumentation, Config config) {
-        solo = new com.robotium.solo.Solo(config, instrumentation, null);
-    }
-
-    /**
-     * Constructor that takes the Instrumentation, Config and Activity objects.
-     *
-     * @param instrumentation the {@link Instrumentation} instance
-     * @param config the {@link Config} instance
-     * @param activity the start {@link Activity} or {@code null}
-     * if no Activity is specified
-     */
-
-    public Solo(Instrumentation instrumentation, Config config, Activity activity) {
-        solo = new com.robotium.solo.Solo(config, instrumentation, activity);
-    }
-
-    /**
-     * Private constructor.
-     *
-     * @param config the {@link Config} instance. If {@code null} one will be created.
-     * @param instrumentation the {@link Instrumentation} instance
-     * @param activity the start {@link Activity} or {@code null}
-     * if no Activity is specified
-     */
-
-    private Solo(Config config, Instrumentation instrumentation, Activity activity) {
-        solo = new com.robotium.solo.Solo(config,instrumentation,activity);
-    }
-
-    /**
      * Config class used to set the scroll behaviour, default timeouts, screenshot filetype and screenshot save path.
      * <br> <br>
      * Example of usage:
@@ -195,15 +158,6 @@ public class Solo {
         return solo.getActivityMonitor();
     }
 
-    /**
-     * Returns the Config used by Robotium.
-     *
-     * @return the Config used by Robotium
-     */
-
-    public Config getConfig(){
-        return solo.getConfig();
-    }
 
     /**
      * Returns an ArrayList of all the View objects located in the focused

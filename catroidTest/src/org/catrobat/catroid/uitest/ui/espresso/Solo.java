@@ -190,27 +190,27 @@ public class Solo {
         solo = new com.robotium.solo.Solo(instrumentation);
     }
 
-    /**
-     * Returns the ActivityMonitor used by Robotium.
-     *
-     * @return the ActivityMonitor used by Robotium
-     */
-
-    public ActivityMonitor getActivityMonitor(){
-        return solo.getActivityMonitor();
-    }
-
-
-    /**
-     * Returns an ArrayList of all the View objects located in the focused
-     * Activity or Dialog.
-     *
-     * @return an {@code ArrayList} of the {@link View} objects located in the focused window
-     */
-
-    public ArrayList<View> getViews() {
-        return solo.getViews();
-    }
+//    /**
+//     * Returns the ActivityMonitor used by Robotium.
+//     *
+//     * @return the ActivityMonitor used by Robotium
+//     */
+//
+//    public ActivityMonitor getActivityMonitor(){
+//        return solo.getActivityMonitor();
+//    }
+//
+//
+//    /**
+//     * Returns an ArrayList of all the View objects located in the focused
+//     * Activity or Dialog.
+//     *
+//     * @return an {@code ArrayList} of the {@link View} objects located in the focused window
+//     */
+//
+//    public ArrayList<View> getViews() {
+//        return solo.getViews();
+//    }
 
     /**
      * Returns an ArrayList of the View objects contained in the parent View.
@@ -223,16 +223,16 @@ public class Solo {
         return solo.getViews(parent);
     }
 
-    /**
-     * Returns the absolute top parent View of the specified View.
-     *
-     * @param view the {@link View} whose top parent is requested
-     * @return the top parent {@link View}
-     */
-
-    public View getTopParent(View view) {
-        return solo.getTopParent(view);
-    }
+//    /**
+//     * Returns the absolute top parent View of the specified View.
+//     *
+//     * @param view the {@link View} whose top parent is requested
+//     * @return the top parent {@link View}
+//     */
+//
+//    public View getTopParent(View view) {
+//        return solo.getTopParent(view);
+//    }
 
     /**
      * Waits for the specified text to appear. Default timeout is 20 seconds.
@@ -242,7 +242,8 @@ public class Solo {
      */
 
     public boolean waitForText(String text) {
-        return solo.waitForText(text);
+        onView(withText(text)).check(matches(isDisplayed()));
+        return true;
     }
 
     /**
@@ -255,7 +256,8 @@ public class Solo {
      */
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout) {
-        return solo.waitForText(text,minimumNumberOfMatches,timeout);
+        onView(withText(text)).check(matches(isDisplayed()));
+        return true;
     }
 
     /**
@@ -269,7 +271,8 @@ public class Solo {
      */
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout, boolean scroll) {
-        return solo.waitForText(text,minimumNumberOfMatches,timeout,scroll);
+        onView(withText(text)).check(matches(isDisplayed()));
+        return true;
     }
 
     /**
@@ -284,7 +287,8 @@ public class Solo {
      */
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout, boolean scroll, boolean onlyVisible) {
-        return solo.waitForText(text,minimumNumberOfMatches,timeout,scroll,onlyVisible);
+        onView(withText(text)).check(matches(isDisplayed()));
+        return true;
     }
 
     /**
@@ -294,8 +298,9 @@ public class Solo {
      * @return {@code true} if the {@link View} is displayed and {@code false} if it is not displayed before the timeout
      */
 
-    public boolean waitForView(int id){
-        return solo.waitForView(id);
+    public boolean waitForView(int id) {
+        onView(withId(id)).check(matches(isDisplayed()));
+        return true;
     }
 
     /**
@@ -308,22 +313,24 @@ public class Solo {
      */
 
     public boolean waitForView(int id, int minimumNumberOfMatches, int timeout){
-        return solo.waitForView(id,minimumNumberOfMatches,timeout);
+        onView(withId(id)).check(matches(isDisplayed()));
+        return true;
     }
 
-    /**
-     * Waits for a View matching the specified resource id.
-     *
-     * @param id the R.id of the {@link View} to wait for
-     * @param minimumNumberOfMatches the minimum number of matches that are expected to be found. {@code 0} means any number of matches
-     * @param timeout the amount of time in milliseconds to wait
-     * @param scroll {@code true} if scrolling should be performed
-     * @return {@code true} if the {@link View} is displayed and {@code false} if it is not displayed before the timeout
-     */
-
-    public boolean waitForView(int id, int minimumNumberOfMatches, int timeout, boolean scroll){
-        return solo.waitForView(id,minimumNumberOfMatches,timeout,scroll);
-    }
+//    /**
+//     * Waits for a View matching the specified resource id.
+//     *
+//     * @param id the R.id of the {@link View} to wait for
+//     * @param minimumNumberOfMatches the minimum number of matches that are expected to be found. {@code 0} means any number of matches
+//     * @param timeout the amount of time in milliseconds to wait
+//     * @param scroll {@code true} if scrolling should be performed
+//     * @return {@code true} if the {@link View} is displayed and {@code false} if it is not displayed before the timeout
+//     */
+//
+//    public boolean waitForView(int id, int minimumNumberOfMatches, int timeout, boolean scroll){
+//        onView(withId(id)).check(matches(isDisplayed()));
+//        return true;
+//    }
 
     /**
      * Waits for a View matching the specified class. Default timeout is 20 seconds.
@@ -333,9 +340,7 @@ public class Solo {
      */
 
     public <T extends View> boolean waitForView(final Class<T> viewClass){
-
         return solo.waitForView(viewClass);
-
     }
 
     /**
@@ -396,36 +401,36 @@ public class Solo {
      * @return {@code true} if the  WebElement is displayed and {@code false} if it is not displayed before the timeout
      */
 
-    public boolean waitForWebElement(By by){
-        return solo.waitForWebElement(by);
-    }
-
-    /**
-     * Waits for a WebElement matching the specified By object.
-     *
-     * @param by the By object. Examples are: {@code By.id("id")} and {@code By.name("name")}
-     * @param timeout the the amount of time in milliseconds to wait
-     * @param scroll {@code true} if scrolling should be performed
-     * @return {@code true} if the WebElement is displayed and {@code false} if it is not displayed before the timeout
-     */
-
-    public boolean waitForWebElement(By by, int timeout, boolean scroll){
-        return waitForWebElement(by,timeout,scroll);
-    }
-
-    /**
-     * Waits for a WebElement matching the specified By object.
-     *
-     * @param by the By object. Examples are: {@code By.id("id")} and {@code By.name("name")}
-     * @param minimumNumberOfMatches the minimum number of matches that are expected to be found. {@code 0} means any number of matches
-     * @param timeout the the amount of time in milliseconds to wait
-     * @param scroll {@code true} if scrolling should be performed
-     * @return {@code true} if the WebElement is displayed and {@code false} if it is not displayed before the timeout
-     */
-
-    public boolean waitForWebElement(By by, int minimumNumberOfMatches, int timeout, boolean scroll){
-        return solo.waitForWebElement(by,minimumNumberOfMatches,timeout,scroll);
-    }
+//    public boolean waitForWebElement(By by){
+//        return solo.waitForWebElement(by);
+//    }
+//
+//    /**
+//     * Waits for a WebElement matching the specified By object.
+//     *
+//     * @param by the By object. Examples are: {@code By.id("id")} and {@code By.name("name")}
+//     * @param timeout the the amount of time in milliseconds to wait
+//     * @param scroll {@code true} if scrolling should be performed
+//     * @return {@code true} if the WebElement is displayed and {@code false} if it is not displayed before the timeout
+//     */
+//
+//    public boolean waitForWebElement(By by, int timeout, boolean scroll){
+//        return waitForWebElement(by,timeout,scroll);
+//    }
+//
+//    /**
+//     * Waits for a WebElement matching the specified By object.
+//     *
+//     * @param by the By object. Examples are: {@code By.id("id")} and {@code By.name("name")}
+//     * @param minimumNumberOfMatches the minimum number of matches that are expected to be found. {@code 0} means any number of matches
+//     * @param timeout the the amount of time in milliseconds to wait
+//     * @param scroll {@code true} if scrolling should be performed
+//     * @return {@code true} if the WebElement is displayed and {@code false} if it is not displayed before the timeout
+//     */
+//
+//    public boolean waitForWebElement(By by, int minimumNumberOfMatches, int timeout, boolean scroll){
+//        return solo.waitForWebElement(by,minimumNumberOfMatches,timeout,scroll);
+//    }
 
     /**
      * Waits for a condition to be satisfied.
@@ -463,76 +468,75 @@ public class Solo {
         return solo.searchButton(text);
     }
 
-    /**
-     * Searches for a Button displaying the specified text and returns {@code true} if at least one Button
-     * is found. Will automatically scroll when needed.
-     *
-     * @param text the text to search for. The parameter will be interpreted as a regular expression
-     * @param onlyVisible {@code true} if only {@link Button} visible on the screen should be searched
-     * @return {@code true} if a {@link Button} displaying the specified text is found and {@code false} if it is not found
-     */
+//    /**
+//     * Searches for a Button displaying the specified text and returns {@code true} if at least one Button
+//     * is found. Will automatically scroll when needed.
+//     *
+//     * @param text the text to search for. The parameter will be interpreted as a regular expression
+//     * @param onlyVisible {@code true} if only {@link Button} visible on the screen should be searched
+//     * @return {@code true} if a {@link Button} displaying the specified text is found and {@code false} if it is not found
+//     */
+//
+//    public boolean searchButton(String text, boolean onlyVisible) {
+//        return solo.searchButton(text,onlyVisible);
+//    }
+//
+//    /**
+//     * Searches for a ToggleButton displaying the specified text and returns {@code true} if at least one ToggleButton
+//     * is found. Will automatically scroll when needed.
+//     *
+//     * @param text the text to search for. The parameter will be interpreted as a regular expression
+//     * @return {@code true} if a {@link ToggleButton} displaying the specified text is found and {@code false} if it is not found
+//     */
+//
+//    public boolean searchToggleButton(String text) {
+//        return solo.searchToggleButton(text);
+//    }
+//
+//    /**
+//     * Searches for a Button displaying the specified text and returns {@code true} if the
+//     * searched Button is found a specified number of times. Will automatically scroll when needed.
+//     *
+//     * @param text the text to search for. The parameter will be interpreted as a regular expression
+//     * @param minimumNumberOfMatches the minimum number of matches expected to be found. {@code 0} matches means that one or more
+//     * matches are expected to be found
+//     * @return {@code true} if a {@link Button} displaying the specified text is found a specified number of times and {@code false}
+//     * if it is not found
+//     */
+//
+//    public boolean searchButton(String text, int minimumNumberOfMatches) {
+//    }
 
-    public boolean searchButton(String text, boolean onlyVisible) {
-        return solo.searchButton(text,onlyVisible);
-    }
-
-    /**
-     * Searches for a ToggleButton displaying the specified text and returns {@code true} if at least one ToggleButton
-     * is found. Will automatically scroll when needed.
-     *
-     * @param text the text to search for. The parameter will be interpreted as a regular expression
-     * @return {@code true} if a {@link ToggleButton} displaying the specified text is found and {@code false} if it is not found
-     */
-
-    public boolean searchToggleButton(String text) {
-        return solo.searchToggleButton(text);
-    }
-
-    /**
-     * Searches for a Button displaying the specified text and returns {@code true} if the
-     * searched Button is found a specified number of times. Will automatically scroll when needed.
-     *
-     * @param text the text to search for. The parameter will be interpreted as a regular expression
-     * @param minimumNumberOfMatches the minimum number of matches expected to be found. {@code 0} matches means that one or more
-     * matches are expected to be found
-     * @return {@code true} if a {@link Button} displaying the specified text is found a specified number of times and {@code false}
-     * if it is not found
-     */
-
-    public boolean searchButton(String text, int minimumNumberOfMatches) {
-        return searchButton(text,minimumNumberOfMatches);
-    }
-
-    /**
-     * Searches for a Button displaying the specified text and returns {@code true} if the
-     * searched Button is found a specified number of times. Will automatically scroll when needed.
-     *
-     * @param text the text to search for. The parameter will be interpreted as a regular expression
-     * @param minimumNumberOfMatches the minimum number of matches expected to be found. {@code 0} matches means that one or more
-     * matches are expected to be found
-     * @param onlyVisible {@code true} if only {@link Button} visible on the screen should be searched
-     * @return {@code true} if a {@link Button} displaying the specified text is found a specified number of times and {@code false}
-     * if it is not found
-     */
-
-    public boolean searchButton(String text, int minimumNumberOfMatches, boolean onlyVisible) {
-        return solo.searchButton(text,minimumNumberOfMatches,onlyVisible);
-    }
-
-    /**
-     * Searches for a ToggleButton displaying the specified text and returns {@code true} if the
-     * searched ToggleButton is found a specified number of times. Will automatically scroll when needed.
-     *
-     * @param text the text to search for. The parameter will be interpreted as a regular expression
-     * @param minimumNumberOfMatches the minimum number of matches expected to be found. {@code 0} matches means that one or more
-     * matches are expected to be found
-     * @return {@code true} if a {@link ToggleButton} displaying the specified text is found a specified number of times and {@code false}
-     * if it is not found
-     */
-
-    public boolean searchToggleButton(String text, int minimumNumberOfMatches) {
-        return  solo.searchToggleButton(text,minimumNumberOfMatches);
-    }
+//    /**
+//     * Searches for a Button displaying the specified text and returns {@code true} if the
+//     * searched Button is found a specified number of times. Will automatically scroll when needed.
+//     *
+//     * @param text the text to search for. The parameter will be interpreted as a regular expression
+//     * @param minimumNumberOfMatches the minimum number of matches expected to be found. {@code 0} matches means that one or more
+//     * matches are expected to be found
+//     * @param onlyVisible {@code true} if only {@link Button} visible on the screen should be searched
+//     * @return {@code true} if a {@link Button} displaying the specified text is found a specified number of times and {@code false}
+//     * if it is not found
+//     */
+//
+//    public boolean searchButton(String text, int minimumNumberOfMatches, boolean onlyVisible) {
+//        return solo.searchButton(text,minimumNumberOfMatches,onlyVisible);
+//    }
+//
+//    /**
+//     * Searches for a ToggleButton displaying the specified text and returns {@code true} if the
+//     * searched ToggleButton is found a specified number of times. Will automatically scroll when needed.
+//     *
+//     * @param text the text to search for. The parameter will be interpreted as a regular expression
+//     * @param minimumNumberOfMatches the minimum number of matches expected to be found. {@code 0} matches means that one or more
+//     * matches are expected to be found
+//     * @return {@code true} if a {@link ToggleButton} displaying the specified text is found a specified number of times and {@code false}
+//     * if it is not found
+//     */
+//
+//    public boolean searchToggleButton(String text, int minimumNumberOfMatches) {
+//        return  solo.searchToggleButton(text,minimumNumberOfMatches);
+//    }
 
     /**
      * Searches for the specified text and returns {@code true} if at least one item
@@ -692,15 +696,15 @@ public class Solo {
         solo.assertMemoryNotLow();
     }
 
-    /**
-     * Waits for a Dialog to open. Default timeout is 20 seconds.
-     *
-     * @return {@code true} if the {@link android.app.Dialog} is opened before the timeout and {@code false} if it is not opened
-     */
-
-    public boolean waitForDialogToOpen() {
-        return solo.waitForDialogToOpen();
-    }
+//    /**
+//     * Waits for a Dialog to open. Default timeout is 20 seconds.
+//     *
+//     * @return {@code true} if the {@link android.app.Dialog} is opened before the timeout and {@code false} if it is not opened
+//     */
+//
+//    public boolean waitForDialogToOpen() {
+//        return solo.waitForDialogToOpen();
+//    }
 
     /**
      * Waits for a Dialog to close. Default timeout is 20 seconds.
@@ -712,16 +716,16 @@ public class Solo {
         return solo.waitForDialogToClose();
     }
 
-    /**
-     * Waits for a Dialog to open.
-     *
-     * @param timeout the amount of time in milliseconds to wait
-     * @return {@code true} if the {@link android.app.Dialog} is opened before the timeout and {@code false} if it is not opened
-     */
-
-    public boolean waitForDialogToOpen(long timeout) {
-        return solo.waitForDialogToClose(timeout);
-    }
+//    /**
+//     * Waits for a Dialog to open.
+//     *
+//     * @param timeout the amount of time in milliseconds to wait
+//     * @return {@code true} if the {@link android.app.Dialog} is opened before the timeout and {@code false} if it is not opened
+//     */
+//
+//    public boolean waitForDialogToOpen(long timeout) {
+//        return solo.waitForDialogToClose(timeout);
+//    }
 
     /**
      * Waits for a Dialog to close.
@@ -978,16 +982,16 @@ public class Solo {
 
     }
 
-    /**
-     * Long clicks the specified View for a specified amount of time.
-     *
-     * @param view the {@link View} to long click
-     * @param time the amount of time to long click
-     */
-
-    public void clickLongOnView(View view, int time) {
-        throw new UnsupportedOperationException("clickLongOnView not supported with time");
-    }
+//    /**
+//     * Long clicks the specified View for a specified amount of time.
+//     *
+//     * @param view the {@link View} to long click
+//     * @param time the amount of time to long click
+//     */
+//
+//    public void clickLongOnView(View view, int time) {
+//        solo.clickLongOnView(view,time);
+//    }
 
     /**
      * Clicks a View or WebElement displaying the specified

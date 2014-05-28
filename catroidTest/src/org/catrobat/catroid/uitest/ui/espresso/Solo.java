@@ -1116,7 +1116,7 @@ public class Solo {
      */
 
     public void clickOnCheckBox(int index) {
-        solo.clickOnCheckBox(index);
+        onView(withId(index)).perform(click());
     }
 
     /**
@@ -1126,7 +1126,7 @@ public class Solo {
      */
 
     public void clickOnEditText(int index) {
-        solo.clickOnEditText(index);
+        onView(withId(index)).perform(click());
     }
 
     /**

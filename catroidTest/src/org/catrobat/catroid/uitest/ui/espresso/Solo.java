@@ -32,6 +32,8 @@ import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 import android.app.Instrumentation.ActivityMonitor;
+
+import com.google.android.apps.common.testing.ui.espresso.action.ViewActions;
 import com.robotium.solo.Condition;
 import com.google.android.apps.common.testing.ui.espresso.Espresso;
 import static com.google.android.apps.common.testing.ui.espresso.Espresso.onData;
@@ -44,6 +46,7 @@ import static com.google.android.apps.common.testing.ui.espresso.action.ViewActi
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.typeText;
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
+import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isRoot;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withTagKey;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withTagValue;
@@ -913,6 +916,7 @@ public class Solo {
      */
 
     public void clickOnMenuItem(String text) {
+        onView(isRoot()).perform(ViewActions.pressKey(KeyEvent.KEYCODE_MENU));
         onView(withRobotiumText(text, TextView.class)).perform(click());
     }
 

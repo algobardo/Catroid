@@ -115,7 +115,7 @@ public class Solo {
             @Override
             public boolean matchesSafely(View view) {
 
-                if(!(view instanceof TextView) || !c.getClass().isInstance(view))
+                if(!(view instanceof TextView) || !c.isInstance(view))
                     return false;
 
 
@@ -162,7 +162,7 @@ public class Solo {
             @Override
             public boolean matchesSafely(View view) {
 
-                if(!( c.getClass().isInstance(view)))
+                if(!( c.isInstance(view)))
                     return false;
 
                 count++;
@@ -316,6 +316,7 @@ public class Solo {
      */
 
     public boolean waitForText(String text) {
+        // TODO: Fix ambig
         onView(withRobotiumText(text, TextView.class)).check(matches(isDisplayed()));
         return true;
     }
@@ -912,7 +913,7 @@ public class Solo {
      */
 
     public void clickOnMenuItem(String text) {
-        onView(withRobotiumText(text, MenuItem.class)).perform(click());
+        onView(withRobotiumText(text, TextView.class)).perform(click());
     }
 
     /**
@@ -1970,6 +1971,7 @@ public class Solo {
      */
 
     public View getView(int id){
+        // TODO: Fixme!!!
         return getView(id, 0);
     }
 

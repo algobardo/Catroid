@@ -175,7 +175,7 @@ public class Solo {
 
             @Override
             public void describeTo(Description description) {
-
+                description.appendText("with index " + index);
             }
         };
     }

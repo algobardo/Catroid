@@ -319,8 +319,7 @@ public class Solo {
      */
 
     public boolean waitForText(String text) {
-        // TODO: Fix ambig
-        onView(withRobotiumText(text, TextView.class)).check(matches(isDisplayed()));
+        onView(allOf(withRobotiumText(text, TextView.class), isnth(0, Object.class))).check(matches(isDisplayed()));
         return true;
     }
 

@@ -10,6 +10,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.PointF;
 import android.os.Environment;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.AbsListView;
@@ -107,14 +108,14 @@ public class Solo {
     };
 
 
-    public static Matcher<View> withRobotiumText(final String text) {
+    public static Matcher<View> withRobotiumText(final String text, final Class c) {
         final Matcher<View> stdMatch = withText(text);
         return new TypeSafeMatcher<View>() {
 
             @Override
             public boolean matchesSafely(View view) {
 
-                if(!(view instanceof TextView))
+                if(!(view instanceof TextView) || !c.getClass().isInstance(view))
                     return false;
 
 
@@ -315,7 +316,7 @@ public class Solo {
      */
 
     public boolean waitForText(String text) {
-        onView(withRobotiumText(text)).check(matches(isDisplayed()));
+        onView(withRobotiumText(text, TextView.class)).check(matches(isDisplayed()));
         return true;
     }
 
@@ -329,7 +330,8 @@ public class Solo {
      */
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout) {
-        onView(allOf(withRobotiumText(text), isnth(0, Object.class))).check(matches(isDisplayed()));
+        // TODO: Handle the case where minimumNumberOfMatches != 0
+        onView(allOf(withRobotiumText(text, TextView.class), isnth(0, Object.class))).check(matches(isDisplayed()));
         return true;
     }
 
@@ -344,7 +346,8 @@ public class Solo {
      */
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout, boolean scroll) {
-        onView(withRobotiumText(text)).check(matches(isDisplayed()));
+        // TODO: Handle the case where minimumNumberOfMatches != 0
+        onView(allOf(withRobotiumText(text, TextView.class), isnth(0, Object.class))).check(matches(isDisplayed()));
         return true;
     }
 
@@ -360,7 +363,8 @@ public class Solo {
      */
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout, boolean scroll, boolean onlyVisible) {
-        onView(withRobotiumText(text)).check(matches(isDisplayed()));
+        // TODO: Handle the case where minimumNumberOfMatches != 0
+        onView(allOf(withRobotiumText(text, TextView.class), isnth(0, Object.class))).check(matches(isDisplayed()));
         return true;
     }
 
@@ -888,7 +892,7 @@ public class Solo {
      */
 
     public void clickOnImageButton(int index) {
-        solo.clickOnImageButton(index);
+        onView(isnth(index, ImageButton.class)).perform(click());
     }
 //
 //    /**
@@ -907,9 +911,8 @@ public class Solo {
      * @param text the text displayed by the MenuItem. The parameter will be interpreted as a regular expression
      */
 
-    public void clickOnMenuItem(String text)
-    {
-        solo.clickOnMenuItem(text);
+    public void clickOnMenuItem(String text) {
+        onView(withRobotiumText(text, MenuItem.class)).perform(click());
     }
 
     /**
@@ -1076,7 +1079,7 @@ public class Solo {
      */
 
     public void clickOnText(String text) {
-        onView(withRobotiumText(text)).perform(click());
+        onView(withRobotiumText(text, TextView.class)).perform(click());
 
     }
 
@@ -1100,7 +1103,7 @@ public class Solo {
      */
     public void clickOnText(String text, int match, boolean scroll) {
         //TODO: unsound!!
-        onView(withRobotiumText(text)).perform(click());
+        onView(withRobotiumText(text, TextView.class)).perform(click());
     }
 
     /**
@@ -1111,7 +1114,7 @@ public class Solo {
 
     public void clickLongOnText(String text)
     {
-        onView(withRobotiumText(text)).perform(longClick());
+        onView(withRobotiumText(text, TextView.class)).perform(longClick());
     }
 
     /**
@@ -1124,7 +1127,7 @@ public class Solo {
     public void clickLongOnText(String text, int match)
     {
         //TODO: unsound!!
-        onView(withRobotiumText(text)).perform(longClick());
+        onView(withRobotiumText(text, TextView.class)).perform(longClick());
     }
 //
 //    /**
@@ -1171,7 +1174,7 @@ public class Solo {
      * @param index the index of the {@link Button} to click. {@code 0} if only one is available
      */
     public void clickOnButton(int index) {
-        onView(withId(index)).perform(click());
+        onView(isnth(index, Button.class)).perform(click());
     }
 //
 //    /**
@@ -1192,7 +1195,7 @@ public class Solo {
 
     public void clickOnCheckBox(int index) {
 
-        onView(isnth(index,CheckBox.class))
+        onView(isnth(index, CheckBox.class))
                 .perform(click());
     }
 
@@ -1203,7 +1206,7 @@ public class Solo {
      */
 
     public void clickOnEditText(int index) {
-        onView(withId(index)).perform(click());
+        onView(isnth(index, EditText.class)).perform(click());
     }
 
     /**
@@ -1826,7 +1829,7 @@ public class Solo {
      */
 
     public void clickOnImage(int index) {
-        solo.clickOnImage(index);
+        onView(isnth(index, ImageView.class)).perform(click());
     }
 
     /**

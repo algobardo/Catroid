@@ -456,12 +456,12 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		createTestProject(testProject);
 		createTestProject(testProject2);
 
-
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.clickOnText(testProject, 1, true);
 		solo.waitForFragmentById(R.id.fragment_sprites_list);
 
+        // solo.sleep(10000);
 		solo.goBack();
 		assertTrue("The name of the current testProject is not displayed on the continue button", solo.getButton(0)
 				.getText().toString().endsWith(testProject));

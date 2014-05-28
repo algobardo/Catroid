@@ -49,9 +49,7 @@ import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMat
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-
 import com.robotium.solo.By;
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -242,7 +240,7 @@ public class Solo {
      */
 
     public boolean waitForText(String text) {
-        onView(withText(text)).check(matches(isDisplayed()));
+        onView(withText(is(text))).check(matches(isDisplayed()));
         return true;
     }
 
@@ -745,6 +743,7 @@ public class Solo {
 
     public void goBack()
     {
+        solo.hideSoftKeyboard();
         Espresso.pressBack();
     }
 

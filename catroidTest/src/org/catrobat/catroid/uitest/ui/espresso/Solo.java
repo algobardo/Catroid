@@ -114,6 +114,10 @@ public class Solo {
             @Override
             public boolean matchesSafely(View view) {
 
+                if(!(view instanceof TextView))
+                    return false;
+
+                
                 Pattern pattern = null;
                 try {
                     pattern = Pattern.compile(text);

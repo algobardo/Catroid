@@ -52,9 +52,14 @@ import static org.hamcrest.Matchers.*;
 
 import com.robotium.solo.By;
 
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
+
+
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
 /**
  * Main class for development of Robotium tests.
@@ -105,6 +110,49 @@ public class Solo {
         }
     };
 
+
+    public static Matcher<View> withRobotiumText(final String text) {
+        final Matcher<View> stdMatch = withText(text);
+        return new TypeSafeMatcher<View>() {
+
+            @Override
+            public boolean matchesSafely(View view) {
+
+                Pattern pattern = null;
+                try {
+                    pattern = Pattern.compile(text);
+                } catch (PatternSyntaxException e) {
+                    pattern = Pattern.compile(text, Pattern.LITERAL);
+                }
+
+                java.util.regex.Matcher matcher = pattern.matcher(((TextView) view).getText());
+
+                if (matcher.find())
+                    return true;
+
+                if (((TextView) view).getError() != null) {
+                    matcher = pattern.matcher(((TextView) view).getError().toString());
+                    if (matcher.find()) {
+                        return true;
+                    }
+                }
+                if (((TextView) view).getText().toString().equals("") && ((TextView) view).getHint() != null) {
+                    matcher = pattern.matcher(((TextView) view).getHint().toString());
+                    if (matcher.find()) {
+                        return true;
+                    }
+                }
+                return false;
+
+            }
+
+
+            @Override
+            public void describeTo(Description description) {
+                stdMatch.describeTo(description);
+            }
+        };
+    }
 
     /**
      * Constructor that takes the Instrumentation object and the start Activity.
@@ -242,7 +290,7 @@ public class Solo {
      */
 
     public boolean waitForText(String text) {
-        onView(withText(text)).check(matches(isDisplayed()));
+        onView(withRobotiumText(text)).check(matches(isDisplayed()));
         return true;
     }
 
@@ -256,7 +304,7 @@ public class Solo {
      */
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout) {
-        onView(withText(text)).check(matches(isDisplayed()));
+        onView(withRobotiumText(text)).check(matches(isDisplayed()));
         return true;
     }
 
@@ -271,7 +319,7 @@ public class Solo {
      */
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout, boolean scroll) {
-        onView(withText(text)).check(matches(isDisplayed()));
+        onView(withRobotiumText(text)).check(matches(isDisplayed()));
         return true;
     }
 
@@ -287,7 +335,7 @@ public class Solo {
      */
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout, boolean scroll, boolean onlyVisible) {
-        onView(withText(text)).check(matches(isDisplayed()));
+        onView(withRobotiumText(text)).check(matches(isDisplayed()));
         return true;
     }
 
@@ -1001,7 +1049,7 @@ public class Solo {
      */
 
     public void clickOnText(String text) {
-        onView(withText(text)).perform(click());
+        onView(withRobotiumText(text)).perform(click());
 
     }
 
@@ -1025,7 +1073,7 @@ public class Solo {
      */
     public void clickOnText(String text, int match, boolean scroll) {
         //TODO: unsound!!
-        onView(withText(text)).perform(click());
+        onView(withRobotiumText(text)).perform(click());
     }
 
     /**
@@ -1036,7 +1084,7 @@ public class Solo {
 
     public void clickLongOnText(String text)
     {
-        onView(withText(text)).perform(longClick());
+        onView(withRobotiumText(text)).perform(longClick());
     }
 
     /**
@@ -1049,7 +1097,7 @@ public class Solo {
     public void clickLongOnText(String text, int match)
     {
         //TODO: unsound!!
-        onView(withText(text)).perform(longClick());
+        onView(withRobotiumText(text)).perform(longClick());
     }
 //
 //    /**

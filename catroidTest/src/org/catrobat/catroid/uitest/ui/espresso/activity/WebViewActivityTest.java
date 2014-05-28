@@ -70,7 +70,6 @@ public class WebViewActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1) {
 
 			solo.waitForView(solo.getView(R.id.webView));
-			solo.sleep(2000);
 
 			assertEquals("Current Activity is not WebViewActivity", WebViewActivity.class, solo.getCurrentActivity()
 					.getClass());
@@ -92,7 +91,6 @@ public class WebViewActivityTest extends BaseActivityInstrumentationTestCase<Mai
 
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1) {
 			solo.waitForView(solo.getView(R.id.webView));
-			solo.sleep(2000);
 
 			assertEquals("Current Activity is not WebViewActivity", WebViewActivity.class, solo.getCurrentActivity()
 					.getClass());
@@ -116,7 +114,6 @@ public class WebViewActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		solo.clickOnButton(buttonText);
 
 		if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
-			solo.sleep(300);
 			assertTrue("Alert dialog title not found", solo.searchText(dialogTitleText));
 			assertTrue("Alert dialog message not found",
 					solo.searchText(solo.getString(R.string.main_menu_web_dialog_message)));
@@ -124,10 +121,8 @@ public class WebViewActivityTest extends BaseActivityInstrumentationTestCase<Mai
 			assertTrue("Cancel button not found", solo.searchText(cancelButtonText));
 
 			solo.clickOnButton(cancelButtonText);
-			solo.sleep(200);
 			assertFalse("Dialog was not closed when pressing cancel", solo.searchText(dialogTitleText));
 			solo.clickOnButton(webButtonText);
-			solo.sleep(300);
 			solo.goBack();
 			assertFalse("Dialog was not closed when clicked back button", solo.searchText(dialogTitleText));
 		}

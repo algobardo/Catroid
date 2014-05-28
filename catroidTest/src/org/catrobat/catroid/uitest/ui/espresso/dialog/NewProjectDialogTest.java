@@ -151,7 +151,6 @@ public class NewProjectDialogTest extends BaseActivityInstrumentationTestCase<Ma
 
 	public void testPositiveButtonDisabledOnCreate() {
 		solo.clickOnButton(solo.getString(R.string.main_menu_new));
-		solo.sleep(500);
 
 		Button okButton = solo.getButton(getActivity().getString(R.string.ok));
 		assertFalse("New project ok button is enabled!", okButton.isEnabled());
@@ -159,7 +158,6 @@ public class NewProjectDialogTest extends BaseActivityInstrumentationTestCase<Ma
 
 	public void testPositiveButtonChangesState() {
 		solo.clickOnButton(solo.getString(R.string.main_menu_new));
-		solo.sleep(1000);
 
 		Button okButton = solo.getButton(getActivity().getString(R.string.ok));
 		EditText editText = (EditText) solo.getView(R.id.project_name_edittext);
@@ -181,7 +179,6 @@ public class NewProjectDialogTest extends BaseActivityInstrumentationTestCase<Ma
 
 	public void testNewProjectDialogHeight() {
 		solo.clickOnButton(solo.getString(R.string.main_menu_new));
-		solo.sleep(2000);
 
 		EditText newProjectName = (EditText) solo.getView(R.id.project_name_edittext);
 
@@ -190,7 +187,6 @@ public class NewProjectDialogTest extends BaseActivityInstrumentationTestCase<Ma
 		int newProjectInputTypeReference = android.text.InputType.TYPE_CLASS_TEXT
 				| android.text.InputType.TYPE_TEXT_VARIATION_NORMAL;
 
-		solo.sleep(2000);
 		assertEquals("New project name field is not a text field", newProjectInputTypeReference, newProjectInputType);
 
 		int projectNameNumberOfLines = newProjectName.getLineCount();

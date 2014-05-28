@@ -205,7 +205,6 @@ public final class UiTestUtils {
 
 	public static void enterText(Solo solo, int editTextIndex, String text) {
 
-		solo.sleep(50);
 		final EditText editText = solo.getEditText(editTextIndex);
 		solo.getCurrentActivity().runOnUiThread(new Runnable() {
 			public void run() {
@@ -214,7 +213,6 @@ public final class UiTestUtils {
 		});
 		solo.clearEditText(editTextIndex);
 		solo.enterText(editTextIndex, text);
-		solo.sleep(50);
 	}
 
 	/**
@@ -302,7 +300,6 @@ public final class UiTestUtils {
 				Double.parseDouble(((EditText) solo.getView(R.id.formula_editor_edit_field)).getText().toString()
 						.replace(',', '.')));
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_ok));
-		solo.sleep(200);
 
 		Formula formula = (Formula) Reflection.getPrivateField(theBrick, fieldName);
 
@@ -323,7 +320,6 @@ public final class UiTestUtils {
 				Double.parseDouble(((EditText) solo.getView(R.id.formula_editor_edit_field)).getText().toString()
 						.replace(',', '.')));
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_ok));
-		solo.sleep(200);
 	}
 
 	public static void clickEnterClose(Solo solo, int editTextNumber, String value) {
@@ -337,7 +333,6 @@ public final class UiTestUtils {
 		} catch (AssertionFailedError e) {
 			solo.sendKey(Solo.ENTER);
 		}
-		solo.sleep(50);
 	}
 
 	public static void clickEnterClose(Solo solo, EditText editText, String value, int buttonIndex) {
@@ -440,12 +435,10 @@ public final class UiTestUtils {
 			fail("add brick fragment should appear");
 		}
 
-		solo.sleep(600);
 		boolean succeeded = clickOnBrickInAddBrickFragment(solo, brickName);
 		if (!succeeded) {
 			fail(brickName + " should appear. Failed to scroll to find it.");
 		}
-		solo.sleep(600);
 	}
 
 	private static boolean clickOnBrickInAddBrickFragment(Solo solo, String brickName) {
@@ -1132,7 +1125,6 @@ public final class UiTestUtils {
 		} else { // From overflow menu
 			solo.clickOnMenuItem(overflowMenuItemName, true);
 		}
-		solo.sleep(400);
 	}
 
 	public static void acceptAndCloseActionMode(Solo solo) {
@@ -1147,7 +1139,6 @@ public final class UiTestUtils {
 	 */
 	public static void openOptionsMenu(Solo solo) {
 		solo.sendKey(Solo.MENU);
-		solo.sleep(200);
 	}
 
 	public static void clickOnBottomBar(Solo solo, int buttonId) {
@@ -1298,7 +1289,6 @@ public final class UiTestUtils {
 			}
 		});
 
-		solo.sleep(ViewConfiguration.getLongPressTimeout() + 200);
 
 		handler.post(new Runnable() {
 			public void run() {
@@ -1313,13 +1303,11 @@ public final class UiTestUtils {
 							MotionEvent.ACTION_MOVE, x, y, 0);
 					activity.dispatchTouchEvent(moveEvent);
 
-					solo.sleep(20);
 					moveEvent.recycle();
 				}
 			}
 		});
 
-		solo.sleep(steps * 20 + 200);
 
 		handler.post(new Runnable() {
 
@@ -1332,7 +1320,6 @@ public final class UiTestUtils {
 			}
 		});
 
-		solo.sleep(1000);
 	}
 
 	private static class ProjectWithCatrobatLanguageVersion extends Project {
@@ -1387,7 +1374,6 @@ public final class UiTestUtils {
 
 	public static void getIntoSpritesFromMainMenu(Solo solo) {
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(300);
 
 		String continueString = solo.getString(R.string.main_menu_continue);
 		solo.waitForText(continueString);
@@ -1399,7 +1385,6 @@ public final class UiTestUtils {
 
 	public static void getIntoProgramMenuFromMainMenu(Solo solo, int spriteIndex) {
 		getIntoSpritesFromMainMenu(solo);
-		solo.sleep(200);
 
 		solo.clickInList(spriteIndex);
 		solo.waitForActivity(ProgramMenuActivity.class.getSimpleName());
@@ -1415,7 +1400,6 @@ public final class UiTestUtils {
 		solo.clickOnText(solo.getString(R.string.sounds));
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 		solo.waitForView(ListView.class);
-		solo.sleep(200);
 	}
 
 	public static void getIntoLooksFromMainMenu(Solo solo) {
@@ -1439,7 +1423,6 @@ public final class UiTestUtils {
 		solo.clickOnText(textToClickOn);
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 		solo.waitForView(ListView.class);
-		solo.sleep(200);
 	}
 
 	public static void getIntoScriptActivityFromMainMenu(Solo solo) {
@@ -1452,11 +1435,9 @@ public final class UiTestUtils {
 		solo.clickOnText(solo.getString(R.string.scripts));
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 		solo.waitForView(ListView.class);
-		solo.sleep(200);
 	}
 
 	public static boolean clickOnTextInList(Solo solo, String text) {
-		solo.sleep(300);
 		ArrayList<TextView> textViews = solo.getCurrentViews(TextView.class, solo.getView(android.R.id.list));
 		for (int textView = 0; textView < textViews.size(); textView++) {
 			TextView view = textViews.get(textView);
@@ -1469,7 +1450,6 @@ public final class UiTestUtils {
 	}
 
 	public static boolean longClickOnTextInList(Solo solo, String text) {
-		solo.sleep(300);
 		ArrayList<TextView> textViews = solo.getCurrentViews(TextView.class);
 		for (int position = 0; position < textViews.size(); position++) {
 			TextView view = textViews.get(position);
@@ -1586,7 +1566,6 @@ public final class UiTestUtils {
 		} catch (Throwable throwable) {
 			Log.e("CATROID", throwable.getMessage());
 		}
-		solo.sleep(500);
 	}
 
 	public static void waitForText(Solo solo, String text) {

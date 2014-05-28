@@ -150,7 +150,6 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 		if (getLookAdapter().getShowDetails()) {
 			solo.clickOnMenuItem(solo.getString(R.string.hide_details), true);
-			solo.sleep(TIME_TO_WAIT);
 		}
 	}
 

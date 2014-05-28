@@ -71,7 +71,6 @@ public class ScriptActivityTest extends BaseActivityInstrumentationTestCase<Main
 		// Note that the activity is _indeed_ rotated on your device/emulator!
 		// Robotium can _force_ the activity to be in landscape mode (and so could we, programmatically)
 		solo.setActivityOrientation(Solo.LANDSCAPE);
-		solo.sleep(200);
 
 		assertEquals(ScriptActivity.class.getSimpleName() + " not set to be in portrait mode in AndroidManifest.xml!",
 				ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, activityInfo.screenOrientation);
@@ -151,7 +150,6 @@ public class ScriptActivityTest extends BaseActivityInstrumentationTestCase<Main
 		if (solo.searchText(solo.getString(R.string.formula_editor_discard_changes_dialog_title))) {
 			solo.clickOnText(solo.getString(R.string.no));
 		}
-		solo.sleep(200);
 		assertTrue("Sprite name not found", solo.waitForText("cat"));
 	}
 

@@ -28,10 +28,7 @@ import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
-
-
 import junit.framework.TestSuite;
-
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
@@ -69,7 +66,6 @@ public class DoubleClickOpensViewOnceTest extends TestSuite {
 		suite.addTestSuite(ScriptActivityDoubleClickOpensViewOnceTest.class);
 		suite.addTestSuite(ScriptFragmentDoubleClickOpensViewOnceTest.class);
 		suite.addTestSuite(LookFragmentDoubleClickOpensViewOnceTest.class);
-
 		return suite;
 	}
 
@@ -135,10 +131,10 @@ public class DoubleClickOpensViewOnceTest extends TestSuite {
 			waitForView(button);
 		}
 
-		public void checkDoubleClickOpensViewOnceActivity(OnClickCommand clickCommand, int buttonId,
-				String openedActivityTag) {
-			checkDoubleClickOpensViewOnceActivity(clickCommand, buttonId, openedActivityTag, false);
-		}
+//		public void checkDoubleClickOpensViewOnceActivity(OnClickCommand clickCommand, int buttonId,
+//				String openedActivityTag) {
+//			checkDoubleClickOpensViewOnceActivity(clickCommand, buttonId, openedActivityTag, false);
+//		}
 
 		public void checkDoubleClickOpensViewOnceActivity(OnClickCommand clickCommand, int buttonId,
 				String openedActivityTag, boolean isKeyboardVisible) {
@@ -499,7 +495,6 @@ public class DoubleClickOpensViewOnceTest extends TestSuite {
 			ScriptActivity activity = (ScriptActivity) solo.getCurrentActivity();
 			BrickCategoryFragment brickCategoryFragment = (BrickCategoryFragment) activity.getSupportFragmentManager()
 					.findFragmentByTag(BrickCategoryFragment.BRICK_CATEGORY_FRAGMENT_TAG);
-			solo.sleep(250);
 			final OnItemClickListener onItemClickListener = brickCategoryFragment.getListView()
 					.getOnItemClickListener();
 

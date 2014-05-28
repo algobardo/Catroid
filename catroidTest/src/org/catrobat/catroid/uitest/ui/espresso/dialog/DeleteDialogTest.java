@@ -104,7 +104,6 @@ public class DeleteDialogTest extends BaseActivityInstrumentationTestCase<MainMe
 		clickOnContextMenuItem(lookName, deleteLookText);
 		solo.clickOnButton(buttonOkText);
 
-		solo.sleep(500);
 		newCount = adapter.getCount();
 		assertEquals("The look was not deleted", oldCount - 1, newCount);
 		assertEquals("The look was not deleted from lookDataList", newCount, lookDataList.size());
@@ -136,7 +135,6 @@ public class DeleteDialogTest extends BaseActivityInstrumentationTestCase<MainMe
 		solo.clickOnText(deleteSoundText);
 		solo.clickOnButton(buttonOkText);
 
-		solo.sleep(500);
 		newCount = adapter.getCount();
 		assertEquals("The sound was not deleted", oldCount - 1, newCount);
 		assertEquals("The sound was not deleted from lookDataList", newCount, soundInfoList.size());

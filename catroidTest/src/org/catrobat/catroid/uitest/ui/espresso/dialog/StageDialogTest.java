@@ -82,7 +82,6 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(1000);
 		solo.goBack();
 
 		solo.goBack();
@@ -131,15 +130,12 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(1000);
 		assertEquals("Unexpected look size", defaultScale, sprite.look.getSizeInUserInterfaceDimensionUnit());
 
 		solo.goBack();
-		solo.sleep(6000);
 		assertEquals("Unexpected look size", defaultScale, sprite.look.getSizeInUserInterfaceDimensionUnit());
 
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_resume));
-		solo.sleep(6000);
 		assertEquals("Unexpected look size", newScale, sprite.look.getSizeInUserInterfaceDimensionUnit());
 	}
 
@@ -156,14 +152,11 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 		solo.goBack();
-		solo.sleep(400);
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_restart));
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 		solo.assertCurrentActivity("Program is not in stage activity", StageActivity.class);
 
-		solo.sleep(500);
 		solo.goBack();
-		solo.sleep(100);
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_back));
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		assertEquals("Returned to wrong Activity", currentActivity, solo.getCurrentActivity());
@@ -183,7 +176,6 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(1000);
 
 		ProjectManager projectManager = ProjectManager.getInstance();
 		Project projectStart = projectManager.getCurrentProject();
@@ -202,11 +194,8 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		spriteList.clear();
 
 		solo.clickOnScreen(ScreenValues.SCREEN_WIDTH / 2, ScreenValues.SCREEN_HEIGHT / 2);
-		solo.sleep(200);
 		solo.goBack();
-		solo.sleep(100);
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_restart));
-		solo.sleep(300);
 
 		//scriptPositions in between
 		Project projectRestart = ProjectManager.getInstance().getCurrentProject();
@@ -262,16 +251,13 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(4000);
 
 		MediaPlayer mediaPlayer = getMediaPlayers().get(0);
 		assertTrue("Sound not playing.", mediaPlayer.isPlaying());
 		int positionBeforeRestart = mediaPlayer.getCurrentPosition();
 		solo.goBack();
-		solo.sleep(500);
 		assertFalse("Sound playing but should be paused.", mediaPlayer.isPlaying());
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_restart));
-		solo.sleep(2000);
 
 		mediaPlayer = getMediaPlayers().get(0);
 		int positionAfterRestart = mediaPlayer.getCurrentPosition();
@@ -289,10 +275,8 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 		solo.goBack();
-		solo.sleep(400);
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_axes_on));
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_resume));
-		solo.sleep(100);
 		byte[] redPixel = { (byte) 255, 0, 0, (byte) 255 };
 		byte[] stagePixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH / 2,
 				ScreenValues.SCREEN_HEIGHT / 2, 1, 1);
@@ -310,7 +294,6 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.goBack();
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_axes_off));
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_resume));
-		solo.sleep(100);
 		byte[] whitePixel = { (byte) 255, (byte) 255, (byte) 255, (byte) 255 };
 		stagePixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH / 2,
 				ScreenValues.SCREEN_HEIGHT / 2, 1, 1);
@@ -356,7 +339,6 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.goBack();
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_maximize));
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_continue));
-		solo.sleep(100);
 		byte[] blackPixel = { 0, 0, 0, (byte) 255 };
 		screenPixel = StageActivity.stageListener.getPixels(0, 0, 1, 1);
 		UiTestUtils.compareByteArrays(blackPixel, screenPixel);
@@ -375,7 +357,6 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.goBack();
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_maximize));
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_continue));
-		solo.sleep(100);
 		screenPixel = StageActivity.stageListener.getPixels(0, 0, 1, 1);
 		UiTestUtils.compareByteArrays(whitePixel, screenPixel);
 		screenPixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH - 1,
@@ -426,24 +407,19 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 		assertTrue("Stage not resizeable.", ((StageActivity) solo.getCurrentActivity()).getResizePossible());
 
-		solo.sleep(200);
 		solo.goBack();
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_continue));
-		solo.sleep(200);
 		solo.goBack();
 		solo.goBack();
 		StorageHandler.getInstance().saveProject(project);
-		solo.sleep(200);
 
 		assertTrue("Wrong screenMode in xml-file.",
 				ProjectManager.getInstance().getCurrentProject().getScreenMode() == ScreenModes.STRETCH);
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(200);
 		solo.goBack();
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_maximize));
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_continue));
-		solo.sleep(200);
 		solo.goBack();
 		solo.goBack();
 

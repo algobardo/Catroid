@@ -47,7 +47,6 @@ public class TermsOfUseDialogTest extends BaseActivityInstrumentationTestCase<Ma
 
 		Button termsOfUseDialogButton = (Button) solo.getView(android.R.id.button2);
 		solo.clickOnButton(solo.getString(R.string.ok));
-		solo.sleep(200);
 
 		ArrayList<View> currentViews = solo.getCurrentViews();
 		assertFalse("Not returned to MainMenuActivity", currentViews.contains(termsOfUseDialogButton));

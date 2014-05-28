@@ -132,7 +132,6 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 
 		File directory = new File(Constants.DEFAULT_ROOT + "/" + testProject);
 		directory.mkdirs();
-		solo.sleep(50);
 		solo.clearEditText(0);
 		solo.enterText(0, testProject);
 		solo.clickOnButton(getActivity().getString(R.string.ok));
@@ -144,7 +143,6 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		directory = new File(Utils.buildProjectPath(projectNameWithNormalAndSpecialChars2 + "_TWO"));
 		directory.mkdirs();
 		String name = projectNameWithNormalAndSpecialChars2 + "_TWO";
-		solo.sleep(50);
 		solo.clearEditText(0);
 		solo.enterText(0, name);
 		solo.clickOnButton(getActivity().getString(R.string.ok));
@@ -289,7 +287,6 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		assertFalse(testProject2 + " was not deleted!", directory.exists());
 
 		createTestProject(testProject2);
-		solo.sleep(200);
 
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
@@ -312,13 +309,11 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		assertFalse(testProject3 + " was not deleted!", directory.exists());
 
 		createTestProject(testProject3);
-		solo.sleep(200);
 
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		assertTrue("MyProjectsActivity not shown", solo.waitForActivity(MyProjectsActivity.class.getSimpleName()));
 		solo.clickOnText(testProject3);
 		assertTrue("ProjectActivity not shown", solo.waitForActivity(ProjectActivity.class.getSimpleName()));
-		solo.sleep(200);
 		solo.goBack();
 		assertTrue("MainMenuActivity not shown", solo.waitForActivity(MainMenuActivity.class.getSimpleName()));
 		solo.clickOnText(solo.getString(R.string.main_menu_continue));
@@ -423,7 +418,6 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		StorageHandler.getInstance().saveProject(standardProject);
 
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(300);
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 
@@ -440,7 +434,6 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 
 		UiTestUtils.goBackToHome(getInstrumentation());
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(300);
 		SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getInstrumentation()
 				.getTargetContext());
 		assertEquals("Standard project was not set in shared preferences", standardProjectName,
@@ -470,7 +463,6 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.waitForFragmentById(R.id.fragment_sprites_list);
 
 		solo.goBack();
-		solo.sleep(400);
 		assertTrue("The name of the current testProject is not displayed on the continue button", solo.getButton(0)
 				.getText().toString().endsWith(testProject));
 
@@ -480,7 +472,6 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.waitForFragmentById(R.id.fragment_sprites_list);
 
 		solo.goBack();
-		solo.sleep(400);
 		assertTrue("The name of the current testProject2 is not displayed on the continue button", solo.getButton(0)
 				.getText().toString().endsWith(testProject2));
 
@@ -497,7 +488,6 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.waitForFragmentById(R.id.fragment_sprites_list);
 
 		solo.goBack();
-		solo.sleep(400);
 		assertTrue("The name of the current projectNameJustSpecialChars is not displayed on the continue button", solo.getButton(0)
 				.getText().toString().endsWith(projectNameJustSpecialChars));
 
@@ -507,7 +497,6 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.waitForFragmentById(R.id.fragment_sprites_list);
 
 		solo.goBack();
-		solo.sleep(400);
 		assertTrue("The name of the current projectNameWithNormalAndSpecialChars2 is not displayed on the continue button", solo.getButton(0)
 				.getText().toString().endsWith(projectNameWithNormalAndSpecialChars2));
 
@@ -523,7 +512,6 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.waitForFragmentById(R.id.fragment_sprites_list);
 
 		solo.goBack();
-		solo.sleep(400);
 		assertTrue("The name of the current projectNameJustOneDot is not displayed on the continue button", solo.getButton(0)
 				.getText().toString().endsWith(projectNameJustOneDot));
 
@@ -533,7 +521,6 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.waitForFragmentById(R.id.fragment_sprites_list);
 
 		solo.goBack();
-		solo.sleep(400);
 		assertTrue("The name of the current projectNameJustTwoDots is not displayed on the continue button", solo.getButton(0)
 				.getText().toString().endsWith(projectNameJustTwoDots));
 	}

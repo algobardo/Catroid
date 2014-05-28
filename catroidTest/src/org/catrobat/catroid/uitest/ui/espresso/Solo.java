@@ -165,7 +165,7 @@ public class Solo {
             @Override
             public boolean matchesSafely(View view) {
 
-                if(!(view.getClass() == c))
+                if(!( c.getClass().isInstance(view)))
                     return false;
 
                 count++;

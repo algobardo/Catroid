@@ -35,6 +35,7 @@ import android.app.Instrumentation.ActivityMonitor;
 
 import com.google.android.apps.common.testing.ui.espresso.UiController;
 import com.google.android.apps.common.testing.ui.espresso.ViewAction;
+
 import com.google.android.apps.common.testing.ui.espresso.action.ViewActions;
 import com.robotium.solo.Condition;
 import com.google.android.apps.common.testing.ui.espresso.Espresso;
@@ -339,8 +340,7 @@ public class Solo {
      */
 
     public boolean waitForText(String text) {
-        // TODO: Fix ambig
-        onView(withRobotiumText(text, TextView.class)).check(matches(isDisplayed()));
+        onView(allOf(withRobotiumText(text, TextView.class), isnth(0, Object.class))).check(matches(isDisplayed()));
         return true;
     }
 
@@ -936,6 +936,7 @@ public class Solo {
      */
 
     public void clickOnMenuItem(String text) {
+        onView(isRoot()).perform(ViewActions.pressKey(KeyEvent.KEYCODE_MENU));
         onView(withRobotiumText(text, TextView.class)).perform(click());
     }
 

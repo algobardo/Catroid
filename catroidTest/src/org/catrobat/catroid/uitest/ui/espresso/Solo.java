@@ -39,6 +39,7 @@ import static com.google.android.apps.common.testing.ui.espresso.Espresso.pressB
 import static com.google.android.apps.common.testing.ui.espresso.Espresso.registerIdlingResources;
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.click;
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.closeSoftKeyboard;
+import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.longClick;
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.typeText;
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
@@ -972,7 +973,8 @@ public class Solo {
      */
 
     public void clickLongOnView(View view) {
-       
+        IdentityMatcher<View> idm = new IdentityMatcher<View>(view);
+        onView(idm).perform(longClick());
 
     }
 
@@ -984,7 +986,7 @@ public class Solo {
      */
 
     public void clickLongOnView(View view, int time) {
-        solo.clickLongOnView(view,time);
+        throw new UnsupportedOperationException("clickLongOnView not supported with time");
     }
 
     /**
@@ -995,7 +997,8 @@ public class Solo {
      */
 
     public void clickOnText(String text) {
-        solo.clickOnText(text);
+        onView(withText(text)).perform(click());
+
     }
 
     /**

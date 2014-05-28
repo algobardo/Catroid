@@ -32,9 +32,26 @@ import android.widget.TimePicker;
 import android.widget.ToggleButton;
 import android.app.Instrumentation.ActivityMonitor;
 import com.robotium.solo.Condition;
-
+import com.google.android.apps.common.testing.ui.espresso.Espresso;
+import static com.google.android.apps.common.testing.ui.espresso.Espresso.onData;
+import static com.google.android.apps.common.testing.ui.espresso.Espresso.onView;
+import static com.google.android.apps.common.testing.ui.espresso.Espresso.pressBack;
+import static com.google.android.apps.common.testing.ui.espresso.Espresso.registerIdlingResources;
+import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.click;
+import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.closeSoftKeyboard;
+import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.typeText;
+import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
+import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
+import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
+import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withTagKey;
+import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withTagValue;
+import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 import com.robotium.solo.By;
+
+import org.hamcrest.Matcher;
 
 /**
  * Main class for development of Robotium tests.
@@ -65,6 +82,8 @@ public class Solo {
 
 
     private com.robotium.solo.Solo solo;
+    private Activity activity;
+
     /**
      * Constructor that takes the Instrumentation object and the start Activity.
      *
@@ -74,6 +93,7 @@ public class Solo {
      */
 
     public Solo(Instrumentation instrumentation, Activity activity) {
+        this.activity = activity;
         solo = new com.robotium.solo.Solo(instrumentation,activity);
     }
 
@@ -699,7 +719,7 @@ public class Solo {
 
     public void goBack()
     {
-        solo.goBack();
+        Espresso.pressBack();
     }
 
     /**
@@ -2244,7 +2264,8 @@ public class Solo {
      */
 
     public boolean waitForFragmentByTag(String tag, int timeout){
-        return solo.waitForFragmentByTag(tag,timeout);
+        onView(withTagValue(is((Object) tag))).check(matches(isDisplayed()));
+        return true;
     }
 
     /**
@@ -2255,7 +2276,8 @@ public class Solo {
      */
 
     public boolean waitForFragmentById(int id){
-        return solo.waitForFragmentById(id);
+        onView(withId(id)).check(matches(isDisplayed()));
+        return true;
     }
 
     /**
@@ -2267,7 +2289,8 @@ public class Solo {
      */
 
     public boolean waitForFragmentById(int id, int timeout){
-        return solo.waitForFragmentById(id,timeout);
+        onView(withId(id)).check(matches(isDisplayed()));
+        return true;
     }
 //
 //    /**

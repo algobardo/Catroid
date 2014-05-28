@@ -64,7 +64,6 @@ android {
     buildToolsVersion "19"
 
     // Robotium tests
-    /*
     defaultConfig {
         minSdkVersion 10
         targetSdkVersion 19
@@ -75,19 +74,6 @@ android {
         versionName getVersionName()
         buildConfigField "String", "GIT_DESCRIBE", "\"${gitDescribe()}\""
     }
-    */
-    // Espresso tests
-    defaultConfig {
-        minSdkVersion 10
-        targetSdkVersion 19
-        packageName "org.catrobat.catroid"
-        testPackageName "org.catrobat.catroid.test"
-        testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
-        versionCode getVersionCode()
-        versionName getVersionName()
-        buildConfigField "String", "GIT_DESCRIBE", "\"${gitDescribe()}\""
-    }
-
 
     packagingOptions {
         exclude 'LICENSE.txt'

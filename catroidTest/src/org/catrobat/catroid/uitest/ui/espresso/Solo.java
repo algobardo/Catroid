@@ -1005,27 +1005,27 @@ public class Solo {
 
     }
 
-    /**
-     * Clicks a View or WebElement displaying the specified text. Will automatically scroll when needed.
-     *
-     * @param text the text to click. The parameter will be interpreted as a regular expression
-     * @param match if multiple objects match the text, this determines which one to click
-     */
+//    /**
+//     * Clicks a View or WebElement displaying the specified text. Will automatically scroll when needed.
+//     *
+//     * @param text the text to click. The parameter will be interpreted as a regular expression
+//     * @param match if multiple objects match the text, this determines which one to click
+//     */
+//
+//    public void clickOnText(String text, int match) {
+//        solo.clickOnText(text,match);
+//    }
 
-    public void clickOnText(String text, int match) {
-        solo.clickOnText(text,match);
-    }
-
-    /**
+    /*
      * Clicks a View or WebElement displaying the specified text.
      *
      * @param text the text to click. The parameter will be interpreted as a regular expression
      * @param match if multiple objects match the text, this determines which one to click
      * @param scroll {@code true} if scrolling should be performed
      */
-
     public void clickOnText(String text, int match, boolean scroll) {
-        solo.clickOnText(text,match,scroll);
+        //TODO: unsound!!
+        onView(withText(text)).perform(click());
     }
 
     /**
@@ -1036,7 +1036,7 @@ public class Solo {
 
     public void clickLongOnText(String text)
     {
-        solo.clickLongOnText(text);
+        onView(withText(text)).perform(longClick());
     }
 
     /**
@@ -1048,7 +1048,8 @@ public class Solo {
 
     public void clickLongOnText(String text, int match)
     {
-        solo.clickLongOnText(text,match);
+        //TODO: unsound!!
+        onView(withText(text)).perform(longClick());
     }
 //
 //    /**
@@ -1095,7 +1096,7 @@ public class Solo {
      * @param index the index of the {@link Button} to click. {@code 0} if only one is available
      */
     public void clickOnButton(int index) {
-        solo.clickOnButton(index);
+        onView(withId(index)).perform(click());
     }
 //
 //    /**

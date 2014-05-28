@@ -329,7 +329,7 @@ public class Solo {
      */
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout) {
-        onView(withRobotiumText(text)).check(matches(isDisplayed()));
+        onView(allOf(withRobotiumText(text), isnth(0, Object.class))).check(matches(isDisplayed()));
         return true;
     }
 
@@ -876,6 +876,7 @@ public class Solo {
      */
 
     public void clickOnButton(String text) {
+
         solo.clickOnButton(text);
 
     }

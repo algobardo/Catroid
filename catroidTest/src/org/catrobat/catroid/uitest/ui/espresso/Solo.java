@@ -32,6 +32,10 @@ import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 import android.app.Instrumentation.ActivityMonitor;
+
+import com.google.android.apps.common.testing.ui.espresso.UiController;
+import com.google.android.apps.common.testing.ui.espresso.ViewAction;
+import com.google.android.apps.common.testing.ui.espresso.action.ViewActions;
 import com.robotium.solo.Condition;
 import com.google.android.apps.common.testing.ui.espresso.Espresso;
 import static com.google.android.apps.common.testing.ui.espresso.Espresso.onData;
@@ -44,6 +48,7 @@ import static com.google.android.apps.common.testing.ui.espresso.action.ViewActi
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.typeText;
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
+import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isRoot;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withTagKey;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withTagValue;
@@ -107,6 +112,24 @@ public class Solo {
         }
     };
 
+    private static ViewAction doNothing(){
+        return new ViewAction() {
+            @Override
+            public Matcher<View> getConstraints() {
+                return isDisplayed();
+            }
+
+            @Override
+            public String getDescription() {
+                return "Doing nothing";
+            }
+
+            @Override
+            public void perform(UiController uiController, View view) {
+                return;
+            }
+        };
+    }
 
     public static Matcher<View> withRobotiumText(final String text, final Class c) {
         final Matcher<View> stdMatch = withText(text);
@@ -1852,6 +1875,8 @@ public class Solo {
      */
 
     public Button getButton(int index) {
+
+        onView(isRoot()).perform(doNothing());
         return solo.getButton(index);
     }
 
@@ -1863,6 +1888,7 @@ public class Solo {
      */
 
     public TextView getText(int index) {
+        onView(isRoot()).perform(doNothing());
         return solo.getText(index);
     }
 //
@@ -1897,6 +1923,7 @@ public class Solo {
 
     public TextView getText(String text)
     {
+        onView(isRoot()).perform(doNothing());
         return solo.getText(text);
     }
 
@@ -1910,6 +1937,7 @@ public class Solo {
 
     public TextView getText(String text, boolean onlyVisible)
     {
+        onView(isRoot()).perform(doNothing());
         return solo.getText(text,onlyVisible);
     }
 
@@ -1922,6 +1950,7 @@ public class Solo {
 
     public Button getButton(String text)
     {
+        onView(isRoot()).perform(doNothing());
         return solo.getButton(text);
     }
 
@@ -1935,6 +1964,7 @@ public class Solo {
 
     public Button getButton(String text, boolean onlyVisible)
     {
+        onView(isRoot()).perform(doNothing());
         return solo.getButton(text,onlyVisible);
     }
 
@@ -1971,7 +2001,6 @@ public class Solo {
      */
 
     public View getView(int id){
-        // TODO: Fixme!!!
         return getView(id, 0);
     }
 
@@ -1984,6 +2013,7 @@ public class Solo {
      */
 
     public View getView(int id, int index){
+        onView(isRoot()).perform(doNothing());
         return solo.getView(id,index);
     }
 
@@ -2007,6 +2037,7 @@ public class Solo {
      */
 
     public View getView(String id, int index){
+        onView(isRoot()).perform(doNothing());
         return solo.getView(id,index);
     }
 
@@ -2019,6 +2050,7 @@ public class Solo {
      */
 
     public <T extends View> T getView(Class<T> viewClass, int index){
+        onView(isRoot()).perform(doNothing());
         return solo.getView(viewClass, index);
     }
 
@@ -2073,6 +2105,7 @@ public class Solo {
      */
 
     public ArrayList<View> getCurrentViews() {
+        onView(isRoot()).perform(doNothing());
         return solo.getCurrentViews();
     }
 
@@ -2084,6 +2117,7 @@ public class Solo {
      */
 
     public <T extends View> ArrayList<T> getCurrentViews(Class<T> classToFilterBy) {
+        onView(isRoot()).perform(doNothing());
         return solo.getCurrentViews(classToFilterBy);
     }
 
@@ -2096,6 +2130,7 @@ public class Solo {
      */
 
     public <T extends View> ArrayList<T> getCurrentViews(Class<T> classToFilterBy, View parent) {
+        onView(isRoot()).perform(doNothing());
         return solo.getCurrentViews(classToFilterBy,parent);
     }
 

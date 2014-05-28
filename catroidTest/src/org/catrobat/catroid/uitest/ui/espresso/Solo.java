@@ -158,14 +158,14 @@ public class Solo {
         };
     }
 
-    public static Matcher<View> isnth(final int index) {
+    public static Matcher<View> isnth(final int index, final Class c) {
 
         return new TypeSafeMatcher<View>() {
             int count = 0;
             @Override
             public boolean matchesSafely(View view) {
 
-                if(!(view instanceof CheckBox))
+                if(!(view.getClass() == c))
                     return false;
 
                 count++;
@@ -1194,7 +1194,7 @@ public class Solo {
 
     public void clickOnCheckBox(int index) {
 
-        onView(isnth(index))
+        onView(isnth(index,CheckBox.class))
                 .perform(click());
     }
 

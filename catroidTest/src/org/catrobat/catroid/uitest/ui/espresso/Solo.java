@@ -121,7 +121,7 @@ public class Solo {
                 if(!(view instanceof TextView))
                     return false;
 
-                
+
                 Pattern pattern = null;
                 try {
                     pattern = Pattern.compile(text);
@@ -154,6 +154,31 @@ public class Solo {
             @Override
             public void describeTo(Description description) {
                 stdMatch.describeTo(description);
+            }
+        };
+    }
+
+    public static Matcher<View> isnth(final int index) {
+
+        return new TypeSafeMatcher<View>() {
+            int count = 0;
+            @Override
+            public boolean matchesSafely(View view) {
+
+                if(!(view instanceof CheckBox))
+                    return false;
+
+                count++;
+                if(index+1==count)
+                    return true;
+
+                return false;
+            }
+
+
+            @Override
+            public void describeTo(Description description) {
+
             }
         };
     }
@@ -1168,7 +1193,9 @@ public class Solo {
      */
 
     public void clickOnCheckBox(int index) {
-        onView(withId(index)).perform(click());
+
+        onView(isnth(index))
+                .perform(click());
     }
 
     /**

@@ -51,6 +51,8 @@ import static org.hamcrest.Matchers.*;
 
 import com.robotium.solo.By;
 
+import org.hamcrest.BaseMatcher;
+import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
 /**
@@ -83,6 +85,25 @@ public class Solo {
 
     private com.robotium.solo.Solo solo;
     private Activity activity;
+
+
+    private class IdentityMatcher<T> extends BaseMatcher<T>{
+        private T mView;
+        public IdentityMatcher(T v){
+            mView = v;
+        }
+
+        @Override
+        public void describeTo(Description description) {
+
+        }
+
+        @Override
+        public boolean matches(Object o) {
+            return o == mView;
+        }
+    };
+
 
     /**
      * Constructor that takes the Instrumentation object and the start Activity.
@@ -929,8 +950,10 @@ public class Solo {
      * @param view the {@link View} to click
      */
 
-    public void clickOnView(View view) {
-        solo.clickOnView(view);
+    public void clickOnView(final View view) {
+      IdentityMatcher<View> idm = new IdentityMatcher<View>(view);
+      onView(idm).perform(click());
+
     }
 
     /**
@@ -940,9 +963,7 @@ public class Solo {
      * @param immediately {@code true} if View should be clicked without any wait
      */
 
-    public void clickOnView(View view, boolean immediately){
-        solo.clickOnView(view,immediately);
-    }
+    public void clickOnView(View view, boolean immediately) { clickOnView(view);    }
 
     /**
      * Long clicks the specified View.
@@ -951,7 +972,7 @@ public class Solo {
      */
 
     public void clickLongOnView(View view) {
-       solo.clickLongOnView(view);
+       
 
     }
 

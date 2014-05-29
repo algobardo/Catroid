@@ -49,6 +49,7 @@ import static com.google.android.apps.common.testing.ui.espresso.action.ViewActi
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.typeText;
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
+import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isEnabled;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isRoot;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withTagKey;
@@ -179,14 +180,14 @@ public class Solo {
         };
     }
 
-    public static Matcher<View> isnth(final int index, final Class c) {
+    public static Matcher<View> isnth(final int index, final Matcher<? super View> m) {
 
         return new TypeSafeMatcher<View>() {
             int count = 0;
             @Override
             public boolean matchesSafely(View view) {
 
-                if(!( c.isInstance(view)))
+                if(!(m.matches(view)))
                     return false;
 
                 count++;
@@ -199,10 +200,12 @@ public class Solo {
 
             @Override
             public void describeTo(Description description) {
-                description.appendText("with index " + index);
+                description.appendText("with index " + index +" of the following ones ");
+                m.describeTo(description);
             }
         };
     }
+
 
     /**
      * Constructor that takes the Instrumentation object and the start Activity.
@@ -340,7 +343,7 @@ public class Solo {
      */
 
     public boolean waitForText(String text) {
-        onView(allOf(withRobotiumText(text, TextView.class), isnth(0, Object.class))).check(matches(isDisplayed()));
+        onView(isnth(0, withRobotiumText(text, TextView.class))).check(matches(isDisplayed()));
         return true;
     }
 
@@ -355,7 +358,7 @@ public class Solo {
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout) {
         // TODO: Handle the case where minimumNumberOfMatches != 0
-        onView(allOf(withRobotiumText(text, TextView.class), isnth(0, Object.class))).check(matches(isDisplayed()));
+        onView(isnth(0, withRobotiumText(text, TextView.class))).check(matches(isDisplayed()));
         return true;
     }
 
@@ -371,7 +374,7 @@ public class Solo {
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout, boolean scroll) {
         // TODO: Handle the case where minimumNumberOfMatches != 0
-        onView(allOf(withRobotiumText(text, TextView.class), isnth(0, Object.class))).check(matches(isDisplayed()));
+        onView(isnth(0, withRobotiumText(text, TextView.class))).check(matches(isDisplayed()));
         return true;
     }
 
@@ -388,7 +391,7 @@ public class Solo {
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout, boolean scroll, boolean onlyVisible) {
         // TODO: Handle the case where minimumNumberOfMatches != 0
-        onView(allOf(withRobotiumText(text, TextView.class), isnth(0, Object.class))).check(matches(isDisplayed()));
+        onView(isnth(0, withRobotiumText(text, TextView.class))).check(matches(isDisplayed()));
         return true;
     }
 
@@ -905,8 +908,7 @@ public class Solo {
 
     public void clickOnButton(String text) {
 
-        solo.clickOnButton(text);
-
+        onView(withRobotiumText(text, Button.class)).perform(click());
     }
 
     /**
@@ -916,7 +918,7 @@ public class Solo {
      */
 
     public void clickOnImageButton(int index) {
-        onView(isnth(index, ImageButton.class)).perform(click());
+        onView(isnth(index, instanceOf(ImageButton.class))).perform(click());
     }
 //
 //    /**
@@ -1199,7 +1201,7 @@ public class Solo {
      * @param index the index of the {@link Button} to click. {@code 0} if only one is available
      */
     public void clickOnButton(int index) {
-        onView(isnth(index, Button.class)).perform(click());
+        onView(isnth(index, allOf(instanceOf(Button.class), isEnabled()))).perform(click());
     }
 //
 //    /**
@@ -1220,7 +1222,7 @@ public class Solo {
 
     public void clickOnCheckBox(int index) {
 
-        onView(isnth(index, CheckBox.class))
+        onView(isnth(index,instanceOf(CheckBox.class)))
                 .perform(click());
     }
 
@@ -1231,7 +1233,7 @@ public class Solo {
      */
 
     public void clickOnEditText(int index) {
-        onView(isnth(index, EditText.class)).perform(click());
+        onView(isnth(index, instanceOf(EditText.class))).perform(click());
     }
 
     /**
@@ -1854,7 +1856,7 @@ public class Solo {
      */
 
     public void clickOnImage(int index) {
-        onView(isnth(index, ImageView.class)).perform(click());
+        onView(isnth(index, instanceOf(ImageView.class))).perform(click());
     }
 
     /**

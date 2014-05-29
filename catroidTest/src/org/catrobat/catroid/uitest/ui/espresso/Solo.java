@@ -48,6 +48,7 @@ import static com.google.android.apps.common.testing.ui.espresso.action.ViewActi
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.longClick;
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.typeText;
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
+import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isClickable;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isEnabled;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isRoot;
@@ -1201,7 +1202,7 @@ public class Solo {
      * @param index the index of the {@link Button} to click. {@code 0} if only one is available
      */
     public void clickOnButton(int index) {
-        onView(isnth(index, allOf(instanceOf(Button.class), isEnabled()))).perform(click());
+        onView(isnth(index, allOf(instanceOf(Button.class), isClickable(), isDisplayed(), isEnabled()))).perform(click());
     }
 //
 //    /**

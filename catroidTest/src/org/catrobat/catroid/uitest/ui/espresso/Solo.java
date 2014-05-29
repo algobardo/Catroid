@@ -391,7 +391,7 @@ public class Solo {
      */
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout, boolean scroll, boolean onlyVisible) {
-        // TODO: Handle the case where minimumNumberOfMatches != 0
+        // TODO: Handle the case where minimumNumberOfMatches != 0 and all the others params are set
         onView(isnth(0, withRobotiumText(text, TextView.class))).check(matches(isDisplayed()));
         return true;
     }
@@ -445,6 +445,7 @@ public class Solo {
      */
 
     public <T extends View> boolean waitForView(final Class<T> viewClass){
+        //TODO: espressify it!
         return solo.waitForView(viewClass);
     }
 
@@ -456,7 +457,10 @@ public class Solo {
      */
 
     public <T extends View> boolean waitForView(View view){
-        return solo.waitForView(view);
+
+        IdentityMatcher<View> m = new IdentityMatcher<View>(view);
+        onView(m).perform(doNothing());
+        return true;
     }
 
     /**
@@ -469,7 +473,10 @@ public class Solo {
      */
 
     public <T extends View> boolean waitForView(View view, int timeout, boolean scroll){
-        return solo.waitForView(view,timeout,scroll);
+        //TODO: take care of the scroll!
+        IdentityMatcher<View> m = new IdentityMatcher<View>(view);
+        onView(m).perform(doNothing());
+        return true;
     }
 
     /**
@@ -482,6 +489,7 @@ public class Solo {
      */
 
     public <T extends View> boolean waitForView(final Class<T> viewClass, final int minimumNumberOfMatches, final int timeout){
+        //TODO: espressify and take care of the minimum
         return solo.waitForView(viewClass,minimumNumberOfMatches,timeout);
     }
 
@@ -919,7 +927,7 @@ public class Solo {
      */
 
     public void clickOnImageButton(int index) {
-        onView(isnth(index, instanceOf(ImageButton.class))).perform(click());
+        onView(isnth(index, allOf(instanceOf(ImageButton.class),isDisplayed()))).perform(click());
     }
 //
 //    /**
@@ -952,7 +960,9 @@ public class Solo {
 
     public void clickOnMenuItem(String text, boolean subMenu)
     {
-        solo.clickOnMenuItem(text,subMenu);
+        //TODO: submenu does not work yet
+        onView(isRoot()).perform(ViewActions.pressKey(KeyEvent.KEYCODE_MENU));
+        onView(withRobotiumText(text, TextView.class)).perform(click());
     }
 //
 //    /**
@@ -1130,7 +1140,6 @@ public class Solo {
      * @param scroll {@code true} if scrolling should be performed
      */
     public void clickOnText(String text, int match, boolean scroll) {
-        //TODO: unsound!!
         onView(withRobotiumText(text, TextView.class)).perform(click());
     }
 
@@ -1154,7 +1163,6 @@ public class Solo {
 
     public void clickLongOnText(String text, int match)
     {
-        //TODO: unsound!!
         onView(withRobotiumText(text, TextView.class)).perform(longClick());
     }
 //
@@ -1223,7 +1231,7 @@ public class Solo {
 
     public void clickOnCheckBox(int index) {
 
-        onView(isnth(index,instanceOf(CheckBox.class)))
+        onView(isnth(index,allOf(instanceOf(CheckBox.class),isDisplayed())))
                 .perform(click());
     }
 
@@ -1234,7 +1242,7 @@ public class Solo {
      */
 
     public void clickOnEditText(int index) {
-        onView(isnth(index, instanceOf(EditText.class))).perform(click());
+        onView(isnth(index, allOf(instanceOf(EditText.class),isDisplayed()))).perform(click());
     }
 
     /**
@@ -1259,6 +1267,7 @@ public class Solo {
      */
 
     public ArrayList<TextView> clickInList(int line, int index) {
+        //TODO: Rewrite
         return solo.clickInList(line,index);
     }
 //
@@ -1308,6 +1317,7 @@ public class Solo {
      */
 
     public void clickOnActionBarItem(int id){
+        //TODO: Rewrite
         solo.clickOnActionBarItem(id);
     }
 
@@ -1332,6 +1342,7 @@ public class Solo {
 
     public void drag(float fromX, float toX, float fromY, float toY,
                      int stepCount) {
+        //TODO: Rewrite
         solo.drag(fromX, toX, fromY, toY, stepCount);
     }
 
@@ -1344,6 +1355,7 @@ public class Solo {
 
     @SuppressWarnings("unchecked")
     public boolean scrollDown() {
+        //TODO: Rewrite
         return solo.scrollDown();
     }
 
@@ -1353,6 +1365,7 @@ public class Solo {
 
     @SuppressWarnings("unchecked")
     public void scrollToBottom() {
+        //TODO: Rewrite
         solo.scrollToBottom();
     }
 //
@@ -1376,6 +1389,7 @@ public class Solo {
 
     @SuppressWarnings("unchecked")
     public void scrollToTop() {
+        //TODO: Rewrite
         solo.scrollToTop();
     }
 
@@ -1387,6 +1401,7 @@ public class Solo {
      */
 
     public boolean scrollDownList(AbsListView list) {
+        //TODO: Rewrite
         return solo.scrollDownList(list);
     }
 
@@ -1398,6 +1413,7 @@ public class Solo {
      */
 
     public boolean scrollListToBottom(AbsListView list) {
+        //TODO: Rewrite
         return solo.scrollListToBottom(list);
     }
 //
@@ -1420,6 +1436,7 @@ public class Solo {
      */
 
     public boolean scrollListToTop(AbsListView list) {
+        //TODO: Rewrite
         return solo.scrollListToTop(list);
     }
 //
@@ -1442,6 +1459,7 @@ public class Solo {
      */
 
     public boolean scrollListToBottom(int index) {
+        //TODO: Rewrite
         return solo.scrollListToBottom(index);
     }
 //

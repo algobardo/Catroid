@@ -96,6 +96,7 @@ public class Solo {
 
     private com.robotium.solo.Solo solo;
     private Activity activity;
+    private Instrumentation inst;
 
 
     private class IdentityMatcher<T> extends BaseMatcher<T>{
@@ -218,6 +219,7 @@ public class Solo {
 
     public Solo(Instrumentation instrumentation, Activity activity) {
         this.activity = activity;
+        this.inst = instrumentation;
         solo = new com.robotium.solo.Solo(instrumentation,activity);
     }
 
@@ -289,6 +291,7 @@ public class Solo {
      */
 
     public Solo(Instrumentation instrumentation) {
+        this.inst = instrumentation;
         solo = new com.robotium.solo.Solo(instrumentation);
     }
 
@@ -908,7 +911,6 @@ public class Solo {
      */
 
     public void clickOnButton(String text) {
-
         onView(withRobotiumText(text, Button.class)).perform(click());
     }
 
@@ -1308,7 +1310,12 @@ public class Solo {
      */
 
     public void clickOnActionBarItem(int id){
-        solo.clickOnActionBarItem(id);
+        // TODO: Should maybe be current activity instead of activity, if it is changed??
+        // TODO: Should maybe wait till idle before invoking??
+        System.out.println("solo.click: 1");
+        inst.invokeMenuActionSync(activity, id, 0);
+        // solo.clickOnActionBarItem(id);
+        System.out.println("solo.click: 2");
     }
 
     /**
@@ -1316,7 +1323,8 @@ public class Solo {
      */
 
     public void clickOnActionBarHomeButton() {
-        solo.clickOnActionBarHomeButton();
+        clickOnActionBarItem(android.R.id.home);
+        // solo.clickOnActionBarHomeButton();
     }
 
     /**

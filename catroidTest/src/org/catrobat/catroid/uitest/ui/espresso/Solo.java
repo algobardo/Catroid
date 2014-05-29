@@ -1202,7 +1202,7 @@ public class Solo {
      * @param index the index of the {@link Button} to click. {@code 0} if only one is available
      */
     public void clickOnButton(int index) {
-        onView(isnth(index, allOf(instanceOf(Button.class), isClickable(), isDisplayed(), isEnabled()))).perform(click());
+        onView(isnth(index, allOf(instanceOf(Button.class), isDisplayed()))).perform(click());
     }
 //
 //    /**

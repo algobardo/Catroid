@@ -4,6 +4,8 @@ package org.catrobat.catroid.uitest.ui.espresso;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import junit.framework.Assert;
+import junit.framework.AssertionFailedError;
+
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.pm.ActivityInfo;
@@ -158,6 +160,13 @@ public class Solo {
                 if (matcher.find())
                     return true;
 
+                if(((TextView)view).getContentDescription()!=null)
+                {
+                    matcher = pattern.matcher(((TextView) view).getContentDescription().toString());
+                    if (matcher.find()) {
+                        return true;
+                    }
+                }
                 if (((TextView) view).getError() != null) {
                     matcher = pattern.matcher(((TextView) view).getError().toString());
                     if (matcher.find()) {
@@ -347,8 +356,13 @@ public class Solo {
      */
 
     public boolean waitForText(String text) {
-        onView(isnth(0, withRobotiumText(text, TextView.class))).check(matches(isDisplayed()));
-        return true;
+        try {
+            onView(isnth(0, withRobotiumText(text, TextView.class))).check(matches(isDisplayed()));
+            return true;
+        }
+        catch(Error err){
+            return false;
+        }
     }
 
     /**
@@ -362,8 +376,13 @@ public class Solo {
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout) {
         // TODO: Handle the case where minimumNumberOfMatches != 0
-        onView(isnth(0, withRobotiumText(text, TextView.class))).check(matches(isDisplayed()));
-        return true;
+        try {
+            onView(isnth(0, withRobotiumText(text, TextView.class))).check(matches(isDisplayed()));
+            return true;
+        }
+        catch(Exception err){
+            return false;
+        }
     }
 
     /**
@@ -378,8 +397,13 @@ public class Solo {
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout, boolean scroll) {
         // TODO: Handle the case where minimumNumberOfMatches != 0
-        onView(isnth(0, withRobotiumText(text, TextView.class))).check(matches(isDisplayed()));
-        return true;
+        try {
+            onView(isnth(0, withRobotiumText(text, TextView.class))).check(matches(isDisplayed()));
+            return true;
+        }
+        catch(Exception err){
+            return false;
+        }
     }
 
     /**
@@ -395,8 +419,13 @@ public class Solo {
 
     public boolean waitForText(String text, int minimumNumberOfMatches, long timeout, boolean scroll, boolean onlyVisible) {
         // TODO: Handle the case where minimumNumberOfMatches != 0 and all the others params are set
-        onView(isnth(0, withRobotiumText(text, TextView.class))).check(matches(isDisplayed()));
-        return true;
+        try{
+            onView(isnth(0, withRobotiumText(text, TextView.class))).check(matches(isDisplayed()));
+            return true;
+        }
+        catch(Error err){
+            return false;
+        }
     }
 
     /**
@@ -407,8 +436,13 @@ public class Solo {
      */
 
     public boolean waitForView(int id) {
-        onView(withId(id)).check(matches(isDisplayed()));
-        return true;
+        try {
+            onView(withId(id)).check(matches(isDisplayed()));
+            return true;
+        }
+        catch(Error err){
+            return false;
+        }
     }
 
     /**
@@ -421,8 +455,13 @@ public class Solo {
      */
 
     public boolean waitForView(int id, int minimumNumberOfMatches, int timeout){
-        onView(withId(id)).check(matches(isDisplayed()));
-        return true;
+        try {
+            onView(withId(id)).check(matches(isDisplayed()));
+            return true;
+        }
+        catch(Error err){
+            return false;
+        }
     }
 
 //    /**
@@ -461,9 +500,14 @@ public class Solo {
 
     public <T extends View> boolean waitForView(View view){
 
-        IdentityMatcher<View> m = new IdentityMatcher<View>(view);
-        onView(m).perform(doNothing());
-        return true;
+        try {
+            IdentityMatcher<View> m = new IdentityMatcher<View>(view);
+            onView(m).perform(doNothing());
+            return true;
+        }
+        catch(Error err){
+            return false;
+        }
     }
 
     /**
@@ -477,9 +521,15 @@ public class Solo {
 
     public <T extends View> boolean waitForView(View view, int timeout, boolean scroll){
         //TODO: take care of the scroll!
-        IdentityMatcher<View> m = new IdentityMatcher<View>(view);
-        onView(m).perform(doNothing());
-        return true;
+        try {
+            IdentityMatcher<View> m = new IdentityMatcher<View>(view);
+            onView(m).perform(doNothing());
+            return true;
+        }
+        catch(Error err)
+        {
+            return false;
+        }
     }
 
     /**
@@ -1321,10 +1371,12 @@ public class Solo {
     public void clickOnActionBarItem(int id){
         // TODO: Should maybe be current activity instead of activity, if it is changed??
         // TODO: Should maybe wait till idle before invoking??
-        System.out.println("solo.click: 1");
-        inst.invokeMenuActionSync(activity, id, 0);
-        // solo.clickOnActionBarItem(id);
-        System.out.println("solo.click: 2");
+        System.out.println("ID:"+id);
+        onView(withId(id)).perform(click());
+        //onView(isRoot()).perform(doNothing());
+        //solo.clickOnActionBarItem(id);
+
+        //inst.invokeMenuActionSync(getCurrentActivity(), id, 0);
     }
 
     /**

@@ -1749,6 +1749,8 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	}
 
 	public void testScreenshotUpdate() {
+        assertTrue("Commented out due to crash", false);
+        /*
 		createProjectWithBackgrounds();
 
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
@@ -1795,6 +1797,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		byte[] greenPixel3 = createScreenshotBitmap();
 		assertTrue("The extracted pixel was not green", UiTestUtils.comparePixelRgbaArrays(greenPixel, greenPixel3));
 		assertTrue("The screenshot has been changed", UiTestUtils.comparePixelRgbaArrays(greenPixel2, greenPixel3));
+		*/
 	}
 
 	public void testSelectAllActionModeButton() {

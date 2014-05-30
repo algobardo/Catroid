@@ -75,6 +75,8 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 	}
 
 	public void testBackButtonPressedTwice() {
+        assertTrue("Commented out due to crash", false);
+        /*
 		Project project = createTestProject(testProject);
 		ProjectManager.getInstance().setProject(project);
 
@@ -87,6 +89,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.goBack();
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		solo.assertCurrentActivity("Program is not in stage activity", ProjectActivity.class);
+		*/
 	}
 
 	public void testBackToPreviousActivity() {
@@ -266,6 +269,8 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 	}
 
 	public void testAxesOnOff() {
+        assertTrue("Commented out due to crash", false);
+        /*
 		createAndSaveTestProject(testProject);
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
@@ -308,6 +313,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		stagePixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH / 2,
 				ScreenValues.SCREEN_HEIGHT - 1, 1, 1);
 		UiTestUtils.compareByteArrays(whitePixel, stagePixel);
+		*/
 	}
 
 	public void testMaximizeStretch() {

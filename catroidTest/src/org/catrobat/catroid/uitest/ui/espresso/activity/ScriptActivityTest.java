@@ -93,6 +93,8 @@ public class ScriptActivityTest extends BaseActivityInstrumentationTestCase<Main
 	}
 
 	public void testPlayProgramButton() {
+        assertTrue("Commented out due to crash", false);
+        /*
 		UiTestUtils.waitForFragment(solo, R.id.fragment_script);
 
 		String currentSprite = ProjectManager.getInstance().getCurrentSprite().getName();
@@ -109,6 +111,7 @@ public class ScriptActivityTest extends BaseActivityInstrumentationTestCase<Main
 		assertEquals("Current sprite name is not shown as actionbar title or is wrong", "cat", currentSprite);
 
 		checkplayProgramButton();
+		*/
 	}
 
 	public void testOverflowMenuItemSettings() {

@@ -137,6 +137,26 @@ public class Solo {
         };
     }
 
+    public static ViewAction takeScreenshot(final com.robotium.solo.Solo solo) {
+
+        return new ViewAction() {
+            @Override
+            public Matcher<View> getConstraints() {
+                return new org.hamcrest.core.IsAnything<View>();
+            }
+
+            @Override
+            public String getDescription() {
+                return "Taking screenshot";
+            }
+
+            @Override
+            public void perform(UiController uiController, View view) {
+                solo.takeScreenshot();
+            }
+        };
+    }
+
     public static Matcher<View> withRobotiumText(final String text, final Class c) {
         final Matcher<View> stdMatch = withText(text);
         return new TypeSafeMatcher<View>() {
@@ -1373,7 +1393,7 @@ public class Solo {
         // TODO: Should maybe wait till idle before invoking??
         System.out.println("ID:"+id);
         onView(withId(id)).perform(click());
-        //onView(isRoot()).perform(doNothing());
+        //waitForIdle();
         //solo.clickOnActionBarItem(id);
 
         //inst.invokeMenuActionSync(getCurrentActivity(), id, 0);
@@ -1957,7 +1977,7 @@ public class Solo {
 
     public Button getButton(int index) {
 
-        onView(isRoot()).perform(doNothing());
+        waitForIdle();
         return solo.getButton(index);
     }
 
@@ -1969,7 +1989,7 @@ public class Solo {
      */
 
     public TextView getText(int index) {
-        onView(isRoot()).perform(doNothing());
+        waitForIdle();
         return solo.getText(index);
     }
 //
@@ -2004,7 +2024,7 @@ public class Solo {
 
     public TextView getText(String text)
     {
-        onView(isRoot()).perform(doNothing());
+        waitForIdle();
         return solo.getText(text);
     }
 
@@ -2018,7 +2038,7 @@ public class Solo {
 
     public TextView getText(String text, boolean onlyVisible)
     {
-        onView(isRoot()).perform(doNothing());
+        waitForIdle();
         return solo.getText(text,onlyVisible);
     }
 
@@ -2031,7 +2051,7 @@ public class Solo {
 
     public Button getButton(String text)
     {
-        onView(isRoot()).perform(doNothing());
+        waitForIdle();
         return solo.getButton(text);
     }
 
@@ -2045,7 +2065,7 @@ public class Solo {
 
     public Button getButton(String text, boolean onlyVisible)
     {
-        onView(isRoot()).perform(doNothing());
+        waitForIdle();
         return solo.getButton(text,onlyVisible);
     }
 
@@ -2094,7 +2114,7 @@ public class Solo {
      */
 
     public View getView(int id, int index){
-        onView(isRoot()).perform(doNothing());
+        waitForIdle();
         return solo.getView(id,index);
     }
 
@@ -2118,7 +2138,7 @@ public class Solo {
      */
 
     public View getView(String id, int index){
-        onView(isRoot()).perform(doNothing());
+        waitForIdle();
         return solo.getView(id,index);
     }
 
@@ -2131,7 +2151,7 @@ public class Solo {
      */
 
     public <T extends View> T getView(Class<T> viewClass, int index){
-        onView(isRoot()).perform(doNothing());
+        waitForIdle();
         return solo.getView(viewClass, index);
     }
 
@@ -2186,7 +2206,7 @@ public class Solo {
      */
 
     public ArrayList<View> getCurrentViews() {
-        onView(isRoot()).perform(doNothing());
+        waitForIdle();
         return solo.getCurrentViews();
     }
 
@@ -2198,7 +2218,7 @@ public class Solo {
      */
 
     public <T extends View> ArrayList<T> getCurrentViews(Class<T> classToFilterBy) {
-        onView(isRoot()).perform(doNothing());
+        waitForIdle();
         return solo.getCurrentViews(classToFilterBy);
     }
 
@@ -2211,7 +2231,7 @@ public class Solo {
      */
 
     public <T extends View> ArrayList<T> getCurrentViews(Class<T> classToFilterBy, View parent) {
-        onView(isRoot()).perform(doNothing());
+        waitForIdle();
         return solo.getCurrentViews(classToFilterBy,parent);
     }
 
@@ -2519,6 +2539,11 @@ public class Solo {
         onView(withId(id)).check(matches(isDisplayed()));
         return true;
     }
+
+    public void waitForIdle()
+    {
+        onView(isRoot()).perform(doNothing());
+    }
 //
 //    /**
 //     * Waits for the specified log message to appear. Default timeout is 20 seconds.
@@ -2743,5 +2768,10 @@ public class Solo {
 //            return defaultValue;
 //        }
 //    }
+
+    public void takeScreenshot(){
+        onView(isRoot()).perform(takeScreenshot(solo));
+    }
+
 }
 

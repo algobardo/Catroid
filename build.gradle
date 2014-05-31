@@ -36,8 +36,8 @@ dependencies {
         //exclude group: 'org.hamcrest'
     //}
     
-    compile fileTree(dir: 'robotium/robotium-solo/target', include: '*.jar')
-
+    //compile fileTree(dir: 'robotium/robotium-solo/target', include: '*.jar')
+    compile 'com.jayway.android.robotium:robotium-solo:5.1'
 }
 
 

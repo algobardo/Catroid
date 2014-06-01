@@ -63,7 +63,6 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.internal.ActionBarSherlockCompat;
 import com.actionbarsherlock.internal.view.menu.ActionMenuItem;
-import com.robotium.solo.Solo;
 
 import junit.framework.AssertionFailedError;
 
@@ -138,6 +137,7 @@ import org.catrobat.catroid.ui.dialogs.NewSpriteDialog;
 import org.catrobat.catroid.ui.dialogs.NewSpriteDialog.ActionAfterFinished;
 import org.catrobat.catroid.ui.dialogs.NewSpriteDialog.DialogWizardStep;
 import org.catrobat.catroid.ui.fragment.AddBrickFragment;
+import org.catrobat.catroid.uitest.Solo;
 import org.catrobat.catroid.utils.NotificationData;
 import org.catrobat.catroid.utils.StatusBarNotificationManager;
 import org.catrobat.catroid.utils.UtilFile;

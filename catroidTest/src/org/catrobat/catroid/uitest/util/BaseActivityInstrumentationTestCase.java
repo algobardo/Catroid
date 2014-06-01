@@ -26,9 +26,9 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
-import com.robotium.solo.Solo;
 
 import org.catrobat.catroid.stage.StageListener;
+import org.catrobat.catroid.uitest.Solo;
 
 public abstract class BaseActivityInstrumentationTestCase<T extends Activity> extends
 		ActivityInstrumentationTestCase2<T> {

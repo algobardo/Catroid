@@ -745,10 +745,14 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		assertTrue("Project just one dot not created", UiTestUtils.searchExactText(solo, UiTestUtils.JUST_ONE_DOT_PROJECT_NAME));
 		assertTrue("Project just two dots not created", UiTestUtils.searchExactText(solo, UiTestUtils.JUST_TWO_DOTS_PROJECT_NAME));
 
+        System.out.println("Ready to press delete"); System.out.flush();
 		UiTestUtils.clickOnActionBar(solo, R.id.delete);
 		solo.waitForText(solo.getString(R.string.delete));
 		String selectAll = solo.getString(R.string.select_all).toUpperCase(Locale.getDefault());
-		solo.clickOnText(selectAll);
+		//TODO: Why does this sleep solves the problem ?
+        //solo.sleep(300);
+        //solo.takeScreenshot();
+        solo.clickOnText(selectAll);
 		assertFalse("Select All is still shown", solo.waitForText(selectAll, 1, 200, false, true));
 		UiTestUtils.acceptAndCloseActionMode(solo);
 		solo.clickOnButton(solo.getString(R.string.yes));
@@ -806,6 +810,9 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 		solo.clickOnText(yes);
 
+        //TODO: NullPointerException originates in getCurrentProject.getName(), step by step debug --> succeed
+        //solo.waitForIdle();
+        //solo.sleep(4000);
 		ProjectManager projectManager = ProjectManager.getInstance();
 		String currentProjectName = projectManager.getCurrentProject().getName();
 

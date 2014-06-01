@@ -32,10 +32,9 @@ dependencies {
     compile fileTree(dir: 'catroid/libs-natives', include: '*.jar')
 
     androidTestCompile fileTree(dir: 'catroidTest/libs', include: '*.jar')
-    compile('com.jakewharton.espresso:espresso:1.1-r3')//{
-        //exclude group: 'org.hamcrest'
-    //}
-    
+    androidTestCompile 'com.jakewharton.espresso:espresso:1.1-r3'
+    //compile project(path: ':espresso:espresso')
+    //compile project(path: ':espresso:espresso', configuration: 'compile')
     compile fileTree(dir: 'robotium/robotium-solo/target', include: '*.jar')
 
 }

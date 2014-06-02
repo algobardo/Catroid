@@ -191,6 +191,8 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 	}
 
 	public void testCreateNewProjectsJustSpecialChars() {
+        assertTrue("Commented out due to crash", false);
+        /*
 		String directoryPath = Utils.buildProjectPath(projectNameJustSpecialChars);
 		File directory = new File(directoryPath);
 		UtilFile.deleteDirectory(directory);
@@ -205,6 +207,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 
 		File file = new File(Utils.buildPath(directoryPath, Constants.PROJECTCODE_NAME));
 		assertTrue("Project file with just special characters was not created!", file.exists());
+		*/
 	}
 
 	public void testCreateNewProjectsJustSpecialCharsTwo() {

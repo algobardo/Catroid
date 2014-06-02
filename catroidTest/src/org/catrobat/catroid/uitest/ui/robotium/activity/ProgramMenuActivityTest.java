@@ -150,6 +150,8 @@ public class ProgramMenuActivityTest extends BaseActivityInstrumentationTestCase
 	}
 
 	public void testPlayButton() {
+        assertTrue("Commented out due to crash", false);
+        /*
 		solo.assertMemoryNotLow();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
 		UiTestUtils.getIntoProgramMenuFromMainMenu(solo, 0);
@@ -167,6 +169,7 @@ public class ProgramMenuActivityTest extends BaseActivityInstrumentationTestCase
 		solo.goBack();
 		solo.waitForActivity(ProgramMenuActivity.class.getSimpleName());
 		solo.assertCurrentActivity("Not in ProgramMenuActivity", ProgramMenuActivity.class);
+		*/
 	}
 
 	public void testMenuItemSettings() {

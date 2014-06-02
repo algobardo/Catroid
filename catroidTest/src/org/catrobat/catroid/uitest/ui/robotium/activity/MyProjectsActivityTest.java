@@ -1863,6 +1863,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	}
 
 	public void testScreenshotUpdate() {
+        assertTrue("Commented out due to crash", false);
         /*
 		createProjectWithBackgrounds();
 

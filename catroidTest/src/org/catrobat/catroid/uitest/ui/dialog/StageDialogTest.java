@@ -94,6 +94,8 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 	}
 
 	public void testBackToPreviousActivity() {
+        assertTrue("Commented out due to crash", false);
+        /*
 		createAndSaveTestProject(testProject);
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
@@ -110,6 +112,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		assertEquals("Not equal Activities", previousActivity, getActivity());
+		*/
 	}
 
 	public void testPauseOnBackButton() {

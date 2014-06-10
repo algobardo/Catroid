@@ -760,6 +760,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 
 		solo.waitForText(rename, 1, timeToWait, false, true);
 
+        solo.sleep(10000); // TODO: REMOVE ME (CQA)
 		checkIfContextMenuAppears(false, false);
 
 		solo.clickOnView(addButton);
@@ -1017,6 +1018,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		String no = solo.getString(R.string.no);
 		solo.waitForText(no);
 		solo.clickOnText(no);
+
 		assertFalse("ActionMode didn't disappear", solo.waitForText(delete, 0, 300));
 
 		int numberOfVisibleCheckBoxes = solo.getCurrentViews(CheckBox.class).size();

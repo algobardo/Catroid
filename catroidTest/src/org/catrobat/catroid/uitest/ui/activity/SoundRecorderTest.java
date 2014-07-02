@@ -31,6 +31,7 @@ import android.os.Build;
 import com.robotium.solo.Condition;
 import com.robotium.solo.Solo;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
@@ -91,6 +92,7 @@ public class SoundRecorderTest extends BaseActivityInstrumentationTestCase<MainM
 		*/
 	}
 
+	@UnstableTest
 	public void testRecordMultipleSounds() throws InterruptedException {
         assertTrue("Commented out due to crash (missing support for API > 19)", false);
         /*

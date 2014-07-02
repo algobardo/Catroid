@@ -25,6 +25,7 @@ package org.catrobat.catroid.uitest.content.interaction;
 import android.os.Build;
 import android.widget.ListView;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.ScreenValues;
@@ -60,6 +61,7 @@ public class BrickDragAndDropTest extends BaseActivityInstrumentationTestCase<Ma
 		assertFalse("Brickcategories should not be shown", solo.searchText(solo.getString(R.string.categories)));
 	}
 
+	@UnstableTest
 	public void testPutHoveringBrickDown() {
 		// clicks on spriteName needed to get focus on listview for solo without adding hovering brick
 

@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.content.Project;
@@ -64,6 +65,7 @@ public class SetVariableTest extends BaseActivityInstrumentationTestCase<MainMen
 		UiTestUtils.getIntoScriptActivityFromMainMenu(solo);
 	}
 
+	@UnstableTest
 	public void testCreateNewUserVariableAndDeletion() {
 		String userVariableName = "testVariable1";
 		String secondUserVariableName = "testVariable2";
@@ -143,6 +145,7 @@ public class SetVariableTest extends BaseActivityInstrumentationTestCase<MainMen
 		assertTrue("UserVariable Name not as expected", userVariable.getName().equals(userVariableName));
 	}
 
+	@UnstableTest
 	public void testCreateUserVariableInFormulaEditor() {
 		String userVariableName = "testVariable1";
 

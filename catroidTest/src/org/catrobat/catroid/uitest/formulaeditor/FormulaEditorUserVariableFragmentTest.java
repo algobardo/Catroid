@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.content.Project;
@@ -103,6 +104,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 		startScript1.addBrick(setVariableBrick);
 	}
 
+	@UnstableTest
 	public void testAddUserVariableAfterStage() throws InterruptedException {
 		String userVariableString = "userVar1";
 
@@ -138,6 +140,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 		assertTrue("UserVariable not added!", listView.getCount() == 2);
 	}
 
+	@UnstableTest
 	public void testModifyUserVariableValuesInStage() throws InterruptedException {
 
 		solo.goBack();
@@ -502,6 +505,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 
 	}
 
+	@UnstableTest
 	public void testSelectAllActionModeButton() {
 		solo.clickOnView(solo.getView(CHANGE_SIZE_EDIT_TEXT_RID));
 

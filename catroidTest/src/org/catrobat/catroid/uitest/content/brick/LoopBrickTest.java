@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ListView;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.content.Project;
@@ -152,6 +153,7 @@ public class LoopBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 		assertTrue("Wrong Brick instance.", projectBrickList.get(3) instanceof LoopEndBrick);
 	}
 
+	@UnstableTest
 	public void testForeverBrick() {
 		ArrayList<Brick> projectBrickList = project.getSpriteList().get(0).getScript(0).getBrickList();
 
@@ -184,6 +186,7 @@ public class LoopBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 
 	}
 
+	@UnstableTest
 	public void testNestedForeverBricks() {
 		ArrayList<Integer> yPosition;
 		ArrayList<Brick> projectBrickList = project.getSpriteList().get(0).getScript(0).getBrickList();
@@ -266,6 +269,7 @@ public class LoopBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 		checkIfForeverLoopsAreCorrectlyPlaced(3);
 	}
 
+	@UnstableTest
 	public void testCopyForeverBrickActionMode() {
 		deleteAllBricks();
 
@@ -288,6 +292,7 @@ public class LoopBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 		assertTrue("Wrong Brick instance.", projectBrickList.get(3) instanceof LoopEndlessBrick);
 	}
 
+	@UnstableTest
 	public void testLoopEndBrickCheckBoxVisibleActionMode() {
 		deleteAllBricks();
 
@@ -323,6 +328,7 @@ public class LoopBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 		assertTrue("CheckBock is not visible.", isCheckBoxVisible);
 	}
 
+	@UnstableTest
 	public void testCopyLoopEndBrickActionMode() {
 		deleteAllBricks();
 
@@ -342,6 +348,7 @@ public class LoopBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 		assertTrue("Wrong Brick instance.", projectBrickList.get(3) instanceof LoopEndBrick);
 	}
 
+	@UnstableTest
 	public void testSelectionAfterCopyActionMode() {
 		deleteAllBricks();
 
@@ -367,6 +374,7 @@ public class LoopBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 		assertTrue("CheckBox is not checked but should be.", secondLoopEndBrickCheckBox.isChecked());
 	}
 
+	@UnstableTest
 	public void testSelectionActionMode() {
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.copy), R.id.copy, getActivity());
 		solo.clickOnCheckBox(1);

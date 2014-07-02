@@ -22,6 +22,7 @@
  */
 package org.catrobat.catroid.uitest.content.interaction;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.content.Project;
@@ -53,6 +54,7 @@ public class ScriptDeleteTest extends BaseActivityInstrumentationTestCase<MainMe
 		UiTestUtils.getIntoScriptActivityFromMainMenu(solo);
 	}
 
+	@UnstableTest
 	public void testAddLooksCategoryBrick() {
 		String brickSetLookText = solo.getString(R.string.brick_set_look);
 		UiTestUtils.addNewBrick(solo, R.string.brick_set_look);
@@ -68,6 +70,7 @@ public class ScriptDeleteTest extends BaseActivityInstrumentationTestCase<MainMe
 		assertTrue("Set size to brick was not added", solo.searchText(solo.getString(R.string.brick_set_size_to)));
 	}
 
+	@UnstableTest
 	public void testDeleteScript() {
 		UiTestUtils.addNewBrick(solo, R.string.brick_broadcast_receive);
 

@@ -25,6 +25,7 @@ package org.catrobat.catroid.uitest.content.brick;
 import android.content.Intent;
 import android.os.Bundle;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
@@ -90,6 +91,7 @@ public class SetLookBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 		super.tearDown();
 	}
 
+	@UnstableTest
 	public void testSelectLookAndPlay() {
 		assertTrue(lookName + " is not selected in Spinner", solo.isSpinnerTextSelected(lookName));
 
@@ -165,6 +167,7 @@ public class SetLookBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 
 	}
 
+	@UnstableTest
 	public void testAdapterUpdateInScriptActivity() {
 		String look1ImagePath = lookDataList.get(0).getAbsolutePath();
 		String look2ImagePath = lookDataList.get(1).getAbsolutePath();
@@ -184,6 +187,7 @@ public class SetLookBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 	}
 
 	@Device
+	@UnstableTest
 	public void testAddNewLook() {
 		String newText = solo.getString(R.string.new_broadcast_message);
 

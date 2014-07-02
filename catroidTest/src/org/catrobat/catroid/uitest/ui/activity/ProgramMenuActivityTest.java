@@ -30,6 +30,7 @@ import android.view.View;
 
 import com.robotium.solo.Solo;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.LookData;
@@ -105,6 +106,7 @@ public class ProgramMenuActivityTest extends BaseActivityInstrumentationTestCase
 				activityInfo.screenOrientation);
 	}
 
+	@UnstableTest
 	public void testTitle() {
 		solo.clickOnText(solo.getString(R.string.main_menu_continue));
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
@@ -149,6 +151,7 @@ public class ProgramMenuActivityTest extends BaseActivityInstrumentationTestCase
 		assertTrue("Text on look button is not 'Backgrounds'", solo.searchText(solo.getString(R.string.backgrounds)));
 	}
 
+	@UnstableTest
 	public void testPlayButton() {
         assertTrue("Commented out due to crash", false);
         /*

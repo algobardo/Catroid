@@ -22,6 +22,7 @@
  */
 package org.catrobat.catroid.uitest.content.brick;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.content.Project;
@@ -60,6 +61,7 @@ public class WhenStartedBrickTest extends BaseActivityInstrumentationTestCase<Ma
 		ProjectManager.getInstance().deleteCurrentProject();
 	}
 
+	@UnstableTest
 	public void testWhenStartedBrick() {
 		if (!solo.waitForView(DragAndDropListView.class, 0, 5000, false)) {
 			fail("DragAndDropListView not shown in 5 secs!");

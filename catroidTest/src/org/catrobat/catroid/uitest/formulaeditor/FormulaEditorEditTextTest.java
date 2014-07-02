@@ -28,6 +28,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.content.Project;
@@ -133,6 +134,7 @@ public class FormulaEditorEditTextTest extends BaseActivityInstrumentationTestCa
 				.getSelectionEnd());
 	}
 
+	@UnstableTest
 	public void testDoubleTapSelection() {
 		BackgroundColorSpan colorHighlight = (BackgroundColorSpan) Reflection.getPrivateField(
 				new FormulaEditorEditText(getActivity()), "COLOR_HIGHLIGHT");
@@ -302,6 +304,7 @@ public class FormulaEditorEditTextTest extends BaseActivityInstrumentationTestCa
 				.toString());
 	}
 
+	@UnstableTest
 	public void testNumberInsertion() {
 		solo.clickOnView(solo.getView(CHANGE_SIZE_BY_EDIT_TEXT_RID));
 
@@ -666,6 +669,7 @@ public class FormulaEditorEditTextTest extends BaseActivityInstrumentationTestCa
 	}
 
 	@Device
+	@UnstableTest
 	public void testComputeDialog() {
 		//For initialization
 		SensorLoudness.getSensorLoudness();

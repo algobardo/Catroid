@@ -30,6 +30,7 @@ import android.content.res.Configuration;
 
 import com.robotium.solo.Solo;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.stage.StageActivity;
@@ -93,6 +94,7 @@ public class ScriptActivityTest extends BaseActivityInstrumentationTestCase<Main
 		checkMainMenuButton();
 	}
 
+	@UnstableTest
 	public void testPlayProgramButton() {
         assertTrue("Commented out due to crash", false);
         /*

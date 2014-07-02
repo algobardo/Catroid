@@ -25,6 +25,7 @@ package org.catrobat.catroid.uitest.ui.dialog;
 import android.app.Activity;
 import android.media.MediaPlayer;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.ScreenModes;
@@ -74,6 +75,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		ProjectManager.getInstance().deleteCurrentProject();
 	}
 
+	@UnstableTest
 	public void testBackButtonPressedTwice() {
         assertTrue("Commented out due to crash", false);
         /*
@@ -93,6 +95,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		*/
 	}
 
+	@UnstableTest
 	public void testBackToPreviousActivity() {
         assertTrue("Commented out due to crash", false);
         /*
@@ -115,6 +118,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		*/
 	}
 
+	@UnstableTest
 	public void testPauseOnBackButton() {
 		float defaultScale = 100.0f;
 		float newScale = 50.0f;
@@ -149,6 +153,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		assertEquals("Unexpected look size", newScale, sprite.look.getSizeInUserInterfaceDimensionUnit());
 	}
 
+	@UnstableTest
 	public void testRestartButtonActivityChain() {
 		createAndSaveTestProject(testProject);
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
@@ -175,6 +180,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		assertEquals("Returned to wrong Activity", currentActivity, solo.getCurrentActivity());
 	}
 
+	@UnstableTest
 	public void testRestartButtonScriptPosition() {
 		createAndSaveTestProject(testProject);
 		ArrayList<Script> scriptStart = new ArrayList<Script>();
@@ -285,6 +291,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		assertTrue("Sound did not play from start!", positionBeforeRestart > positionAfterRestart);
 	}
 
+	@UnstableTest
 	public void testAxesOnOff() {
         assertTrue("Commented out due to crash", false);
         /*
@@ -336,6 +343,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		*/
 	}
 
+	@UnstableTest
 	public void testMaximizeStretch() {
 		Project project = createTestProject(testProject);
 		project.getXmlHeader().virtualScreenWidth = 480;
@@ -418,6 +426,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		UiTestUtils.compareByteArrays(whitePixel, screenPixel);
 	}
 
+	@UnstableTest
 	public void testMaximizeStretchRememeberSetting() {
 		Project project = createTestProject(testProject);
 		project.getXmlHeader().virtualScreenWidth = 480;

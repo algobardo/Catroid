@@ -37,6 +37,7 @@ import android.widget.TextView;
 
 import com.robotium.solo.Solo;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.LookData;
@@ -295,6 +296,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 				solo.searchText((defaultSpriteName + solo.getString(R.string.copy_sprite_name_suffix) + "1")));
 	}
 
+	@UnstableTest
 	public void testCopySprite() {
 		defaultSpriteName = solo.getString(R.string.default_project_sprites_mole_name);
 		UiTestUtils.createProjectForCopySprite(UiTestUtils.PROJECTNAME1, getActivity());
@@ -334,6 +336,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 				.getBrickList().size(), brickCounter);
 	}
 
+	@UnstableTest
 	public void testCopySelectAll() {
 		UiTestUtils.getIntoSpritesFromMainMenu(solo);
 		int currentNumberOfSprites = getCurrentNumberOfSprites() - 1;
@@ -370,6 +373,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		assertFalse("Found delete option for background sprite", solo.searchText(solo.getString(R.string.delete)));
 	}
 
+	@UnstableTest
 	public void testAddNewSprite() {
 		UiTestUtils.getIntoSpritesFromMainMenu(solo);
 
@@ -518,6 +522,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		solo.assertCurrentActivity("Main menu is not displayed", MainMenuActivity.class);
 	}
 
+	@UnstableTest
 	public void testCheckMaxTextLines() {
 		UiTestUtils.getIntoSpritesFromMainMenu(solo);
 
@@ -530,6 +535,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		assertEquals("linecount is wrong - ellipsize failed", expectedLineCount, textView.getLineCount());
 	}
 
+	@UnstableTest
 	public void testNewSpriteDialog() {
 		UiTestUtils.getIntoSpritesFromMainMenu(solo);
 
@@ -885,6 +891,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		checkIfNumberOfSpritesIsEqual(expectedNumberOfSprites);
 	}
 
+	@UnstableTest
 	public void testDeleteActionMode() {
 		UiTestUtils.getIntoSpritesFromMainMenu(solo);
 
@@ -954,6 +961,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		assertFalse("Sprite was not Deleted!", solo.waitForText(FOURTH_TEST_SPRITE_NAME, 1, 200));
 	}
 
+	@UnstableTest
 	public void testItemClick() {
 		UiTestUtils.getIntoSpritesFromMainMenu(solo);
 
@@ -1126,6 +1134,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		assertFalse("ActionMode didn't disappear", solo.waitForText(rename, 0, timeToWait));
 	}
 
+	@UnstableTest
 	public void testRenameActionMode() {
 		UiTestUtils.getIntoSpritesFromMainMenu(solo);
 

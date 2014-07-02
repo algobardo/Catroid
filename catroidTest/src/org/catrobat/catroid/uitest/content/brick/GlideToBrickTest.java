@@ -25,6 +25,7 @@ package org.catrobat.catroid.uitest.content.brick;
 import android.os.Build;
 import android.widget.TextView;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.content.Project;
@@ -57,6 +58,7 @@ public class GlideToBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 		UiTestUtils.getIntoScriptActivityFromMainMenu(solo);
 	}
 
+	@UnstableTest
 	public void testNumberInput() {
 		double duration = 1.5;
 		int xPosition = 123;

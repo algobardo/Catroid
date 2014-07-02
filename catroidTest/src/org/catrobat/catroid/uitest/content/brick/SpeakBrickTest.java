@@ -25,6 +25,7 @@ package org.catrobat.catroid.uitest.content.brick;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.content.Project;
@@ -67,6 +68,7 @@ public class SpeakBrickTest extends BaseActivityInstrumentationTestCase<ScriptAc
 		super.setUp();
 	}
 
+	@UnstableTest
 	public void testSpeakBrick() {
 		ListView dragDropListView = UiTestUtils.getScriptListView(solo);
 		BrickAdapter adapter = (BrickAdapter) dragDropListView.getAdapter();

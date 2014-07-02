@@ -24,6 +24,7 @@ package org.catrobat.catroid.uitest.content.brick;
 
 import android.widget.Spinner;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.content.Project;
@@ -66,6 +67,7 @@ public class VariableBricksTest extends BaseActivityInstrumentationTestCase<Main
 		super.tearDown();
 	}
 
+	@UnstableTest
 	public void testVariableBricks() {
 		Spinner setVariableSpinner = solo.getCurrentViews(Spinner.class).get(0);
 		Spinner changeVariableSpinner = solo.getCurrentViews(Spinner.class).get(1);

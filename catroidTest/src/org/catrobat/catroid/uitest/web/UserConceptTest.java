@@ -32,6 +32,7 @@ import android.widget.TextView;
 
 import com.robotium.solo.Solo;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.ui.MainMenuActivity;
@@ -155,6 +156,7 @@ public class UserConceptTest extends BaseActivityInstrumentationTestCase<MainMen
 		assertNotNull("Login Dialog is not shown.", solo.getText(solo.getString(R.string.login_register_dialog_title)));
 	}
 
+	@UnstableTest
 	public void testRegisterUsernameDifferentCases() throws Throwable {
 		setTestUrl();
 		clearSharedPreferences();

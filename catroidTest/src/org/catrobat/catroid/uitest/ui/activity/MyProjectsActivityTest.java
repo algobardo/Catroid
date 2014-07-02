@@ -38,6 +38,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.robotium.solo.Solo;
+
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
@@ -211,6 +213,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		);
 	}
 
+	@UnstableTest
 	public void testOverFlowMenuSettings() {
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
@@ -223,7 +226,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
      * CQA: This test case may fail sometimes du to a bad input state.
      * See "Catroid test observations" @ Google Drive.
      */
-    /**
+    /*
 	public void testDeleteSprite() {
 		try {
 			StandardProjectHandler.createAndSaveStandardProject(getActivity());
@@ -809,6 +812,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
      * from execution to execution, which is a huge problem since this test case deletes the first
      * of them, and checks that is no longer there.
      */
+    @UnstableTest
 	public void testItemClick() {
 		createProjects();
 		solo.sleep(2000);
@@ -829,6 +833,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		assertFalse("Project not deleted", solo.waitForText(UiTestUtils.DEFAULT_TEST_PROJECT_NAME, 0, 200));
 	}
 
+	@UnstableTest
 	public void testDeleteProjectViaActionBar() {
 		String delete = solo.getString(R.string.delete);
 		createProjects();
@@ -973,6 +978,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		assertTrue("Second project has been deleted!", solo.searchText(UiTestUtils.PROJECTNAME1));
 	}
 
+	@UnstableTest
 	public void testLongClickCancelDeleteAndCopy() {
 
 		String delete = solo.getString(R.string.delete);
@@ -994,6 +1000,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	}
 
+	@UnstableTest
 	public void testRenameProject() {
 		createProjects();
 		Reflection.setPrivateField(ProjectManager.class, ProjectManager.getInstance(), "asynchronTask", false);
@@ -1063,6 +1070,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 				.getCurrentProject().getName());
 	}
 
+	@UnstableTest
 	public void testRenameCurrentProjectViaActionBar() {
 		String rename = solo.getString(R.string.rename);
 		createProjects();
@@ -1373,6 +1381,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		assertTrue("Menu item still says \"Hide Details\"!", solo.searchText(showDetailsText));
 	}
 
+	@UnstableTest
 	public void testProjectDetailsLastAccess() {
 		String showDetailsText = solo.getString(R.string.show_details);
 
@@ -1419,6 +1428,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		assertTrue("Last access is not correct!", solo.searchText(mediumDateFormat.format(date)));
 	}
 
+	@UnstableTest
 	public void testAddNewProject() {
 		createProjects();
 		String buttonMyProjectsText = solo.getString(R.string.main_menu_programs);
@@ -1567,6 +1577,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 				.getDescription().equalsIgnoreCase(lorem));
 	}
 
+	@UnstableTest
 	public void testCopyCurrentProject() {
 		createProjects();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
@@ -1644,6 +1655,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		assertTrue("Did not copy the selected project", solo.searchText(UiTestUtils.COPIED_PROJECT_NAME, true));
 	}
 
+	@UnstableTest
 	public void testCopyProjectViaActionBar() {
 		String copy = solo.getString(R.string.copy);
 		createProjects();
@@ -1879,6 +1891,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		assertTrue("Long Projectname not found", solo.searchText(longProjectName));
 	}
 
+	@UnstableTest
 	public void testScreenshotUpdate() {
         assertTrue("Commented out due to crash", false);
         /*
@@ -1931,6 +1944,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		*/
 	}
 
+	@UnstableTest
 	public void testSelectAllActionModeButton() {
 		createProjectWithBackgrounds();
 

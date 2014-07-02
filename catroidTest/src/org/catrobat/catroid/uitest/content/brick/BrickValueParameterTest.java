@@ -28,6 +28,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.BrickValues;
@@ -72,6 +73,7 @@ public class BrickValueParameterTest extends BaseActivityInstrumentationTestCase
 		super.tearDown();
 	}
 
+	@UnstableTest
 	public void testMotionBricksDefaultValues() {
 		String categoryMotionText = solo.getString(R.string.category_motion);
 
@@ -183,6 +185,7 @@ public class BrickValueParameterTest extends BaseActivityInstrumentationTestCase
 		assertEquals("Value in Selected Brick GoBack is not correct", BrickValues.GO_BACK, goBackEditTextValue);
 	}
 
+	@UnstableTest
 	public void testLookBricksDefaultValues() {
 		String categoryLooksText = solo.getString(R.string.category_looks);
 
@@ -255,6 +258,7 @@ public class BrickValueParameterTest extends BaseActivityInstrumentationTestCase
 				(float) BrickValues.CHANGE_BRITHNESS_BY, changeBrightnessEditTextValue);
 	}
 
+	@UnstableTest
 	public void testSoundBricksDefaultValues() {
 		String categorySoundText = solo.getString(R.string.category_sound);
 
@@ -306,6 +310,7 @@ public class BrickValueParameterTest extends BaseActivityInstrumentationTestCase
 				changeVolumeByEditTextValue);
 	}
 
+	@UnstableTest
 	public void testControlBricksDefaultValues() {
 		String categoryControlText = solo.getString(R.string.category_control);
 
@@ -378,6 +383,7 @@ public class BrickValueParameterTest extends BaseActivityInstrumentationTestCase
 		assertEquals("Value in Selected Brick Repeat is not correct", BrickValues.REPEAT, repeatEditTextValue);
 	}
 
+	@UnstableTest
 	public void testLegoBricksDefaultValues() {
 		String categoryLegoNXTText = solo.getString(R.string.category_lego_nxt);
 

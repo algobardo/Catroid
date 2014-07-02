@@ -30,6 +30,7 @@ import android.test.UiThreadTest;
 import android.util.Log;
 import android.widget.EditText;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
@@ -100,6 +101,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		});
 	}
 
+	@UnstableTest
 	public void testUploadProjectSuccessAndTokenReplacementAfterUpload() throws Throwable {
 		setServerURLToTestUrl();
 		UiTestUtils.createTestProject(testProject);
@@ -340,6 +342,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 
 	}
 
+	@UnstableTest
 	public void testUploadModifiedStandardProject() throws Throwable {
 		createAndSaveStandardProject();
 

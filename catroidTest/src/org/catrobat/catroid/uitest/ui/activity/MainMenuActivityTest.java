@@ -35,6 +35,7 @@ import android.widget.ListView;
 
 import com.robotium.solo.Solo;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
@@ -190,6 +191,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		assertTrue("Project file with special characters two was not created!", file.exists());
 	}
 
+	@UnstableTest
 	public void testCreateNewProjectsJustSpecialChars() {
         assertTrue("Commented out due to crash", false);
         /*
@@ -286,6 +288,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		assertFalse("Play button is visible", solo.searchButton(solo.getString(R.id.button_play)));
 	}
 
+	@UnstableTest
 	public void testLoadProject() {
 		File directory = new File(Constants.DEFAULT_ROOT + "/" + testProject2);
 		UtilFile.deleteDirectory(directory);
@@ -462,6 +465,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 				ProjectManager.getInstance().getCurrentProject().getSpriteList().get(0).getNumberOfBricks());
 	}
 
+	@UnstableTest
 	public void testProjectNameVisible() {
 		createTestProject(testProject);
 		createTestProject(testProject2);
@@ -489,7 +493,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 
 	}
 
-
+	@UnstableTest
 	public void testProjectNameWithNormalAndSpecialCharsVisible() {
 		createTestProject(projectNameJustSpecialChars);
 		createTestProject(projectNameWithNormalAndSpecialChars2);

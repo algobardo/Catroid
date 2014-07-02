@@ -26,6 +26,7 @@ import android.media.MediaPlayer;
 
 import com.robotium.solo.Solo;
 
+import org.catrobat.catroid.uitest.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.SoundInfo;
@@ -82,6 +83,7 @@ public class PlaySoundBrickTest extends BaseActivityInstrumentationTestCase<Main
 		super.tearDown();
 	}
 
+	@UnstableTest
 	public void testSelectAndPlaySoundFile() {
 		solo.clickOnText(soundName);
 		solo.sleep(1000);
@@ -113,6 +115,7 @@ public class PlaySoundBrickTest extends BaseActivityInstrumentationTestCase<Main
 		assertEquals("wrong file playing", 4875, mediaPlayer.getDuration());
 	}
 
+	@UnstableTest
 	public void testSpinnerUpdatesDelete() {
 		String buttonDeleteText = solo.getString(R.string.delete);
 
@@ -135,6 +138,7 @@ public class PlaySoundBrickTest extends BaseActivityInstrumentationTestCase<Main
 		assertTrue(soundName2 + " is not in Spinner", solo.searchText(soundName2));
 	}
 
+	@UnstableTest
 	public void testSpinnerUpdatesRename() {
 		String newName = "nameRenamed";
 
@@ -158,6 +162,7 @@ public class PlaySoundBrickTest extends BaseActivityInstrumentationTestCase<Main
 		assertTrue(soundName2 + " is not in Spinner", solo.searchText(soundName2));
 	}
 
+	@UnstableTest
 	public void testAddNewSound() {
 		String newText = solo.getString(R.string.new_broadcast_message);
 		String recordedFilename = solo.getString(R.string.soundrecorder_recorded_filename);

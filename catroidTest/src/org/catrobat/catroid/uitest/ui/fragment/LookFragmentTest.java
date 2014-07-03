@@ -33,6 +33,7 @@ import android.widget.TextView;
 
 import com.robotium.solo.Solo;
 
+import android.test.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
@@ -980,6 +981,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 				solo.waitForText(SECOND_TEST_LOOK_NAME, 0, 200, false, false));
 	}
 
+	@UnstableTest
 	public void testDeleteSelectAll() {
 		UiTestUtils.openActionMode(solo, delete, R.id.delete, getActivity());
 		String selectAll = solo.getString(R.string.select_all).toUpperCase(Locale.getDefault());
@@ -1176,6 +1178,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 						&& solo.searchText(SECOND_TEST_LOOK_NAME + copiedLookAddition));
 	}
 
+	@UnstableTest
 	public void testCopySelectAll() {
 		int currentNumberOfLooks = lookDataList.size();
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.copy), R.id.copy, getActivity());

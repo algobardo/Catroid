@@ -25,7 +25,7 @@ package org.catrobat.catroid.uitest.ui.dialog;
 import android.app.Activity;
 import android.media.MediaPlayer;
 
-import org.catrobat.catroid.uitest.UnstableTest;
+import android.test.UnstableTest;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.ScreenModes;

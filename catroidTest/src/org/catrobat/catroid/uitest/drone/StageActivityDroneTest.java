@@ -71,6 +71,7 @@ public class StageActivityDroneTest extends BaseActivityInstrumentationTestCase<
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void testDroneProxyOnStage() {
 		DroneTestUtils.setDroneTermsOfUseAcceptedPermanently(getActivity());
 		waitForDroneServiceToStart();
@@ -92,7 +93,7 @@ public class StageActivityDroneTest extends BaseActivityInstrumentationTestCase<
 
 		waitForStageActivity();
 
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		assertNotNull("Drone service wrapper should be initialised", DroneServiceWrapper.getInstance()
 				.getDroneService());
 
@@ -102,7 +103,7 @@ public class StageActivityDroneTest extends BaseActivityInstrumentationTestCase<
 	private void waitForDroneServiceToStart() {
 		for (int i = 0; i < 10; i++) { //waiting for the service to start
 			Log.d(TAG, "Spinning=" + i);
-			solo.sleep(500);
+			// solo.sleep(500); // CQA
 			if (droneControlService != null) {
 				break;
 			}

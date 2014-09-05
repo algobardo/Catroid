@@ -22,6 +22,10 @@
  */
 package org.catrobat.catroid.uitest.ui.dialog;
 
+import android.test.Solo; // CQA
+import android.widget.WeakListAdapter; // CQA
+import android.widget.Updater; // CQA
+
 import android.widget.ListAdapter;
 
 import org.catrobat.catroid.ProjectManager;
@@ -92,9 +96,15 @@ public class DeleteDialogTest extends BaseActivityInstrumentationTestCase<MainMe
 		assertTrue("No ok button found", solo.searchButton(buttonOkText));
 		assertTrue("No cancel button found", solo.searchButton(buttonCancelText));
 
-		ScriptActivity activity = (ScriptActivity) solo.getCurrentActivity();
-		LookFragment fragment = (LookFragment) activity.getFragment(ScriptActivity.FRAGMENT_LOOKS);
-		ListAdapter adapter = fragment.getListAdapter();
+		// CQA:
+		WeakListAdapter adapter = new WeakListAdapter(new Updater<ListAdapter>() {
+			public ListAdapter update() {
+				ScriptActivity activity = (ScriptActivity) solo.getCurrentActivity();
+				LookFragment fragment = (LookFragment) activity.getFragment(ScriptActivity.FRAGMENT_LOOKS);
+				ListAdapter adapter = fragment.getListAdapter();
+				return adapter;
+			}
+		});
 
 		int oldCount = adapter.getCount();
 		solo.clickOnButton(buttonCancelText);
@@ -104,7 +114,7 @@ public class DeleteDialogTest extends BaseActivityInstrumentationTestCase<MainMe
 		clickOnContextMenuItem(lookName, deleteLookText);
 		solo.clickOnButton(buttonOkText);
 
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		newCount = adapter.getCount();
 		assertEquals("The look was not deleted", oldCount - 1, newCount);
 		assertEquals("The look was not deleted from lookDataList", newCount, lookDataList.size());
@@ -124,9 +134,16 @@ public class DeleteDialogTest extends BaseActivityInstrumentationTestCase<MainMe
 		assertTrue("No ok button found", solo.searchButton(buttonOkText));
 		assertTrue("No cancel button found", solo.searchButton(buttonCancelText));
 
-		ScriptActivity activity = (ScriptActivity) solo.getCurrentActivity();
-		SoundFragment fragment = (SoundFragment) activity.getFragment(ScriptActivity.FRAGMENT_SOUNDS);
-		ListAdapter adapter = fragment.getListAdapter();
+		// CQA:
+		WeakListAdapter adapter = new WeakListAdapter(new Updater<ListAdapter>() {
+			public ListAdapter update() {
+				ScriptActivity activity = (ScriptActivity) solo.getCurrentActivity();
+				SoundFragment fragment = (SoundFragment) activity.getFragment(ScriptActivity.FRAGMENT_SOUNDS);
+				ListAdapter adapter = fragment.getListAdapter();
+				return adapter;
+			}
+		});
+
 		int oldCount = adapter.getCount();
 		solo.clickOnButton(buttonCancelText);
 		int newCount = adapter.getCount();
@@ -136,7 +153,7 @@ public class DeleteDialogTest extends BaseActivityInstrumentationTestCase<MainMe
 		solo.clickOnText(deleteSoundText);
 		solo.clickOnButton(buttonOkText);
 
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		newCount = adapter.getCount();
 		assertEquals("The sound was not deleted", oldCount - 1, newCount);
 		assertEquals("The sound was not deleted from lookDataList", newCount, soundInfoList.size());

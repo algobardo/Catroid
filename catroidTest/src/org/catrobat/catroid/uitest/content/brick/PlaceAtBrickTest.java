@@ -88,7 +88,7 @@ public class PlaceAtBrickTest extends BaseActivityInstrumentationTestCase<Script
 
 		UiTestUtils.testBrickWithFormulaEditor(solo, R.id.brick_place_at_edit_text_x, xPosition, "xPosition",
 				placeAtBrick);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		UiTestUtils.testBrickWithFormulaEditor(solo, R.id.brick_place_at_edit_text_y, yPosition, "yPosition",
 				placeAtBrick);

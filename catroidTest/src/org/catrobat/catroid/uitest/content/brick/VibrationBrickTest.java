@@ -76,6 +76,7 @@ public class VibrationBrickTest extends BaseActivityInstrumentationTestCase<Scri
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void testVibrationBrick() {
 		SensorTestServerConnection.calibrateVibrationSensor();
 
@@ -92,47 +93,47 @@ public class VibrationBrickTest extends BaseActivityInstrumentationTestCase<Scri
 
 		Log.d(TAG, "checking vibration sensor value");
 		SensorTestServerConnection.checkVibrationSensorValue(SensorTestServerConnection.SET_VIBRATION_OFF_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 		SensorTestServerConnection.checkVibrationSensorValue(SensorTestServerConnection.SET_VIBRATION_OFF_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 
 		Log.d(TAG, "Vibration starts after pressing play");
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 		SensorTestServerConnection.checkVibrationSensorValue(SensorTestServerConnection.SET_VIBRATION_ON_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 
 		Log.d(TAG, "sleep four seconds. the phone should have stopped vibrating");
 
-		solo.sleep(4000);
+		// solo.sleep(4000); // CQA
 		Log.d(TAG, "checking vibration sensor value");
 		SensorTestServerConnection.checkVibrationSensorValue(SensorTestServerConnection.SET_VIBRATION_OFF_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 
 		Log.d(TAG, "tapping the screen should turn on the vibrator");
 		UiTestUtils.clickOnStageCoordinates(solo, 100, 200, 480, 800);
 
-		solo.sleep(4000);
+		// solo.sleep(4000); // CQA
 		SensorTestServerConnection.checkVibrationSensorValue(SensorTestServerConnection.SET_VIBRATION_ON_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 
 		Log.d(TAG, "pause StageActivity - this should turn off the vibrator");
 		solo.goBack();
 
 		Log.d(TAG, "checking vibration sensor value");
 		SensorTestServerConnection.checkVibrationSensorValue(SensorTestServerConnection.SET_VIBRATION_OFF_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 		SensorTestServerConnection.checkVibrationSensorValue(SensorTestServerConnection.SET_VIBRATION_OFF_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 
 		Log.d(TAG, "resume StageActivity - this should turn the vibrator on again");
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_resume));
 
-		solo.sleep(5000);
+		// solo.sleep(5000); // CQA
 		SensorTestServerConnection.checkVibrationSensorValue(SensorTestServerConnection.SET_VIBRATION_ON_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 
 		Log.d(TAG, "test finished");
 	}

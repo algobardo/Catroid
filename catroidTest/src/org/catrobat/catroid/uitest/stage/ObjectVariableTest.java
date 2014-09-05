@@ -92,6 +92,7 @@ public class ObjectVariableTest extends BaseActivityInstrumentationTestCase<Main
 		return new Formula(parseTree);
 	}
 
+	@android.test.UnstableTest
 	public void testLookSensorValueInStage() {
 
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
@@ -103,7 +104,7 @@ public class ObjectVariableTest extends BaseActivityInstrumentationTestCase<Main
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 
 		Formula lookXPositionFormula = getFormulaBySensor(Sensors.OBJECT_X);
 		assertEquals("Variable shows false x position", SPRITE_X_POSITION,
@@ -134,6 +135,7 @@ public class ObjectVariableTest extends BaseActivityInstrumentationTestCase<Main
 
 	}
 
+	@android.test.UnstableTest
 	public void testLookSensorValueBeforeAndAfterStage() {
 
 		Formula lookXPositionFormula = getFormulaBySensor(Sensors.OBJECT_X);
@@ -173,7 +175,7 @@ public class ObjectVariableTest extends BaseActivityInstrumentationTestCase<Main
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 
 		solo.goBack();
 		solo.goBack();

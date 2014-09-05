@@ -90,13 +90,14 @@ public class SetLookBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 		super.tearDown();
 	}
 
+	@android.test.UnstableTest
 	public void testSelectLookAndPlay() {
 		assertTrue(lookName + " is not selected in Spinner", solo.isSpinnerTextSelected(lookName));
 
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		Look look = ProjectManager.getInstance().getCurrentProject().getSpriteList().get(0).look;
 		assertEquals("look not set", look.getImagePath(), lookDataList.get(0).getAbsolutePath());
 		solo.goBack();
@@ -110,7 +111,7 @@ public class SetLookBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		look = ProjectManager.getInstance().getCurrentProject().getSpriteList().get(0).look;
 		assertEquals("look not set", look.getImagePath(), lookDataList.get(1).getAbsolutePath());
 	}
@@ -165,6 +166,7 @@ public class SetLookBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 
 	}
 
+	@android.test.UnstableTest
 	public void testAdapterUpdateInScriptActivity() {
 		String look1ImagePath = lookDataList.get(0).getAbsolutePath();
 		String look2ImagePath = lookDataList.get(1).getAbsolutePath();
@@ -184,6 +186,7 @@ public class SetLookBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void testAddNewLook() {
 		String newText = solo.getString(R.string.new_broadcast_message);
 
@@ -200,11 +203,11 @@ public class SetLookBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 		solo.clickOnText(newText);
 
 		ScriptActivity currentActivity = (ScriptActivity) solo.getCurrentActivity();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		LookFragment lookFragment = (LookFragment) currentActivity.getFragment(ScriptActivity.FRAGMENT_LOOKS);
 		lookFragment.startActivityForResult(intent, LookController.REQUEST_SELECT_OR_DRAW_IMAGE);
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 		solo.goBack();
 		assertTrue("Testfile not added from mockActivity", solo.searchText(testFile));
@@ -222,9 +225,9 @@ public class SetLookBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 		solo.clickOnText(oldName);
 		solo.clickOnText(newLook);
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
-		solo.sleep(5000);
+		// solo.sleep(5000); // CQA
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		String lookPath = ProjectManager.getInstance().getCurrentSprite().look.getImagePath();
 		assertEquals("Wrong image shown in stage --> Problem with Adapter update in Script", lookImagePath, lookPath);
 		solo.goBack();

@@ -103,6 +103,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		});
 	}
 
+	@android.test.UnstableTest
 	public void testUploadProjectSuccessAndTokenReplacementAfterUpload() throws Throwable {
 		setServerURLToTestUrl();
 		UiTestUtils.createTestProject(testProject);
@@ -122,12 +123,13 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		downloadProject(newTestProject, testProject);
 	}
 
+	@android.test.UnstableTest
 	public void testUploadProjectOldCatrobatLanguageVersion() throws Throwable {
 		setServerURLToTestUrl();
 
 		UiTestUtils.createTestProject(testProject);
 		solo.waitForFragmentById(R.id.fragment_sprites_list);
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		UiTestUtils.clickOnHomeActionBarButton(solo);
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
 
@@ -165,12 +167,13 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		UiTestUtils.clearAllUtilTestProjects();
 	}
 
+	@android.test.UnstableTest
 	public void testUploadProjectOffensiveLanguageUsed() throws Throwable {
 		setServerURLToTestUrl();
 
 		UiTestUtils.createTestProject(testProject);
 		solo.waitForFragmentById(R.id.fragment_sprites_list);
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		UiTestUtils.clickOnHomeActionBarButton(solo);
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
 
@@ -204,6 +207,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		UiTestUtils.clearAllUtilTestProjects();
 	}
 
+	@android.test.UnstableTest
 	public void testRenameProjectNameAndDescriptionWhenUploading() throws Throwable {
 		setServerURLToTestUrl();
 
@@ -218,7 +222,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		String projectNameSetWhenUploading = newTestProject;
 		String projectDescriptionSetWhenUploading = newTestDescription;
 		uploadProjectFromMainMenu(newTestProject, newTestDescription);
-		solo.sleep(5000);
+		// solo.sleep(5000); // CQA
 
 		Project uploadProject = StorageHandler.getInstance().loadProject(newTestProject);
 
@@ -243,6 +247,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 				serverProjectDescription.equalsIgnoreCase(projectDescriptionSetWhenUploading));
 	}
 
+	@android.test.UnstableTest
 	public void testRenameProjectDescriptionWhenUploading() throws Throwable {
 		setServerURLToTestUrl();
 
@@ -253,11 +258,12 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 
 		//Project description is changed to testdescription2 in uploadProject()
 		uploadProjectFromMainMenu(testProject, newTestDescription);
-		solo.sleep(5000);
+		// solo.sleep(5000); // CQA
 
 		checkProjectNameAndDescriptionBeforAndAfterDownload(testProject, newTestDescription);
 	}
 
+	@android.test.UnstableTest
 	public void testUploadingFromProgrammList() throws Throwable {
 		setServerURLToTestUrl();
 
@@ -267,11 +273,12 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		UiTestUtils.createValidUser(getActivity());
 
 		uploadProjectFromProgrammList(testProject, newTestDescription);
-		solo.sleep(5000);
+		// solo.sleep(5000); // CQA
 
 		checkProjectNameAndDescriptionBeforAndAfterDownload(testProject, newTestDescription);
 	}
 
+	@android.test.UnstableTest
 	public void testUploadFromProgramm() throws Throwable {
 		setServerURLToTestUrl();
 
@@ -281,11 +288,12 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		UiTestUtils.createValidUser(getActivity());
 
 		uploadProjectFromProgramm(testProject, newTestDescription);
-		solo.sleep(5000);
+		// solo.sleep(5000); // CQA
 
 		checkProjectNameAndDescriptionBeforAndAfterDownload(testProject, newTestDescription);
 	}
 
+	@android.test.UnstableTest
 	public void testUpAndDownloadJapaneseUnicodeProject() throws Throwable {
 		setServerURLToTestUrl();
 
@@ -313,6 +321,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		assertTrue("Project name on server was changed", serverProjectName.equalsIgnoreCase(testProject));
 	}
 
+	@android.test.UnstableTest
 	public void testDownload() throws Throwable {
 		setServerURLToTestUrl();
 
@@ -353,6 +362,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		assertTrue("Project was successfully downloaded", serverProjectName.equalsIgnoreCase(projectName));
 	}
 
+	@android.test.UnstableTest
 	public void testUploadStandardProject() throws Throwable {
 		deleteOldAndCreateAndSaveCleanStandardProject();
 
@@ -364,7 +374,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		String uploadButtonText = solo.getString(R.string.upload_button);
 		assertTrue("Upload button not found within 5 secs!", solo.waitForText(uploadButtonText, 0, 5000));
 
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		solo.clickOnButton(uploadButtonText);
 
 		assertTrue("When uploading a project with the standard project name,  the error message should be shown",
@@ -374,7 +384,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 
 		solo.clickOnButton(solo.getString(R.string.main_menu_upload));
 		solo.waitForText(uploadButtonText);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		solo.scrollToTop();
 
@@ -389,6 +399,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void testUploadModifiedStandardProject() throws Throwable {
 		deleteOldAndCreateAndSaveCleanStandardProject();
 
@@ -425,6 +436,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 				solo.waitForText(solo.getString(R.string.notification_upload_finished), 0, 10000));
 	}
 
+	@android.test.UnstableTest
 	public void testDownloadProjectAfterModification() throws Throwable {
 		setServerURLToTestUrl();
 
@@ -461,7 +473,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 
 		UiTestUtils.clearAllUtilTestProjects();
 
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		soundInfoList.remove(0);
 
@@ -573,7 +585,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		solo.enterText(projectUploadDescription, uploadProjectDescription);
 
 		solo.clickOnButton(solo.getString(R.string.upload_button));
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		boolean success = solo.waitForText(solo.getString(R.string.notification_upload_finished), 1, 50000);
 		assertTrue("Upload failed. Internet connection?", success);
@@ -606,7 +618,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		intent.setData(Uri.parse(downloadUrl));
 		launchActivityWithIntent(getInstrumentation().getTargetContext().getPackageName(), MainMenuActivity.class,
 				intent);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		assertTrue("OverwriteRenameDialog not shown.", solo.searchText(solo.getString(R.string.overwrite_text)));
 
 		if (newProjectName == null) {
@@ -616,10 +628,10 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 			assertTrue("No text field to enter new name.", solo.searchEditText(projectName));
 
 			solo.clickOnButton(solo.getString(R.string.ok));
-			solo.sleep(500);
+			// solo.sleep(500); // CQA
 			assertTrue("projectName not visible.", solo.searchText(projectName));
 
-			solo.sleep(500);
+			// solo.sleep(500); // CQA
 			solo.clearEditText(0);
 			solo.enterText(0, newProjectName);
 		}

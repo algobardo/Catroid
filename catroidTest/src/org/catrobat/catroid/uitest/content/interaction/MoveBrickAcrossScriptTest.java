@@ -59,6 +59,7 @@ public class MoveBrickAcrossScriptTest extends BaseActivityInstrumentationTestCa
 		UiTestUtils.getIntoScriptActivityFromMainMenu(solo);
 	}
 
+	@android.test.UnstableTest
 	public void testMoveBrickAcrossScript() {
 		ScriptActivity activity = (ScriptActivity) solo.getCurrentActivity();
 		ScriptFragment fragment = (ScriptFragment) activity.getFragment(ScriptActivity.FRAGMENT_SCRIPTS);

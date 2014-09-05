@@ -150,7 +150,7 @@ public class PointToBrickTest extends BaseActivityInstrumentationTestCase<Script
 		solo.clickOnButton(solo.getString(R.string.yes));
 
 		solo.clickOnText(spriteName2);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnText(solo.getString(R.string.scripts));
 
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_add);

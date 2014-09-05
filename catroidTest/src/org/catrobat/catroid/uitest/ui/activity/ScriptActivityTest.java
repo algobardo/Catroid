@@ -28,7 +28,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 
-import com.jayway.android.robotium.solo.Solo;
+import android.test.Solo; // CQA, instead of robotium
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -71,7 +71,7 @@ public class ScriptActivityTest extends BaseActivityInstrumentationTestCase<Main
 		// Note that the activity is _indeed_ rotated on your device/emulator!
 		// Robotium can _force_ the activity to be in landscape mode (and so could we, programmatically)
 		solo.setActivityOrientation(Solo.LANDSCAPE);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		assertEquals(ScriptActivity.class.getSimpleName() + " not set to be in portrait mode in AndroidManifest.xml!",
 				ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, activityInfo.screenOrientation);
@@ -93,6 +93,7 @@ public class ScriptActivityTest extends BaseActivityInstrumentationTestCase<Main
 		checkMainMenuButton();
 	}
 
+	@android.test.UnstableTest
 	public void testPlayProgramButton() {
 		UiTestUtils.waitForFragment(solo, R.id.fragment_script);
 
@@ -151,7 +152,7 @@ public class ScriptActivityTest extends BaseActivityInstrumentationTestCase<Main
 		if (solo.searchText(solo.getString(R.string.formula_editor_discard_changes_dialog_title))) {
 			solo.clickOnText(solo.getString(R.string.no));
 		}
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("Sprite name not found", solo.waitForText("cat"));
 	}
 

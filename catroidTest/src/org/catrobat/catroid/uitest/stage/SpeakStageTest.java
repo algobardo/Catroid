@@ -111,10 +111,11 @@ public class SpeakStageTest extends BaseActivityInstrumentationTestCase<ProjectA
 		}
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class);
-		solo.sleep(1500);
+		// solo.sleep(1500); // CQA
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void testNormalBehaviour() {
 		createNormalBehaviourProject();
 		prepareStageForTesting(UiTestUtils.PROJECTNAME1);
@@ -128,7 +129,7 @@ public class SpeakStageTest extends BaseActivityInstrumentationTestCase<ProjectA
 		assertTrue("Wrong soundfile played",
 				soundManagerMock.playedSoundFiles.contains(speechFileTestText.getAbsolutePath()));
 
-		solo.sleep(1200);
+		// solo.sleep(1200); // CQA
 
 		assertTrue("speechFileHelloWorlText does not exist", speechFileHelloWorlText.exists());
 		assertEquals("Length of speechFileHelloWorlText is different from original", byteLengthOfHelloWorldText,
@@ -154,10 +155,11 @@ public class SpeakStageTest extends BaseActivityInstrumentationTestCase<ProjectA
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void testMultiSpeech() {
 		createMultiSpeechesProject();
 		prepareStageForTesting(UiTestUtils.PROJECTNAME3);
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 
 		assertTrue("speechFileLongText does not exist", speechFileLongText.exists());
 		assertTrue("speechFileSimultaneousText does not exist", speechFileSimultaneousText.exists());
@@ -175,10 +177,11 @@ public class SpeakStageTest extends BaseActivityInstrumentationTestCase<ProjectA
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void testDeleteSpeechFiles() {
 		createMultiSpeechesProject();
 		prepareStageForTesting(UiTestUtils.PROJECTNAME3);
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 
 		assertTrue("speechFileLongText does not exist", speechFileLongText.exists());
 		assertTrue("speechFileSimultaneousText does not exist", speechFileSimultaneousText.exists());

@@ -160,7 +160,7 @@ public class ScriptFragmentTest extends BaseActivityInstrumentationTestCase<Main
 
 		UiTestUtils.addNewBrick(solo, R.string.brick_wait);
 		solo.clickOnText(solo.getString(R.string.brick_when_started));
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.copy), R.id.copy, getActivity());
 		solo.clickOnCheckBox(1);
@@ -185,14 +185,14 @@ public class ScriptFragmentTest extends BaseActivityInstrumentationTestCase<Main
 				.getNumberOfBricks();
 
 		solo.clickOnText(solo.getString(R.string.brick_hide));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnText(solo.getString(R.string.brick_context_dialog_copy_brick));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		ArrayList<Integer> yPosition = UiTestUtils.getListItemYPositions(solo, 0);
 		int addedYPosition = UiTestUtils.getAddedListItemYPosition(solo);
 		solo.drag(20, 20, addedYPosition, yPosition.get(yPosition.size() - 1) + 20, 20);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		assertEquals("Brick was not copied", numberOfBricks + 1, ProjectManager.getInstance().getCurrentProject()
 				.getSpriteList().get(0).getNumberOfBricks());
@@ -210,7 +210,7 @@ public class ScriptFragmentTest extends BaseActivityInstrumentationTestCase<Main
 
 		UiTestUtils.addNewBrick(solo, R.string.brick_wait);
 		UiTestUtils.dragFloatingBrickDownwards(solo, 0);
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.copy), R.id.copy, getActivity());
 		solo.clickOnCheckBox(1);
@@ -239,7 +239,7 @@ public class ScriptFragmentTest extends BaseActivityInstrumentationTestCase<Main
 
 		UiTestUtils.addNewBrick(solo, R.string.brick_wait);
 		solo.clickOnText(solo.getString(R.string.brick_when_started));
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 
 		assertTrue("Wait brick is not in List", solo.searchText(solo.getString(R.string.brick_wait)));
 
@@ -336,7 +336,7 @@ public class ScriptFragmentTest extends BaseActivityInstrumentationTestCase<Main
 		List<Integer> yPositionList = UiTestUtils.getListItemYPositions(solo, 0);
 		UiTestUtils.addNewBrick(solo, R.string.brick_broadcast_receive);
 		solo.clickOnScreen(20, yPositionList.get(0) + 20);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		assertEquals("Two control bricks should be added.", 2, sprite.getNumberOfScripts());
 		assertTrue("First script isn't a start script.", sprite.getScript(0) instanceof StartScript);
@@ -356,6 +356,7 @@ public class ScriptFragmentTest extends BaseActivityInstrumentationTestCase<Main
 		assertFalse("Copy Button visible!", UiTestUtils.menuButtonVisible(solo, R.id.copy));
 	}
 
+	@android.test.UnstableTest
 	public void testSimpleDragNDrop() {
 		List<Brick> brickListToCheck = UiTestUtils.createTestProject();
 		UiTestUtils.getIntoScriptActivityFromMainMenu(solo);
@@ -497,6 +498,7 @@ public class ScriptFragmentTest extends BaseActivityInstrumentationTestCase<Main
 		assertEquals("Not all Bricks have been deleted!", 0, numberOfBricks);
 	}
 
+	@android.test.UnstableTest
 	public void testDeleteActionModeTwoScripts() {
 		UiTestUtils.createTestProjectForActionModeDelete();
 		UiTestUtils.getIntoScriptActivityFromMainMenu(solo);
@@ -540,7 +542,7 @@ public class ScriptFragmentTest extends BaseActivityInstrumentationTestCase<Main
 		solo.clickOnCheckBox(4);
 		assertEquals("Fourth checkbox should be checked", true, solo.getCurrentViews(CheckBox.class).get(4).isChecked());
 
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		solo.clickOnCheckBox(1);
 		expectedTitle = getActivity().getResources().getQuantityString(R.plurals.number_of_bricks_to_delete, 5, 5);
 		assertTrue("Title not as expected", solo.waitForText(expectedTitle, 0, 300, false, true));
@@ -592,13 +594,13 @@ public class ScriptFragmentTest extends BaseActivityInstrumentationTestCase<Main
 				4);
 		assertTrue("Title not as expected", solo.waitForText(expectedTitle, 0, 300, false, true));
 
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		solo.clickOnCheckBox(5);
 		solo.clickOnCheckBox(2);
 		expectedTitle = getActivity().getResources().getQuantityString(R.plurals.number_of_bricks_to_delete, 0, 0);
 		assertTrue("Title not as expected", solo.waitForText(expectedTitle, 0, 300, false, true));
 
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		solo.clickOnCheckBox(3);
 		expectedTitle = getActivity().getResources().getQuantityString(R.plurals.number_of_bricks_to_delete, 3, 3);
 		assertTrue("Title not as expected", solo.waitForText(expectedTitle, 0, 300, false, true));
@@ -633,7 +635,7 @@ public class ScriptFragmentTest extends BaseActivityInstrumentationTestCase<Main
 		solo.waitForText(solo.getString(R.string.no));
 		solo.clickOnButton(solo.getString(R.string.no));
 
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		ArrayList<Brick> brickList = ProjectManager.getInstance().getCurrentScript().getBrickList();
 
 		solo.clickOnText(solo.getString(R.string.brick_show));
@@ -780,7 +782,7 @@ public class ScriptFragmentTest extends BaseActivityInstrumentationTestCase<Main
 
 		assertFalse("Lego brick category is showing!", solo.searchText(categoryLegoNXTLabel));
 
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		solo.goBack();
 		String currentSprite = ProjectManager.getInstance().getCurrentSprite().getName();
 		assertEquals("Current sprite name is not shown as actionbar title or is wrong", "cat", currentSprite);
@@ -794,7 +796,7 @@ public class ScriptFragmentTest extends BaseActivityInstrumentationTestCase<Main
 		solo.clickOnText(mindstormsPreferenceString);
 		solo.goBack();
 
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		ListView fragmentListView = solo.getCurrentViews(ListView.class).get(
 				solo.getCurrentViews(ListView.class).size() - 1);
 		solo.scrollListToBottom(fragmentListView);

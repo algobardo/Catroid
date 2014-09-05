@@ -89,7 +89,7 @@ public class MainMenuSteps extends AndroidTestCase {
 		Solo solo = (Solo) Cucumber.get(Cucumber.KEY_SOLO);
 		solo.waitForActivity(activityClass.getSimpleName(), 3000);
 		assertEquals("I did not switch to the expected view.", activityClass, solo.getCurrentActivity().getClass());
-		solo.sleep(2000); // give activity time to completely load
+		// solo.sleep(2000); // CQA // give activity time to completely load
 		solo.getCurrentActivity().finish();
 	}
 }

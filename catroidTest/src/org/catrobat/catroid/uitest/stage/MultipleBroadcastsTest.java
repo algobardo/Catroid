@@ -60,9 +60,10 @@ public class MultipleBroadcastsTest extends BaseActivityInstrumentationTestCase<
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 	}
 
+	@android.test.UnstableTest
 	public void testSendMultipleBroadcastsWhenProjectStart() {
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		assertEquals("Sprite1 is at the false x position", sprite1PosX,
 				(int) sprite1.look.getXInUserInterfaceDimensionUnit());
 		assertEquals("Sprite2 is at the false x position", sprite2PosX,

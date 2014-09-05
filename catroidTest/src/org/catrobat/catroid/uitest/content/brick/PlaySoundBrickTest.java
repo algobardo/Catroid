@@ -24,7 +24,7 @@ package org.catrobat.catroid.uitest.content.brick;
 
 import android.media.MediaPlayer;
 
-import com.jayway.android.robotium.solo.Solo;
+import android.test.Solo; // CQA, instead of robotium
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -82,16 +82,17 @@ public class PlaySoundBrickTest extends BaseActivityInstrumentationTestCase<Main
 		super.tearDown();
 	}
 
+	@android.test.UnstableTest
 	public void testSelectAndPlaySoundFile() {
 		solo.clickOnText(soundName);
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		assertTrue(soundName + " is not in Spinner", solo.searchText(soundName));
 		assertTrue(soundName2 + " is not in Spinner", solo.searchText(soundName2));
 		solo.clickOnText(soundName);
 		assertTrue(soundName + " is not selected in Spinner", solo.searchText(soundName));
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 
 		MediaPlayer mediaPlayer = getMediaPlayers().get(0);
 		assertTrue("mediaPlayer is not playing", mediaPlayer.isPlaying());
@@ -106,13 +107,14 @@ public class PlaySoundBrickTest extends BaseActivityInstrumentationTestCase<Main
 		assertTrue(soundName2 + " is not selected in Spinner", solo.searchText(soundName2));
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 
 		mediaPlayer = getMediaPlayers().get(0);
 		assertTrue("mediaPlayer is not playing", mediaPlayer.isPlaying());
 		assertEquals("wrong file playing", 4875, mediaPlayer.getDuration());
 	}
 
+	@android.test.UnstableTest
 	public void testSpinnerUpdatesDelete() {
 		String buttonDeleteText = solo.getString(R.string.delete);
 
@@ -135,6 +137,7 @@ public class PlaySoundBrickTest extends BaseActivityInstrumentationTestCase<Main
 		assertTrue(soundName2 + " is not in Spinner", solo.searchText(soundName2));
 	}
 
+	@android.test.UnstableTest
 	public void testSpinnerUpdatesRename() {
 		String newName = "nameRenamed";
 
@@ -143,21 +146,22 @@ public class PlaySoundBrickTest extends BaseActivityInstrumentationTestCase<Main
 		assertTrue(soundName2 + " is not in Spinner", solo.searchText(soundName2));
 		solo.goBack();
 		UiTestUtils.switchToFragmentInScriptActivity(solo, UiTestUtils.SOUNDS_INDEX);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickLongOnText(soundName);
 		solo.clickOnText(solo.getString(R.string.rename));
 		solo.clearEditText(0);
 		solo.enterText(0, newName);
 		solo.sendKey(Solo.ENTER);
 		solo.waitForDialogToClose(500);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		UiTestUtils.switchToFragmentInScriptActivity(solo, UiTestUtils.SCRIPTS_INDEX);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnText(newName);
 		assertTrue(newName + " is not in Spinner", solo.searchText(newName));
 		assertTrue(soundName2 + " is not in Spinner", solo.searchText(soundName2));
 	}
 
+	@android.test.UnstableTest
 	public void testAddNewSound() {
 		String newText = solo.getString(R.string.new_broadcast_message);
 		String recordedFilename = solo.getString(R.string.soundrecorder_recorded_filename);
@@ -174,7 +178,7 @@ public class PlaySoundBrickTest extends BaseActivityInstrumentationTestCase<Main
 
 		solo.waitForActivity(SoundRecorderActivity.class.getSimpleName());
 		solo.clickOnImageButton(0);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		solo.clickOnImageButton(0);
 
 		solo.waitForText(recordedFilename);

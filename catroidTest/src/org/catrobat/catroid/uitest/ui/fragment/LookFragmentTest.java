@@ -31,7 +31,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.jayway.android.robotium.solo.Solo;
+import android.test.Solo; // CQA, instead of robotium
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -151,7 +151,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 		if (getLookAdapter().getShowDetails()) {
 			solo.clickOnMenuItem(solo.getString(R.string.hide_details), true);
-			solo.sleep(TIME_TO_WAIT);
+			// solo.sleep(TIME_TO_WAIT); // CQA
 		}
 	}
 
@@ -186,7 +186,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		solo.goBack();
 		solo.clickInList(2);
 		solo.clickOnText(solo.getString(R.string.look));
-		solo.sleep(400);
+		// solo.sleep(400); // CQA
 
 		emptyViewHeading = (TextView) solo.getCurrentActivity().findViewById(R.id.fragment_look_text_heading);
 		emptyViewDescription = (TextView) solo.getCurrentActivity().findViewById(R.id.fragment_look_text_description);
@@ -222,7 +222,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		int oldCount = adapter.getCount();
 
 		clickOnContextMenuItem(testLookName, copy);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		int newCount = adapter.getCount();
 
@@ -252,7 +252,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		clickOnContextMenuItem(testLookName, solo.getString(R.string.delete));
 		solo.waitForText(deleteDialogTitle);
 		solo.clickOnButton(solo.getString(R.string.yes));
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 
 		int newCount = adapter.getCount();
 
@@ -269,7 +269,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		String newLookName = "loOKNamEtESt1";
 
 		renameLook(FIRST_TEST_LOOK_NAME, newLookName);
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 
 		assertEquals("Look not renamed in LookDataList", newLookName, getLookName(0));
 		assertTrue("Look not renamed in actual view", solo.searchText(newLookName));
@@ -278,10 +278,10 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 	public void testShowAndHideDetails() {
 		int timeToWait = 300;
 
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		checkVisibilityOfViews(VISIBLE, VISIBLE, GONE, GONE);
 		solo.clickOnMenuItem(solo.getString(R.string.show_details));
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		checkVisibilityOfViews(VISIBLE, VISIBLE, VISIBLE, GONE);
 
 		// Test if showDetails is remembered after pressing back
@@ -289,11 +289,11 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		solo.waitForActivity(ProgramMenuActivity.class.getSimpleName());
 		solo.clickOnText(solo.getString(R.string.backgrounds));
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		checkVisibilityOfViews(VISIBLE, VISIBLE, VISIBLE, GONE);
 
 		solo.clickOnMenuItem(solo.getString(R.string.hide_details));
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		checkVisibilityOfViews(VISIBLE, VISIBLE, GONE, GONE);
 	}
 
@@ -306,7 +306,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 		getLookFragment().startActivityForResult(intent, LookController.REQUEST_SELECT_OR_DRAW_IMAGE);
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 		assertTrue("Testfile not added from mockActivity", solo.searchText("testFile"));
 
@@ -337,7 +337,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 		getLookFragment().startActivityForResult(intent, LookController.REQUEST_SELECT_OR_DRAW_IMAGE);
 
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		solo.waitForActivity(ScriptActivity.class.getSimpleName(), 2000);
 		solo.assertCurrentActivity("Should be in ScriptActivity", ScriptActivity.class.getSimpleName());
 
@@ -356,7 +356,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		intent.putExtras(bundleForPaintroid);
 
 		getLookFragment().startActivityForResult(intent, LookController.REQUEST_SELECT_OR_DRAW_IMAGE);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 
 		assertTrue("Testfile not added from mockActivity", solo.searchText("testFile"));
@@ -384,7 +384,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		intent.putExtras(bundleForPaintroid);
 
 		getLookFragment().startActivityForResult(intent, LookController.REQUEST_SELECT_OR_DRAW_IMAGE);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 
 		lookDataList = projectManager.getCurrentSprite().getLookDataList();
@@ -417,6 +417,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 				solo.searchText("Edit in Pocket Paint"));
 	}
 
+	@android.test.UnstableTest
 	public void testEditImageWithPaintroid() {
 		LookData lookData = lookDataList.get(0);
 		getLookFragment().setSelectedLookData(lookData);
@@ -433,7 +434,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 		getLookFragment().startActivityForResult(intent, LookController.REQUEST_POCKET_PAINT_EDIT_IMAGE);
 
-		solo.sleep(5000);
+		// solo.sleep(5000); // CQA
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 
 		lookDataList = projectManager.getCurrentSprite().getLookDataList();
@@ -456,21 +457,23 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		assertFalse("File not deleted from LookDataList", isInLookDataListSunnglasses);
 	}
 
+	@android.test.UnstableTest
 	public void testEditCopiedImageInPaontroid() {
 
 		Intent intent = new Intent(getInstrumentation().getContext(),
 				org.catrobat.catroid.uitest.mockups.MockPaintroidActivity.class);
 		getLookFragment().sendPocketPaintIntent(0, intent);
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertNotNull("there must be an Intent", getLookFragment().lastRecivedIntent);
 		Bundle bundle = getLookFragment().lastRecivedIntent.getExtras();
 		String pathOfPocketPaintImage = bundle.getString(Constants.EXTRA_PICTURE_PATH_POCKET_PAINT);
 		assertEquals("Image must by a temp copy", Constants.TMP_IMAGE_PATH, pathOfPocketPaintImage);
 	}
 
+	@android.test.UnstableTest
 	public void testPaintroidImagefileExtension() {
 		String lookDataModifiedHash = lookData3.getLookFileName();
 		lookDataModifiedHash = "THIS_IS_A_MODIFIED_HASH_AND_HERE_ARE_SOME_DUMMIE_CHARS";
@@ -486,7 +489,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 		getLookFragment().startActivityForResult(intent, LookController.REQUEST_POCKET_PAINT_EDIT_IMAGE);
 
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 
 		assertTrue("Copied file does not have correct fileextension", lookData3.getLookFileName().endsWith(".png"));
@@ -507,7 +510,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 		getLookFragment().startActivityForResult(intent, LookController.REQUEST_POCKET_PAINT_EDIT_IMAGE);
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 
 		lookDataList = projectManager.getCurrentSprite().getLookDataList();
@@ -537,7 +540,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 		getLookFragment().startActivityForResult(intent, LookController.REQUEST_POCKET_PAINT_EDIT_IMAGE);
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 
 		lookDataList = projectManager.getCurrentSprite().getLookDataList();
@@ -552,6 +555,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 				projectManager.getFileChecksumContainer().getUsage(md5ChecksumImageFile));
 	}
 
+	@android.test.UnstableTest
 	public void testEditImageWithPaintroidToSomethingAlreadyUsed() throws IOException {
 		int oldNumberOfLookDatas = lookDataList.size();
 
@@ -570,7 +574,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		intent.putExtras(bundleForPaintroid);
 
 		getLookFragment().startActivityForResult(intent, LookController.REQUEST_POCKET_PAINT_EDIT_IMAGE);
-		solo.sleep(4000);
+		// solo.sleep(4000); // CQA
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 
 		lookDataList = projectManager.getCurrentSprite().getLookDataList();
@@ -588,6 +592,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 				projectManager.getFileChecksumContainer().getUsage(md5ChecksumPaintroidImageFile));
 	}
 
+	@android.test.UnstableTest
 	public void testEditImageWhichIsAlreadyUsed() {
 		File tempImageFile = UiTestUtils.saveFileToProject(UiTestUtils.DEFAULT_TEST_PROJECT_NAME,
 				"catroid_sunglasses2.png", RESOURCE_IMAGE, getActivity(), UiTestUtils.FileTypes.IMAGE);
@@ -600,7 +605,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		projectManager.getFileChecksumContainer().addChecksum(lookDataToAdd.getChecksum(),
 				lookDataToAdd.getAbsolutePath());
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		LookData lookData = lookDataList.get(0);
 		getLookFragment().setSelectedLookData(lookData);
@@ -615,7 +620,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		intent.putExtras(bundleForPaintroid);
 
 		getLookFragment().startActivityForResult(intent, LookController.REQUEST_POCKET_PAINT_EDIT_IMAGE);
-		solo.sleep(4000);
+		// solo.sleep(4000); // CQA
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 
 		assertEquals("Wrong number of lookDatas", 3, lookDataList.size());
@@ -624,6 +629,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 				.getFileChecksumContainer().getUsage(md5ChecksumImageFile));
 	}
 
+	@android.test.UnstableTest
 	public void testEqualLookNames() {
 		final String assertMessageText = "Look not renamed correctly";
 
@@ -677,7 +683,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		getLookFragment().startActivityForResult(intent, LookController.REQUEST_SELECT_OR_DRAW_IMAGE);
 
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
-		solo.sleep(5000);
+		// solo.sleep(5000); // CQA
 
 		expectedLookName = defaultLookName + "3";
 		assertEquals(assertMessageText, expectedLookName, getLookName(4));
@@ -704,7 +710,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		getLookFragment().startActivityForResult(intent, LookController.REQUEST_SELECT_OR_DRAW_IMAGE);
 
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
-		solo.sleep(5000);
+		// solo.sleep(5000); // CQA
 
 		expectedLookName = defaultLookName + "4";
 		assertEquals(assertMessageText, expectedLookName, getLookName(5));
@@ -712,10 +718,11 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 				projectManager.getFileChecksumContainer().containsChecksum(md5ChecksumImageFile));
 	}
 
+	@android.test.UnstableTest
 	public void testBottomBarAndContextMenuOnActionModes() {
 		if (!getLookAdapter().getShowDetails()) {
 			solo.clickOnMenuItem(solo.getString(R.string.show_details), true);
-			solo.sleep(TIME_TO_WAIT);
+			// solo.sleep(TIME_TO_WAIT); // CQA
 		}
 
 		LinearLayout bottomBarLayout = (LinearLayout) solo.getView(R.id.bottom_bar);
@@ -747,7 +754,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 				solo.waitForActivity(StageActivity.class.getSimpleName(), timeToWait));
 
 		solo.goBack();
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		checkIfContextMenuAppears(true, ACTION_MODE_RENAME);
 
@@ -770,7 +777,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 				solo.waitForActivity(StageActivity.class.getSimpleName(), timeToWait));
 
 		solo.goBack();
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		checkIfContextMenuAppears(true, ACTION_MODE_DELETE);
 
@@ -793,7 +800,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 				solo.waitForActivity(StageActivity.class.getSimpleName(), timeToWait));
 
 		solo.goBack();
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		checkIfContextMenuAppears(true, ACTION_MODE_COPY);
 
@@ -870,7 +877,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 		// If an already existing name was entered a counter should be appended
 		String expectedNewLookName = newLookName + "1";
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		lookDataList = projectManager.getCurrentSprite().getLookDataList();
 		assertEquals("Look is not correctly renamed in lookDataList (1 should be appended)", expectedNewLookName,
 				lookDataList.get(checkboxIndex).getLookName());
@@ -1029,9 +1036,9 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		UiTestUtils.acceptAndCloseActionMode(solo);
 		assertFalse("ActionMode didn't disappear", solo.waitForText(copy, 0, TIME_TO_WAIT));
 
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		clickOnContextMenuItem(FIRST_TEST_LOOK_NAME, copy);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		lookDataList = projectManager.getCurrentSprite().getLookDataList();
 
@@ -1077,7 +1084,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		UiTestUtils.acceptAndCloseActionMode(solo);
 		solo.clickOnButton(solo.getString(R.string.no));
 
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		int viewAmountAfterDeleteMode = solo.getCurrentViews().size();
 
@@ -1177,7 +1184,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		int expectedNumberOfLooks = currentNumberOfLooks + 2;
 
 		String copiedLookAddition = "_" + solo.getString(R.string.copy_addition);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		UiTestUtils.openActionMode(solo, copy, R.id.copy, getActivity());
 
@@ -1190,7 +1197,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		UiTestUtils.acceptAndCloseActionMode(solo);
 		assertFalse("ActionMode didn't disappear", solo.waitForText(copy, 0, TIME_TO_WAIT));
 
-		solo.sleep(TIME_TO_WAIT);
+		// solo.sleep(TIME_TO_WAIT); // CQA
 
 		checkIfNumberOfLooksIsEqual(expectedNumberOfLooks);
 
@@ -1221,7 +1228,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 	public void testResolutionWhenCroppedWithPaintroid() {
 		solo.clickOnMenuItem(solo.getString(R.string.show_details));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		checkVisibilityOfViews(VISIBLE, VISIBLE, VISIBLE, GONE);
 
 		LookData lookData = lookDataList.get(0);
@@ -1233,7 +1240,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 		int sampleSize = 2;
 
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		try {
 			UiTestUtils.cropImage(pathToImageFile, sampleSize);
 		} catch (FileNotFoundException e) {
@@ -1428,7 +1435,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 	private void checkIfCheckboxesAreCorrectlyChecked(boolean firstCheckboxExpectedChecked,
 			boolean secondCheckboxExpectedChecked) {
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		firstCheckBox = solo.getCurrentViews(CheckBox.class).get(0);
 		secondCheckBox = solo.getCurrentViews(CheckBox.class).get(1);
 		assertEquals("First checkbox not correctly checked", firstCheckboxExpectedChecked, firstCheckBox.isChecked());

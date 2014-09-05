@@ -59,12 +59,13 @@ public class TouchAxisTest extends BaseActivityInstrumentationTestCase<MainMenuA
 
 	// This prevents regression of https://github.com/Catrobat/Catroid/issues/3
 
+	@android.test.UnstableTest
 	public void testYAxis() {
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 
 		solo.clickOnScreen(ScreenValues.SCREEN_WIDTH / 2, 100);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		byte[] blackPixel = { (byte) 0, (byte) 0, (byte) 0, (byte) 255 };
 		byte[] screenPixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH / 2, 100, 1, 1);

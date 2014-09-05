@@ -54,7 +54,7 @@ public class AboutDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 
 		Button aboutDialogButton = (Button) solo.getView(android.R.id.button3);
 		solo.clickOnButton(solo.getString(R.string.ok));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		ArrayList<View> currentViews = solo.getCurrentViews();
 		assertFalse("Not returned to MainMenuActivity", currentViews.contains(aboutDialogButton));

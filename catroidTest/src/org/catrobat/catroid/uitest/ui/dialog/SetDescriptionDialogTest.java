@@ -58,14 +58,14 @@ public class SetDescriptionDialogTest extends BaseActivityInstrumentationTestCas
 		Project uploadProject = new Project(getActivity(), testProject);
 		storageHandler.saveProject(uploadProject);
 
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
 		solo.clickLongOnText(testProject);
 		solo.clickOnText(solo.getString(R.string.set_description));
 		EditText description = (EditText) solo.getView(R.id.dialog_text_EditMultiLineText);
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		int descriptionInputType = description.getInputType();
 		int typeToCheck = android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE | android.text.InputType.TYPE_CLASS_TEXT
 				| android.text.InputType.TYPE_TEXT_VARIATION_NORMAL;

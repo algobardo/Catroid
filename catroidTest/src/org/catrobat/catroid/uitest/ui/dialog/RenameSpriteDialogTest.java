@@ -25,7 +25,7 @@ package org.catrobat.catroid.uitest.ui.dialog;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.widget.ListView;
 
-import com.jayway.android.robotium.solo.Solo;
+import android.test.Solo; // CQA, instead of robotium
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -60,18 +60,18 @@ public class RenameSpriteDialogTest extends BaseActivityInstrumentationTestCase<
 
 	public void testRenameSpriteDialog() throws NameNotFoundException, IOException {
 		createTestProject(testProject);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		assertTrue("Cannot click on project.", UiTestUtils.clickOnTextInList(solo, testProject));
 		solo.clickLongOnText(cat);
 
 		solo.clickOnText(solo.getString(R.string.rename));
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 		solo.clearEditText(0);
 		UiTestUtils.enterText(solo, 0, kat);
 		solo.sendKey(Solo.ENTER);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		ListView spritesList = (ListView) solo.getCurrentActivity().findViewById(android.R.id.list);
 		String first = ((Sprite) spritesList.getItemAtPosition(1)).getName();
@@ -83,11 +83,11 @@ public class RenameSpriteDialogTest extends BaseActivityInstrumentationTestCase<
 		createTestProject(testProject);
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		assertTrue("Cannot click on project.", UiTestUtils.clickOnTextInList(solo, testProject));
 		solo.clickLongOnText(cat);
 
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		solo.clickOnText(solo.getString(R.string.rename));
 		solo.clearEditText(0);
 		UiTestUtils.enterText(solo, 0, catMixedCase);

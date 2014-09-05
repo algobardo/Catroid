@@ -72,6 +72,7 @@ public class BroadcastBricksTest extends BaseActivityInstrumentationTestCase<Mai
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void testBroadcastBricks() {
 		checkSetupBricks();
 
@@ -99,7 +100,7 @@ public class BroadcastBricksTest extends BaseActivityInstrumentationTestCase<Mai
 		solo.waitForText(solo.getString(R.string.yes));
 		solo.clickOnButton(solo.getString(R.string.yes));
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		UiTestUtils.addNewBrick(solo, R.string.category_control, R.string.brick_broadcast);
 		//dont need to place it because there are 0 bricks, places automatically.
@@ -123,7 +124,7 @@ public class BroadcastBricksTest extends BaseActivityInstrumentationTestCase<Mai
 		enterNewTextIntoSpinner(broadcastReceiverSpinnerId, broadcastMessage);
 		pressSpinnerItem(broadcastSpinnerId, broadcastMessage);
 		pressSpinnerItem(broadcastWaitSpinnerId, broadcastMessage);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		UiTestUtils.clickOnHomeActionBarButton(solo);
 		UiTestUtils.getIntoScriptActivityFromMainMenu(solo);

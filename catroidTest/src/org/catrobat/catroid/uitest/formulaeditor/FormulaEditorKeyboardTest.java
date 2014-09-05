@@ -83,6 +83,7 @@ public class FormulaEditorKeyboardTest extends BaseActivityInstrumentationTestCa
 		ProjectManager.getInstance().setCurrentSprite(firstSprite);
 	}
 
+	@android.test.UnstableTest
 	public void testNormalKeysKeyboard() {
 
 		solo.clickOnView(solo.getView(CHANGE_SIZE_EDIT_TEXT_RID));
@@ -197,6 +198,7 @@ public class FormulaEditorKeyboardTest extends BaseActivityInstrumentationTestCa
 		}
 	}
 
+	@android.test.UnstableTest
 	public void testObjectFragment() {
 
 		String itemString = "";
@@ -261,6 +263,7 @@ public class FormulaEditorKeyboardTest extends BaseActivityInstrumentationTestCa
 		solo.clickOnView(solo.getView(R.id.formula_editor_edit_field_clear));
 	}
 
+	@android.test.UnstableTest
 	public void testMathFragment() {
 
 		String itemString = "";
@@ -356,6 +359,7 @@ public class FormulaEditorKeyboardTest extends BaseActivityInstrumentationTestCa
 		solo.clickOnView(solo.getView(R.id.formula_editor_edit_field_clear));
 	}
 
+	@android.test.UnstableTest
 	public void testLogicFragment() {
 
 		String itemString = "";
@@ -433,6 +437,7 @@ public class FormulaEditorKeyboardTest extends BaseActivityInstrumentationTestCa
 		solo.clickOnView(solo.getView(R.id.formula_editor_edit_field_clear));
 	}
 
+	@android.test.UnstableTest
 	public void testSensorsFragment() {
 
 		String itemString = "";

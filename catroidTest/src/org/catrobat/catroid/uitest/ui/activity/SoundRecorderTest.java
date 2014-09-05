@@ -28,8 +28,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.os.Build;
 
-import com.jayway.android.robotium.solo.Condition;
-import com.jayway.android.robotium.solo.Solo;
+import com.robotium.solo.Condition;
+import android.test.Solo; // CQA, instead of robotium
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -64,6 +64,7 @@ public class SoundRecorderTest extends BaseActivityInstrumentationTestCase<MainM
 		UiTestUtils.switchToFragmentInScriptActivity(solo, UiTestUtils.SOUNDS_INDEX);
 	}
 
+	@android.test.UnstableTest
 	public void testOrientation() throws NameNotFoundException {
 		prepareRecording();
 		solo.waitForActivity(SoundRecorderActivity.class.getSimpleName());
@@ -80,7 +81,7 @@ public class SoundRecorderTest extends BaseActivityInstrumentationTestCase<MainM
 		// Note that the activity is _indeed_ rotated on your device/emulator!
 		// Robotium can _force_ the activity to be in landscape mode (and so could we, programmatically)
 		solo.setActivityOrientation(Solo.LANDSCAPE);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		assertEquals(SoundRecorderActivity.class.getSimpleName()
 						+ " not set to be in portrait mode in AndroidManifest.xml!", ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
@@ -88,6 +89,7 @@ public class SoundRecorderTest extends BaseActivityInstrumentationTestCase<MainM
 		);
 	}
 
+	@android.test.UnstableTest
 	public void testRecordMultipleSounds() throws InterruptedException {
 
 
@@ -97,7 +99,7 @@ public class SoundRecorderTest extends BaseActivityInstrumentationTestCase<MainM
 		assertTrue("Could not find record Button Object!", recordButton != null);
 
 		recordSound();
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		assertSoundRecording(1);
 
 		prepareRecording();
@@ -108,9 +110,9 @@ public class SoundRecorderTest extends BaseActivityInstrumentationTestCase<MainM
 
 		recordSoundGoBackWhileRecording();
 
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		assertSoundRecording(2);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 	}
 
 	private void recordSound() throws InterruptedException {
@@ -122,7 +124,7 @@ public class SoundRecorderTest extends BaseActivityInstrumentationTestCase<MainM
 		assertTrue("TimeOut at changing Recording State", result);
 
 		int recordTime = 500;
-		solo.sleep(recordTime);
+		// solo.sleep(recordTime); // CQA
 
 		solo.clickOnView(recordButton);
 		WaitForStop waitForStop = new WaitForStop();
@@ -140,7 +142,7 @@ public class SoundRecorderTest extends BaseActivityInstrumentationTestCase<MainM
 		assertTrue("TimeOut at changing Recording State", result);
 
 		int recordTime = 500;
-		solo.sleep(recordTime);
+		// solo.sleep(recordTime); // CQA
 
 		solo.goBack();
 		WaitForStop waitForStop = new WaitForStop();

@@ -289,7 +289,7 @@ public class BrickValueParameterTest extends BaseActivityInstrumentationTestCase
 		String speakEditTextValue = speakEditText.getText().toString();
 		assertEquals("Value in Selected Brick Speak is not correct", defaultSpeakValue, speakEditTextValue);
 
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_add);
 		solo.clickOnText(categorySoundText);
 		solo.clickOnText(solo.getString(R.string.brick_change_volume_by));

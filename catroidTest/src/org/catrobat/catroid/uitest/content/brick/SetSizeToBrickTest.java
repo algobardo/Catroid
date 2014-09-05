@@ -82,6 +82,7 @@ public class SetSizeToBrickTest extends BaseActivityInstrumentationTestCase<Main
 		super.tearDown();
 	}
 
+	@android.test.UnstableTest
 	public void testSetSizeToBrick() {
 		double newSize = 200;
 
@@ -98,7 +99,7 @@ public class SetSizeToBrickTest extends BaseActivityInstrumentationTestCase<Main
 
 		solo.assertCurrentActivity("Not in stage", StageActivity.class);
 
-		solo.sleep(400);
+		// solo.sleep(400); // CQA
 
 		solo.goBack();
 		solo.clickOnText(solo.getString(R.string.stage_dialog_screenshot));

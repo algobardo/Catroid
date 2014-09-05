@@ -66,6 +66,7 @@ public class VariableBricksTest extends BaseActivityInstrumentationTestCase<Main
 		super.tearDown();
 	}
 
+	@android.test.UnstableTest
 	public void testVariableBricks() {
 		Spinner setVariableSpinner = solo.getCurrentViews(Spinner.class).get(0);
 		Spinner changeVariableSpinner = solo.getCurrentViews(Spinner.class).get(1);
@@ -88,7 +89,7 @@ public class VariableBricksTest extends BaseActivityInstrumentationTestCase<Main
 		solo.waitForView(solo.getView(R.id.button_play));
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(5000);
+		// solo.sleep(5000); // CQA
 
 		assertEquals("Variable has the wrong value after stage", 42.0,
 				userVariablesContainer.getUserVariable("p2", sprite).getValue());

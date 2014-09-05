@@ -70,22 +70,23 @@ public class TransparentWhenBrickTest extends BaseActivityInstrumentationTestCas
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 	}
 
+	@android.test.UnstableTest
 	public void testTapOnSideAreaOfForegroundSprite() {
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		assertTrue("Sprite cat is not at x=0 and y=0",
 				cat.look.getXInUserInterfaceDimensionUnit() == 0 && cat.look.getYInUserInterfaceDimensionUnit() == 0);
 		assertTrue("Sprite fish is not at x=0 and y=0",
 				fish.look.getXInUserInterfaceDimensionUnit() == 0 && fish.look.getYInUserInterfaceDimensionUnit() == 0);
 		assertTrue("Sprite fish is not the foreground sprite", fish.look.getZIndex() > cat.look.getZIndex());
 		UiTestUtils.clickOnStageCoordinates(solo, 22, 45, screenWidth, screenHeight);
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		assertTrue("Sprite cat is at false position", cat.look.getXInUserInterfaceDimensionUnit() == catXPosition
 				&& cat.look.getYInUserInterfaceDimensionUnit() == catYPosition);
 		assertTrue("Sprite fish has moved",
 				fish.look.getXInUserInterfaceDimensionUnit() == 0 && fish.look.getYInUserInterfaceDimensionUnit() == 0);
 		UiTestUtils.clickOnStageCoordinates(solo, 0, 0, screenWidth, screenHeight);
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		assertTrue("Sprite cat is at false position", cat.look.getXInUserInterfaceDimensionUnit() == catXPosition
 				&& cat.look.getYInUserInterfaceDimensionUnit() == catYPosition);
 		assertTrue(
@@ -94,24 +95,25 @@ public class TransparentWhenBrickTest extends BaseActivityInstrumentationTestCas
 						&& fish.look.getYInUserInterfaceDimensionUnit() == fishYPosition);
 	}
 
+	@android.test.UnstableTest
 	public void testTapOnHalfTransparentAreaOfForegroundSprite() {
 		Formula ghostEffectValue = new Formula(50.0);
 		Reflection.setPrivateField(setGhostEffectBrick, "transparency", ghostEffectValue);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		assertTrue("Sprite cat is not at x=0 and y=0",
 				cat.look.getXInUserInterfaceDimensionUnit() == 0 && cat.look.getYInUserInterfaceDimensionUnit() == 0);
 		assertTrue("Sprite fish is not at x=0 and y=0",
 				fish.look.getXInUserInterfaceDimensionUnit() == 0 && fish.look.getYInUserInterfaceDimensionUnit() == 0);
 		assertTrue("Sprite fish is not the foreground sprite", fish.look.getZIndex() > cat.look.getZIndex());
 		UiTestUtils.clickOnStageCoordinates(solo, 22, 45, screenWidth, screenHeight);
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		assertTrue("Sprite cat is at false position", cat.look.getXInUserInterfaceDimensionUnit() == catXPosition
 				&& cat.look.getYInUserInterfaceDimensionUnit() == catYPosition);
 		assertTrue("Sprite fish has moved",
 				fish.look.getXInUserInterfaceDimensionUnit() == 0 && fish.look.getYInUserInterfaceDimensionUnit() == 0);
 		UiTestUtils.clickOnStageCoordinates(solo, 0, 0, screenWidth, screenHeight);
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		assertTrue("Sprite cat is at false position", cat.look.getXInUserInterfaceDimensionUnit() == catXPosition
 				&& cat.look.getYInUserInterfaceDimensionUnit() == catYPosition);
 		assertTrue(
@@ -120,18 +122,19 @@ public class TransparentWhenBrickTest extends BaseActivityInstrumentationTestCas
 						&& fish.look.getYInUserInterfaceDimensionUnit() == fishYPosition);
 	}
 
+	@android.test.UnstableTest
 	public void testTapOnFullTransparentAreaOfForegroundSprite() {
 		Formula ghostEffectValue = new Formula(100.0);
 		Reflection.setPrivateField(setGhostEffectBrick, "transparency", ghostEffectValue);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		assertTrue("Sprite cat is not at x=0 and y=0",
 				cat.look.getXInUserInterfaceDimensionUnit() == 0 && cat.look.getYInUserInterfaceDimensionUnit() == 0);
 		assertTrue("Sprite fish is not at x=0 and y=0",
 				fish.look.getXInUserInterfaceDimensionUnit() == 0 && fish.look.getYInUserInterfaceDimensionUnit() == 0);
 		assertTrue("Sprite fish is not the foreground sprite", fish.look.getZIndex() > cat.look.getZIndex());
 		UiTestUtils.clickOnStageCoordinates(solo, 0, 0, screenWidth, screenHeight);
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		assertEquals("Sprite cat is at false position", catXPosition, (int) cat.look.getXInUserInterfaceDimensionUnit());
 		assertEquals("Sprite cat is at false position", catYPosition, (int) cat.look.getYInUserInterfaceDimensionUnit());
 		assertEquals("Sprite fish has moved", 0, (int) fish.look.getXInUserInterfaceDimensionUnit());

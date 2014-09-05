@@ -28,7 +28,7 @@ import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
-import com.jayway.android.robotium.solo.Solo;
+import android.test.Solo; // CQA, instead of robotium
 
 import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.stage.StageListener;

@@ -35,7 +35,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.jayway.android.robotium.solo.Solo;
+import android.test.Solo; // CQA, instead of robotium
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -164,9 +164,9 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 
 		solo.clickOnButton(0);
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickLongOnText(defaultSpriteName);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertEquals("Copy is not in context menu!", true, solo.searchText(getActivity().getString(R.string.copy)));
 		solo.clickOnText(getActivity().getString(R.string.copy));
 		solo.clickLongOnText(defaultSpriteName);
@@ -232,19 +232,19 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 
 		solo.clickOnButton(0);
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickLongOnText("Pocket Code");
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertEquals("Copy is not in context menu!", true, solo.searchText(getActivity().getString(R.string.copy)));
 		solo.clickOnText(getActivity().getString(R.string.copy));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		Sprite copiedSprite = project.getSpriteList().get(2);
 		solo.clickOnText(copiedSprite.getName());
 		solo.clickOnText(solo.getString(R.string.scripts));
 		solo.waitForActivity(ScriptActivity.class);
 
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		int spinnerIndex = 0;
 
@@ -287,9 +287,9 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		UiTestUtils.clickOnTextInList(solo, solo.getString(R.string.default_project_name));
 		solo.waitForText(defaultSpriteName);
 		solo.clickLongOnText(defaultSpriteName);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnText(solo.getString(R.string.copy));
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 
 		assertTrue("Copied Sprite name should have 1 as suffix!",
 				solo.searchText((defaultSpriteName + solo.getString(R.string.copy_sprite_name_suffix) + "1")));
@@ -303,12 +303,12 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
 		solo.clickOnText(UiTestUtils.PROJECTNAME1);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickLongOnText(defaultSpriteName);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertEquals("Copy is not in context menu!", true, solo.searchText(getActivity().getString(R.string.copy)));
 		solo.clickOnText(getActivity().getString(R.string.copy));
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 
 		ListView spritesList = (ListView) solo.getCurrentActivity().findViewById(android.R.id.list);
 		Sprite copiedSprite = ((Sprite) spritesList.getItemAtPosition(3));
@@ -320,15 +320,15 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		int brickCounter = checkIds(firstSprite, copiedSprite);
 
 		solo.goBack();
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		solo.clickLongOnText(defaultSpriteName + "$");
 		solo.clickOnText(getActivity().getString(R.string.delete));
 		String yes = solo.getString(R.string.yes);
 		solo.waitForText(yes);
 		solo.clickOnText(yes);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		solo.clickOnText(defaultSpriteName + solo.getString(R.string.copy_sprite_name_suffix));
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		assertEquals("The number of Bricks differs!", ProjectManager.getInstance().getCurrentSprite().getScript(0)
 				.getBrickList().size(), brickCounter);
@@ -434,7 +434,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		// Note that the activity is _indeed_ rotated on your device/emulator!
 		// Robotium can _force_ the activity to be in landscape mode (and so could we, programmatically)
 		solo.setActivityOrientation(Solo.LANDSCAPE);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		assertEquals(ProjectActivity.class.getSimpleName() + " not set to be in portrait mode in AndroidManifest.xml!",
 				ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, activityInfo.screenOrientation);
@@ -447,12 +447,12 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 
 		clickOnContextMenuItem(FIRST_TEST_SPRITE_NAME, rename);
 		solo.waitForText(solo.getString(R.string.rename_sprite_dialog));
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 
 		solo.clearEditText(0);
 		UiTestUtils.enterText(solo, 0, spriteToRename);
 		solo.sendKey(Solo.ENTER);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		int spriteToRenameIndex = 1;
 
@@ -475,7 +475,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		solo.clickOnText(yes);
 
 		// Dialog is handled asynchronously, so we need to wait a while for it to finish
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		spriteList = projectManager.getCurrentProject().getSpriteList();
 
 		assertEquals("Size of sprite list has not changed accordingly", expectedNumberOfSpritesAfterDelete,
@@ -501,7 +501,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		solo.waitForText(no);
 		solo.clickOnText(no);
 
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		spriteList = projectManager.getCurrentProject().getSpriteList();
 
 		assertEquals("Size of sprite list has changed!", expectedNumberOfSprites, spriteList.size());
@@ -555,16 +555,16 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 
 		String errorMessageText = solo.getString(R.string.spritename_already_exists);
 		String buttonCloseText = solo.getString(R.string.close);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		assertTrue("ErrorMessage not visible", solo.searchText(errorMessageText));
 
 		solo.clickOnButton(buttonCloseText);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		//Check if button deactivated when adding sprite without name ""
 		UiTestUtils.enterText(solo, 0, "");
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		String okButtonText = solo.getString(R.string.ok);
 		boolean okButtonEnabled = solo.getButton(okButtonText).isEnabled();
@@ -585,7 +585,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		UiTestUtils.enterText(solo, 0, SECOND_TEST_SPRITE_NAME);
 		solo.sendKey(Solo.ENTER);
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("Error message not visible", solo.searchText(errorSpriteAlreadyExists));
 		solo.clickOnButton(buttonCloseText);
 		assertTrue("RenameSpriteDialog not visible", solo.searchText(dialogRenameSpriteText));
@@ -593,13 +593,13 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		//------------ Enter Key:
 		solo.clickOnEditText(0);
 		solo.sendKey(Solo.ENTER);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("ErrorMessage not visible", solo.searchText(errorSpriteAlreadyExists));
 		solo.clickOnButton(buttonCloseText);
 
 		// Check if button deactivated when renaming sprite to name ""
 		UiTestUtils.enterText(solo, 0, "");
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		String okButtonText = solo.getString(R.string.ok);
 		boolean okButtonEnabled = solo.getButton(okButtonText).isEnabled();
@@ -608,11 +608,11 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		// Test renaming sprite to ("") with ENTER key
 		solo.clickOnEditText(0);
 		solo.sendKey(Solo.ENTER);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		assertTrue("ErrorMessage not visible", solo.searchText(solo.getString(R.string.spritename_invalid)));
 		solo.clickOnButton(buttonCloseText);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("not in NewSpriteDialog", solo.searchText(dialogRenameSpriteText));
 	}
 
@@ -675,7 +675,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 
 		if (solo.waitForText(hideDetailsText, 0, 300)) {
 			solo.clickOnText(hideDetailsText);
-			solo.sleep(300);
+			// solo.sleep(300); // CQA
 		} else {
 			solo.goBack();
 		}
@@ -683,7 +683,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		checkVisibilityOfViews(detailsView, false);
 
 		solo.clickOnMenuItem(showDetailsText);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		checkVisibilityOfViews(detailsView, true);
 
@@ -701,7 +701,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		checkVisibilityOfViews(detailsView, true);
 
 		solo.clickOnMenuItem(hideDetailsText);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		assertFalse("Scripts should be hidden",
 				solo.waitForText(solo.getString(R.string.number_of_scripts), 0, 100, false, true));
@@ -741,6 +741,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		assertEquals("Displayed wrong number of sound", soundCount, soundCountActual);
 	}
 
+	@android.test.UnstableTest
 	public void testBottomBarAndContextMenuOnActionModes() {
 		UiTestUtils.getIntoSpritesFromMainMenu(solo);
 
@@ -933,7 +934,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		solo.waitForText(solo.getString(R.string.delete));
 		solo.clickOnText(selectAll);
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		for (CheckBox checkBox : solo.getCurrentViews(CheckBox.class)) {
 			if (checkBox.isShown()) {
 				assertTrue("CheckBox is not Checked!", checkBox.isChecked());
@@ -988,7 +989,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 				solo.searchText(solo.getString(R.string.dialog_confirm_delete_object_title)));
 
 		solo.clickOnText(no);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		UiTestUtils.openActionMode(solo, delete, R.id.delete, getActivity());
 
 		assertTrue("Bottom bar is visible", solo.getView(R.id.bottom_bar).getVisibility() == View.GONE);
@@ -1141,7 +1142,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		solo.clearEditText(0);
 		solo.enterText(0, renamedSpriteName);
 		solo.clickOnButton(solo.getString(R.string.ok));
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 
 		assertTrue("The second sprite was not renamed!", projectManager.getCurrentProject().getSpriteList().get(2)
 				.getName().equalsIgnoreCase(renamedSpriteName));
@@ -1188,7 +1189,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 
 	private void checkIfCheckboxesAreCorrectlyChecked(boolean firstCheckboxExpectedChecked,
 			boolean secondCheckboxExpectedChecked) {
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		firstCheckBox = solo.getCurrentViews(CheckBox.class).get(1);
 		secondCheckBox = solo.getCurrentViews(CheckBox.class).get(2);
 		assertEquals("First checkbox not correctly checked", firstCheckboxExpectedChecked, firstCheckBox.isChecked());
@@ -1251,7 +1252,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		solo.clearEditText(0);
 		solo.enterText(0, text);
 		solo.clickOnButton(solo.getString(R.string.ok));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 	}
 
 	private int checkNumberOfElements(Sprite firstSprite, Sprite copiedSprite) {
@@ -1422,7 +1423,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		}
 
 		solo.clickOnText(defaultSpriteName + solo.getString(R.string.copy_sprite_name_suffix));
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 
 		Sprite currentSprite = ProjectManager.getInstance().getCurrentSprite();
 		Script scriptCopied = currentSprite.getScript(0);

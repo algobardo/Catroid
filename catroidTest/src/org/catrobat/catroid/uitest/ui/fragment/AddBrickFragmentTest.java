@@ -84,6 +84,7 @@ public class AddBrickFragmentTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.goBack();
 	}
 
+	@android.test.UnstableTest
 	public void testCorrectReturnToCategoriesFragment() {
 		goToAddBrickFromMainMenu();
 		String categoriesString = solo.getString(R.string.categories);

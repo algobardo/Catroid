@@ -27,7 +27,7 @@ import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.jayway.android.robotium.solo.Solo;
+import android.test.Solo; // CQA, instead of robotium
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -81,19 +81,20 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 		ProjectManager.getInstance().setCurrentScript(script);
 	}
 
+	@android.test.UnstableTest
 	public void testChangeFormula() {
 
 		solo.clickOnView(solo.getView(X_POS_EDIT_TEXT_RID));
-		solo.sleep(150);
+		// solo.sleep(150); // CQA
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_1));
-		solo.sleep(150);
+		// solo.sleep(150); // CQA
 		solo.clickOnView(solo.getView(Y_POS_EDIT_TEXT_RID, 1));
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 		assertTrue("Saved changes message not found!",
 				solo.searchText(solo.getString(R.string.formula_editor_changes_saved)));
 
 		solo.goBack();
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 		assertEquals("Value not saved!", "1 ", ((TextView) solo.getView(X_POS_EDIT_TEXT_RID)).getText().toString());
 
 		solo.clickOnView(solo.getView(Y_POS_EDIT_TEXT_RID));
@@ -102,7 +103,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 
 		solo.clickOnView(solo.getView(X_POS_EDIT_TEXT_RID, 1));
 		assertTrue("Fix error message not found!", solo.searchText(solo.getString(R.string.formula_editor_parse_fail)));
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		solo.clickOnView(solo.getView(X_POS_EDIT_TEXT_RID, 1));
 		solo.clickOnView(solo.getView(X_POS_EDIT_TEXT_RID, 1));
 		assertTrue("Changes saved message not found!",
@@ -120,7 +121,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 
 		assertEquals("Wrong text in FormulaEditor", "1 ", solo.getEditText(FORMULA_EDITOR_EDIT_TEXT_ID).getText()
 				.toString());
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 		assertEquals("Wrong text in X EditText", "1 ", ((TextView) solo.getView(X_POS_EDIT_TEXT_RID, 1)).getText()
 				.toString());
 
@@ -132,7 +133,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 				.toString());
 
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_ok));
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 		assertEquals("Wrong text in X EditText", "12 ", ((TextView) solo.getView(X_POS_EDIT_TEXT_RID)).getText()
 				.toString());
 	}
@@ -156,28 +157,28 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 				solo.getEditText(FORMULA_EDITOR_EDIT_TEXT_ID).getText().toString());
 
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_undo));
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 		assertEquals("Undo did something wrong", "1 - 2 × cos( sin( 0 ) ) ",
 				solo.getEditText(FORMULA_EDITOR_EDIT_TEXT_ID).getText().toString());
 
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_undo));
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 		assertEquals("Undo did something wrong", "1 - 2 × cos( 0 ) ", solo.getEditText(FORMULA_EDITOR_EDIT_TEXT_ID)
 				.getText().toString());
 
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_undo));
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 		assertEquals("Undo did something wrong", "1 - 2 × ", solo.getEditText(FORMULA_EDITOR_EDIT_TEXT_ID).getText()
 				.toString());
 
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_undo));
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 		assertEquals("Undo did something wrong", "1 - 2 ", solo.getEditText(FORMULA_EDITOR_EDIT_TEXT_ID).getText()
 				.toString());
 
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_ok));
 
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 		assertEquals("Undo did something wrong", "1 - 2 ", ((TextView) solo.getView(X_POS_EDIT_TEXT_RID)).getText()
 				.toString());
 
@@ -186,6 +187,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 
 	}
 
+	@android.test.UnstableTest
 	public void testUndoRedo() {
 
 		solo.clickOnView(solo.getView(X_POS_EDIT_TEXT_RID));
@@ -198,7 +200,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_plus));
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_9));
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		assertEquals("Wrong text in field", "9 - 8 × 7 + 9 ", solo.getEditText(FORMULA_EDITOR_EDIT_TEXT_ID).getText()
 				.toString());
@@ -207,7 +209,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 			solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_undo));
 		}
 
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 		assertEquals("Undo did something wrong", INITIAL_X + " ", solo.getEditText(FORMULA_EDITOR_EDIT_TEXT_ID)
 				.getText().toString());
 
@@ -220,7 +222,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 			solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_redo));
 		}
 
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 		assertEquals("Undo did something wrong", "9 - 8 × 7 + 9 ", solo.getEditText(FORMULA_EDITOR_EDIT_TEXT_ID)
 				.getText().toString());
 
@@ -230,6 +232,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 
 	}
 
+	@android.test.UnstableTest
 	public void testUndoLimit() {
 
 		solo.clickOnView(solo.getView(X_POS_EDIT_TEXT_RID));
@@ -243,7 +246,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 			solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_plus));
 			searchString += " +";
 		}
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 
 		assertEquals("Wrong text in field", "1" + searchString + " ", solo.getEditText(FORMULA_EDITOR_EDIT_TEXT_ID)
 				.getText().toString());
@@ -267,6 +270,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 
 	}
 
+	@android.test.UnstableTest
 	public void testSimpleInterpretation() {
 		String newXFormula = "10 + 12 - 2 × 3 - 4 ";
 		int newXValue = 10 + 12 - 2 * 3 - 4;
@@ -275,7 +279,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 
 		solo.clickOnView(solo.getView(X_POS_EDIT_TEXT_RID));
 
-		solo.sleep(250);
+		// solo.sleep(250); // CQA
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_1));
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_0));
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_plus));
@@ -288,7 +292,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_minus));
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_4));
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_ok));
-		solo.sleep(250);
+		// solo.sleep(250); // CQA
 		assertTrue("Save failed toast not found",
 				solo.searchText(solo.getString(R.string.formula_editor_changes_saved)));
 
@@ -313,12 +317,12 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 				.getText().toString());
 
 		solo.clickOnView(solo.getView(Y_POS_EDIT_TEXT_RID, 1));
-		solo.sleep(250);
+		// solo.sleep(250); // CQA
 		assertEquals("Wrong text in FormulaEditor", newYFormula, solo.getEditText(FORMULA_EDITOR_EDIT_TEXT_ID)
 				.getText().toString());
 
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_ok));
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		//Interpretation test
 		Formula formula = (Formula) Reflection.getPrivateField(placeAtBrick, "xPosition");
@@ -343,7 +347,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_9));
 
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_ok));
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		Formula formula = (Formula) Reflection.getPrivateField(placeAtBrick, "xPosition");
 		float value = formula.interpretFloat(sprite);
@@ -363,7 +367,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_0));
 
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_ok));
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		Formula anotherFormula = (Formula) Reflection.getPrivateField(placeAtBrick, "yPosition");
 		float anotherValue = anotherFormula.interpretFloat(sprite);
@@ -388,7 +392,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_3));
 
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_ok));
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		Formula formula = (Formula) Reflection.getPrivateField(placeAtBrick, "xPosition");
 		float value = formula.interpretFloat(sprite);
@@ -408,7 +412,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_4));
 
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_ok));
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		Formula anotherFormula = (Formula) Reflection.getPrivateField(placeAtBrick, "yPosition");
 		float anotherValue = anotherFormula.interpretFloat(sprite);
@@ -432,6 +436,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 
 	}
 
+	@android.test.UnstableTest
 	public void testGoBackAndEditTextSwitches() {
 
 		solo.clickOnView(solo.getView(X_POS_EDIT_TEXT_RID));

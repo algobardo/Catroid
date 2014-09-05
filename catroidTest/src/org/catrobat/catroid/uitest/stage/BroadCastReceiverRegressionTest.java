@@ -55,6 +55,7 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 		UiTestUtils.prepareStageForTest();
 	}
 
+	@android.test.UnstableTest
 	public void testReceiversWorkMoreThanOnce() {
 		UiTestUtils.createEmptyProject();
 		Sprite sprite = ProjectManager.getInstance().getCurrentProject().getSpriteList().get(0);
@@ -74,7 +75,7 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 
 		assertEquals("Broadcast was not executed!", xMovement, (int) sprite.look.getXInUserInterfaceDimensionUnit());
 
@@ -85,12 +86,13 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 		// This is where the magic happens. We try to execute the program again, Broadcasts should still work.
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 
 		assertEquals("Broadcast didn't work a second time!", xMovement,
 				(int) sprite.look.getXInUserInterfaceDimensionUnit());
 	}
 
+	@android.test.UnstableTest
 	public void testWhenScriptRestartingItself() {
 		UiTestUtils.createEmptyProject();
 		Sprite sprite = ProjectManager.getInstance().getCurrentProject().getSpriteList().get(0);
@@ -115,12 +117,13 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 
 		assertTrue("When script does not restart itself!",
 				(int) sprite.look.getXInUserInterfaceDimensionUnit() > xMovement);
 	}
 
+	@android.test.UnstableTest
 	public void testRestartingOfWhenScriptWithBroadcastWaitBrick() {
 		UiTestUtils.createEmptyProject();
 		String messageOne = "messageOne";
@@ -150,12 +153,13 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(3000);
+		// solo.sleep(3000); // CQA
 
 		assertTrue("When script does not restart itself when a BroadcastWait is sent!",
 				(int) sprite.look.getXInUserInterfaceDimensionUnit() > 5 * xMovement);
 	}
 
+	@android.test.UnstableTest
 	public void testRestartingSendBroadcastAfterBroadcastAndWait() {
 		String message = "increase variable value";
 		String variableName = "test variable";
@@ -170,7 +174,7 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(3000);
+		// solo.sleep(3000); // CQA
 
 		UserVariable userVariable = (UserVariable) Reflection.getPrivateField(setVariableBrick, "userVariable");
 		assertNotNull("UserVariable is null", userVariable);
@@ -179,6 +183,7 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 		assertEquals("Broadcast script of sprite 3 does not restart itself when a BroadcastWait is sent!", expectedValue, userVariable.getValue());
 	}
 
+	@android.test.UnstableTest
 	public void testRestartingSendBroadcastInBroadcastAndWait() {
 		String message1 = "message1";
 		String message2 = "message2";
@@ -191,7 +196,7 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(3000);
+		// solo.sleep(3000); // CQA
 
 		assertEquals("Second Broadcast Script does not restart itself!", (int) ((initialRotation - 3 * degreesToTurn) % 360),
 				(int) secondSprite.look.getRotation());
@@ -201,6 +206,7 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 
 	}
 
+	@android.test.UnstableTest
 	public void testCorrectRestartingOfBroadcastsWithSameActionStringsWithinOneSprite() {
 		String message = "message";
 		String variableName = "test variable";
@@ -215,7 +221,7 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(3000);
+		// solo.sleep(3000); // CQA
 
 		UserVariable userVariable = (UserVariable) Reflection.getPrivateField(setVariableBrick, "userVariable");
 		assertNotNull("UserVariable is null", userVariable);
@@ -231,7 +237,7 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 		solo.clickOnText(solo.getString(R.string.scripts));
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 		solo.waitForView(ListView.class);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 	}
 
 	private void createUserVariable(String variableName) {

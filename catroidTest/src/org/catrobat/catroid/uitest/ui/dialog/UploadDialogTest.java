@@ -62,15 +62,15 @@ public class UploadDialogTest extends BaseActivityInstrumentationTestCase<MainMe
 		uploadDialogTitle = solo.getString(R.string.upload_project_dialog_title);
 		createTestProject();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName(), 3000);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		try {
 			setServerURLToTestURL();
 		} catch (Throwable e) {
 			throw new Exception();
 		}
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		UiTestUtils.createValidUser(getActivity());
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 	}
 
 	@Override
@@ -131,7 +131,7 @@ public class UploadDialogTest extends BaseActivityInstrumentationTestCase<MainMe
 		solo.clearEditText(0);
 		solo.enterText(0, testDescription);
 		assertTrue("dialog not loaded in 5 seconds", solo.waitForText(actionSetDescriptionText, 0, 5000));
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		solo.clickOnText(solo.getString(R.string.ok));
 
@@ -145,7 +145,7 @@ public class UploadDialogTest extends BaseActivityInstrumentationTestCase<MainMe
 		assertTrue("upload project dialog not shown", uploadDialogShown);
 		EditText uploadDescriptionView = (EditText) solo.getView(R.id.project_description_upload);
 		String uploadDescription = uploadDescriptionView.getText().toString();
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		assertEquals("Project description was not set or is wrong", testDescription, uploadDescription);
 	}
 
@@ -164,7 +164,7 @@ public class UploadDialogTest extends BaseActivityInstrumentationTestCase<MainMe
 				| android.text.InputType.TYPE_TEXT_VARIATION_NORMAL;
 		int newProjectDescriptionInputTypeReference = android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
 				| android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_NORMAL;
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertEquals("Project name field is not a text field", newProjectInputTypeReference, projectUploadNameInputType);
 		assertEquals("Project description field is not multiline", newProjectDescriptionInputTypeReference,
 				projectUploadDescriptionInputType);

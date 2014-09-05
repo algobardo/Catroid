@@ -33,7 +33,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.jayway.android.robotium.solo.Solo;
+import android.test.Solo; // CQA, instead of robotium
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -112,7 +112,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.enterText(0, testProject);
 		String buttonOKText = solo.getString(R.string.ok);
 		solo.waitForText(buttonOKText);
-		solo.clickOnText(buttonOKText);
+		solo.clickOnButton(buttonOKText); // CQA: was solo.clickOnText();
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 
 		File file = new File(Constants.DEFAULT_ROOT + "/" + testProject + "/" + Constants.PROJECTCODE_NAME);
@@ -130,13 +130,14 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		Button okButton = solo.getButton(getActivity().getString(R.string.ok));
 
 		assertFalse("New project ok button is enabled!", okButton.isEnabled());
-		solo.clickOnButton(getActivity().getString(R.string.ok));
+		// solo.clickOnButton(getActivity().getString(R.string.ok)); // CQA: click on disabled button
 
 		File directory = new File(Constants.DEFAULT_ROOT + "/" + testProject);
 		directory.mkdirs();
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 		solo.clearEditText(0);
 		solo.enterText(0, testProject);
+		solo.sleep(2000);
 		solo.clickOnButton(getActivity().getString(R.string.ok));
 		assertTrue("No error message was displayed upon creating a project with the same name twice.",
 				solo.searchText(solo.getString(R.string.error_project_exists)));
@@ -145,7 +146,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		directory = new File(Utils.buildProjectPath(projectNameWithNormalAndSpecialChars2 + "_TWO"));
 		directory.mkdirs();
 		String name = projectNameWithNormalAndSpecialChars2 + "_TWO";
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 		solo.clearEditText(0);
 		solo.enterText(0, name);
 		solo.clickOnButton(getActivity().getString(R.string.ok));
@@ -166,7 +167,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.enterText(0, projectNameWithNormalAndSpecialChars);
 		String buttonOKText = solo.getString(R.string.ok);
 		solo.waitForText(buttonOKText);
-		solo.clickOnText(buttonOKText);
+		solo.clickOnButton(buttonOKText); // CQA: was solo.clickOnText();
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 
 		File file = new File(Utils.buildPath(directoryPath, Constants.PROJECTCODE_NAME));
@@ -183,7 +184,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.enterText(0, projectNameWithNormalAndSpecialChars2);
 		String buttonOKText = solo.getString(R.string.ok);
 		solo.waitForText(buttonOKText);
-		solo.clickOnText(buttonOKText);
+		solo.clickOnButton(buttonOKText); // CQA: was solo.clickOnText();
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 
 		File file = new File(Utils.buildPath(directoryPath, Constants.PROJECTCODE_NAME));
@@ -200,7 +201,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.enterText(0, projectNameJustSpecialChars);
 		String buttonOKText = solo.getString(R.string.ok);
 		solo.waitForText(buttonOKText);
-		solo.clickOnText(buttonOKText);
+		solo.clickOnButton(buttonOKText); // CQA: was solo.clickOnText();
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 
 		File file = new File(Utils.buildPath(directoryPath, Constants.PROJECTCODE_NAME));
@@ -217,7 +218,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.enterText(0, projectNameJustSpecialChars2);
 		String buttonOKText = solo.getString(R.string.ok);
 		solo.waitForText(buttonOKText);
-		solo.clickOnText(buttonOKText);
+		solo.clickOnButton(buttonOKText); // CQA: was solo.clickOnText();
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 
 		File file = new File(Utils.buildPath(directoryPath, Constants.PROJECTCODE_NAME));
@@ -234,7 +235,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.enterText(0, projectNameJustOneDot);
 		String buttonOKText = solo.getString(R.string.ok);
 		solo.waitForText(buttonOKText);
-		solo.clickOnText(buttonOKText);
+		solo.clickOnButton(buttonOKText); // CQA: was solo.clickOnText();
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 
 		File file = new File(Utils.buildPath(directoryPath, Constants.PROJECTCODE_NAME));
@@ -251,7 +252,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		solo.enterText(0, projectNameJustTwoDots);
 		String buttonOKText = solo.getString(R.string.ok);
 		solo.waitForText(buttonOKText);
-		solo.clickOnText(buttonOKText);
+		solo.clickOnButton(buttonOKText); // CQA: was solo.clickOnText();
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 
 		File file = new File(Utils.buildPath(directoryPath, Constants.PROJECTCODE_NAME));
@@ -288,7 +289,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		assertFalse(testProject2 + " was not deleted!", directory.exists());
 
 		createTestProject(testProject2);
-		solo.sleep(200);
+		solo.sleep(1000); // CQA
 
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		assertTrue("MyProjectsActivity not shown", solo.waitForActivity(MyProjectsActivity.class.getSimpleName()));
@@ -313,7 +314,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		assertFalse(testProject3 + " was not deleted!", directory.exists());
 
 		createTestProject(testProject3);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		assertTrue("MyProjectsActivity not shown", solo.waitForActivity(MyProjectsActivity.class.getSimpleName()));
@@ -431,7 +432,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		StorageHandler.getInstance().saveProject(standardProject);
 
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 
@@ -448,7 +449,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 
 		UiTestUtils.goBackToHome(getInstrumentation());
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getInstrumentation()
 				.getTargetContext());
 		assertEquals("Standard project was not set in shared preferences", standardProjectName,
@@ -547,7 +548,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		assertTrue("The name of the current projectNameJustOneDot is not displayed on the continue button", solo
 				.getButton(0).getText().toString().endsWith(projectNameJustOneDot));
 
-		solo.sleep(400);
+		// solo.sleep(400); // CQA
 		assertTrue("The name of the current projectNameJustOneDot is not displayed on the continue button", solo.searchText(projectNameJustOneDot));
 
 		solo.clickOnText(solo.getString(R.string.main_menu_programs));

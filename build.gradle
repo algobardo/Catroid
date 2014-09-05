@@ -2,15 +2,18 @@ import java.util.regex.Pattern
 
 buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:0.12.+'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.10.+'
+        classpath 'com.crashlytics.examples.gradle:preprocessor:1.0.0'
     }
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -22,6 +25,7 @@ apply plugin: 'pmd'
 apply from: 'gradle/adb_tasks.gradle'
 apply from: 'gradle/code_quality_tasks.gradle'
 apply from: 'gradle/intellij_config_tasks.gradle'
+apply plugin: 'preprocessor'
 
 check.dependsOn 'checkstyle'
 check.dependsOn 'pmd'
@@ -47,6 +51,11 @@ dependencies {
     compile fileTree(include: '*.jar', dir: 'catroid/libs')
     compile fileTree(include: '*.jar', dir: 'catroid/libs-natives')
     androidTestCompile fileTree(include: '*.jar', dir: 'catroidTest/libs')
+    androidTestCompile('com.jakewharton.espresso:espresso:1.1-r3') { // CQA
+        exclude module: 'hamcrest-core'
+        exclude module: 'guava'
+    }
+    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.1'
     pmd 'net.sourceforge.pmd:pmd:5.1.1'
 }
 
@@ -86,6 +95,8 @@ def getCurrentGitBranch() {
 android {
     compileSdkVersion 19
     buildToolsVersion '19.1.0'
+
+    /*
     defaultConfig {
         minSdkVersion 10
         targetSdkVersion 19
@@ -99,6 +110,36 @@ android {
         buildConfigField "String", "GIT_DESCRIBE", "\"${getGitDescribe()}\""
         buildConfigField "String", "GIT_CURRENT_BRANCH", "\"${getCurrentGitBranch()}\""
     }
+    */
+
+    // CQA: Espresso config
+    defaultConfig {
+        minSdkVersion 10
+        targetSdkVersion 19
+        applicationId 'org.catrobat.catroid'
+        testApplicationId "org.catrobat.catroid.test"
+        testInstrumentationRunner 'com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner'
+        versionCode getBuildNumberParameter()
+        println "VersionCode is " + versionCode
+        versionName generateVersionName(projectVersion, versionCode)
+        println "VersionName is " + versionName
+        buildConfigField "String", "GIT_DESCRIBE", "\"${getGitDescribe()}\""
+        buildConfigField "String", "GIT_CURRENT_BRANCH", "\"${getCurrentGitBranch()}\""
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+    }
+
+    buildTypes {
+
+        // Enable code coverage
+
+        debug {
+            testCoverageEnabled = true
+        }
+    }
+
     sourceSets {
         main {
             manifest.srcFile 'catroid/AndroidManifest.xml'
@@ -122,6 +163,7 @@ android {
             }
         }
     }
+
     lintOptions {
         // define ignores like a specific res-folder in our lint.xml file
         lintConfig file('config/lint.xml')
@@ -195,3 +237,22 @@ if (signing_config_file.exists()) {
     apply from: signing_config_file.absolutePath
 }
 
+/*********************/
+/*** CODE COVERAGE ***/
+/*********************/
+
+allprojects {
+    
+    // Avoid VerifyError
+    
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = 1.5
+        targetCompatibility = 1.5
+    }
+}
+
+task jacoco(dependsOn: "createDebugCoverageReport") {
+    group = "Reporting"
+
+    description = "Generate Jacoco coverage reports"
+}

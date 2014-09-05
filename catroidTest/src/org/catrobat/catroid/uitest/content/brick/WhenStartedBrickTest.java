@@ -60,6 +60,7 @@ public class WhenStartedBrickTest extends BaseActivityInstrumentationTestCase<Ma
 		ProjectManager.getInstance().deleteCurrentProject();
 	}
 
+	@android.test.UnstableTest
 	public void testWhenStartedBrick() {
 		if (!solo.waitForView(DragAndDropListView.class, 0, 5000, false)) {
 			fail("DragAndDropListView not shown in 5 secs!");
@@ -75,7 +76,7 @@ public class WhenStartedBrickTest extends BaseActivityInstrumentationTestCase<Ma
 		assertEquals("Incorrect number of bricks.", 3, projectBrickList.size());
 		assertNotNull("TextView does not exist", solo.getText(solo.getString(R.string.brick_when)));
 
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 
 		UiTestUtils.addNewBrick(solo, R.string.brick_when_started);
 
@@ -83,7 +84,7 @@ public class WhenStartedBrickTest extends BaseActivityInstrumentationTestCase<Ma
 		addedYPosition = UiTestUtils.getAddedListItemYPosition(solo);
 
 		solo.drag(20, 20, addedYPosition, yPosition.get(yPosition.size() - 1) + 20, 100);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		projectBrickList = ProjectManager.getInstance().getCurrentSprite().getScript(0).getBrickList();
 		assertEquals("Incorrect number of bricks.", 3, projectBrickList.size());
 		projectBrickList = ProjectManager.getInstance().getCurrentSprite().getScript(1).getBrickList();
@@ -91,7 +92,7 @@ public class WhenStartedBrickTest extends BaseActivityInstrumentationTestCase<Ma
 		assertTrue("Wrong Script instance.",
 				(ProjectManager.getInstance().getCurrentSprite().getScript(1) instanceof StartScript));
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_add);
 		solo.clickOnText(solo.getString(R.string.category_control));
@@ -102,7 +103,7 @@ public class WhenStartedBrickTest extends BaseActivityInstrumentationTestCase<Ma
 		addedYPosition = UiTestUtils.getAddedListItemYPosition(solo);
 
 		solo.drag(20, 20, addedYPosition, yPosition.get(3) + 20, 100);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		projectBrickList = ProjectManager.getInstance().getCurrentSprite().getScript(0).getBrickList();
 		assertEquals("Incorrect number of bricks.", 2, projectBrickList.size());
 		assertTrue("Wrong Script instance.",
@@ -118,7 +119,7 @@ public class WhenStartedBrickTest extends BaseActivityInstrumentationTestCase<Ma
 		assertTrue("Wrong Script instance.",
 				(ProjectManager.getInstance().getCurrentSprite().getScript(2) instanceof StartScript));
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		UiTestUtils.addNewBrick(solo, R.string.brick_when_started);
 
@@ -127,7 +128,7 @@ public class WhenStartedBrickTest extends BaseActivityInstrumentationTestCase<Ma
 
 		solo.goBack();
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		projectBrickList = ProjectManager.getInstance().getCurrentSprite().getScript(0).getBrickList();
 		assertEquals("Incorrect number of bricks.", 2, projectBrickList.size());
 		assertTrue("Wrong Script instance.",

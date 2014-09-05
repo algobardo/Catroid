@@ -29,7 +29,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.jayway.android.robotium.solo.Solo;
+import android.test.Solo; // CQA, instead of robotium
 
 import junit.framework.TestSuite;
 
@@ -499,7 +499,7 @@ public class DoubleClickOpensViewOnceTest extends TestSuite {
 			ScriptActivity activity = (ScriptActivity) solo.getCurrentActivity();
 			BrickCategoryFragment brickCategoryFragment = (BrickCategoryFragment) activity.getSupportFragmentManager()
 					.findFragmentByTag(BrickCategoryFragment.BRICK_CATEGORY_FRAGMENT_TAG);
-			solo.sleep(250);
+			// solo.sleep(250); // CQA
 			final OnItemClickListener onItemClickListener = brickCategoryFragment.getListView()
 					.getOnItemClickListener();
 

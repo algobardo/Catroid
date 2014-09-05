@@ -30,7 +30,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.jayway.android.robotium.solo.Solo;
+import android.test.Solo; // CQA, instead of robotium
 
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
@@ -158,6 +158,7 @@ public class UserConceptTest extends BaseActivityInstrumentationTestCase<MainMen
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void testRegisterUsernameDifferentCases() throws Throwable {
 		setTestUrl();
 		clearSharedPreferences();

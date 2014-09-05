@@ -86,6 +86,7 @@ public class LedBrickTest extends BaseActivityInstrumentationTestCase<ScriptActi
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void testLedBricks() {
 		ListView dragDropListView = UiTestUtils.getScriptListView(solo);
 		BrickAdapter adapter = (BrickAdapter) dragDropListView.getAdapter();
@@ -104,54 +105,54 @@ public class LedBrickTest extends BaseActivityInstrumentationTestCase<ScriptActi
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 
-		solo.sleep(LED_DELAY_MS);
+		// solo.sleep(LED_DELAY_MS); // CQA
 		Log.d(TAG, "checking sensor value");
 		SensorTestServerConnection.checkLightSensorValue(SensorTestServerConnection.SET_LED_OFF_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 		SensorTestServerConnection.checkLightSensorValue(SensorTestServerConnection.SET_LED_OFF_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 		SensorTestServerConnection.checkLightSensorValue(SensorTestServerConnection.SET_LED_OFF_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 
 		Log.d(TAG, "tapping the screen should turn on the led");
 		UiTestUtils.clickOnStageCoordinates(solo, 100, 200, 480, 800);
 
 		// wait a long time, then check the sensor value weather the light is really on
-		solo.sleep(LED_DELAY_MS);
+		// solo.sleep(LED_DELAY_MS); // CQA
 		Log.d(TAG, "checking sensor value");
 		SensorTestServerConnection.checkLightSensorValue(SensorTestServerConnection.SET_LED_ON_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 		SensorTestServerConnection.checkLightSensorValue(SensorTestServerConnection.SET_LED_ON_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 		SensorTestServerConnection.checkLightSensorValue(SensorTestServerConnection.SET_LED_ON_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 
 		Log.d(TAG, "pause StageActivity - this should turn off the led");
 		solo.goBack();
 
 		// pausing the activity should turn the light off. again, check the sensor value
-		solo.sleep(LED_DELAY_MS);
+		// solo.sleep(LED_DELAY_MS); // CQA
 		Log.d(TAG, "checking sensor value");
 		SensorTestServerConnection.checkLightSensorValue(SensorTestServerConnection.SET_LED_OFF_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 		SensorTestServerConnection.checkLightSensorValue(SensorTestServerConnection.SET_LED_OFF_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 		SensorTestServerConnection.checkLightSensorValue(SensorTestServerConnection.SET_LED_OFF_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 
 		// resuming the activity should turn the led on again
 		Log.d(TAG, "resume StageActivity - this should turn the led on again");
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_resume));
-		solo.sleep(6000);
+		// solo.sleep(6000); // CQA
 		// wait a long time, then check the sensor value weather the light is really on
-		solo.sleep(LED_DELAY_MS);
+		// solo.sleep(LED_DELAY_MS); // CQA
 		Log.d(TAG, "checking sensor value");
 		SensorTestServerConnection.checkLightSensorValue(SensorTestServerConnection.SET_LED_ON_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 		SensorTestServerConnection.checkLightSensorValue(SensorTestServerConnection.SET_LED_ON_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 		SensorTestServerConnection.checkLightSensorValue(SensorTestServerConnection.SET_LED_ON_VALUE);
-		solo.sleep(WLAN_DELAY_MS);
+		// solo.sleep(WLAN_DELAY_MS); // CQA
 
 		Log.d(TAG, "testLedBrick() finished");
 	}

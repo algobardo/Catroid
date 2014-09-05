@@ -74,6 +74,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		ProjectManager.getInstance().deleteCurrentProject();
 	}
 
+	@android.test.UnstableTest
 	public void testBackButtonPressedTwice() {
 		Project project = createTestProject(testProject);
 		ProjectManager.getInstance().setProject(project);
@@ -82,7 +83,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		solo.goBack();
 
 		solo.goBack();
@@ -90,6 +91,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.assertCurrentActivity("Program is not in stage activity", ProjectActivity.class);
 	}
 
+	@android.test.UnstableTest
 	public void testBackToPreviousActivity() {
 		createAndSaveTestProject(testProject);
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
@@ -109,6 +111,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		assertEquals("Not equal Activities", previousActivity, getActivity());
 	}
 
+	@android.test.UnstableTest
 	public void testPauseOnBackButton() {
 		float defaultScale = 100.0f;
 		float newScale = 50.0f;
@@ -131,18 +134,19 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		assertEquals("Unexpected look size", defaultScale, sprite.look.getSizeInUserInterfaceDimensionUnit());
 
 		solo.goBack();
-		solo.sleep(6000);
+		// solo.sleep(6000); // CQA
 		assertEquals("Unexpected look size", defaultScale, sprite.look.getSizeInUserInterfaceDimensionUnit());
 
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_resume));
-		solo.sleep(6000);
+		// solo.sleep(6000); // CQA
 		assertEquals("Unexpected look size", newScale, sprite.look.getSizeInUserInterfaceDimensionUnit());
 	}
 
+	@android.test.UnstableTest
 	public void testRestartButtonActivityChain() {
 		createAndSaveTestProject(testProject);
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
@@ -156,14 +160,14 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 		solo.goBack();
-		solo.sleep(400);
+		// solo.sleep(400); // CQA
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_restart));
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 		solo.assertCurrentActivity("Program is not in stage activity", StageActivity.class);
 
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		solo.goBack();
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_back));
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		assertEquals("Returned to wrong Activity", currentActivity, solo.getCurrentActivity());
@@ -183,7 +187,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 
 		ProjectManager projectManager = ProjectManager.getInstance();
 		Project projectStart = projectManager.getCurrentProject();
@@ -202,11 +206,11 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		spriteList.clear();
 
 		solo.clickOnScreen(ScreenValues.SCREEN_WIDTH / 2, ScreenValues.SCREEN_HEIGHT / 2);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.goBack();
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_restart));
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		//scriptPositions in between
 		Project projectRestart = ProjectManager.getInstance().getCurrentProject();
@@ -229,6 +233,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		}
 	}
 
+	@android.test.UnstableTest
 	public void testRestartProjectWithSound() {
 		String projectName = UiTestUtils.PROJECTNAME1;
 		//creating sprites for project:
@@ -262,16 +267,16 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(4000);
+		// solo.sleep(4000); // CQA
 
 		MediaPlayer mediaPlayer = getMediaPlayers().get(0);
 		assertTrue("Sound not playing.", mediaPlayer.isPlaying());
 		int positionBeforeRestart = mediaPlayer.getCurrentPosition();
 		solo.goBack();
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		assertFalse("Sound playing but should be paused.", mediaPlayer.isPlaying());
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_restart));
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 
 		mediaPlayer = getMediaPlayers().get(0);
 		int positionAfterRestart = mediaPlayer.getCurrentPosition();
@@ -289,10 +294,10 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 		solo.goBack();
-		solo.sleep(400);
+		// solo.sleep(400); // CQA
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_axes_on));
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_resume));
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 		byte[] redPixel = { (byte) 255, 0, 0, (byte) 255 };
 		byte[] stagePixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH / 2,
 				ScreenValues.SCREEN_HEIGHT / 2, 1, 1);
@@ -310,7 +315,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.goBack();
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_axes_off));
 		solo.clickOnButton(solo.getString(R.string.stage_dialog_resume));
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 		byte[] whitePixel = { (byte) 255, (byte) 255, (byte) 255, (byte) 255 };
 		stagePixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH / 2,
 				ScreenValues.SCREEN_HEIGHT / 2, 1, 1);
@@ -327,6 +332,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		UiTestUtils.compareByteArrays(whitePixel, stagePixel);
 	}
 
+	@android.test.UnstableTest
 	public void testMaximizeStretch() {
 		Project project = createTestProject(testProject);
 		project.getXmlHeader().virtualScreenWidth = 480;
@@ -356,7 +362,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.goBack();
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_maximize));
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_continue));
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 		byte[] blackPixel = { 0, 0, 0, (byte) 255 };
 		screenPixel = StageActivity.stageListener.getPixels(0, 0, 1, 1);
 		UiTestUtils.compareByteArrays(blackPixel, screenPixel);
@@ -375,7 +381,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.goBack();
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_maximize));
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_continue));
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 		screenPixel = StageActivity.stageListener.getPixels(0, 0, 1, 1);
 		UiTestUtils.compareByteArrays(whitePixel, screenPixel);
 		screenPixel = StageActivity.stageListener.getPixels(ScreenValues.SCREEN_WIDTH - 1,
@@ -409,6 +415,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		UiTestUtils.compareByteArrays(whitePixel, screenPixel);
 	}
 
+	@android.test.UnstableTest
 	public void testMaximizeStretchRememeberSetting() {
 		Project project = createTestProject(testProject);
 		project.getXmlHeader().virtualScreenWidth = 480;
@@ -426,24 +433,24 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 		assertTrue("Stage not resizeable.", ((StageActivity) solo.getCurrentActivity()).getResizePossible());
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.goBack();
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_continue));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.goBack();
 		solo.goBack();
 		StorageHandler.getInstance().saveProject(project);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		assertTrue("Wrong screenMode in xml-file.",
 				ProjectManager.getInstance().getCurrentProject().getScreenMode() == ScreenModes.STRETCH);
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.goBack();
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_maximize));
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_continue));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.goBack();
 		solo.goBack();
 

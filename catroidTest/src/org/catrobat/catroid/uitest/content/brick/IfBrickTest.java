@@ -82,7 +82,7 @@ public class IfBrickTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 
 	public void testStrings() {
 		solo.clickOnView(solo.getView(R.id.brick_if_begin_edit_text));
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 
 		boolean isFound = solo.searchText(solo.getString(R.string.brick_if_begin_second_part));
 		assertTrue("String: " + getActivity().getString(R.string.brick_if_begin_second_part) + " not found!", isFound);
@@ -216,6 +216,7 @@ public class IfBrickTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		assertTrue("Wrong Brick instance.", projectBrickList.get(4) instanceof IfLogicEndBrick);
 	}
 
+	@android.test.UnstableTest
 	public void testCopyIfLogicBeginBrickActionMode() {
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.copy), R.id.copy, getActivity());
 		solo.clickOnCheckBox(1);
@@ -232,6 +233,7 @@ public class IfBrickTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		assertTrue("Wrong Brick instance.", projectBrickList.get(6) instanceof IfLogicEndBrick);
 	}
 
+	@android.test.UnstableTest
 	public void testCopyIfLogicElseBrickActionMode() {
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.copy), R.id.copy, getActivity());
 		solo.clickOnCheckBox(3);
@@ -264,6 +266,7 @@ public class IfBrickTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		assertTrue("Wrong Brick instance.", projectBrickList.get(6) instanceof IfLogicEndBrick);
 	}
 
+	@android.test.UnstableTest
 	public void testSelectionAfterCopyActionMode() {
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.copy), R.id.copy, getActivity());
 		solo.clickOnCheckBox(1);
@@ -290,6 +293,7 @@ public class IfBrickTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		assertTrue("CheckBox is not checked but should be.", secondIfLogicEndBrickCheckBox.isChecked());
 	}
 
+	@android.test.UnstableTest
 	public void testSelectionActionMode() {
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.copy), R.id.copy, getActivity());
 		solo.clickOnCheckBox(1);

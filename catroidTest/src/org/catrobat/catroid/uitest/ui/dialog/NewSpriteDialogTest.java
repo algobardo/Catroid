@@ -100,10 +100,10 @@ public class NewSpriteDialogTest extends BaseActivityInstrumentationTestCase<Mai
 
 		String errorMessageText = solo.getString(R.string.spritename_already_exists);
 		String buttonCloseText = solo.getString(R.string.close);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("ErrorMessage not visible", solo.searchText(errorMessageText));
 		solo.clickOnButton(buttonCloseText);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		String okButtonText = solo.getString(R.string.ok);
 		boolean okButtonEnabled = solo.getButton(okButtonText).isEnabled();

@@ -28,7 +28,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.view.View;
 
-import com.jayway.android.robotium.solo.Solo;
+import android.test.Solo; // CQA, instead of robotium
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -98,7 +98,7 @@ public class ProgramMenuActivityTest extends BaseActivityInstrumentationTestCase
 		// Note that the activity is _indeed_ rotated on your device/emulator!
 		// Robotium can _force_ the activity to be in landscape mode (and so could we, programmatically)
 		solo.setActivityOrientation(Solo.LANDSCAPE);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		assertEquals(ProgramMenuActivity.class.getSimpleName()
 				+ " not set to be in portrait mode in AndroidManifest.xml!", ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
@@ -149,6 +149,7 @@ public class ProgramMenuActivityTest extends BaseActivityInstrumentationTestCase
 		assertTrue("Text on look button is not 'Backgrounds'", solo.searchText(solo.getString(R.string.backgrounds)));
 	}
 
+	@android.test.UnstableTest
 	public void testPlayButton() {
 		solo.assertMemoryNotLow();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());

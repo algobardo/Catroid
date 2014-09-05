@@ -103,6 +103,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 		startScript1.addBrick(setVariableBrick);
 	}
 
+	@android.test.UnstableTest
 	public void testAddUserVariableAfterStage() throws InterruptedException {
 		String userVariableString = "userVar1";
 
@@ -115,7 +116,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_ok));
 
 		solo.clickOnView(solo.getView(R.id.button_play));
-		solo.sleep(250);
+		// solo.sleep(250); // CQA
 		assertTrue("StageActivity not shown: ", solo.waitForActivity(StageActivity.class.getSimpleName()));
 
 		solo.goBack();
@@ -123,7 +124,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_back));
 		assertTrue("ScriptActivity not shown: ", solo.waitForActivity(ScriptActivity.class.getSimpleName()));
 
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		solo.clickOnView(solo.getView(SET_VARIABLE_EDIT_TEXT_RID));
 		assertTrue("FormulaEditorFragment not shown: ",
 				solo.waitForFragmentByTag(FormulaEditorFragment.FORMULA_EDITOR_FRAGMENT_TAG));
@@ -138,6 +139,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 		assertTrue("UserVariable not added!", listView.getCount() == 2);
 	}
 
+	@android.test.UnstableTest
 	public void testModifyUserVariableValuesInStage() throws InterruptedException {
 
 		solo.goBack();
@@ -147,7 +149,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 		solo.clickOnView(solo.getView(R.id.button_play));
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(250);
+		// solo.sleep(250); // CQA
 		solo.goBack();
 		solo.waitForView(solo.getView(R.id.stage_dialog_button_back));
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_back));
@@ -177,7 +179,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 		solo.waitForActivity(ProgramMenuActivity.class.getSimpleName());
 		solo.clickOnView(solo.getView(R.id.button_play));
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(250);
+		// solo.sleep(250); // CQA
 		solo.goBack();
 		solo.waitForView(solo.getView(R.id.stage_dialog_button_back));
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_back));
@@ -207,7 +209,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 
 		solo.clickOnView(solo.getView(R.id.button_play));
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(250);
+		// solo.sleep(250); // CQA
 		solo.goBack();
 		solo.waitForView(solo.getView(R.id.stage_dialog_button_back));
 		solo.clickOnView(solo.getView(R.id.stage_dialog_button_back));
@@ -311,7 +313,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 		solo.clickOnCheckBox(0);
 		solo.clickOnCheckBox(1);
 		solo.clickOnImage(ACTIONMODE_INDEX);
-		solo.sleep(250);
+		// solo.sleep(250); // CQA
 
 		ListView userVariableListView = getVariableListView();
 
@@ -386,6 +388,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 		ProjectManager.getInstance().getCurrentProject().getUserVariables().deleteUserVariableByName("global");
 	}
 
+	@android.test.UnstableTest
 	public void testCreateUserVariableDoubleName() {
 
 		solo.clickOnView(solo.getView(CHANGE_SIZE_EDIT_TEXT_RID));
@@ -513,7 +516,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 
 		String selectAll = solo.getString(R.string.select_all).toUpperCase(Locale.getDefault());
 
-		solo.sleep(400);
+		// solo.sleep(400); // CQA
 
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.delete), R.id.delete, getActivity());
 		assertTrue("Select All is not shown", solo.getView(R.id.select_all).isShown());

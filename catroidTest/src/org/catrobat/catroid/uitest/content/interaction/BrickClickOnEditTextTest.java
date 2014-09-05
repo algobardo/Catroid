@@ -71,24 +71,24 @@ public class BrickClickOnEditTextTest extends BaseActivityInstrumentationTestCas
 		int addedYPosition;
 
 		UiTestUtils.addNewBrick(solo, R.string.brick_set_x);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		yPosition = UiTestUtils.getListItemYPositions(solo, 0);
 		addedYPosition = UiTestUtils.getAddedListItemYPosition(solo);
 
 		solo.drag(20, 20, addedYPosition, yPosition.get(0), 20);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		List<Brick> brickListToCheck = ProjectManager.getInstance().getCurrentScript().getBrickList();
 		assertEquals("One Brick should be in bricklist", 1, brickListToCheck.size());
 		assertTrue("Set brick should be instance of SetXBrick", brickListToCheck.get(0) instanceof SetXBrick);
 
 		UiTestUtils.addNewBrick(solo, R.string.brick_set_y);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		yPosition = UiTestUtils.getListItemYPositions(solo, 0);
 		addedYPosition = UiTestUtils.getAddedListItemYPosition(solo);
 
 		solo.drag(20, 20, addedYPosition, yPosition.get(1), 20);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		brickListToCheck = ProjectManager.getInstance().getCurrentScript().getBrickList();
 		assertEquals("Two Bricks should be in bricklist", 2, brickListToCheck.size());

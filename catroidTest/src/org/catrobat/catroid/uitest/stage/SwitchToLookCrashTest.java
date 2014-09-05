@@ -63,6 +63,7 @@ public class SwitchToLookCrashTest extends BaseActivityInstrumentationTestCase<M
 		prepareTest();
 	}
 
+	@android.test.UnstableTest
 	public void testSwitchToLookCrashPNG() throws IOException {
 		String nyanCatPath = "";
 		String nyanCat = "nyancat_crash";
@@ -89,7 +90,7 @@ public class SwitchToLookCrashTest extends BaseActivityInstrumentationTestCase<M
 		intent.putExtras(bundleForGallery);
 
 		getLookFragment().startActivityForResult(intent, LookController.REQUEST_SELECT_OR_DRAW_IMAGE);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("Testfile not added from mockActivity", solo.searchText(nyanCat));
 
 		String checksumNyanCatImageFile = Utils.md5Checksum(nyanCatPngFile);
@@ -112,9 +113,10 @@ public class SwitchToLookCrashTest extends BaseActivityInstrumentationTestCase<M
 
 		UiTestUtils.clickOnActionBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(5000);
+		// solo.sleep(5000); // CQA
 	}
 
+	@android.test.UnstableTest
 	public void testSwitchToLookCrashJPG() throws IOException {
 		String manImagePath = "";
 		String manImage = "man_crash";
@@ -141,7 +143,7 @@ public class SwitchToLookCrashTest extends BaseActivityInstrumentationTestCase<M
 		intent.putExtras(bundleForGallery);
 
 		getLookFragment().startActivityForResult(intent, LookController.REQUEST_SELECT_OR_DRAW_IMAGE);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("Testfile not added from mockActivity", solo.searchText(manImage));
 
 		String checksumNyanCatImageFile = Utils.md5Checksum(nyanCatPngFile);
@@ -164,7 +166,7 @@ public class SwitchToLookCrashTest extends BaseActivityInstrumentationTestCase<M
 
 		UiTestUtils.clickOnActionBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(5000);
+		// solo.sleep(5000); // CQA
 	}
 
 	private void writeBufferToFile(InputStream inputStream, String imageFilePath) throws IOException {

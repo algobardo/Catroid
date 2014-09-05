@@ -72,6 +72,7 @@ public class LoopBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 		ProjectManager.getInstance().deleteCurrentProject();
 	}
 
+	@android.test.UnstableTest
 	public void testRepeatBrick() {
 		ArrayList<Integer> yPosition;
 		ArrayList<Brick> projectBrickList = project.getSpriteList().get(0).getScript(0).getBrickList();
@@ -174,7 +175,7 @@ public class LoopBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 				((NestingBrick) projectBrickList.get(2)).getAllNestingBrickParts(false).get(1), projectBrickList.get(4));
 
 		UiTestUtils.addNewBrick(solo, R.string.brick_change_brightness);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		UiTestUtils.dragFloatingBrick(solo, 1.25f);
 
 		assertEquals("Incorrect number of bricks.", 8, projectBrickList.size());
@@ -184,6 +185,7 @@ public class LoopBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 
 	}
 
+	@android.test.UnstableTest
 	public void testNestedForeverBricks() {
 		ArrayList<Integer> yPosition;
 		ArrayList<Brick> projectBrickList = project.getSpriteList().get(0).getScript(0).getBrickList();
@@ -230,7 +232,7 @@ public class LoopBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 		addedYPosition = UiTestUtils.getAddedListItemYPosition(solo);
 
 		solo.drag(20, 20, addedYPosition, yPosition.get(1), 20);
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 
 		checkIfForeverLoopsAreCorrectlyPlaced(0);
 		checkIfForeverLoopsAreCorrectlyPlaced(1);
@@ -367,6 +369,7 @@ public class LoopBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 		assertTrue("CheckBox is not checked but should be.", secondLoopEndBrickCheckBox.isChecked());
 	}
 
+	@android.test.UnstableTest
 	public void testSelectionActionMode() {
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.copy), R.id.copy, getActivity());
 		solo.clickOnCheckBox(1);

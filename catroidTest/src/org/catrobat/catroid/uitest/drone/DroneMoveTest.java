@@ -72,7 +72,7 @@ public class DroneMoveTest extends BaseActivityInstrumentationTestCase<ScriptAct
 		solo.clickOnView(solo.getView(R.id.brick_drone_move_label));
 		solo.clickOnText(solo.getString(R.string.brick_context_dialog_delete_brick));
 		solo.clickOnText(solo.getString(R.string.yes));
-		solo.sleep(350);
+		// solo.sleep(350); // CQA
 	}
 
 }

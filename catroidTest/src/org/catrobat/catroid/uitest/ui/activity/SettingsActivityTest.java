@@ -30,7 +30,7 @@ import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.widget.ListView;
 
-import com.jayway.android.robotium.solo.Solo;
+import android.test.Solo; // CQA, instead of robotium
 
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.test.drone.DroneTestUtils;
@@ -54,6 +54,7 @@ public class SettingsActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		settings = solo.getString(R.string.settings);
 	}
 
+	@android.test.UnstableTest
 	public void testToggleDroneBricks() {
 		String dronePreferenceString = solo.getString(R.string.preference_description_quadcopter_bricks);
 		String categoryDroneLabel = solo.getString(R.string.category_drone);
@@ -125,7 +126,7 @@ public class SettingsActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_add);
 		assertFalse("Lego brick category is showing!", solo.searchText(categoryLegoNXTLabel));
 		solo.goBack();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		UiTestUtils.clickOnHomeActionBarButton(solo);
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
 

@@ -94,6 +94,7 @@ public class LegoNXTTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 
 	// This test requires the NXTBTTestServer to be running or a LegoNXT Robot to run! Check connect string to see if you connect to the right device!
 	@Device
+	@android.test.UnstableTest
 	public void testNXTFunctionality() {
 		createTestproject(projectName);
 
@@ -102,7 +103,7 @@ public class LegoNXTTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		assertTrue("Bluetooth not supported on device", bluetoothAdapter != null);
 		if (!bluetoothAdapter.isEnabled()) {
 			bluetoothAdapter.enable();
-			solo.sleep(5000);
+			// solo.sleep(5000); // CQA
 		}
 
 		ArrayList<String> autoConnectIDs = new ArrayList<String>();
@@ -113,7 +114,7 @@ public class LegoNXTTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		solo.clickOnText(solo.getString(R.string.main_menu_continue));
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 
 		ListView deviceList = solo.getCurrentViews(ListView.class).get(0);
 		String connectedDeviceName = null;
@@ -126,11 +127,11 @@ public class LegoNXTTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		}
 
 		solo.clickOnText(connectedDeviceName);
-		solo.sleep(8000);
+		// solo.sleep(8000); // CQA
 		solo.assertCurrentActivity("Not in stage - connection to bluetooth-device failed", StageActivity.class);
 
 		solo.clickOnScreen(ScreenValues.SCREEN_WIDTH / 2, ScreenValues.SCREEN_HEIGHT / 2);
-		solo.sleep(10000);
+		// solo.sleep(10000); // CQA
 
 		ArrayList<byte[]> executedCommands = LegoNXTCommunicator.getReceivedMessageList();
 		assertEquals("Commands seem to have not been executed! Connected to correct device??", commands.size(),
@@ -172,6 +173,7 @@ public class LegoNXTTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 
 	// This test requires the NXTBTTestServer to be running or a LegoNXT Robot to run! Check connect string to see if you connect to the right device!
 	@Device
+	@android.test.UnstableTest
 	public void testNXTPersistentConnection() {
 		createTestproject(projectName);
 
@@ -180,7 +182,7 @@ public class LegoNXTTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		assertTrue("Bluetooth not supported on device", bluetoothAdapter != null);
 		if (!bluetoothAdapter.isEnabled()) {
 			bluetoothAdapter.enable();
-			solo.sleep(5000);
+			// solo.sleep(5000); // CQA
 		}
 		Set<BluetoothDevice> bondedDevices = bluetoothAdapter.getBondedDevices();
 		Iterator<BluetoothDevice> iterator = bondedDevices.iterator();
@@ -205,27 +207,27 @@ public class LegoNXTTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		Reflection.setPrivateField(deviceListActivity, "autoConnectIDs", autoConnectIDs);
 
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
-		solo.sleep(6500);// increase this sleep if probs!
+		// solo.sleep(6500); // CQA// increase this sleep if probs!
 
 		solo.goBack();
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		solo.goBack();
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		solo.goBack();
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		//Device is still connected (until visiting main menu or exiting program)!
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		solo.assertCurrentActivity("BT connection was not there anymore!!!", StageActivity.class);
 
 		solo.goBack();
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		solo.goBack();
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		solo.goBack();
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		solo.goBack();
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		//main menu => device disconnected!
 
 		autoConnectIDs = new ArrayList<String>();
@@ -235,7 +237,7 @@ public class LegoNXTTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		solo.clickOnText(solo.getString(R.string.main_menu_continue));
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
-		solo.sleep(10000); //yes, has to be that long! waiting for auto connection timeout!
+		// solo.sleep(10000); // CQA //yes, has to be that long! waiting for auto connection timeout!
 
 		assertTrue("I should be on the bluetooth device choosing screen, but am not!",
 				solo.searchText(connectedDeviceMacAdress));
@@ -246,6 +248,7 @@ public class LegoNXTTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void testNXTConnectionDialogGoBack() {
 		createTestproject(projectName);
 
@@ -258,18 +261,18 @@ public class LegoNXTTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		assertTrue("Bluetooth not supported on device", bluetoothAdapter != null);
 		if (!bluetoothAdapter.isEnabled()) {
 			bluetoothAdapter.enable();
-			solo.sleep(5000);
+			// solo.sleep(5000); // CQA
 		}
 
 		solo.clickOnText(solo.getString(R.string.main_menu_continue));
 		solo.waitForActivity(ProjectActivity.class.getSimpleName());
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		solo.assertCurrentActivity("Devicelist not shown!", DeviceListActivity.class);
 		solo.goBack();
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		solo.assertCurrentActivity("Devicelist not shown!", DeviceListActivity.class);
 
 	}

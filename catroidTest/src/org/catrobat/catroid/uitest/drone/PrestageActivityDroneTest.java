@@ -85,6 +85,7 @@ public class PrestageActivityDroneTest extends BaseActivityInstrumentationTestCa
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void test00DroneTermsOfServiceDialog() {
 		//ATTENTION, test0* must be executed in the right order!
 		//TODO Drone: make test order irrelevant
@@ -128,7 +129,7 @@ public class PrestageActivityDroneTest extends BaseActivityInstrumentationTestCa
 		//TODO Drone: make test order irrelevant
 		UiTestUtils.getIntoSpritesFromMainMenu(solo);
 		UiTestUtils.clickOnPlayButton(solo);
-		solo.sleep(4000);
+		// solo.sleep(4000); // CQA
 		solo.getText(solo.getString(R.string.close));
 		waitForPreStageActivity();
 		int requiredResourceCounter = (Integer) Reflection.getPrivateField(preStageActivity, "requiredResourceCounter");
@@ -173,9 +174,9 @@ public class PrestageActivityDroneTest extends BaseActivityInstrumentationTestCa
 		UiTestUtils.getIntoSpritesFromMainMenu(solo);
 		UiTestUtils.clickOnPlayButton(solo);
 		waitForPreStageActivity();
-		solo.sleep(4000);
+		// solo.sleep(4000); // CQA
 		assertEquals("Must be unchanged 0", 0, getDroneBatteryLevelFromPreStageActivityDroneInitializer());
-		solo.sleep(4000);
+		// solo.sleep(4000); // CQA
 		preStageActivity.getDroneInitializer().onDroneBatteryChanged(2);
 		preStageActivity.getDroneInitializer().onDroneReady();
 
@@ -200,6 +201,7 @@ public class PrestageActivityDroneTest extends BaseActivityInstrumentationTestCa
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void test05DroneServiceStart() {
 		//ATTENTION, test0* must be executed in the right order!
 		//TODO Drone: make test order irrelevant
@@ -229,7 +231,7 @@ public class PrestageActivityDroneTest extends BaseActivityInstrumentationTestCa
 	private void waitForDroneServiceToBind(ActivityUnderTest activityUnderTest) {
 		for (int i = 0; i < 10; i++) { //waiting for the service to start
 			Log.d(TAG, "Spinning=" + i);
-			solo.sleep(1000);
+			// solo.sleep(1000); // CQA
 			switch (activityUnderTest) {
 				case PRE_STAGE:
 					getDroneControlServiceFromPreStageDroneInitializer();

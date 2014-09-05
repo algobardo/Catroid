@@ -32,7 +32,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.jayway.android.robotium.solo.Solo;
+import android.test.Solo; // CQA, instead of robotium
 
 import org.catrobat.catroid.BuildConfig;
 import org.catrobat.catroid.ProjectManager;
@@ -144,7 +144,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 
 		if (getSoundAdapter().getShowDetails()) {
 			solo.clickOnMenuItem(solo.getString(R.string.hide_details), true);
-			solo.sleep(TIME_TO_WAIT);
+			// solo.sleep(TIME_TO_WAIT); // CQA
 		}
 	}
 
@@ -201,7 +201,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.copy), R.id.copy, getActivity());
 		String selectAll = solo.getString(R.string.select_all).toUpperCase(Locale.getDefault());
 		solo.clickOnText(selectAll);
-		solo.sleep(TIME_TO_WAIT);
+		// solo.sleep(TIME_TO_WAIT); // CQA
 		for (CheckBox checkBox : solo.getCurrentViews(CheckBox.class)) {
 			assertTrue("CheckBox is not Checked!", checkBox.isChecked());
 		}
@@ -221,7 +221,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		clickOnContextMenuItem(SECOND_TEST_SOUND_NAME, solo.getString(R.string.delete));
 		solo.waitForText(deleteDialogTitle);
 		solo.clickOnButton(solo.getString(R.string.yes));
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 
 		int newCount = adapter.getCount();
 
@@ -234,7 +234,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		String newSoundName = "TeStSoUNd1";
 
 		renameSound(FIRST_TEST_SOUND_NAME, newSoundName);
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 
 		assertEquals("Sound not renamed in SoundList", newSoundName, getSoundTitle(0));
 		assertTrue("Sound not renamed in actual view", solo.searchText(newSoundName));
@@ -244,7 +244,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 	public void testSoundTimeUnderOneSecond() {
 		String soundName = "shortSound";
 		addNewSound(soundName, "soundunderonesecond.m4p", RESOURCE_SHORT_SOUND);
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		assertTrue("Sound has a length of 00:00", !solo.searchText("00:00"));
 
 
@@ -265,7 +265,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		assertEquals(assertMessageText, expectedSoundName, getSoundTitle(1));
 
 		expectedSoundName = defaultSoundName + "2";
-		solo.sleep(TIME_TO_WAIT);
+		// solo.sleep(TIME_TO_WAIT); // CQA
 		assertEquals(assertMessageText, expectedSoundName, getSoundTitle(2));
 
 		newSoundName = "x";
@@ -275,7 +275,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 
 		assertNotSame("Sound not renamed", expectedSoundName, getSoundTitle(1));
 		renameSound(newSoundName, defaultSoundName);
-		solo.sleep(TIME_TO_WAIT);
+		// solo.sleep(TIME_TO_WAIT); // CQA
 		assertEquals(assertMessageText, expectedSoundName, getSoundTitle(1));
 	}
 
@@ -285,7 +285,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		checkVisibilityOfViews(VISIBLE, VISIBLE, GONE, GONE);
 		checkPlayAndStopButton(R.string.sound_play);
 		solo.clickOnMenuItem(solo.getString(R.string.show_details));
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		checkVisibilityOfViews(VISIBLE, VISIBLE, VISIBLE, GONE);
 		checkPlayAndStopButton(R.string.sound_play);
 
@@ -294,16 +294,17 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		solo.waitForActivity(ProgramMenuActivity.class.getSimpleName());
 		solo.clickOnText(solo.getString(R.string.sounds));
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		checkVisibilityOfViews(VISIBLE, VISIBLE, VISIBLE, GONE);
 		checkPlayAndStopButton(R.string.sound_play);
 
 		solo.clickOnMenuItem(solo.getString(R.string.hide_details));
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		checkVisibilityOfViews(VISIBLE, VISIBLE, GONE, GONE);
 		checkPlayAndStopButton(R.string.sound_play);
 	}
 
+	@android.test.UnstableTest
 	public void testPlayAndStopSound() {
 		// Mute before playing sound
 		AudioManager audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
@@ -318,15 +319,15 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		ImageButton playAndStopImageButton = (ImageButton) solo.getView(R.id.fragment_sound_item_image_button);
 
 		solo.clickOnView(playAndStopImageButton);
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 
 		assertTrue("Mediaplayer is not playing although play button was touched", soundInfo.isPlaying);
 		checkVisibilityOfViews(VISIBLE, VISIBLE, GONE, GONE);
 		checkPlayAndStopButton(R.string.sound_stop);
 
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		solo.clickOnView(playAndStopImageButton);
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 
 		assertFalse("Mediaplayer is playing after touching stop button", soundInfo.isPlaying);
 		checkVisibilityOfViews(VISIBLE, VISIBLE, GONE, GONE);
@@ -334,16 +335,16 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 
 		// test the text fields
 		solo.clickOnView(playAndStopImageButton);
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 
 		assertTrue("Mediaplayer is not playing although play button was touched", soundInfo.isPlaying);
 		assertFalse("Mediaplayer is not playing although play button was touched", soundInfo2.isPlaying);
 		checkVisibilityOfViews(VISIBLE, VISIBLE, GONE, GONE);
 		checkPlayAndStopButton(R.string.sound_stop);
 
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		solo.clickOnText(FIRST_TEST_SOUND_NAME);
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 
 		assertFalse("Mediaplayer is playing after touching stop button", soundInfo.isPlaying);
 		assertFalse("Mediaplayer is not playing although play button was touched", soundInfo2.isPlaying);
@@ -367,13 +368,13 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		ImageButton playAndStopImageButton = (ImageButton) solo.getView(R.id.fragment_sound_item_image_button);
 
 		solo.clickOnView(playAndStopImageButton);
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 
 		assertTrue("Mediaplayer is not playing although play button was touched", soundInfo.isPlaying);
 		checkVisibilityOfViews(VISIBLE, VISIBLE, GONE, GONE);
 		checkPlayAndStopButton(R.string.sound_stop);
 
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		UiTestUtils.switchToFragmentInScriptActivity(solo, UiTestUtils.LOOKS_INDEX);
 		UiTestUtils.switchToFragmentInScriptActivity(solo, UiTestUtils.SOUNDS_INDEX);
 
@@ -384,6 +385,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		audioManager.setStreamMute(AudioManager.STREAM_MUSIC, false);
 	}
 
+	@android.test.UnstableTest
 	public void testAddSound() {
 		int expectedNumberOfSounds = getCurrentNumberOfSounds() + 1;
 
@@ -405,7 +407,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		intent.putExtras(bundleForExternalSource);
 
 		getSoundFragment().startActivityForResult(intent, SoundController.REQUEST_SELECT_MUSIC);
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
 		solo.assertCurrentActivity("Should be in SoundActivity", ScriptActivity.class.getSimpleName());
 
@@ -474,7 +476,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		// Check if rename ActionMode disappears if nothing was selected
 		checkIfCheckboxesAreCorrectlyChecked(false, false);
 		UiTestUtils.acceptAndCloseActionMode(solo);
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		assertFalse("BackPack dialog title didn't show up", solo.waitForText(backPackDialogTitle, 0, TIME_TO_WAIT));
 	}
 
@@ -522,6 +524,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		assertTrue("BackPack title didn't show up", solo.waitForText(backPackTitle, 0, TIME_TO_WAIT));
 	}
 
+	@android.test.UnstableTest
 	public void testBackPackSoundContextMenuAndCheckPlaying() {
 
 		if (!BuildConfig.FEATURE_BACKPACK_ENABLED) {
@@ -538,7 +541,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		soundInfoList = backPackListManager.getSoundInfoArrayList();
 		SoundInfo soundInfo = soundInfoList.get(0);
 		solo.clickOnView(playAndStopImageButton);
-		solo.sleep(TIME_TO_WAIT_BACKPACK);
+		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 
 		assertTrue("Mediaplayer is not playing although play button was touched", soundInfo.isPlaying);
 	}
@@ -553,7 +556,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 
 		assertNotNull("Could not get Adapter", adapter);
 		clickOnContextMenuItem(FIRST_TEST_SOUND_NAME, solo.getString(R.string.backpack));
-		solo.sleep(TIME_TO_WAIT_BACKPACK);
+		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 		clickOnContextMenuItem(FIRST_TEST_UNPACKING_SOUND_NAME, solo.getString(R.string.unpack));
 		solo.waitForDialogToClose(TIME_TO_WAIT_BACKPACK);
 		solo.goBack();
@@ -572,12 +575,12 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 
 		assertNotNull("Could not get Adapter", adapter);
 		clickOnContextMenuItem(FIRST_TEST_SOUND_NAME, solo.getString(R.string.backpack));
-		solo.sleep(TIME_TO_WAIT_BACKPACK);
+		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 		solo.goBack();
 		clickOnContextMenuItem(FIRST_TEST_SOUND_NAME, solo.getString(R.string.delete));
 		solo.waitForText(deleteDialogTitle);
 		solo.clickOnButton(solo.getString(R.string.yes));
-		solo.sleep(50);
+		// solo.sleep(50); // CQA
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.unpacking), R.id.unpacking, getActivity());
 		clickOnContextMenuItem(FIRST_TEST_UNPACKING_SOUND_NAME, solo.getString(R.string.unpack));
 		solo.waitForDialogToClose(TIME_TO_WAIT_BACKPACK);
@@ -600,14 +603,14 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 
 		assertNotNull("Could not get Adapter", adapter);
 		clickOnContextMenuItem(FIRST_TEST_SOUND_NAME, solo.getString(R.string.backpack));
-		solo.sleep(TIME_TO_WAIT_BACKPACK);
+		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 		clickOnContextMenuItem(FIRST_TEST_UNPACKING_SOUND_NAME, solo.getString(R.string.unpack));
 		solo.waitForDialogToClose(TIME_TO_WAIT_BACKPACK);
 		solo.goBack();
 
 		assertTrue("Sound wasn't unpacked!", solo.waitForText(FIRST_TEST_UNPACKING_SOUND_NAME, 0, TIME_TO_WAIT));
 		clickOnContextMenuItem(SECOND_TEST_SOUND_NAME, solo.getString(R.string.backpack));
-		solo.sleep(TIME_TO_WAIT_BACKPACK);
+		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 		clickOnContextMenuItem(SECOND_TEST_UNPACKING_SOUND_NAME, solo.getString(R.string.unpack));
 		solo.waitForDialogToClose(TIME_TO_WAIT_BACKPACK);
 		solo.goBack();
@@ -624,18 +627,18 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 	//
 	//		assertNotNull("Could not get Adapter", adapter);
 	//		clickOnContextMenuItem(FIRST_TEST_SOUND_NAME, solo.getString(R.string.backpack));
-	//		solo.sleep(TIME_TO_WAIT_BACKPACK);
+	//		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 	//		UiTestUtils.clickOnHomeActionBarButton(solo);
 	//		solo.clickOnText(solo.getString(R.string.programs));
 	//		UiTestUtils.clickOnTextInList(solo, solo.getString(R.string.programs));
-	//		solo.sleep(TIME_TO_WAIT_BACKPACK);
+	//		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 	//		UiTestUtils.clickOnTextInList(solo, UiTestUtils.PROJECTNAME1);
-	//		solo.sleep(TIME_TO_WAIT_BACKPACK);
+	//		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 	//		UiTestUtils.clickOnTextInList(solo, "cat");
-	//		solo.sleep(TIME_TO_WAIT_BACKPACK);
+	//		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 	//		solo.clickOnText(solo.getString(R.string.sounds));
 	//		UiTestUtils.openActionMode(solo, solo.getString(R.string.unpacking), R.id.unpacking, getActivity());
-	//		solo.sleep(TIME_TO_WAIT_BACKPACK);
+	//		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 	//		clickOnContextMenuItem(FIRST_TEST_SOUND_NAME, solo.getString(R.string.unpack));
 	//		solo.waitForDialogToClose(TIME_TO_WAIT_BACKPACK);
 	//		solo.goBack();
@@ -658,12 +661,12 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 
 		assertNotNull("Could not get Adapter", adapter);
 		clickOnContextMenuItem(FIRST_TEST_SOUND_NAME, solo.getString(R.string.backpack));
-		solo.sleep(TIME_TO_WAIT_BACKPACK);
+		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 
 		solo.goBack();
 
 		clickOnContextMenuItem(SECOND_TEST_SOUND_NAME, solo.getString(R.string.backpack));
-		solo.sleep(TIME_TO_WAIT_BACKPACK);
+		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.unpacking), R.id.unpacking, getActivity());
 
@@ -691,12 +694,12 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 
 		assertNotNull("Could not get Adapter", adapter);
 		clickOnContextMenuItem(FIRST_TEST_SOUND_NAME, solo.getString(R.string.backpack));
-		solo.sleep(TIME_TO_WAIT_BACKPACK);
+		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 
 		solo.goBack();
 
 		clickOnContextMenuItem(SECOND_TEST_SOUND_NAME, solo.getString(R.string.backpack));
-		solo.sleep(TIME_TO_WAIT_BACKPACK);
+		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.unpacking), R.id.unpacking, getActivity());
 
@@ -725,15 +728,15 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 
 		assertNotNull("Could not get Adapter", adapter);
 		clickOnContextMenuItem(FIRST_TEST_SOUND_NAME, solo.getString(R.string.backpack));
-		solo.sleep(TIME_TO_WAIT_BACKPACK);
+		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 		solo.goBack();
 		solo.goBack();
 		solo.goBack();
 		solo.clickOnText(SECOND_SPRITE_NAME);
-		solo.sleep(TIME_TO_WAIT_BACKPACK);
+		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 		solo.clickOnText(solo.getString(R.string.sounds));
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.unpacking), R.id.unpacking, getActivity());
-		solo.sleep(TIME_TO_WAIT_BACKPACK);
+		// solo.sleep(TIME_TO_WAIT_BACKPACK); // CQA
 		clickOnContextMenuItem(FIRST_TEST_SOUND_NAME, solo.getString(R.string.unpack));
 		solo.waitForDialogToClose(1000);
 		solo.goBack();
@@ -778,12 +781,13 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		// If an already existing name was entered a counter should be appended
 		String expectedNewSoundName = newSoundName + "1";
 		soundInfoList = projectManager.getCurrentSprite().getSoundList();
-		solo.sleep(TIME_TO_WAIT);
+		// solo.sleep(TIME_TO_WAIT); // CQA
 		assertEquals("Sound is not correctly renamed in SoundList (1 should be appended)", expectedNewSoundName,
 				soundInfoList.get(checkboxIndex).getTitle());
 		assertTrue("Sound not renamed in actual view", solo.searchText(expectedNewSoundName, true));
 	}
 
+	@android.test.UnstableTest
 	public void testBottomBarAndContextMenuOnActionModes() {
 		LinearLayout bottomBarLayout = (LinearLayout) solo.getView(R.id.bottom_bar);
 		ImageButton addButton = (ImageButton) bottomBarLayout.findViewById(R.id.button_add);
@@ -811,7 +815,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 				solo.waitForActivity(StageActivity.class.getSimpleName(), timeToWait));
 
 		solo.goBack();
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		checkIfContextMenuAppears(true, false);
 
@@ -832,7 +836,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 				solo.waitForActivity(StageActivity.class.getSimpleName(), timeToWait));
 
 		solo.goBack();
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		checkIfContextMenuAppears(true, true);
 	}
@@ -840,7 +844,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 	public void testItemClick() {
 		UiTestUtils.clickOnActionBar(solo, R.id.delete);
 		solo.clickInList(1);
-		solo.sleep(TIME_TO_WAIT);
+		// solo.sleep(TIME_TO_WAIT); // CQA
 
 		ArrayList<CheckBox> checkBoxList = solo.getCurrentViews(CheckBox.class);
 		assertTrue("CheckBox not checked", checkBoxList.get(0).isChecked());
@@ -856,7 +860,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		UiTestUtils.openActionMode(solo, delete, R.id.delete, getActivity());
 		String selectAll = solo.getString(R.string.select_all).toUpperCase(Locale.getDefault());
 		solo.clickOnText(selectAll);
-		solo.sleep(TIME_TO_WAIT);
+		// solo.sleep(TIME_TO_WAIT); // CQA
 		for (CheckBox checkBox : solo.getCurrentViews(CheckBox.class)) {
 			assertTrue("CheckBox is not Checked!", checkBox.isChecked());
 		}
@@ -995,7 +999,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		addNewSound(testSoundName, "longsound.mp3", RESOURCE_SOUND);
 		addNewSound(testSoundName, "longsound.mp3", RESOURCE_SOUND);
 
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		soundInfoList = projectManager.getCurrentSprite().getSoundList();
 
@@ -1036,28 +1040,28 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		ImageButton playAndStopImageButton = (ImageButton) solo.getView(R.id.fragment_sound_item_image_button);
 
 		solo.clickOnView(playAndStopImageButton);
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		solo.clickLongOnText(FIRST_TEST_SOUND_NAME);
 		solo.waitForText(solo.getString(R.string.delete));
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		assertFalse("Mediaplayer continues playing even if context menu has been opened", soundInfo.isPlaying);
 		solo.goBack();
 		checkVisibilityOfViews(VISIBLE, VISIBLE, GONE, GONE);
 		checkPlayAndStopButton(R.string.sound_play);
 
 		solo.clickOnView(playAndStopImageButton);
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		UiTestUtils.openActionMode(solo, rename, 0, getActivity());
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		assertFalse("Mediaplayer continues playing even if rename action has been opened", soundInfo.isPlaying);
 		solo.goBack();
 		checkVisibilityOfViews(VISIBLE, VISIBLE, GONE, GONE);
 		checkPlayAndStopButton(R.string.sound_play);
 
 		solo.clickOnView(playAndStopImageButton);
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		UiTestUtils.openActionMode(solo, delete, R.id.delete, getActivity());
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		assertFalse("Mediaplayer continues playing even if delete action has been opened", soundInfo.isPlaying);
 		solo.goBack();
 		checkVisibilityOfViews(VISIBLE, VISIBLE, GONE, GONE);
@@ -1066,9 +1070,9 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		UiTestUtils.openActionMode(solo, delete, R.id.delete, getActivity());
 		solo.clickOnView(playAndStopImageButton);
 		solo.clickOnCheckBox(0);
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		UiTestUtils.acceptAndCloseActionMode(solo);
-		solo.sleep(timeToWait);
+		// solo.sleep(timeToWait); // CQA
 		assertFalse("Mediaplayer continues playing even if already deleted", soundInfo.isPlaying);
 		solo.goBack();
 
@@ -1169,7 +1173,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 			assertFalse("Select All is still shown", solo.getView(R.id.select_all).isShown());
 
 			UiTestUtils.acceptAndCloseActionMode(solo);
-			solo.sleep(500);
+			// solo.sleep(500); // CQA
 			solo.goBack();
 
 			UiTestUtils.openActionMode(solo, solo.getString(R.string.unpacking), R.id.unpacking, getActivity());
@@ -1219,7 +1223,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		UiTestUtils.acceptAndCloseActionMode(solo);
 		solo.clickOnButton(solo.getString(R.string.no));
 
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		int viewAmountAfterDeleteMode = solo.getCurrentViews().size();
 
 		assertTrue("checkboxes or other delete elements are still visible", viewAmountBeforeDeleteMode == viewAmountAfterDeleteMode);
@@ -1298,7 +1302,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 
 	private void checkIfCheckboxesAreCorrectlyChecked(boolean firstCheckboxExpectedChecked,
 			boolean secondCheckboxExpectedChecked) {
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		firstCheckBox = solo.getCurrentViews(CheckBox.class).get(0);
 		secondCheckBox = solo.getCurrentViews(CheckBox.class).get(1);
 		assertEquals("First checkbox not correctly checked", firstCheckboxExpectedChecked, firstCheckBox.isChecked());

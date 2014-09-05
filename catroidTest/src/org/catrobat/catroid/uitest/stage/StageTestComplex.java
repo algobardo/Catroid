@@ -74,9 +74,10 @@ public class StageTestComplex extends BaseActivityInstrumentationTestCase<MainMe
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void testShowTexture() {
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(1400);
+		// solo.sleep(1400); // CQA
 		byte[] screenArray = StageActivity.stageListener.getPixels(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 		UiTestUtils.comparePixelArrayWithPixelScreenArrayWithTolerance(WHITE_PIXEL, screenArray, 0, 0, SCREEN_WIDTH,
@@ -105,7 +106,7 @@ public class StageTestComplex extends BaseActivityInstrumentationTestCase<MainMe
 				SCREEN_HEIGHT);
 
 		solo.clickOnScreen((SCREEN_WIDTH / 2) + 21, (SCREEN_HEIGHT / 2) - 21);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		screenArray = StageActivity.stageListener.getPixels(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 		UiTestUtils.comparePixelArrayWithPixelScreenArray(BLUE_PIXEL, screenArray, 21, 21, SCREEN_WIDTH, SCREEN_HEIGHT);
 		UiTestUtils.comparePixelArrayWithPixelScreenArray(BLUE_PIXEL, screenArray, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -115,7 +116,7 @@ public class StageTestComplex extends BaseActivityInstrumentationTestCase<MainMe
 				SCREEN_HEIGHT);
 
 		solo.clickOnScreen((SCREEN_WIDTH / 2) - 21, (SCREEN_HEIGHT / 2) - 21);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		screenArray = StageActivity.stageListener.getPixels(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 		UiTestUtils.comparePixelArrayWithPixelScreenArray(WHITE_PIXEL, screenArray, -31, 21, SCREEN_WIDTH,
 				SCREEN_HEIGHT);
@@ -126,7 +127,7 @@ public class StageTestComplex extends BaseActivityInstrumentationTestCase<MainMe
 				SCREEN_HEIGHT);
 
 		solo.clickOnScreen((SCREEN_WIDTH / 2) + 21, (SCREEN_HEIGHT / 2) + 21);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		screenArray = StageActivity.stageListener.getPixels(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 		UiTestUtils.comparePixelArrayWithPixelScreenArray(GREEN_PIXEL, screenArray, 1, -2, SCREEN_WIDTH, SCREEN_HEIGHT);
 		UiTestUtils
@@ -137,7 +138,7 @@ public class StageTestComplex extends BaseActivityInstrumentationTestCase<MainMe
 				SCREEN_HEIGHT);
 
 		solo.clickOnScreen((SCREEN_WIDTH / 2) - 21, (SCREEN_HEIGHT / 2) + 21);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		screenArray = StageActivity.stageListener.getPixels(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 		UiTestUtils.comparePixelArrayWithPixelScreenArray(RED_BRIGHTNESS_PIXEL, screenArray, -21, -21, SCREEN_WIDTH,
 				SCREEN_HEIGHT);
@@ -153,13 +154,14 @@ public class StageTestComplex extends BaseActivityInstrumentationTestCase<MainMe
 		UiTestUtils.comparePixelArrayWithPixelScreenArray(BLUE_PIXEL, screenArray, 21, 21, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 		solo.clickOnScreen((SCREEN_WIDTH / 2) - 50, (SCREEN_HEIGHT / 2) - 50);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		screenArray = StageActivity.stageListener.getPixels(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 		UiTestUtils.comparePixelArrayWithPixelScreenArray(BLACK_BRIGHTNESS_PIXEL, screenArray, -54, 55, SCREEN_WIDTH,
 				SCREEN_HEIGHT);
 
 	}
 
+	@android.test.UnstableTest
 	public void testBehaviourWithoutBricks() {
 		Project project = ProjectManager.getInstance().getCurrentProject();
 		assertNotNull("current project was null", project);
@@ -174,7 +176,7 @@ public class StageTestComplex extends BaseActivityInstrumentationTestCase<MainMe
 		StorageHandler.getInstance().loadProject(project.getName());
 
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(1400);
+		// solo.sleep(1400); // CQA
 
 		byte[] screenArray = StageActivity.stageListener.getPixels(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 		UiTestUtils.comparePixelArrayWithPixelScreenArray(BLUE_PIXEL, screenArray, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -186,7 +188,7 @@ public class StageTestComplex extends BaseActivityInstrumentationTestCase<MainMe
 				.comparePixelArrayWithPixelScreenArray(BLUE_PIXEL, screenArray, 19, -19, SCREEN_WIDTH, SCREEN_HEIGHT);
 		UiTestUtils.comparePixelArrayWithPixelScreenArray(BLUE_PIXEL, screenArray, 19, 19, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 	}
 
 	private void createProject() {

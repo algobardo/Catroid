@@ -38,7 +38,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.jayway.android.robotium.solo.Solo;
+import android.test.Solo; // CQA, instead of robotium
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -207,7 +207,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		// Note that the activity is _indeed_ rotated on your device/emulator!
 		// Robotium can _force_ the activity to be in landscape mode (and so could we, programmatically)
 		solo.setActivityOrientation(Solo.LANDSCAPE);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		assertEquals(MyProjectsActivity.class.getSimpleName()
 						+ " not set to be in portrait mode in AndroidManifest.xml!", ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
@@ -260,7 +260,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 			}
 		}
 
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 
 		File imageFile;
 
@@ -280,7 +280,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 			fail("Standard Project not created");
 		}
 		UiTestUtils.createTestProject();
-		solo.sleep(600);
+		// solo.sleep(600); // CQA
 
 		String myProjectsText = solo.getString(R.string.main_menu_programs);
 		assertTrue("Main-Menu not shown in 5 secs!", solo.waitForText(myProjectsText, 0, 5000));
@@ -299,7 +299,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
 		solo.clickOnText(UiTestUtils.DEFAULT_TEST_PROJECT_NAME);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("No error message was shown", solo.searchText(solo.getString(R.string.error_load_project)));
 
 		solo.clickOnButton(0);
@@ -320,7 +320,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 			fail("Standard Project not created");
 		}
 		UiTestUtils.createTestProject();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		String myProjectsText = solo.getString(R.string.main_menu_programs);
 		String standardProjectName = solo.getString(R.string.default_project_name);
@@ -362,19 +362,20 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clickOnButton(myProjectsText);
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("click on project '" + standardProjectName + "' in list not successful",
 				UiTestUtils.clickOnTextInList(solo, standardProjectName));
 
 		List<Sprite> spriteList = ProjectManager.getInstance().getCurrentProject().getSpriteList();
 		assertTrue("Standard Project should be restored", spriteList.size() == 5);
-		solo.sleep(3000);
+		// solo.sleep(3000); // CQA
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void testProjectsAndImagesVisible() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -443,14 +444,14 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		ProjectManager.getInstance().setProject(firstCacheTestProject);
 
 		for (int i = 1; i < numberOfCacheProjects; i++) {
-			solo.sleep(500);
+			// solo.sleep(500); // CQA
 			StorageHandler.getInstance().saveProject(new Project(getActivity(), "cachetestProject" + i));
 			UiTestUtils.saveFileToProject(cacheProjectName + i, StageListener.SCREENSHOT_MANUAL_FILE_NAME,
 					IMAGE_RESOURCE_2, getInstrumentation().getContext(), UiTestUtils.FileTypes.ROOT);
 		}
 
 		Log.v(MY_PROJECTS_ACTIVITY_TEST_TAG, "before sleep");
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 		Log.v(MY_PROJECTS_ACTIVITY_TEST_TAG, "after sleep");
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		Log.v(MY_PROJECTS_ACTIVITY_TEST_TAG, "after intent");
@@ -459,7 +460,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 		ArrayList<ListView> listViews = solo.getCurrentViews(ListView.class);
 		while (solo.getCurrentViews(ListView.class).size() == 0) {
-			solo.sleep(100);
+			// solo.sleep(100); // CQA
 			listViews = solo.getCurrentViews(ListView.class);
 		}
 
@@ -492,7 +493,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		UiTestUtils.saveFileToProject(secondCacheProjectName, StageListener.SCREENSHOT_MANUAL_FILE_NAME,
 				IMAGE_RESOURCE_3, getInstrumentation().getContext(), UiTestUtils.FileTypes.ROOT);
 		StorageHandler.getInstance().saveProject(secondCacheTestProject);
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		firstCacheTestProject = StorageHandler.getInstance().loadProject(firstCacheProjectName);
 		UiTestUtils.saveFileToProject(firstCacheProjectName, "screenshot.png", IMAGE_RESOURCE_2, getInstrumentation()
 				.getContext(), UiTestUtils.FileTypes.ROOT);
@@ -501,7 +502,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 		//leave and reenter MyProjectsActivity 
 		solo.goBack();
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 
@@ -509,7 +510,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		Log.v(MY_PROJECTS_ACTIVITY_TEST_TAG, "scroll bottom");
 		solo.scrollToTop();
 		Log.v(MY_PROJECTS_ACTIVITY_TEST_TAG, "scroll up");
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		int currentViewID;
 		int pixelColor;
 		int imageViewID = R.id.my_projects_activity_project_image;
@@ -551,7 +552,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	public void testDeleteProject() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -583,7 +584,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	public void testChooseNoOnDeleteQuestion() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -600,7 +601,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	public void testChooseNoOnDeleteQuestionInActionMode() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -639,7 +640,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	public void testDeleteCurrentProject() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		//current project is UiTestUtils.DEFAULT_TEST_PROJECT_NAME
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
@@ -667,7 +668,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		unzip = true;
 		saveProjectsToZip();
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
@@ -728,7 +729,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 			UiTestUtils.createTestProject(UiTestUtils.DEFAULT_TEST_PROJECT_NAME + " " + count);
 		}
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
@@ -738,12 +739,12 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.waitForText(solo.getString(R.string.delete));
 		String selectAll = solo.getString(R.string.select_all).toUpperCase(Locale.getDefault());
 		solo.clickOnText(selectAll);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertFalse("Select All is still shown", solo.waitForText(selectAll, 1, 200, false, true));
 		UiTestUtils.acceptAndCloseActionMode(solo);
 		solo.clickOnButton(solo.getString(R.string.yes));
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		for (int count = 0; count < 10; count++) {
 			assertFalse("Project not deleted",
@@ -756,7 +757,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	public void testDeleteProjectsWithSpecialChars() {
 		createProjectsWithSpecialChars();
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
@@ -775,12 +776,12 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.waitForText(solo.getString(R.string.delete));
 		String selectAll = solo.getString(R.string.select_all).toUpperCase(Locale.getDefault());
 		solo.clickOnText(selectAll);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertFalse("Select All is still shown", solo.waitForText(selectAll, 1, 200, false, true));
 		UiTestUtils.acceptAndCloseActionMode(solo);
 		solo.clickOnButton(solo.getString(R.string.yes));
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		assertFalse("Project with normal and special chars not deleted",
 				UiTestUtils.searchExactText(solo, UiTestUtils.NORMAL_AND_SPECIAL_CHAR_PROJECT_NAME));
@@ -794,9 +795,10 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	}
 
+    @android.test.UnstableTest
 	public void testItemClick() {
 		createProjects();
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -817,7 +819,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	public void testDeleteProjectViaActionBar() {
 		String delete = solo.getString(R.string.delete);
 		createProjects();
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -839,7 +841,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 		solo.clickOnText(yes);
 
-		solo.sleep(1500);
+		// solo.sleep(1500); // CQA
 		ProjectManager projectManager = ProjectManager.getInstance();
 		String currentProjectName = projectManager.getCurrentProject().getName();
 
@@ -862,7 +864,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	public void testConfirmDeleteProgramDialogTitleChange() {
 		String delete = solo.getString(R.string.delete);
 		createProjects();
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -883,7 +885,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 				solo.searchText(solo.getString(R.string.dialog_confirm_delete_program_title)));
 
 		solo.clickOnText(no);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		UiTestUtils.openActionMode(solo, delete, R.id.delete, getActivity());
 
 		assertTrue("Bottom bar is visible", solo.getView(R.id.bottom_bar).getVisibility() == View.GONE);
@@ -904,7 +906,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		String multipleItemAppendixDeleteActionMode = solo.getString(R.string.programs);
 		String delete = solo.getString(R.string.delete);
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -936,7 +938,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		}
 		String delete = solo.getString(R.string.delete);
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -950,7 +952,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clickOnCheckBox(1);
 
 		solo.goBack();
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		assertFalse("Delete confirmation dialog is showing!", solo.searchText(solo.getString(R.string.yes)));
 
@@ -964,12 +966,12 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		String copy = solo.getString(R.string.copy);
 
 		createProjects();
-		solo.sleep(400);
+		// solo.sleep(400); // CQA
 
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		assertFalse("Project is selected!", UiTestUtils.getContextMenuAndGoBackToCheckIfSelected(solo, getActivity(),
 				R.id.delete, delete, UiTestUtils.PROJECTNAME1));
@@ -983,7 +985,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		createProjects();
 		Reflection.setPrivateField(ProjectManager.class, ProjectManager.getInstance(), "asynchronTask", false);
 		String currentProjectName = ProjectManager.getInstance().getCurrentProject().getName();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		String buttonPositiveText = solo.getString(R.string.ok);
 		String actionRenameText = solo.getString(R.string.rename);
 
@@ -997,7 +999,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.PROJECTNAME3);
 		solo.clickOnText(buttonPositiveText);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		assertTrue("rename wasnt successfull", solo.searchText(UiTestUtils.PROJECTNAME3, 1, true));
 		assertFalse("rename wasnt successfull", solo.searchText(UiTestUtils.PROJECTNAME1, 1, true));
 		assertEquals("the renamed project is not first in list", ((ProjectData) (solo.getCurrentViews(ListView.class)
@@ -1007,7 +1009,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 				.getInstance().getCurrentProject().getName());
 
 		solo.scrollToTop();
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		solo.waitForText(UiTestUtils.DEFAULT_TEST_PROJECT_NAME);
 		assertTrue("longclick on project '" + UiTestUtils.DEFAULT_TEST_PROJECT_NAME + "' in list not successful",
 				UiTestUtils.longClickOnTextInList(solo, UiTestUtils.DEFAULT_TEST_PROJECT_NAME));
@@ -1015,7 +1017,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.PROJECTNAME1);
 		solo.clickOnText(buttonPositiveText);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		assertTrue("rename wasnt successfull", solo.searchText(UiTestUtils.PROJECTNAME1, 1, true));
 		assertFalse("rename wasnt successfull", solo.searchText(UiTestUtils.DEFAULT_TEST_PROJECT_NAME, 1, true));
 
@@ -1029,7 +1031,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	public void testRenameCurrentProject() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1040,18 +1042,19 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.PROJECTNAME3);
 		solo.clickOnText(solo.getString(R.string.ok));
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		assertTrue("rename wasnt successfull", solo.searchText(UiTestUtils.PROJECTNAME3, 1, true));
 		solo.goBack();
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		assertEquals("current project not updated", UiTestUtils.PROJECTNAME3, ProjectManager.getInstance()
 				.getCurrentProject().getName());
 	}
 
+	@android.test.UnstableTest
 	public void testRenameCurrentProjectViaActionBar() {
 		String rename = solo.getString(R.string.rename);
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1064,26 +1067,26 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clickOnCheckBox(0);
 		solo.clickOnCheckBox(1);
 
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		boolean checked = solo.getCurrentViews(CheckBox.class).get(0).isChecked();
 
 		assertFalse("First project is still checked!", checked);
 		solo.scrollToTop();
 		solo.clickOnCheckBox(0);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		while (!solo.isCheckBoxChecked(0)) {
-			solo.sleep(100);
+			// solo.sleep(100); // CQA
 			solo.clickOnCheckBox(0);
 		}
 		UiTestUtils.acceptAndCloseActionMode(solo);
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.PROJECTNAME3);
 		solo.clickOnText(solo.getString(R.string.ok));
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 		assertTrue("Rename was not successful!", solo.searchText(UiTestUtils.PROJECTNAME3, 1, true));
 
 		solo.goBack();
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 		assertEquals("Current project not updated!", UiTestUtils.PROJECTNAME3, ProjectManager.getInstance()
 				.getCurrentProject().getName());
 	}
@@ -1093,7 +1096,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		String cancel = solo.getString(R.string.cancel_button);
 		String ok = solo.getString(R.string.ok);
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1105,14 +1108,14 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clickOnCheckBox(0);
 
 		solo.goBack();
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		assertFalse("Rename dialog is showing!", (solo.searchText(cancel) && solo.searchText(ok)));
 	}
 
 	public void testRenameCurrentProjectMixedCase() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1123,11 +1126,11 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.DEFAULT_TEST_PROJECT_NAME_MIXED_CASE);
 		solo.sendKey(Solo.ENTER);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		assertTrue("rename to Mixed Case was not successfull",
 				solo.searchText(UiTestUtils.DEFAULT_TEST_PROJECT_NAME_MIXED_CASE, 1, true));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.goBack();
 		assertEquals("current project not updated", UiTestUtils.DEFAULT_TEST_PROJECT_NAME_MIXED_CASE, ProjectManager
 				.getInstance().getCurrentProject().getName());
@@ -1135,7 +1138,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	public void testRenameToSameName() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1146,7 +1149,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.DEFAULT_TEST_PROJECT_NAME);
 		solo.sendKey(Solo.ENTER);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.assertCurrentActivity("Should be My Projects Activity", MyProjectsActivity.class);
 		assertEquals("Should not be renamed", UiTestUtils.DEFAULT_TEST_PROJECT_NAME, ProjectManager.getInstance()
 				.getCurrentProject().getName());
@@ -1154,7 +1157,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	public void testRenameWithNoInput() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1164,7 +1167,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clickOnText(solo.getString(R.string.rename));
 		solo.clearEditText(0);
 		solo.sendKey(Solo.ENTER);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		String errorMessageInvalidInput = solo.getString(R.string.notification_invalid_text_entered);
 		assertTrue("No or wrong error message shown", solo.searchText(errorMessageInvalidInput));
 		solo.clickOnButton(solo.getString(R.string.close));
@@ -1172,7 +1175,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	public void testRenameProjectWithNormalAndSpecialChars() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1190,7 +1193,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	public void testRenameProjectWithNormalAndSpecialCharsTwo() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
@@ -1211,7 +1214,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	public void testRenameProjectJustSpecialCharacters() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1231,7 +1234,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	public void testRenameProjectJustSpecialCharactersTwo() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1250,7 +1253,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	public void testRenameProjectJustOneDot() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1270,7 +1273,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	public void testRenameProjectJustTwoDots() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1290,7 +1293,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	public void testRenameToExistingProjectMixedCase() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1300,7 +1303,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clickOnText(solo.getString(R.string.rename));
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.DEFAULT_TEST_PROJECT_NAME_MIXED_CASE);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.sendKey(Solo.ENTER);
 		solo.waitForDialogToClose(500);
 		String errorMessageProjectExists = solo.getString(R.string.error_project_exists);
@@ -1308,50 +1311,52 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.goBack();
 	}
 
+	/**
+	 * CQA: Inlined View variable projectDetails.
+	 */
 	public void testProjectDetails() {
 		String showDetailsText = solo.getString(R.string.show_details);
 		String hideDetailsText = solo.getString(R.string.hide_details);
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
 
-		View projectDetails = solo.getView(R.id.my_projects_activity_list_item_details);
-		solo.waitForView(projectDetails);
+		solo.waitForView(solo.getView(R.id.my_projects_activity_list_item_details));
 		UiTestUtils.openOptionsMenu(solo);
 
 		solo.waitForText(showDetailsText);
 		solo.clickOnText(showDetailsText);
-		solo.sleep(500);
-		assertEquals("Project details are not showing!", View.VISIBLE, projectDetails.getVisibility());
+		// solo.sleep(500); // CQA
+		assertEquals("Project details are not showing!", View.VISIBLE, solo.getView(R.id.my_projects_activity_list_item_details).getVisibility());
 
-		solo.sleep(400);
+		// solo.sleep(400); // CQA
 		UiTestUtils.openOptionsMenu(solo);
 		assertTrue("Menu item still says \"Show Details\"!", solo.searchText(hideDetailsText));
 
 		solo.goBack();
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
-		assertEquals("Project details are not showing!", View.VISIBLE, projectDetails.getVisibility());
+		assertEquals("Project details are not showing!", View.VISIBLE, solo.getView(R.id.my_projects_activity_list_item_details).getVisibility());
 
 		UiTestUtils.openOptionsMenu(solo);
 		assertTrue("Menu item still says \"Show Details\"!", solo.searchText(hideDetailsText));
 
 		solo.clickOnText(hideDetailsText);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		//get details view again, otherwise assert will fail
-		projectDetails = solo.getView(R.id.my_projects_activity_list_item_details);
-		assertEquals("Project details are still showing!", View.GONE, projectDetails.getVisibility());
+		assertEquals("Project details are still showing!", View.GONE, solo.getView(R.id.my_projects_activity_list_item_details).getVisibility());
 
-		solo.sleep(400);
+		// solo.sleep(400); // CQA
 		UiTestUtils.openOptionsMenu(solo);
 		assertTrue("Menu item still says \"Hide Details\"!", solo.searchText(showDetailsText));
 	}
 
+	@android.test.UnstableTest
 	public void testProjectDetailsLastAccess() {
 		String showDetailsText = solo.getString(R.string.show_details);
 
@@ -1376,7 +1381,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		succeededInSettingModifiedDate = projectCodeFile.setLastModified(now.getTime() - DateUtils.DAY_IN_MILLIS);
 		assertTrue("Failed to set last modified on " + projectFilePath, succeededInSettingModifiedDate);
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1387,7 +1392,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 		solo.waitForText(showDetailsText);
 		solo.clickOnText(showDetailsText);
-		solo.sleep(400);
+		// solo.sleep(400); // CQA
 
 		//get details view again, otherwise assert will fail
 		projectDetails = solo.getView(R.id.my_projects_activity_list_item_details);
@@ -1444,21 +1449,21 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	public void testAddNewProjectMixedCase() {
 		createProjects();
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		String buttonOkText = solo.getString(R.string.ok);
 		String buttonCloseText = solo.getString(R.string.close);
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_add);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.enterText(0, UiTestUtils.DEFAULT_TEST_PROJECT_NAME_MIXED_CASE);
 		solo.clickOnButton(buttonOkText);
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("No or wrong error message shown", solo.searchText(solo.getString(R.string.error_project_exists)));
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 		solo.clickOnButton(buttonCloseText);
-		solo.sleep(100);
+		// solo.sleep(100); // CQA
 		solo.clickOnButton(buttonOkText);
 		assertTrue("No or wrong error message shown", solo.searchText(solo.getString(R.string.error_project_exists)));
 		solo.clickOnButton(buttonCloseText);
@@ -1467,7 +1472,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	public void testSetDescriptionCurrentProject() {
 		createProjects();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		String actionSetDescriptionText = solo.getString(R.string.set_description);
 
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
@@ -1480,7 +1485,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		assertTrue("dialog not loaded in 5 seconds", solo.waitForText(actionSetDescriptionText, 0, 5000));
 		solo.clearEditText(0);
 		solo.enterText(0, lorem);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		solo.clickOnText(solo.getString(R.string.ok));
 		solo.waitForDialogToClose(500);
 
@@ -1502,7 +1507,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		Reflection.setPrivateField(ProjectManager.class, ProjectManager.getInstance(), "asynchronTask", false);
 
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		String actionSetDescriptionText = solo.getString(R.string.set_description);
 
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
@@ -1520,9 +1525,9 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 		solo.clearEditText(0);
 		solo.enterText(0, lorem);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 		solo.clickOnText(solo.getString(R.string.ok));
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		// temporarily removed - should be added when displaying projectdescription
 		//                assertTrue("description is not shown in activity", solo.searchText("Lorem ipsum"));
@@ -1555,7 +1560,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	public void testCopyCurrentProject() {
 		createProjects();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
@@ -1571,7 +1576,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.goBack();
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
-		solo.sleep(300);
+		// solo.sleep(300); // CQA
 
 		solo.waitForText(UiTestUtils.DEFAULT_TEST_PROJECT_NAME);
 		assertTrue("longclick on project '" + UiTestUtils.DEFAULT_TEST_PROJECT_NAME + "' in list not successful",
@@ -1587,7 +1592,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		LookData lookDataOldProject = lookDataListOldProject.get(0);
 		String oldChecksum = lookDataOldProject.getChecksum();
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.waitForText(UiTestUtils.COPIED_PROJECT_NAME);
 		assertTrue("click on project '" + UiTestUtils.COPIED_PROJECT_NAME + "' in list not successful",
 				UiTestUtils.clickOnTextInList(solo, UiTestUtils.COPIED_PROJECT_NAME));
@@ -1611,7 +1616,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	public void testCopyProject() {
 		createProjects();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
@@ -1623,7 +1628,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.COPIED_PROJECT_NAME);
 		solo.sendKey(Solo.ENTER);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("Did not copy the selected project", solo.searchText(UiTestUtils.COPIED_PROJECT_NAME, true));
 	}
 
@@ -1634,7 +1639,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		UiTestUtils.openActionMode(solo, copy, R.id.copy, getActivity());
 
@@ -1643,24 +1648,24 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clickOnCheckBox(0);
 		assertTrue("Actionbar title is not displayed correctly!", solo.searchText(copy));
 		solo.clickOnCheckBox(1);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		boolean checked = solo.getCurrentViews(CheckBox.class).get(0).isChecked();
 
 		assertFalse("First project is still checked!", checked);
 		UiTestUtils.acceptAndCloseActionMode(solo);
 
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.COPIED_PROJECT_NAME);
 		solo.sendKey(Solo.ENTER);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("Did not copy the selected project", solo.searchText(UiTestUtils.COPIED_PROJECT_NAME, true));
 	}
 
 	public void testCopyProjectMixedCase() {
 		createProjects();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
@@ -1672,7 +1677,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.DEFAULT_TEST_PROJECT_NAME_MIXED_CASE);
 		solo.sendKey(Solo.ENTER);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		String errorMessageProjectExists = solo.getString(R.string.error_project_exists);
 		assertTrue("No or wrong error message shown", solo.searchText((errorMessageProjectExists)));
 		solo.clickOnButton(solo.getString(R.string.close));
@@ -1681,7 +1686,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	public void testCopyProjectNoName() {
 		createProjects();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
@@ -1693,7 +1698,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clearEditText(0);
 		solo.enterText(0, " ");
 		solo.sendKey(Solo.ENTER);
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		String notificationEmptyString = solo.getString(R.string.notification_invalid_text_entered);
 		assertTrue("No or wrong error message shown", solo.searchText(notificationEmptyString));
 		solo.clickOnButton(solo.getString(R.string.close));
@@ -1702,7 +1707,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	public void testCopyProjectJustSpecialCharacters() {
 		createProjects();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1713,7 +1718,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.JUST_SPECIAL_CHAR_PROJECT_NAME);
 		solo.clickOnText(solo.getString(R.string.ok));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 
 		assertTrue("Did not copy the selected project to just special chars",
 				UiTestUtils.searchExactText(solo, UiTestUtils.JUST_SPECIAL_CHAR_PROJECT_NAME, true));
@@ -1723,7 +1728,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	public void testCopyProjectJustSpecialCharactersTwo() {
 		createProjects();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1734,7 +1739,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.JUST_SPECIAL_CHAR_PROJECT_NAME2);
 		solo.clickOnText(solo.getString(R.string.ok));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("Did not copy the selected project to just special chars two",
 				UiTestUtils.searchExactText(solo, UiTestUtils.JUST_SPECIAL_CHAR_PROJECT_NAME2, true));
 		UtilFile.deleteDirectory(new File(Utils.buildProjectPath(UiTestUtils.JUST_SPECIAL_CHAR_PROJECT_NAME2)));
@@ -1743,7 +1748,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	public void testCopyProjectWithNormalAndSpecialCharacters() {
 		createProjects();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1754,7 +1759,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.NORMAL_AND_SPECIAL_CHAR_PROJECT_NAME);
 		solo.clickOnText(solo.getString(R.string.ok));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("Did not copy the selected project to normal and special chars",
 				UiTestUtils.searchExactText(solo, UiTestUtils.NORMAL_AND_SPECIAL_CHAR_PROJECT_NAME, true));
 		UtilFile.deleteDirectory(new File(Utils.buildProjectPath(UiTestUtils.NORMAL_AND_SPECIAL_CHAR_PROJECT_NAME)));
@@ -1763,7 +1768,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	public void testCopyProjectWithNormalAndSpecialCharactersTwo() {
 		createProjects();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1774,7 +1779,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.NORMAL_AND_SPECIAL_CHAR_PROJECT_NAME2);
 		solo.clickOnText(solo.getString(R.string.ok));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("Did not copy the selected project to normal and special chars two",
 				UiTestUtils.searchExactText(solo, UiTestUtils.NORMAL_AND_SPECIAL_CHAR_PROJECT_NAME2, true));
 		UtilFile.deleteDirectory(new File(Utils.buildProjectPath(UiTestUtils.NORMAL_AND_SPECIAL_CHAR_PROJECT_NAME2)));
@@ -1783,7 +1788,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	public void testCopyProjectJustDot() {
 		createProjects();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1794,7 +1799,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.JUST_ONE_DOT_PROJECT_NAME);
 		solo.clickOnText(solo.getString(R.string.ok));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("Did not copy the selected project to one dot",
 				UiTestUtils.searchExactText(solo, UiTestUtils.JUST_ONE_DOT_PROJECT_NAME, true));
 		UtilFile.deleteDirectory(new File(Utils.buildProjectPath(UiTestUtils.JUST_ONE_DOT_PROJECT_NAME)));
@@ -1803,7 +1808,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	public void testCopyProjectJustDots() {
 		createProjects();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1814,7 +1819,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		solo.clearEditText(0);
 		solo.enterText(0, UiTestUtils.JUST_TWO_DOTS_PROJECT_NAME);
 		solo.clickOnText(solo.getString(R.string.ok));
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		assertTrue("Did not copy the selected project to two dots",
 				UiTestUtils.searchExactText(solo, UiTestUtils.JUST_TWO_DOTS_PROJECT_NAME, true));
 		UtilFile.deleteDirectory(new File(Utils.buildProjectPath(UiTestUtils.JUST_TWO_DOTS_PROJECT_NAME)));
@@ -1823,7 +1828,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	public void testBottombarElementsVisibilty() {
 		UiTestUtils.createEmptyProject();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
-		solo.sleep(200);
+		// solo.sleep(200); // CQA
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
 		solo.waitForFragmentById(R.id.fragment_projects_list);
@@ -1871,6 +1876,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		assertTrue("Long Projectname not found", solo.searchText(longProjectName));
 	}
 
+	@android.test.UnstableTest
 	public void testScreenshotUpdate() {
 		createProjectWithBackgrounds();
 
@@ -2004,7 +2010,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		Reflection.setPrivateField(StageListener.class, "checkIfAutomaticScreenshotShouldBeTaken", true);
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 
 		if (makeScreenshot) {
 			solo.goBack();
@@ -2020,7 +2026,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
 		solo.waitForActivity(MyProjectsActivity.class.getSimpleName());
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 	}
 
 	private byte[] createScreenshotBitmap() {
@@ -2069,7 +2075,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		Project project2 = new Project(getActivity(), UiTestUtils.PROJECTNAME1);
 		StorageHandler.getInstance().saveProject(project2);
 
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 
 		Project project1 = new Project(getActivity(), UiTestUtils.DEFAULT_TEST_PROJECT_NAME);
 		StorageHandler.getInstance().saveProject(project1);
@@ -2100,7 +2106,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		UiTestUtils.saveFileToProject(UiTestUtils.PROJECTNAME1, StageListener.SCREENSHOT_MANUAL_FILE_NAME,
 				IMAGE_RESOURCE_3, getInstrumentation().getContext(), UiTestUtils.FileTypes.ROOT);
 
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 	}
 
 	private void createProjectsWithSpecialChars() {
@@ -2113,7 +2119,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		Project project3 = new Project(getActivity(), UiTestUtils.JUST_TWO_DOTS_PROJECT_NAME);
 		StorageHandler.getInstance().saveProject(project3);
 
-		solo.sleep(500);
+		// solo.sleep(500); // CQA
 
 		Project project4 = new Project(getActivity(), UiTestUtils.JUST_ONE_DOT_PROJECT_NAME);
 		StorageHandler.getInstance().saveProject(project4);
@@ -2141,17 +2147,17 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		UiTestUtils.saveFileToProject(UiTestUtils.JUST_ONE_DOT_PROJECT_NAME, StageListener.SCREENSHOT_MANUAL_FILE_NAME,
 				IMAGE_RESOURCE_2, getInstrumentation().getContext(), UiTestUtils.FileTypes.ROOT);
 
-		solo.sleep(1000);
+		// solo.sleep(1000); // CQA
 	}
 
 	private void createProjectsWithoutSprites() {
 		Project project1 = new Project(getActivity(), UiTestUtils.PROJECTNAME1);
 		StorageHandler.getInstance().saveProject(project1);
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 
 		Project project2 = new Project(getActivity(), UiTestUtils.DEFAULT_TEST_PROJECT_NAME);
 		StorageHandler.getInstance().saveProject(project2);
-		solo.sleep(2000);
+		// solo.sleep(2000); // CQA
 	}
 
 	private void createStandardProgramIfNeeded() {

@@ -524,7 +524,6 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		assertTrue("BackPack title didn't show up", solo.waitForText(backPackTitle, 0, TIME_TO_WAIT));
 	}
 
-	@android.test.UnstableTest
 	public void testBackPackSoundContextMenuAndCheckPlaying() {
 
 		if (!BuildConfig.FEATURE_BACKPACK_ENABLED) {

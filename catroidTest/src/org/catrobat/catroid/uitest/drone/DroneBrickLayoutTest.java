@@ -48,7 +48,6 @@ public class DroneBrickLayoutTest extends BaseActivityInstrumentationTestCase<Ma
 	}
 
 	@Device
-	@android.test.UnstableTest
 	public void testDroneBricksPrototypeView() {
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 

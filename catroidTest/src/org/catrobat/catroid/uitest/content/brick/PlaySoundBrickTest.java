@@ -114,7 +114,6 @@ public class PlaySoundBrickTest extends BaseActivityInstrumentationTestCase<Main
 		assertEquals("wrong file playing", 4875, mediaPlayer.getDuration());
 	}
 
-	@android.test.UnstableTest
 	public void testSpinnerUpdatesDelete() {
 		String buttonDeleteText = solo.getString(R.string.delete);
 
@@ -137,7 +136,6 @@ public class PlaySoundBrickTest extends BaseActivityInstrumentationTestCase<Main
 		assertTrue(soundName2 + " is not in Spinner", solo.searchText(soundName2));
 	}
 
-	@android.test.UnstableTest
 	public void testSpinnerUpdatesRename() {
 		String newName = "nameRenamed";
 

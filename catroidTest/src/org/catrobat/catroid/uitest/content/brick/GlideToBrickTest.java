@@ -57,6 +57,7 @@ public class GlideToBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 		UiTestUtils.getIntoScriptActivityFromMainMenu(solo);
 	}
 
+	@android.test.UnstableTest
 	public void testNumberInput() {
 		double duration = 1.5;
 		int xPosition = 123;

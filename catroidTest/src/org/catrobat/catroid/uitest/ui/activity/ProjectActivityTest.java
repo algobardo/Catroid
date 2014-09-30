@@ -658,6 +658,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		solo.assertCurrentActivity("Click on objects headline switched activity!", ProjectActivity.class);
 	}
 
+	@android.test.UnstableTest
 	public void testSpriteListDetails() {
 		UiTestUtils.getIntoSpritesFromMainMenu(solo);
 
@@ -924,6 +925,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 				solo.waitForText(deletedSpriteName, 0, 200, false, false));
 	}
 
+	@android.test.UnstableTest
 	public void testDeleteSelectAll() {
 		UiTestUtils.getIntoSpritesFromMainMenu(solo);
 

@@ -344,6 +344,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 				solo.searchText(solo.getString(R.string.main_menu_rate_app)));
 	}
 
+	@android.test.UnstableTest
 	public void testShouldDisplayDialogIfVersionNumberTooLow() throws Throwable {
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
 

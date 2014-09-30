@@ -141,6 +141,7 @@ public class SpeakStageTest extends BaseActivityInstrumentationTestCase<ProjectA
 	}
 
 	@Device
+	@android.test.UnstableTest
 	public void testNullText() {
 		createNullTextProject();
 		prepareStageForTesting(UiTestUtils.PROJECTNAME2);

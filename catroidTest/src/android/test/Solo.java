@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 import java.lang.IllegalArgumentException;
 import java.util.ArrayList;
 import junit.framework.Assert;
-import junit.framework.AssertionFailedError;
 
 import android.util.Log;
 import android.app.Activity;
@@ -40,6 +39,10 @@ import android.app.Instrumentation.ActivityMonitor;
 import com.google.android.apps.common.testing.ui.espresso.UiController;
 import com.google.android.apps.common.testing.ui.espresso.ViewAction;
 import com.google.android.apps.common.testing.ui.espresso.action.ViewActions;
+import com.google.android.apps.common.testing.ui.espresso.action.GeneralClickAction;
+import com.google.android.apps.common.testing.ui.espresso.action.Tap;
+import com.google.android.apps.common.testing.ui.espresso.action.CoordinatesProvider;
+import com.google.android.apps.common.testing.ui.espresso.action.Press;
 import com.robotium.solo.Condition;
 import com.google.android.apps.common.testing.ui.espresso.Espresso;
 import com.google.android.apps.common.testing.ui.espresso.ViewInteraction;
@@ -53,6 +56,7 @@ import static com.google.android.apps.common.testing.ui.espresso.action.ViewActi
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.closeSoftKeyboard;
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.longClick;
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.scrollTo;
+import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.pressKey;
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.typeText;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isClickable;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
@@ -74,7 +78,6 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 public class Solo {
-
     public final static int LANDSCAPE = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;   // 0
     public final static int PORTRAIT = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;     // 1
     public final static int RIGHT = KeyEvent.KEYCODE_DPAD_RIGHT;
@@ -87,11 +90,9 @@ public class Solo {
     public final static int CLOSED = 0;
     public final static int OPENED = 1;
 
-
-    private com.robotium.solo.Solo solo;
+    public com.robotium.solo.Solo solo;
     private Activity activity;
     private Instrumentation inst;
-
 
     private class IdentityMatcher<T> extends BaseMatcher<T>{
         private T mView;
@@ -128,24 +129,24 @@ public class Solo {
         };
     }
 
-    private static ViewAction doLog(){
-        return new ViewAction() {
-            @Override
-            public Matcher<View> getConstraints() {
-                return isDisplayed();
-            }
+    private static ViewAction clickXY(final int x, final int y){
+        return new GeneralClickAction(
+            Tap.SINGLE,
+            new CoordinatesProvider() {
+                @Override
+                public float[] calculateCoordinates(View view) {
 
-            @Override
-            public String getDescription() {
-                return "Doing logging";
-            }
+                   final int[] screenPos = new int[2];
+                   view.getLocationOnScreen(screenPos);
 
-            @Override
-            public void perform(UiController uiController, View view) {
-                System.out.println("Doing logging");
-                System.out.println(view);
-            }
-        };
+                   final float screenX = screenPos[0] + x;
+                   final float screenY = screenPos[1] + y;
+                   float[] coordinates = {screenX, screenY};
+
+                   return coordinates;
+                }
+            },
+            Press.FINGER);
     }
 
     public static ViewAction takeScreenshot(final com.robotium.solo.Solo solo) {
@@ -709,23 +710,23 @@ public class Solo {
      * @return {@code true} if a {@link Button} displaying the specified text is found and {@code false} if it is not found
      */
 
-    public boolean searchButton(String text) {
-        return waitForText(text);
+    public boolean searchButton(String text) { // TODO NOW
+        return searchButton(text, 0, false);
         // return solo.searchButton(text);
     }
 
-//    /**
-//     * Searches for a Button displaying the specified text and returns {@code true} if at least one Button
-//     * is found. Will automatically scroll when needed.
-//     *
-//     * @param text the text to search for. The parameter will be interpreted as a regular expression
-//     * @param onlyVisible {@code true} if only {@link Button} visible on the screen should be searched
-//     * @return {@code true} if a {@link Button} displaying the specified text is found and {@code false} if it is not found
-//     */
-//
-//    public boolean searchButton(String text, boolean onlyVisible) {
-//        return solo.searchButton(text,onlyVisible);
-//    }
+    /**
+     * Searches for a Button displaying the specified text and returns {@code true} if at least one Button
+     * is found. Will automatically scroll when needed.
+     *
+     * @param text the text to search for. The parameter will be interpreted as a regular expression
+     * @param onlyVisible {@code true} if only {@link Button} visible on the screen should be searched
+     * @return {@code true} if a {@link Button} displaying the specified text is found and {@code false} if it is not found
+     */
+
+    public boolean searchButton(String text, boolean onlyVisible) { // TODO NOW
+        return searchButton(text, 0, onlyVisible);
+    }
 //
 //    /**
 //     * Searches for a ToggleButton displaying the specified text and returns {@code true} if at least one ToggleButton
@@ -739,35 +740,45 @@ public class Solo {
 //        return solo.searchToggleButton(text);
 //    }
 //
-//    /**
-//     * Searches for a Button displaying the specified text and returns {@code true} if the
-//     * searched Button is found a specified number of times. Will automatically scroll when needed.
-//     *
-//     * @param text the text to search for. The parameter will be interpreted as a regular expression
-//     * @param minimumNumberOfMatches the minimum number of matches expected to be found. {@code 0} matches means that one or more
-//     * matches are expected to be found
-//     * @return {@code true} if a {@link Button} displaying the specified text is found a specified number of times and {@code false}
-//     * if it is not found
-//     */
-//
-//    public boolean searchButton(String text, int minimumNumberOfMatches) {
-//    }
+    /**
+     * Searches for a Button displaying the specified text and returns {@code true} if the
+     * searched Button is found a specified number of times. Will automatically scroll when needed.
+     *
+     * @param text the text to search for. The parameter will be interpreted as a regular expression
+     * @param minimumNumberOfMatches the minimum number of matches expected to be found. {@code 0} matches means that one or more
+     * matches are expected to be found
+     * @return {@code true} if a {@link Button} displaying the specified text is found a specified number of times and {@code false}
+     * if it is not found
+     */
 
-//    /**
-//     * Searches for a Button displaying the specified text and returns {@code true} if the
-//     * searched Button is found a specified number of times. Will automatically scroll when needed.
-//     *
-//     * @param text the text to search for. The parameter will be interpreted as a regular expression
-//     * @param minimumNumberOfMatches the minimum number of matches expected to be found. {@code 0} matches means that one or more
-//     * matches are expected to be found
-//     * @param onlyVisible {@code true} if only {@link Button} visible on the screen should be searched
-//     * @return {@code true} if a {@link Button} displaying the specified text is found a specified number of times and {@code false}
-//     * if it is not found
-//     */
-//
-//    public boolean searchButton(String text, int minimumNumberOfMatches, boolean onlyVisible) {
-//        return solo.searchButton(text,minimumNumberOfMatches,onlyVisible);
-//    }
+    public boolean searchButton(String text, int minimumNumberOfMatches) {
+        return searchButton(text, minimumNumberOfMatches, false);
+    }
+
+    /**
+     * Searches for a Button displaying the specified text and returns {@code true} if the
+     * searched Button is found a specified number of times. Will automatically scroll when needed.
+     *
+     * @param text the text to search for. The parameter will be interpreted as a regular expression
+     * @param minimumNumberOfMatches the minimum number of matches expected to be found. {@code 0} matches means that one or more
+     * matches are expected to be found
+     * @param onlyVisible {@code true} if only {@link Button} visible on the screen should be searched
+     * @return {@code true} if a {@link Button} displaying the specified text is found a specified number of times and {@code false}
+     * if it is not found
+     */
+
+    public boolean searchButton(String text, int minimumNumberOfMatches, boolean onlyVisible) {
+        try {
+            onView(isnth(0, withRobotiumText(text, instanceOf(Button.class))))
+            .check(matches(isDisplayed()));
+            return true;
+        } catch(Error err) {
+            return false;
+        } catch (Exception exc) {
+            return false;
+        }
+        // return solo.searchButton(text, minimumNumberOfMatches, onlyVisible);
+    }
 //
 //    /**
 //     * Searches for a ToggleButton displaying the specified text and returns {@code true} if the
@@ -1005,12 +1016,10 @@ public class Solo {
      */
 
     public void goBack() {
-        // solo.hideSoftKeyboard();
         solo.sleep(1000);
-        onView(isRoot()).perform(myCloseSoftKeyboard());
+        onView(isRoot()).perform(myCloseSoftKeyboard()); // solo.hideSoftKeyboard();
         solo.sleep(1000);
         Espresso.pressBack();
-        solo.sleep(1000);
     }
 
     /**
@@ -1021,7 +1030,7 @@ public class Solo {
      */
 
     public void clickOnScreen(float x, float y) {
-        solo.clickOnScreen(x,y);
+        onView(isRoot()).perform(clickXY(Math.round(x), Math.round(y)));
     }
 
     /**
@@ -1032,34 +1041,33 @@ public class Solo {
      * @param numberOfClicks the number of clicks to perform
      */
 
-    public void clickOnScreen(float x, float y, int numberOfClicks) {
-        solo.clickOnScreen(x,y,numberOfClicks);
+//    public void clickOnScreen(float x, float y, int numberOfClicks) {
+//    }
+
+    /**
+     * Long clicks the specified coordinates.
+     *
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
+
+//    public void clickLongOnScreen(float x, float y) {
+//    }
+
+    /**
+     * Long clicks the specified coordinates for a specified amount of time.
+     *
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @param time the amount of time to long click
+     */
+
+    public void clickLongOnScreen(float x, float y, int time) {
+        solo.clickLongOnScreen(x, y, time);
+        waitForIdleInject();
     }
 
-//    /**
-//     * Long clicks the specified coordinates.
-//     *
-//     * @param x the x coordinate
-//     * @param y the y coordinate
-//     */
-//
-//    public void clickLongOnScreen(float x, float y) {
-//        clicker.clickLongOnScreen(x, y, 0, null);
-//    }
-//
-//    /**
-//     * Long clicks the specified coordinates for a specified amount of time.
-//     *
-//     * @param x the x coordinate
-//     * @param y the y coordinate
-//     * @param time the amount of time to long click
-//     */
-//
-//    public void clickLongOnScreen(float x, float y, int time) {
-//        clicker.clickLongOnScreen(x, y, time, null);
-//    }
-//
-//
+
     /**
      * Clicks a Button displaying the specified text. Will automatically scroll when needed.
      *
@@ -1109,7 +1117,16 @@ public class Solo {
      */
 
     public void clickOnMenuItem(String text) {
-        openContextualActionModeOverflowMenu(); // openActionBarOverflowOrOptionsMenu();
+        openContextualActionModeOverflowMenu();
+        // onView(isRoot()).perform(ViewActions.pressKey(KeyEvent.KEYCODE_MENU));
+
+        onView(withRobotiumText(text, instanceOf(TextView.class)))
+        .check(matches(allOf(isEnabled())))
+        .perform(click());
+    }
+
+    public void clickOnMenuItemOptionsMenu(String text) {
+        openActionBarOverflowOrOptionsMenu(inst.getTargetContext());
         // onView(isRoot()).perform(ViewActions.pressKey(KeyEvent.KEYCODE_MENU));
 
         onView(withRobotiumText(text, instanceOf(TextView.class)))
@@ -1309,8 +1326,6 @@ public class Solo {
      * @param scroll {@code true} if scrolling should be performed
      */
     public void clickOnText(String text, int match, boolean scroll) {
-        Log.i("Solo", "clickOnText(text=" + text + ", match=" + match + "): check(), perform()");
-
         // Note: isnth() must not be used for both check() and perform(),
         // so we create two matchers. Otherwise count is broken.
 
@@ -1320,8 +1335,6 @@ public class Solo {
 
         onView(isnth(match - 1, allOf(withRobotiumText(text, instanceOf(TextView.class)), isDisplayed())))
         .perform(click());
-
-        Log.i("Solo", "clickOnText(text=" + text + ", match=" + match + "): end");
     }
 
     /**
@@ -1352,46 +1365,44 @@ public class Solo {
         onView(isnth(match - 1, allOf(withRobotiumText(text, instanceOf(TextView.class)), isDisplayed())))
         .perform(longClick());
     }
-//
-//    /**
-//     * Long clicks a View or WebElement displaying the specified text.
-//     *
-//     * @param text the text to click. The parameter will be interpreted as a regular expression
-//     * @param match if multiple objects match the text, this determines which one to click
-//     * @param scroll {@code true} if scrolling should be performed
-//     */
-//
-//    public void clickLongOnText(String text, int match, boolean scroll)
-//    {
-//        clicker.clickOnText(text, true, match, scroll, 0);
-//    }
-//
-//    /**
-//     * Long clicks a View or WebElement displaying the specified text.
-//     *
-//     * @param text the text to click. The parameter will be interpreted as a regular expression
-//     * @param match if multiple objects match the text, this determines which one to click
-//     * @param time the amount of time to long click
-//     */
-//
-//    public void clickLongOnText(String text, int match, int time)
-//    {
+
+    /**
+     * Long clicks a View or WebElement displaying the specified text.
+     *
+     * @param text the text to click. The parameter will be interpreted as a regular expression
+     * @param match if multiple objects match the text, this determines which one to click
+     * @param scroll {@code true} if scrolling should be performed
+     */
+
+    public void clickLongOnText(String text, int match, boolean scroll) { // TODO: Scroll should not be ignored
+        clickLongOnText(text, match);
+    }
+
+    /**
+     * Long clicks a View or WebElement displaying the specified text.
+     *
+     * @param text the text to click. The parameter will be interpreted as a regular expression
+     * @param match if multiple objects match the text, this determines which one to click
+     * @param time the amount of time to long click
+     */
+
+//    public void clickLongOnText(String text, int match, int time) {
 //        clicker.clickOnText(text, true, match, true, time);
 //    }
-//
-//    /**
-//     * Long clicks a View displaying the specified text and then selects
-//     * an item from the context menu that appears. Will automatically scroll when needed.
-//     *
-//     * @param text the text to click. The parameter will be interpreted as a regular expression
-//     * @param index the index of the menu item to press. {@code 0} if only one is available
-//     */
-//
+
+    /**
+     * Long clicks a View displaying the specified text and then selects
+     * an item from the context menu that appears. Will automatically scroll when needed.
+     *
+     * @param text the text to click. The parameter will be interpreted as a regular expression
+     * @param index the index of the menu item to press. {@code 0} if only one is available
+     */
+
 //    public void clickLongOnTextAndPress(String text, int index) {
 //        clicker.clickLongOnTextAndPress(text, index);
 //    }
-//
-/*
+
+    /*
      * Clicks a Button matching the specified index.
      *
      * @param index the index of the {@link Button} to click. {@code 0} if only one is available
@@ -1410,16 +1421,23 @@ public class Solo {
 
         Log.i("Solo", "clickOnButton(index=" + index + "): end");
     }
-//
-//    /**
-//     * Clicks a RadioButton matching the specified index.
-//     *
-//     * @param index the index of the {@link RadioButton} to click. {@code 0} if only one is available
-//     */
-//
-//    public void clickOnRadioButton(int index) {
-//        clicker.clickOn(RadioButton.class, index);
-//    }
+
+    /**
+     * Clicks a RadioButton matching the specified index.
+     *
+     * @param index the index of the {@link RadioButton} to click. {@code 0} if only one is available
+     */
+
+    public void clickOnRadioButton(int index) {
+        // Note: isnth() must not be used for both check() and perform(),
+        // so we create two matchers. Otherwise count is broken.
+
+        onView(isnth(index, allOf(instanceOf(RadioButton.class), isDisplayed())))
+        .check(matches(allOf(isEnabled())));
+
+        onView(isnth(index, allOf(instanceOf(RadioButton.class), isDisplayed())))
+        .perform(click());
+    }
 
     /**
      * Clicks a CheckBox matching the specified index.
@@ -1464,7 +1482,9 @@ public class Solo {
      */
 
     public ArrayList<TextView> clickInList(int line) {
-        return solo.clickInList(line);
+        ArrayList<TextView> result = solo.clickInList(line);
+        waitForIdleInject();
+        return result;
     }
 
     /**
@@ -1477,8 +1497,9 @@ public class Solo {
      */
 
     public ArrayList<TextView> clickInList(int line, int index) {
-        //TODO: Rewrite
-        return solo.clickInList(line,index);
+        ArrayList<TextView> result = solo.clickInList(line,index);
+        waitForIdleInject();
+        return result;
     }
 //
 //    /**
@@ -1559,8 +1580,8 @@ public class Solo {
 
     public void drag(float fromX, float toX, float fromY, float toY,
                      int stepCount) {
-        //TODO: Rewrite
         solo.drag(fromX, toX, fromY, toY, stepCount);
+        waitForIdleInject();
     }
 
     /**
@@ -1900,29 +1921,30 @@ public class Solo {
 //        setter.setTimePicker(timePicker, hour, minute);
 //    }
 //
-//    /**
-//     * Sets the progress of a ProgressBar matching the specified index. Examples of ProgressBars are: {@link android.widget.SeekBar} and {@link android.widget.RatingBar}.
-//     *
-//     * @param index the index of the {@link ProgressBar}
-//     * @param progress the progress to set the {@link ProgressBar}
-//     */
-//
-//    public void setProgressBar(int index, int progress){
-//        setProgressBar(waiter.waitForAndGetView(index, ProgressBar.class), progress);
-//    }
-//
-//    /**
-//     * Sets the progress of the specified ProgressBar. Examples of ProgressBars are: {@link android.widget.SeekBar} and {@link android.widget.RatingBar}.
-//     *
-//     * @param progressBar the {@link ProgressBar}
-//     * @param progress the progress to set the {@link ProgressBar}
-//     */
-//
-//    public void setProgressBar(ProgressBar progressBar, int progress){
-//        progressBar = (ProgressBar) waiter.waitForView(progressBar, Timeout.getSmallTimeout());
-//        setter.setProgressBar(progressBar, progress);
-//    }
-//
+    /**
+     * Sets the progress of a ProgressBar matching the specified index. Examples of ProgressBars are: {@link android.widget.SeekBar} and {@link android.widget.RatingBar}.
+     *
+     * @param index the index of the {@link ProgressBar}
+     * @param progress the progress to set the {@link ProgressBar}
+     */
+
+    public void setProgressBar(int index, int progress) {
+        solo.setProgressBar(index, progress);
+        waitForIdleInject();
+    }
+
+    /**
+     * Sets the progress of the specified ProgressBar. Examples of ProgressBars are: {@link android.widget.SeekBar} and {@link android.widget.RatingBar}.
+     *
+     * @param progressBar the {@link ProgressBar}
+     * @param progress the progress to set the {@link ProgressBar}
+     */
+
+    public void setProgressBar(ProgressBar progressBar, int progress) {
+        solo.setProgressBar(progressBar, progress);
+        waitForIdleInject();
+    }
+
 //    /**
 //     * Sets the status of the NavigationDrawer. Examples of status are: {@code Solo.CLOSED} and {@code Solo.OPENED}.
 //     *
@@ -2206,8 +2228,7 @@ public class Solo {
      * @return the {@link Button} displaying the specified text
      */
 
-    public Button getButton(String text)
-    {
+    public Button getButton(String text) {
         waitForIdle();
         return solo.getButton(text);
     }
@@ -2220,10 +2241,9 @@ public class Solo {
      * @return the {@link Button} displaying the specified text
      */
 
-    public Button getButton(String text, boolean onlyVisible)
-    {
+    public Button getButton(String text, boolean onlyVisible) {
         waitForIdle();
-        return solo.getButton(text,onlyVisible);
+        return solo.getButton(text, onlyVisible);
     }
 
 //    /**
@@ -2567,7 +2587,7 @@ public class Solo {
      * Unlocks the lock screen.
      */
 
-    public void unlockScreen(){
+    public void unlockScreen() {
         solo.unlockScreen();
         waitForIdle();
     }
@@ -2585,6 +2605,10 @@ public class Solo {
         } else {
             onView(isRoot()).perform(ViewActions.pressKey(key));
         }
+    }
+
+    public void sendKeyNoSpecialCase(int key) {
+        onView(isRoot()).perform(ViewActions.pressKey(key));
     }
 
     /**

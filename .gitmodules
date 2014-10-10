@@ -1,4 +1,4 @@
 [submodule "catroidTest/src/android"]
 	path = catroidTest/src/android
-	url = git@github.com:algobardo/Catroid.git
+	url = https://github.com/algobardo/android.testR2E
 	branch = latest

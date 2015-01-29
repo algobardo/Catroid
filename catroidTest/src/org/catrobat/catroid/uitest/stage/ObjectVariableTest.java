@@ -92,7 +92,7 @@ public class ObjectVariableTest extends BaseActivityInstrumentationTestCase<Main
 		return new Formula(parseTree);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testLookSensorValueInStage() {
 
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
@@ -135,7 +135,7 @@ public class ObjectVariableTest extends BaseActivityInstrumentationTestCase<Main
 
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testLookSensorValueBeforeAndAfterStage() {
 
 		Formula lookXPositionFormula = getFormulaBySensor(Sensors.OBJECT_X);

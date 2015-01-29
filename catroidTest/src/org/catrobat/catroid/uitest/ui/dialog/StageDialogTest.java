@@ -74,7 +74,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		ProjectManager.getInstance().deleteCurrentProject();
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testBackButtonPressedTwice() {
 		Project project = createTestProject(testProject);
 		ProjectManager.getInstance().setProject(project);
@@ -91,7 +91,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		solo.assertCurrentActivity("Program is not in stage activity", ProjectActivity.class);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testBackToPreviousActivity() {
 		createAndSaveTestProject(testProject);
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
@@ -111,7 +111,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		assertEquals("Not equal Activities", previousActivity, getActivity());
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testPauseOnBackButton() {
 		float defaultScale = 100.0f;
 		float newScale = 50.0f;
@@ -146,7 +146,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		assertEquals("Unexpected look size", newScale, sprite.look.getSizeInUserInterfaceDimensionUnit());
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testRestartButtonActivityChain() {
 		createAndSaveTestProject(testProject);
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
@@ -173,7 +173,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		assertEquals("Returned to wrong Activity", currentActivity, solo.getCurrentActivity());
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testRestartButtonScriptPosition() {
 		createAndSaveTestProject(testProject);
 		ArrayList<Script> scriptStart = new ArrayList<Script>();
@@ -234,7 +234,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		}
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testRestartProjectWithSound() {
 		String projectName = UiTestUtils.PROJECTNAME1;
 		//creating sprites for project:
@@ -285,7 +285,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		assertTrue("Sound did not play from start!", positionBeforeRestart > positionAfterRestart);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testAxesOnOff() {
 		createAndSaveTestProject(testProject);
 		solo.clickOnButton(solo.getString(R.string.main_menu_programs));
@@ -416,7 +416,7 @@ public class StageDialogTest extends BaseActivityInstrumentationTestCase<MainMen
 		UiTestUtils.compareByteArrays(whitePixel, screenPixel);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testMaximizeStretchRememeberSetting() {
 		Project project = createTestProject(testProject);
 		project.getXmlHeader().virtualScreenWidth = 480;

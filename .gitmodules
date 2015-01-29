@@ -1,4 +1,0 @@
-[submodule "catroidTest/src/android"]
-	path = catroidTest/src/android
-	url = https://github.com/algobardo/android.testR2E
-	branch = master

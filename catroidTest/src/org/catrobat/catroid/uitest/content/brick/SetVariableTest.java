@@ -64,7 +64,7 @@ public class SetVariableTest extends BaseActivityInstrumentationTestCase<MainMen
 		UiTestUtils.getIntoScriptActivityFromMainMenu(solo);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testCreateNewUserVariableAndDeletion() {
 		String userVariableName = "testVariable1";
 		String secondUserVariableName = "testVariable2";
@@ -144,7 +144,7 @@ public class SetVariableTest extends BaseActivityInstrumentationTestCase<MainMen
 		assertTrue("UserVariable Name not as expected", userVariable.getName().equals(userVariableName));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testCreateUserVariableInFormulaEditor() {
 		String userVariableName = "testVariable1";
 

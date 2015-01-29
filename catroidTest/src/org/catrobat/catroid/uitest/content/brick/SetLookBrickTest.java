@@ -90,7 +90,7 @@ public class SetLookBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 		super.tearDown();
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testSelectLookAndPlay() {
 		assertTrue(lookName + " is not selected in Spinner", solo.isSpinnerTextSelected(lookName));
 
@@ -166,7 +166,7 @@ public class SetLookBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testAdapterUpdateInScriptActivity() {
 		String look1ImagePath = lookDataList.get(0).getAbsolutePath();
 		String look2ImagePath = lookDataList.get(1).getAbsolutePath();
@@ -186,7 +186,7 @@ public class SetLookBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testAddNewLook() {
 		String newText = solo.getString(R.string.new_broadcast_message);
 

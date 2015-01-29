@@ -22,9 +22,9 @@
  */
 package org.catrobat.catroid.uitest.ui.dialog;
 
-import android.test.Solo; // CQA
-import android.widget.WeakListAdapter; // CQA
-import android.widget.Updater; // CQA
+import dk.au.cs.thor.robotium2espresso.Solo;
+import dk.au.cs.thor.robotium2espresso.widgets.WeakListAdapter;
+import dk.au.cs.thor.robotium2espresso.widgets.Updater;
 
 import android.widget.ListAdapter;
 

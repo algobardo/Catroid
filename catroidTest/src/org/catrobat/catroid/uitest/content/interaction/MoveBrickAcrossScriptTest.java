@@ -59,7 +59,7 @@ public class MoveBrickAcrossScriptTest extends BaseActivityInstrumentationTestCa
 		UiTestUtils.getIntoScriptActivityFromMainMenu(solo);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testMoveBrickAcrossScript() {
 		ScriptActivity activity = (ScriptActivity) solo.getCurrentActivity();
 		ScriptFragment fragment = (ScriptFragment) activity.getFragment(ScriptActivity.FRAGMENT_SCRIPTS);

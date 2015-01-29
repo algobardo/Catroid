@@ -28,7 +28,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 
-import android.test.Solo; // CQA, instead of robotium
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -93,7 +93,7 @@ public class ScriptActivityTest extends BaseActivityInstrumentationTestCase<Main
 		checkMainMenuButton();
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testPlayProgramButton() {
 		UiTestUtils.waitForFragment(solo, R.id.fragment_script);
 

@@ -103,7 +103,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		});
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testUploadProjectSuccessAndTokenReplacementAfterUpload() throws Throwable {
 		setServerURLToTestUrl();
 		UiTestUtils.createTestProject(testProject);
@@ -123,7 +123,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		downloadProject(newTestProject, testProject);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testUploadProjectOldCatrobatLanguageVersion() throws Throwable {
 		setServerURLToTestUrl();
 
@@ -167,7 +167,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		UiTestUtils.clearAllUtilTestProjects();
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testUploadProjectOffensiveLanguageUsed() throws Throwable {
 		setServerURLToTestUrl();
 
@@ -207,7 +207,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		UiTestUtils.clearAllUtilTestProjects();
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testRenameProjectNameAndDescriptionWhenUploading() throws Throwable {
 		setServerURLToTestUrl();
 
@@ -247,7 +247,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 				serverProjectDescription.equalsIgnoreCase(projectDescriptionSetWhenUploading));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testRenameProjectDescriptionWhenUploading() throws Throwable {
 		setServerURLToTestUrl();
 
@@ -263,7 +263,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		checkProjectNameAndDescriptionBeforAndAfterDownload(testProject, newTestDescription);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testUploadingFromProgrammList() throws Throwable {
 		setServerURLToTestUrl();
 
@@ -278,7 +278,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		checkProjectNameAndDescriptionBeforAndAfterDownload(testProject, newTestDescription);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testUploadFromProgramm() throws Throwable {
 		setServerURLToTestUrl();
 
@@ -293,7 +293,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		checkProjectNameAndDescriptionBeforAndAfterDownload(testProject, newTestDescription);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testUpAndDownloadJapaneseUnicodeProject() throws Throwable {
 		setServerURLToTestUrl();
 
@@ -321,7 +321,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		assertTrue("Project name on server was changed", serverProjectName.equalsIgnoreCase(testProject));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testDownload() throws Throwable {
 		setServerURLToTestUrl();
 
@@ -362,7 +362,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		assertTrue("Project was successfully downloaded", serverProjectName.equalsIgnoreCase(projectName));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testUploadStandardProject() throws Throwable {
 		deleteOldAndCreateAndSaveCleanStandardProject();
 
@@ -399,7 +399,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testUploadModifiedStandardProject() throws Throwable {
 		deleteOldAndCreateAndSaveCleanStandardProject();
 
@@ -436,7 +436,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 				solo.waitForText(solo.getString(R.string.notification_upload_finished), 0, 10000));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testDownloadProjectAfterModification() throws Throwable {
 		setServerURLToTestUrl();
 

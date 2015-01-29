@@ -72,7 +72,7 @@ public class BroadcastBricksTest extends BaseActivityInstrumentationTestCase<Mai
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testBroadcastBricks() {
 		checkSetupBricks();
 

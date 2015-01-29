@@ -74,7 +74,7 @@ public class StageTestComplex extends BaseActivityInstrumentationTestCase<MainMe
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testShowTexture() {
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 		// solo.sleep(1400); // CQA
@@ -161,7 +161,7 @@ public class StageTestComplex extends BaseActivityInstrumentationTestCase<MainMe
 
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testBehaviourWithoutBricks() {
 		Project project = ProjectManager.getInstance().getCurrentProject();
 		assertNotNull("current project was null", project);

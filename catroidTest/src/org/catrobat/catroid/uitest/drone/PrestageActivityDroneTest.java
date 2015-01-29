@@ -85,7 +85,7 @@ public class PrestageActivityDroneTest extends BaseActivityInstrumentationTestCa
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void test00DroneTermsOfServiceDialog() {
 		//ATTENTION, test0* must be executed in the right order!
 		//TODO Drone: make test order irrelevant
@@ -201,7 +201,7 @@ public class PrestageActivityDroneTest extends BaseActivityInstrumentationTestCa
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void test05DroneServiceStart() {
 		//ATTENTION, test0* must be executed in the right order!
 		//TODO Drone: make test order irrelevant

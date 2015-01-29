@@ -35,7 +35,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import android.test.Solo; // CQA, instead of robotium
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -658,7 +658,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		solo.assertCurrentActivity("Click on objects headline switched activity!", ProjectActivity.class);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testSpriteListDetails() {
 		UiTestUtils.getIntoSpritesFromMainMenu(solo);
 
@@ -742,7 +742,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		assertEquals("Displayed wrong number of sound", soundCount, soundCountActual);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testBottomBarAndContextMenuOnActionModes() {
 		UiTestUtils.getIntoSpritesFromMainMenu(solo);
 
@@ -925,7 +925,7 @@ public class ProjectActivityTest extends BaseActivityInstrumentationTestCase<Mai
 				solo.waitForText(deletedSpriteName, 0, 200, false, false));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testDeleteSelectAll() {
 		UiTestUtils.getIntoSpritesFromMainMenu(solo);
 

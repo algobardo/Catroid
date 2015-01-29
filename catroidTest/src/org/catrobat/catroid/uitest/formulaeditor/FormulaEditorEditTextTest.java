@@ -133,7 +133,7 @@ public class FormulaEditorEditTextTest extends BaseActivityInstrumentationTestCa
 				.getSelectionEnd());
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testDoubleTapSelection() {
 		BackgroundColorSpan colorHighlight = (BackgroundColorSpan) Reflection.getPrivateField(
 				new FormulaEditorEditText(getActivity()), "COLOR_HIGHLIGHT");
@@ -303,7 +303,7 @@ public class FormulaEditorEditTextTest extends BaseActivityInstrumentationTestCa
 				.toString());
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testNumberInsertion() {
 		solo.clickOnView(solo.getView(CHANGE_SIZE_BY_EDIT_TEXT_RID));
 
@@ -354,7 +354,7 @@ public class FormulaEditorEditTextTest extends BaseActivityInstrumentationTestCa
 		solo.clickOnView(solo.getView(R.id.formula_editor_edit_field_clear));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testGoBackToDiscardChanges() {
 		solo.clickOnView(solo.getView(CHANGE_SIZE_BY_EDIT_TEXT_RID));
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_9));
@@ -372,7 +372,7 @@ public class FormulaEditorEditTextTest extends BaseActivityInstrumentationTestCa
 				+ "0 ", ((TextView) solo.getView(CHANGE_SIZE_BY_EDIT_TEXT_RID)).getText().toString());
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testDiscardDialog() {
 		solo.clickOnView(solo.getView(CHANGE_SIZE_BY_EDIT_TEXT_RID));
 		solo.clickOnView(solo.getView(R.id.formula_editor_keyboard_9));
@@ -414,7 +414,7 @@ public class FormulaEditorEditTextTest extends BaseActivityInstrumentationTestCa
 				((TextView) solo.getView(CHANGE_SIZE_BY_EDIT_TEXT_RID)).getText().toString());
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testErrorInFirstAndLastCharactersAndEmptyFormula() {
 		solo.clickOnView(solo.getView(CHANGE_SIZE_BY_EDIT_TEXT_RID));
 		solo.clickOnView(solo.getView(R.id.formula_editor_edit_field_clear));
@@ -671,7 +671,7 @@ public class FormulaEditorEditTextTest extends BaseActivityInstrumentationTestCa
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testComputeDialog() {
 		//For initialization
 		SensorLoudness.getSensorLoudness();

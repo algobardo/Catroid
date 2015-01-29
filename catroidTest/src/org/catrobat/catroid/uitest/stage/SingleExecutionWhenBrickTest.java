@@ -60,7 +60,7 @@ public class SingleExecutionWhenBrickTest extends BaseActivityInstrumentationTes
 		super(MainMenuActivity.class);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testWaitBrickWhenTapped() {
 
 		createProjectWhenBrick(SCREEN_HEIGHT, SCREEN_WIDTH);
@@ -82,7 +82,7 @@ public class SingleExecutionWhenBrickTest extends BaseActivityInstrumentationTes
 		assertEquals("Look has wrong AlphaValue.", 50f, yellowSprite.look.getTransparencyInUserInterfaceDimensionUnit());
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testWaitBrickBroadcast() {
 
 		createProjectWhenBrick(SCREEN_HEIGHT, SCREEN_WIDTH);
@@ -104,7 +104,7 @@ public class SingleExecutionWhenBrickTest extends BaseActivityInstrumentationTes
 		assertEquals("Look has wrong AlphaValue.", 100f, greenSprite.look.getTransparencyInUserInterfaceDimensionUnit());
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testWaitBrickWhenStreched() {
 
 		createProjectWhenBrick(SCREEN_WIDTH, SCREEN_WIDTH);

@@ -48,7 +48,7 @@ public class DroneMoveTest extends BaseActivityInstrumentationTestCase<ScriptAct
 	}
 
 	@Device
-	@android.test.UnstableTest	
+	@dk.au.cs.thor.robotium2espresso.UnstableTest	
 	public void testAllMoveBricks() {
 		int numberOfBricks = ProjectManager.getInstance().getCurrentScript().getBrickList().size();
 

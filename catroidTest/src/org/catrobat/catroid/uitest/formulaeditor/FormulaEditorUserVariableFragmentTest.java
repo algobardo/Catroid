@@ -103,7 +103,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 		startScript1.addBrick(setVariableBrick);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testAddUserVariableAfterStage() throws InterruptedException {
 		String userVariableString = "userVar1";
 
@@ -139,7 +139,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 		assertTrue("UserVariable not added!", listView.getCount() == 2);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testModifyUserVariableValuesInStage() throws InterruptedException {
 
 		solo.goBack();
@@ -388,7 +388,7 @@ public class FormulaEditorUserVariableFragmentTest extends BaseActivityInstrumen
 		ProjectManager.getInstance().getCurrentProject().getUserVariables().deleteUserVariableByName("global");
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testCreateUserVariableDoubleName() {
 
 		solo.clickOnView(solo.getView(CHANGE_SIZE_EDIT_TEXT_RID));

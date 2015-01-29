@@ -29,7 +29,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 
 import com.robotium.solo.Condition;
-import android.test.Solo; // CQA, instead of robotium
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -64,7 +64,7 @@ public class SoundRecorderTest extends BaseActivityInstrumentationTestCase<MainM
 		UiTestUtils.switchToFragmentInScriptActivity(solo, UiTestUtils.SOUNDS_INDEX);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testOrientation() throws NameNotFoundException {
 		prepareRecording();
 		solo.waitForActivity(SoundRecorderActivity.class.getSimpleName());
@@ -89,7 +89,7 @@ public class SoundRecorderTest extends BaseActivityInstrumentationTestCase<MainM
 		);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testRecordMultipleSounds() throws InterruptedException {
 
 

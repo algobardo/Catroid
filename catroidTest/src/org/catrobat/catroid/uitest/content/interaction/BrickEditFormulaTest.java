@@ -49,7 +49,7 @@ public class BrickEditFormulaTest extends BaseActivityInstrumentationTestCase<Ma
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testClickOnBrickItemEditFormula() {
 		checkBrick(R.string.brick_change_brightness);
 		checkBrick(R.string.brick_change_ghost_effect);

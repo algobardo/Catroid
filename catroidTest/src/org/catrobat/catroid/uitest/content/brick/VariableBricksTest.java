@@ -66,7 +66,7 @@ public class VariableBricksTest extends BaseActivityInstrumentationTestCase<Main
 		super.tearDown();
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testVariableBricks() {
 		Spinner setVariableSpinner = solo.getCurrentViews(Spinner.class).get(0);
 		Spinner changeVariableSpinner = solo.getCurrentViews(Spinner.class).get(1);

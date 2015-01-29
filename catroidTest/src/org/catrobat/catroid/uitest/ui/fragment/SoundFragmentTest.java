@@ -32,7 +32,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import android.test.Solo; // CQA, instead of robotium
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 import org.catrobat.catroid.BuildConfig;
 import org.catrobat.catroid.ProjectManager;
@@ -304,7 +304,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		checkPlayAndStopButton(R.string.sound_play);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testPlayAndStopSound() {
 		// Mute before playing sound
 		AudioManager audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
@@ -385,7 +385,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		audioManager.setStreamMute(AudioManager.STREAM_MUSIC, false);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testAddSound() {
 		int expectedNumberOfSounds = getCurrentNumberOfSounds() + 1;
 
@@ -786,7 +786,7 @@ public class SoundFragmentTest extends BaseActivityInstrumentationTestCase<MainM
 		assertTrue("Sound not renamed in actual view", solo.searchText(expectedNewSoundName, true));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testBottomBarAndContextMenuOnActionModes() {
 		LinearLayout bottomBarLayout = (LinearLayout) solo.getView(R.id.bottom_bar);
 		ImageButton addButton = (ImageButton) bottomBarLayout.findViewById(R.id.button_add);

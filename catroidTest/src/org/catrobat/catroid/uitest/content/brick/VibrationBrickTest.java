@@ -76,7 +76,7 @@ public class VibrationBrickTest extends BaseActivityInstrumentationTestCase<Scri
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testVibrationBrick() {
 		SensorTestServerConnection.calibrateVibrationSensor();
 

@@ -115,7 +115,7 @@ public class SpeakStageTest extends BaseActivityInstrumentationTestCase<ProjectA
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testNormalBehaviour() {
 		createNormalBehaviourProject();
 		prepareStageForTesting(UiTestUtils.PROJECTNAME1);
@@ -141,7 +141,7 @@ public class SpeakStageTest extends BaseActivityInstrumentationTestCase<ProjectA
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testNullText() {
 		createNullTextProject();
 		prepareStageForTesting(UiTestUtils.PROJECTNAME2);
@@ -156,7 +156,7 @@ public class SpeakStageTest extends BaseActivityInstrumentationTestCase<ProjectA
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testMultiSpeech() {
 		createMultiSpeechesProject();
 		prepareStageForTesting(UiTestUtils.PROJECTNAME3);
@@ -178,7 +178,7 @@ public class SpeakStageTest extends BaseActivityInstrumentationTestCase<ProjectA
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testDeleteSpeechFiles() {
 		createMultiSpeechesProject();
 		prepareStageForTesting(UiTestUtils.PROJECTNAME3);

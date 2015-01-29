@@ -30,7 +30,7 @@ import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.widget.ListView;
 
-import android.test.Solo; // CQA, instead of robotium
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.test.drone.DroneTestUtils;
@@ -54,7 +54,7 @@ public class SettingsActivityTest extends BaseActivityInstrumentationTestCase<Ma
 		settings = solo.getString(R.string.settings);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testToggleDroneBricks() {
 		String dronePreferenceString = solo.getString(R.string.preference_description_quadcopter_bricks);
 		String categoryDroneLabel = solo.getString(R.string.category_drone);

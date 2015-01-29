@@ -33,7 +33,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import android.test.Solo; // CQA, instead of robotium
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -344,7 +344,7 @@ public class MainMenuActivityTest extends BaseActivityInstrumentationTestCase<Ma
 				solo.searchText(solo.getString(R.string.main_menu_rate_app)));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testShouldDisplayDialogIfVersionNumberTooLow() throws Throwable {
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());
 

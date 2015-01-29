@@ -94,7 +94,7 @@ public class LegoNXTTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 
 	// This test requires the NXTBTTestServer to be running or a LegoNXT Robot to run! Check connect string to see if you connect to the right device!
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testNXTFunctionality() {
 		createTestproject(projectName);
 
@@ -173,7 +173,7 @@ public class LegoNXTTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 
 	// This test requires the NXTBTTestServer to be running or a LegoNXT Robot to run! Check connect string to see if you connect to the right device!
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testNXTPersistentConnection() {
 		createTestproject(projectName);
 
@@ -248,7 +248,7 @@ public class LegoNXTTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testNXTConnectionDialogGoBack() {
 		createTestproject(projectName);
 

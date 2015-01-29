@@ -24,7 +24,7 @@ package org.catrobat.catroid.uitest.content.brick;
 
 import android.media.MediaPlayer;
 
-import android.test.Solo; // CQA, instead of robotium
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -82,7 +82,7 @@ public class PlaySoundBrickTest extends BaseActivityInstrumentationTestCase<Main
 		super.tearDown();
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testSelectAndPlaySoundFile() {
 		solo.clickOnText(soundName);
 		// solo.sleep(1000); // CQA
@@ -159,7 +159,7 @@ public class PlaySoundBrickTest extends BaseActivityInstrumentationTestCase<Main
 		assertTrue(soundName2 + " is not in Spinner", solo.searchText(soundName2));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testAddNewSound() {
 		String newText = solo.getString(R.string.new_broadcast_message);
 		String recordedFilename = solo.getString(R.string.soundrecorder_recorded_filename);

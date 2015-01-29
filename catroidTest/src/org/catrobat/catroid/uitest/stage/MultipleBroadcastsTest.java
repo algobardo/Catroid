@@ -60,7 +60,7 @@ public class MultipleBroadcastsTest extends BaseActivityInstrumentationTestCase<
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testSendMultipleBroadcastsWhenProjectStart() {
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 		// solo.sleep(2000); // CQA

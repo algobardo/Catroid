@@ -28,7 +28,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.view.View;
 
-import android.test.Solo; // CQA, instead of robotium
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -149,7 +149,7 @@ public class ProgramMenuActivityTest extends BaseActivityInstrumentationTestCase
 		assertTrue("Text on look button is not 'Backgrounds'", solo.searchText(solo.getString(R.string.backgrounds)));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testPlayButton() {
 		solo.assertMemoryNotLow();
 		solo.waitForActivity(MainMenuActivity.class.getSimpleName());

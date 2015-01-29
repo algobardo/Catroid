@@ -71,7 +71,7 @@ public class StageActivityDroneTest extends BaseActivityInstrumentationTestCase<
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testDroneProxyOnStage() {
 		DroneTestUtils.setDroneTermsOfUseAcceptedPermanently(getActivity());
 		waitForDroneServiceToStart();

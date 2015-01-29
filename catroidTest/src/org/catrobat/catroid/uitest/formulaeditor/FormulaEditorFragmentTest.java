@@ -27,7 +27,7 @@ import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import android.test.Solo; // CQA, instead of robotium
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -81,7 +81,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 		ProjectManager.getInstance().setCurrentScript(script);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testChangeFormula() {
 
 		solo.clickOnView(solo.getView(X_POS_EDIT_TEXT_RID));
@@ -187,7 +187,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testUndoRedo() {
 
 		solo.clickOnView(solo.getView(X_POS_EDIT_TEXT_RID));
@@ -232,7 +232,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testUndoLimit() {
 
 		solo.clickOnView(solo.getView(X_POS_EDIT_TEXT_RID));
@@ -270,7 +270,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testSimpleInterpretation() {
 		String newXFormula = "10 + 12 - 2 × 3 - 4 ";
 		int newXValue = 10 + 12 - 2 * 3 - 4;
@@ -436,7 +436,7 @@ public class FormulaEditorFragmentTest extends BaseActivityInstrumentationTestCa
 
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testGoBackAndEditTextSwitches() {
 
 		solo.clickOnView(solo.getView(X_POS_EDIT_TEXT_RID));

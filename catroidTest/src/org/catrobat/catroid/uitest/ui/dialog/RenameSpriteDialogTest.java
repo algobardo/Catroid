@@ -25,7 +25,7 @@ package org.catrobat.catroid.uitest.ui.dialog;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.widget.ListView;
 
-import android.test.Solo; // CQA, instead of robotium
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;

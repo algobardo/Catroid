@@ -29,7 +29,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
 
-import android.test.Solo; // CQA, instead of robotium
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 import junit.framework.TestSuite;
 

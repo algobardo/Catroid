@@ -31,7 +31,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import android.test.Solo; // CQA, instead of robotium
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -417,7 +417,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 				solo.searchText("Edit in Pocket Paint"));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testEditImageWithPaintroid() {
 		LookData lookData = lookDataList.get(0);
 		getLookFragment().setSelectedLookData(lookData);
@@ -457,7 +457,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		assertFalse("File not deleted from LookDataList", isInLookDataListSunnglasses);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testEditCopiedImageInPaontroid() {
 
 		Intent intent = new Intent(getInstrumentation().getContext(),
@@ -473,7 +473,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		assertEquals("Image must by a temp copy", Constants.TMP_IMAGE_PATH, pathOfPocketPaintImage);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testPaintroidImagefileExtension() {
 		String lookDataModifiedHash = lookData3.getLookFileName();
 		lookDataModifiedHash = "THIS_IS_A_MODIFIED_HASH_AND_HERE_ARE_SOME_DUMMIE_CHARS";
@@ -555,7 +555,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 				projectManager.getFileChecksumContainer().getUsage(md5ChecksumImageFile));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testEditImageWithPaintroidToSomethingAlreadyUsed() throws IOException {
 		int oldNumberOfLookDatas = lookDataList.size();
 
@@ -592,7 +592,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 				projectManager.getFileChecksumContainer().getUsage(md5ChecksumPaintroidImageFile));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testEditImageWhichIsAlreadyUsed() {
 		File tempImageFile = UiTestUtils.saveFileToProject(UiTestUtils.DEFAULT_TEST_PROJECT_NAME,
 				"catroid_sunglasses2.png", RESOURCE_IMAGE, getActivity(), UiTestUtils.FileTypes.IMAGE);
@@ -629,7 +629,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 				.getFileChecksumContainer().getUsage(md5ChecksumImageFile));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testEqualLookNames() {
 		final String assertMessageText = "Look not renamed correctly";
 
@@ -718,7 +718,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 				projectManager.getFileChecksumContainer().containsChecksum(md5ChecksumImageFile));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testBottomBarAndContextMenuOnActionModes() {
 		if (!getLookAdapter().getShowDetails()) {
 			solo.clickOnMenuItem(solo.getString(R.string.show_details), true);

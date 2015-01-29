@@ -72,7 +72,7 @@ public class LoopBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 		ProjectManager.getInstance().deleteCurrentProject();
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testRepeatBrick() {
 		ArrayList<Integer> yPosition;
 		ArrayList<Brick> projectBrickList = project.getSpriteList().get(0).getScript(0).getBrickList();
@@ -185,7 +185,7 @@ public class LoopBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testNestedForeverBricks() {
 		ArrayList<Integer> yPosition;
 		ArrayList<Brick> projectBrickList = project.getSpriteList().get(0).getScript(0).getBrickList();
@@ -369,7 +369,7 @@ public class LoopBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 		assertTrue("CheckBox is not checked but should be.", secondLoopEndBrickCheckBox.isChecked());
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testSelectionActionMode() {
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.copy), R.id.copy, getActivity());
 		solo.clickOnCheckBox(1);

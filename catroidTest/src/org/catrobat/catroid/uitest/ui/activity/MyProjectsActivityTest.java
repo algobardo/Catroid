@@ -38,7 +38,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import android.test.Solo; // CQA, instead of robotium
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -372,7 +372,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 	}
 
 	@Device
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testProjectsAndImagesVisible() {
 		createProjects();
 		// solo.sleep(200); // CQA
@@ -795,7 +795,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 	}
 
-    @android.test.UnstableTest
+    @dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testItemClick() {
 		createProjects();
 		// solo.sleep(2000); // CQA
@@ -816,7 +816,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		assertFalse("Project not deleted", solo.waitForText(UiTestUtils.DEFAULT_TEST_PROJECT_NAME, 0, 200));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testDeleteProjectViaActionBar() {
 		String delete = solo.getString(R.string.delete);
 		createProjects();
@@ -1051,7 +1051,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 				.getCurrentProject().getName());
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testRenameCurrentProjectViaActionBar() {
 		String rename = solo.getString(R.string.rename);
 		createProjects();
@@ -1357,7 +1357,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		assertTrue("Menu item still says \"Hide Details\"!", solo.searchText(showDetailsText));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testProjectDetailsLastAccess() {
 		String showDetailsText = solo.getString(R.string.show_details);
 
@@ -1877,7 +1877,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		assertTrue("Long Projectname not found", solo.searchText(longProjectName));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testScreenshotUpdate() {
 		createProjectWithBackgrounds();
 

@@ -216,7 +216,7 @@ public class IfBrickTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		assertTrue("Wrong Brick instance.", projectBrickList.get(4) instanceof IfLogicEndBrick);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testCopyIfLogicBeginBrickActionMode() {
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.copy), R.id.copy, getActivity());
 		solo.clickOnCheckBox(1);
@@ -233,7 +233,7 @@ public class IfBrickTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		assertTrue("Wrong Brick instance.", projectBrickList.get(6) instanceof IfLogicEndBrick);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testCopyIfLogicElseBrickActionMode() {
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.copy), R.id.copy, getActivity());
 		solo.clickOnCheckBox(3);
@@ -266,7 +266,7 @@ public class IfBrickTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		assertTrue("Wrong Brick instance.", projectBrickList.get(6) instanceof IfLogicEndBrick);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testSelectionAfterCopyActionMode() {
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.copy), R.id.copy, getActivity());
 		solo.clickOnCheckBox(1);
@@ -293,7 +293,7 @@ public class IfBrickTest extends BaseActivityInstrumentationTestCase<MainMenuAct
 		assertTrue("CheckBox is not checked but should be.", secondIfLogicEndBrickCheckBox.isChecked());
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testSelectionActionMode() {
 		UiTestUtils.openActionMode(solo, solo.getString(R.string.copy), R.id.copy, getActivity());
 		solo.clickOnCheckBox(1);

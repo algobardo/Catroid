@@ -356,7 +356,7 @@ public class ScriptFragmentTest extends BaseActivityInstrumentationTestCase<Main
 		assertFalse("Copy Button visible!", UiTestUtils.menuButtonVisible(solo, R.id.copy));
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testSimpleDragNDrop() {
 		List<Brick> brickListToCheck = UiTestUtils.createTestProject();
 		UiTestUtils.getIntoScriptActivityFromMainMenu(solo);
@@ -498,7 +498,7 @@ public class ScriptFragmentTest extends BaseActivityInstrumentationTestCase<Main
 		assertEquals("Not all Bricks have been deleted!", 0, numberOfBricks);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testDeleteActionModeTwoScripts() {
 		UiTestUtils.createTestProjectForActionModeDelete();
 		UiTestUtils.getIntoScriptActivityFromMainMenu(solo);

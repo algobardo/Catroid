@@ -63,7 +63,7 @@ public class WebViewActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		super.tearDown();
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testWebViewExplore() {
 		String webButtonText = solo.getString(R.string.main_menu_web);
 		solo.clickOnButton(webButtonText);
@@ -90,7 +90,7 @@ public class WebViewActivityTest extends BaseActivityInstrumentationTestCase<Mai
 		}
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testWebViewHelp() {
 		String helpButtonText = solo.getString(R.string.main_menu_help);
 

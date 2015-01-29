@@ -51,11 +51,12 @@ dependencies {
     compile fileTree(include: '*.jar', dir: 'catroid/libs')
     compile fileTree(include: '*.jar', dir: 'catroid/libs-natives')
     androidTestCompile fileTree(include: '*.jar', dir: 'catroidTest/libs')
-    androidTestCompile('com.jakewharton.espresso:espresso:1.1-r3') { // CQA
+
+    compile ('dk.au.cs.thor.robotium2espresso:robotium2espresso:1.0.0') {
         exclude module: 'hamcrest-core'
         exclude module: 'guava'
     }
-    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.1'
+    
     pmd 'net.sourceforge.pmd:pmd:5.1.1'
 }
 

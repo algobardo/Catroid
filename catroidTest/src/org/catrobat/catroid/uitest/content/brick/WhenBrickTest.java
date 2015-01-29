@@ -56,7 +56,7 @@ public class WhenBrickTest extends BaseActivityInstrumentationTestCase<MainMenuA
 		UiTestUtils.getIntoScriptActivityFromMainMenu(solo);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testWhenBrick() {
 		if (!solo.waitForView(DragAndDropListView.class, 0, 5000, false)) {
 			fail("DragAndDropListView not shown in 5 secs!");

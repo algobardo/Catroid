@@ -55,7 +55,7 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 		UiTestUtils.prepareStageForTest();
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testReceiversWorkMoreThanOnce() {
 		UiTestUtils.createEmptyProject();
 		Sprite sprite = ProjectManager.getInstance().getCurrentProject().getSpriteList().get(0);
@@ -92,7 +92,7 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 				(int) sprite.look.getXInUserInterfaceDimensionUnit());
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testWhenScriptRestartingItself() {
 		UiTestUtils.createEmptyProject();
 		Sprite sprite = ProjectManager.getInstance().getCurrentProject().getSpriteList().get(0);
@@ -123,7 +123,7 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 				(int) sprite.look.getXInUserInterfaceDimensionUnit() > xMovement);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testRestartingOfWhenScriptWithBroadcastWaitBrick() {
 		UiTestUtils.createEmptyProject();
 		String messageOne = "messageOne";
@@ -159,7 +159,7 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 				(int) sprite.look.getXInUserInterfaceDimensionUnit() > 5 * xMovement);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testRestartingSendBroadcastAfterBroadcastAndWait() {
 		String message = "increase variable value";
 		String variableName = "test variable";
@@ -183,7 +183,7 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 		assertEquals("Broadcast script of sprite 3 does not restart itself when a BroadcastWait is sent!", expectedValue, userVariable.getValue());
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testRestartingSendBroadcastInBroadcastAndWait() {
 		String message1 = "message1";
 		String message2 = "message2";
@@ -206,7 +206,7 @@ public class BroadCastReceiverRegressionTest extends BaseActivityInstrumentation
 
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testCorrectRestartingOfBroadcastsWithSameActionStringsWithinOneSprite() {
 		String message = "message";
 		String variableName = "test variable";

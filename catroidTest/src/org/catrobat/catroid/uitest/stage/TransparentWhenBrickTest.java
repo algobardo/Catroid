@@ -70,7 +70,7 @@ public class TransparentWhenBrickTest extends BaseActivityInstrumentationTestCas
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testTapOnSideAreaOfForegroundSprite() {
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 		// solo.sleep(2000); // CQA
@@ -95,7 +95,7 @@ public class TransparentWhenBrickTest extends BaseActivityInstrumentationTestCas
 						&& fish.look.getYInUserInterfaceDimensionUnit() == fishYPosition);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testTapOnHalfTransparentAreaOfForegroundSprite() {
 		Formula ghostEffectValue = new Formula(50.0);
 		Reflection.setPrivateField(setGhostEffectBrick, "transparency", ghostEffectValue);
@@ -122,7 +122,7 @@ public class TransparentWhenBrickTest extends BaseActivityInstrumentationTestCas
 						&& fish.look.getYInUserInterfaceDimensionUnit() == fishYPosition);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testTapOnFullTransparentAreaOfForegroundSprite() {
 		Formula ghostEffectValue = new Formula(100.0);
 		Reflection.setPrivateField(setGhostEffectBrick, "transparency", ghostEffectValue);

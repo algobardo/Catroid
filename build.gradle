@@ -96,24 +96,7 @@ def getCurrentGitBranch() {
 android {
     compileSdkVersion 19
     buildToolsVersion '19.1.0'
-
-    /*
-    defaultConfig {
-        minSdkVersion 10
-        targetSdkVersion 19
-        applicationId 'org.catrobat.catroid'
-        testApplicationId "org.catrobat.catroid.test"
-        testInstrumentationRunner 'pl.polidea.instrumentation.PolideaInstrumentationTestRunner'
-        versionCode getBuildNumberParameter()
-        println "VersionCode is " + versionCode
-        versionName generateVersionName(projectVersion, versionCode)
-        println "VersionName is " + versionName
-        buildConfigField "String", "GIT_DESCRIBE", "\"${getGitDescribe()}\""
-        buildConfigField "String", "GIT_CURRENT_BRANCH", "\"${getCurrentGitBranch()}\""
-    }
-    */
-
-    // CQA: Espresso config
+    
     defaultConfig {
         minSdkVersion 10
         targetSdkVersion 19

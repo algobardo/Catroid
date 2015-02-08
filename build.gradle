@@ -8,7 +8,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:0.12.+'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.10.+'
-        classpath 'dk.au.cs.thor.gradle:instrumentation:1.0.0'
     }
 }
 
@@ -25,7 +24,6 @@ apply plugin: 'pmd'
 apply from: 'gradle/adb_tasks.gradle'
 apply from: 'gradle/code_quality_tasks.gradle'
 apply from: 'gradle/intellij_config_tasks.gradle'
-apply plugin: 'instrumentation'
 
 check.dependsOn 'checkstyle'
 check.dependsOn 'pmd'

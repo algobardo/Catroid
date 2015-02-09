@@ -71,6 +71,16 @@ public class BroadcastBricksTest extends BaseActivityInstrumentationTestCase<Mai
 		UiTestUtils.getIntoScriptActivityFromMainMenu(solo);
 	}
 
+	/**
+	 * CQA: testBroadcastBricks is flaky: fails with skin=none, but passes with skin=WXGA800.
+	 *
+	 * Reason:
+	 * Fails because the upper-most entry in the spinner (dropdown)
+	 * is hidden due to small screen size.
+	 *
+	 * Fix:
+	 * Use of solo.pressSpinnerItem?
+	 */
 	@Device
 	public void testBroadcastBricks() {
 		checkSetupBricks();
@@ -173,14 +183,9 @@ public class BroadcastBricksTest extends BaseActivityInstrumentationTestCase<Mai
 		checkCorrectSpinnerSelections();
 	}
 
-	/**
-	 * CQA: testBroadcastBricks is flaky: fails with skin=none, but passes with skin=WXGA800.
-	 * Underlying reason: the inserted assertion fails.
-	 */
 	private void dismissEnterNewTextIntoSpinner(int spinnerId) {
 		solo.clickOnView(solo.getView(spinnerId));
-		boolean found = solo.waitForText(solo.getString(R.string.new_broadcast_message));
-		assertTrue("CQA: Should display 'New...' entry in dropdown", found);
+		solo.waitForText(solo.getString(R.string.new_broadcast_message));
 		solo.clickInList(0);
 		solo.waitForView(EditText.class);
 		solo.goBack();

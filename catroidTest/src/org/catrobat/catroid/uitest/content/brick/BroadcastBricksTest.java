@@ -173,9 +173,14 @@ public class BroadcastBricksTest extends BaseActivityInstrumentationTestCase<Mai
 		checkCorrectSpinnerSelections();
 	}
 
+	/**
+	 * CQA: testBroadcastBricks is flaky: fails with skin=none, but passes with skin=WXGA800.
+	 * Underlying reason: the inserted assertion fails.
+	 */
 	private void dismissEnterNewTextIntoSpinner(int spinnerId) {
 		solo.clickOnView(solo.getView(spinnerId));
-		solo.waitForText(solo.getString(R.string.new_broadcast_message));
+		boolean found = solo.waitForText(solo.getString(R.string.new_broadcast_message));
+		assertTrue("CQA: Should display 'New...' entry in dropdown", found);
 		solo.clickInList(0);
 		solo.waitForView(EditText.class);
 		solo.goBack();

@@ -272,6 +272,10 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 		checkProjectNameAndDescriptionBeforAndAfterDownload(testProject, newTestDescription);
 	}
 
+	@dk.au.cs.android.easyhttpmock.HttpExpectation(
+		url=ServerCalls.TEST_FILE_UPLOAD_URL_HTTP,
+		responseCode=200,
+		response="wrong response")
 	public void testUploadFromProgramm() throws Throwable {
 		setServerURLToTestUrl();
 

@@ -2,15 +2,18 @@ import java.util.regex.Pattern
 
 buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:0.12.+'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.10.+'
+        classpath 'dk.au.cs.android.easyhttpmock:instrumentation:1.0.0'
     }
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -22,6 +25,7 @@ apply plugin: 'pmd'
 apply from: 'gradle/adb_tasks.gradle'
 apply from: 'gradle/code_quality_tasks.gradle'
 apply from: 'gradle/intellij_config_tasks.gradle'
+apply plugin: "instrumentation"
 
 check.dependsOn 'checkstyle'
 check.dependsOn 'pmd'
@@ -55,6 +59,7 @@ dependencies {
     compile fileTree(include: '*.jar', dir: 'catroid/libs-natives')
     androidTestCompile fileTree(include: '*.jar', dir: 'catroidTest/libs')
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.1'
+    androidTestCompile 'dk.au.cs.android.easyhttpmock:library:1.0.0'
     pmd 'net.sourceforge.pmd:pmd:5.1.1'
 }
 
